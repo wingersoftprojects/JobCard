@@ -31,7 +31,6 @@ public class Delivery_noteCriteria extends AbstractORMCriteria {
 	public final IntegerExpression add_by;
 	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_by;
-	public final CollectionExpression group_right;
 	
 	public Delivery_noteCriteria(Criteria criteria) {
 		super(criteria);
@@ -47,7 +46,6 @@ public class Delivery_noteCriteria extends AbstractORMCriteria {
 		add_by = new IntegerExpression("add_by", this);
 		last_edit_date = new TimestampExpression("last_edit_date", this);
 		last_edit_by = new IntegerExpression("last_edit_by", this);
-		group_right = new CollectionExpression("group_right", this);
 	}
 	
 	public Delivery_noteCriteria(PersistentSession session) {
@@ -64,10 +62,6 @@ public class Delivery_noteCriteria extends AbstractORMCriteria {
 	
 	public Customer_detailCriteria createCustomer_detaillCriteria() {
 		return new Customer_detailCriteria(createCriteria("customer_detaill"));
-	}
-	
-	public Group_rightCriteria createGroup_rightCriteria() {
-		return new Group_rightCriteria(createCriteria("group_right"));
 	}
 	
 	public Delivery_note uniqueDelivery_note() {

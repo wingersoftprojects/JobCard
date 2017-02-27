@@ -33,7 +33,6 @@ public class Job_cardCriteria extends AbstractORMCriteria {
 	public final IntegerExpression delivery_noteId;
 	public final AssociationExpression delivery_note;
 	public final CollectionExpression user_action;
-	public final CollectionExpression group_right;
 	
 	public Job_cardCriteria(Criteria criteria) {
 		super(criteria);
@@ -51,7 +50,6 @@ public class Job_cardCriteria extends AbstractORMCriteria {
 		delivery_noteId = new IntegerExpression("delivery_note.job_card_id", this);
 		delivery_note = new AssociationExpression("delivery_note", this);
 		user_action = new CollectionExpression("user_action", this);
-		group_right = new CollectionExpression("group_right", this);
 	}
 	
 	public Job_cardCriteria(PersistentSession session) {
@@ -76,10 +74,6 @@ public class Job_cardCriteria extends AbstractORMCriteria {
 	
 	public User_actionCriteria createUser_actionCriteria() {
 		return new User_actionCriteria(createCriteria("user_action"));
-	}
-	
-	public Group_rightCriteria createGroup_rightCriteria() {
-		return new Group_rightCriteria(createCriteria("group_right"));
 	}
 	
 	public Job_card uniqueJob_card() {

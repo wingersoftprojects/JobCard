@@ -373,10 +373,6 @@ public class Delivery_note implements Serializable {
 				getCustomer_detaill().getDelivery_note().remove(this);
 			}
 			
-			models.Group_right[] lGroup_rights = (models.Group_right[])getGroup_right().toArray(new models.Group_right[getGroup_right().size()]);
-			for(int i = 0; i < lGroup_rights.length; i++) {
-				lGroup_rights[i].setDelivery_note(null);
-			}
 			return delete();
 		}
 		catch(Exception e) {
@@ -395,10 +391,6 @@ public class Delivery_note implements Serializable {
 				getCustomer_detaill().getDelivery_note().remove(this);
 			}
 			
-			models.Group_right[] lGroup_rights = (models.Group_right[])getGroup_right().toArray(new models.Group_right[getGroup_right().size()]);
-			for(int i = 0; i < lGroup_rights.length; i++) {
-				lGroup_rights[i].setDelivery_note(null);
-			}
 			try {
 				session.delete(this);
 				return true;
@@ -448,11 +440,6 @@ public class Delivery_note implements Serializable {
 	
 	@Column(name="last_edit_by", nullable=true)	
 	private Integer last_edit_by;
-	
-	@OneToMany(mappedBy="delivery_note", targetEntity=models.Group_right.class)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
-	private java.util.Set group_right = new java.util.HashSet();
 	
 	private void setDelivery_note_id(int value) {
 		this.delivery_note_id = value;
@@ -557,15 +544,6 @@ public class Delivery_note implements Serializable {
 	public models.Job_card getJob_card() {
 		return job_card;
 	}
-	
-	public void setGroup_right(java.util.Set value) {
-		this.group_right = value;
-	}
-	
-	public java.util.Set getGroup_right() {
-		return group_right;
-	}
-	
 	
 	public boolean equals(Object obj) {
 		if (obj == null) {

@@ -365,16 +365,8 @@ public class Group_right implements Serializable {
 	
 	public boolean deleteAndDissociate()throws PersistentException {
 		try {
-			if(getGroup_detail() != null) {
-				getGroup_detail().getGroup_right().remove(this);
-			}
-			
-			if(getJob_card() != null) {
-				getJob_card().getGroup_right().remove(this);
-			}
-			
-			if(getDelivery_note() != null) {
-				getDelivery_note().getGroup_right().remove(this);
+			if(getGroup_detail1() != null) {
+				getGroup_detail1().getGroup_right1().remove(this);
 			}
 			
 			return delete();
@@ -387,16 +379,8 @@ public class Group_right implements Serializable {
 	
 	public boolean deleteAndDissociate(org.orm.PersistentSession session)throws PersistentException {
 		try {
-			if(getGroup_detail() != null) {
-				getGroup_detail().getGroup_right().remove(this);
-			}
-			
-			if(getJob_card() != null) {
-				getJob_card().getGroup_right().remove(this);
-			}
-			
-			if(getDelivery_note() != null) {
-				getDelivery_note().getGroup_right().remove(this);
+			if(getGroup_detail1() != null) {
+				getGroup_detail1().getGroup_right1().remove(this);
 			}
 			
 			try {
@@ -420,18 +404,11 @@ public class Group_right implements Serializable {
 	
 	@ManyToOne(targetEntity=models.Group_detail.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns({ @JoinColumn(name="group_detail_id", referencedColumnName="group_detail_id", unique=true, nullable=false) })	
-	private models.Group_detail group_detail;
+	@JoinColumns({ @JoinColumn(name="group_detail_id", referencedColumnName="group_detail_id", nullable=false) })	
+	private models.Group_detail group_detail1;
 	
-	@ManyToOne(targetEntity=models.Job_card.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns({ @JoinColumn(name="job_card_id", referencedColumnName="job_card_id", nullable=false) })	
-	private models.Job_card job_card;
-	
-	@ManyToOne(targetEntity=models.Delivery_note.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns({ @JoinColumn(name="delivery_note_id", referencedColumnName="delivery_note_id", nullable=false) })	
-	private models.Delivery_note delivery_note;
+	@Column(name="group_right_function", nullable=false, length=255)	
+	private String group_right_function;
 	
 	@Column(name="allow_view", nullable=false, length=1)	
 	private int allow_view;
@@ -559,28 +536,20 @@ public class Group_right implements Serializable {
 		return last_edit_by;
 	}
 	
-	public void setGroup_detail(models.Group_detail value) {
-		this.group_detail = value;
+	public void setGroup_right_function(String value) {
+		this.group_right_function = value;
 	}
 	
-	public models.Group_detail getGroup_detail() {
-		return group_detail;
+	public String getGroup_right_function() {
+		return group_right_function;
 	}
 	
-	public void setJob_card(models.Job_card value) {
-		this.job_card = value;
+	public void setGroup_detail1(models.Group_detail value) {
+		this.group_detail1 = value;
 	}
 	
-	public models.Job_card getJob_card() {
-		return job_card;
-	}
-	
-	public void setDelivery_note(models.Delivery_note value) {
-		this.delivery_note = value;
-	}
-	
-	public models.Delivery_note getDelivery_note() {
-		return delivery_note;
+	public models.Group_detail getGroup_detail1() {
+		return group_detail1;
 	}
 	
 	public boolean equals(Object obj) {
