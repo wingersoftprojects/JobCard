@@ -369,9 +369,9 @@ public class Group_detail implements Serializable {
 			for(int i = 0; i < lGroup_users.length; i++) {
 				lGroup_users[i].setGroup_detail(null);
 			}
-			models.Group_right[] lGroup_right1s = (models.Group_right[])getGroup_right1().toArray(new models.Group_right[getGroup_right1().size()]);
-			for(int i = 0; i < lGroup_right1s.length; i++) {
-				lGroup_right1s[i].setGroup_detail1(null);
+			models.Group_right[] lGroup_rights = (models.Group_right[])getGroup_right().toArray(new models.Group_right[getGroup_right().size()]);
+			for(int i = 0; i < lGroup_rights.length; i++) {
+				lGroup_rights[i].setGroup_detail(null);
 			}
 			return delete();
 		}
@@ -387,9 +387,9 @@ public class Group_detail implements Serializable {
 			for(int i = 0; i < lGroup_users.length; i++) {
 				lGroup_users[i].setGroup_detail(null);
 			}
-			models.Group_right[] lGroup_right1s = (models.Group_right[])getGroup_right1().toArray(new models.Group_right[getGroup_right1().size()]);
-			for(int i = 0; i < lGroup_right1s.length; i++) {
-				lGroup_right1s[i].setGroup_detail1(null);
+			models.Group_right[] lGroup_rights = (models.Group_right[])getGroup_right().toArray(new models.Group_right[getGroup_right().size()]);
+			for(int i = 0; i < lGroup_rights.length; i++) {
+				lGroup_rights[i].setGroup_detail(null);
 			}
 			try {
 				session.delete(this);
@@ -436,10 +436,10 @@ public class Group_detail implements Serializable {
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set group_user = new java.util.HashSet();
 	
-	@OneToMany(mappedBy="group_detail1", targetEntity=models.Group_right.class)	
+	@OneToMany(mappedBy="group_detail", targetEntity=models.Group_right.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
-	private java.util.Set group_right1 = new java.util.HashSet();
+	private java.util.Set group_right = new java.util.HashSet();
 	
 	private void setGroup_detail_id(int value) {
 		this.group_detail_id = value;
@@ -522,12 +522,12 @@ public class Group_detail implements Serializable {
 	}
 	
 	
-	public void setGroup_right1(java.util.Set value) {
-		this.group_right1 = value;
+	public void setGroup_right(java.util.Set value) {
+		this.group_right = value;
 	}
 	
-	public java.util.Set getGroup_right1() {
-		return group_right1;
+	public java.util.Set getGroup_right() {
+		return group_right;
 	}
 	
 	

@@ -28,7 +28,7 @@ public class Group_detailCriteria extends AbstractORMCriteria {
 	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_by;
 	public final CollectionExpression group_user;
-	public final CollectionExpression group_right1;
+	public final CollectionExpression group_right;
 	
 	public Group_detailCriteria(Criteria criteria) {
 		super(criteria);
@@ -41,7 +41,7 @@ public class Group_detailCriteria extends AbstractORMCriteria {
 		last_edit_date = new TimestampExpression("last_edit_date", this);
 		last_edit_by = new IntegerExpression("last_edit_by", this);
 		group_user = new CollectionExpression("group_user", this);
-		group_right1 = new CollectionExpression("group_right1", this);
+		group_right = new CollectionExpression("group_right", this);
 	}
 	
 	public Group_detailCriteria(PersistentSession session) {
@@ -56,8 +56,8 @@ public class Group_detailCriteria extends AbstractORMCriteria {
 		return new Group_userCriteria(createCriteria("group_user"));
 	}
 	
-	public Group_rightCriteria createGroup_right1Criteria() {
-		return new Group_rightCriteria(createCriteria("group_right1"));
+	public Group_rightCriteria createGroup_rightCriteria() {
+		return new Group_rightCriteria(createCriteria("group_right"));
 	}
 	
 	public Group_detail uniqueGroup_detail() {

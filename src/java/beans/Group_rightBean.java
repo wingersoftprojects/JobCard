@@ -180,7 +180,7 @@ public class Group_rightBean extends AbstractBean<Group_right> implements Serial
             }
             if(group_right ==null){
                 group_right = new Group_right();
-                group_right.setGroup_detail1(group_detail);
+                group_right.setGroup_detail(group_detail);
                 //group_right.setJob_card(job_cards.get(i));
                 group_right.setAllow_view(0);
                 group_right.setAllow_add(0);

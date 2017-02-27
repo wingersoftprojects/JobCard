@@ -28,7 +28,7 @@ public class Group_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_by;
 	public final CollectionExpression group_user;
-	public final CollectionExpression group_right1;
+	public final CollectionExpression group_right;
 	
 	public Group_detailDetachedCriteria() {
 		super(models.Group_detail.class, models.Group_detailCriteria.class);
@@ -41,7 +41,7 @@ public class Group_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		last_edit_date = new TimestampExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_by = new IntegerExpression("last_edit_by", this.getDetachedCriteria());
 		group_user = new CollectionExpression("group_user", this.getDetachedCriteria());
-		group_right1 = new CollectionExpression("group_right1", this.getDetachedCriteria());
+		group_right = new CollectionExpression("group_right", this.getDetachedCriteria());
 	}
 	
 	public Group_detailDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -55,15 +55,15 @@ public class Group_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		last_edit_date = new TimestampExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_by = new IntegerExpression("last_edit_by", this.getDetachedCriteria());
 		group_user = new CollectionExpression("group_user", this.getDetachedCriteria());
-		group_right1 = new CollectionExpression("group_right1", this.getDetachedCriteria());
+		group_right = new CollectionExpression("group_right", this.getDetachedCriteria());
 	}
 	
 	public Group_userDetachedCriteria createGroup_userCriteria() {
 		return new Group_userDetachedCriteria(createCriteria("group_user"));
 	}
 	
-	public Group_rightDetachedCriteria createGroup_right1Criteria() {
-		return new Group_rightDetachedCriteria(createCriteria("group_right1"));
+	public Group_rightDetachedCriteria createGroup_rightCriteria() {
+		return new Group_rightDetachedCriteria(createCriteria("group_right"));
 	}
 	
 	public Group_detail uniqueGroup_detail(PersistentSession session) {

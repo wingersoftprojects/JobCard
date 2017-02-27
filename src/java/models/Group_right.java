@@ -365,8 +365,8 @@ public class Group_right implements Serializable {
 	
 	public boolean deleteAndDissociate()throws PersistentException {
 		try {
-			if(getGroup_detail1() != null) {
-				getGroup_detail1().getGroup_right1().remove(this);
+			if(getGroup_detail() != null) {
+				getGroup_detail().getGroup_right().remove(this);
 			}
 			
 			return delete();
@@ -379,8 +379,8 @@ public class Group_right implements Serializable {
 	
 	public boolean deleteAndDissociate(org.orm.PersistentSession session)throws PersistentException {
 		try {
-			if(getGroup_detail1() != null) {
-				getGroup_detail1().getGroup_right1().remove(this);
+			if(getGroup_detail() != null) {
+				getGroup_detail().getGroup_right().remove(this);
 			}
 			
 			try {
@@ -405,7 +405,7 @@ public class Group_right implements Serializable {
 	@ManyToOne(targetEntity=models.Group_detail.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns({ @JoinColumn(name="group_detail_id", referencedColumnName="group_detail_id", nullable=false) })	
-	private models.Group_detail group_detail1;
+	private models.Group_detail group_detail;
 	
 	@Column(name="group_right_function", nullable=false, length=255)	
 	private String group_right_function;
@@ -544,12 +544,12 @@ public class Group_right implements Serializable {
 		return group_right_function;
 	}
 	
-	public void setGroup_detail1(models.Group_detail value) {
-		this.group_detail1 = value;
+	public void setGroup_detail(models.Group_detail value) {
+		this.group_detail = value;
 	}
 	
-	public models.Group_detail getGroup_detail1() {
-		return group_detail1;
+	public models.Group_detail getGroup_detail() {
+		return group_detail;
 	}
 	
 	public boolean equals(Object obj) {

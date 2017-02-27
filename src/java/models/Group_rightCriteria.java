@@ -20,8 +20,8 @@ import org.orm.criteria.*;
 
 public class Group_rightCriteria extends AbstractORMCriteria {
 	public final IntegerExpression group_right_id;
-	public final IntegerExpression group_detail1Id;
-	public final AssociationExpression group_detail1;
+	public final IntegerExpression group_detailId;
+	public final AssociationExpression group_detail;
 	public final StringExpression group_right_function;
 	public final IntegerExpression allow_view;
 	public final IntegerExpression allow_edit;
@@ -37,8 +37,8 @@ public class Group_rightCriteria extends AbstractORMCriteria {
 	public Group_rightCriteria(Criteria criteria) {
 		super(criteria);
 		group_right_id = new IntegerExpression("group_right_id", this);
-		group_detail1Id = new IntegerExpression("group_detail1.group_detail_id", this);
-		group_detail1 = new AssociationExpression("group_detail1", this);
+		group_detailId = new IntegerExpression("group_detail.group_detail_id", this);
+		group_detail = new AssociationExpression("group_detail", this);
 		group_right_function = new StringExpression("group_right_function", this);
 		allow_view = new IntegerExpression("allow_view", this);
 		allow_edit = new IntegerExpression("allow_edit", this);
@@ -60,8 +60,8 @@ public class Group_rightCriteria extends AbstractORMCriteria {
 		this(models.JobCardPersistentManager.instance().getSession());
 	}
 	
-	public Group_detailCriteria createGroup_detail1Criteria() {
-		return new Group_detailCriteria(createCriteria("group_detail1"));
+	public Group_detailCriteria createGroup_detailCriteria() {
+		return new Group_detailCriteria(createCriteria("group_detail"));
 	}
 	
 	public Group_right uniqueGroup_right() {
