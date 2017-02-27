@@ -28,12 +28,15 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	public final StringExpression second_name;
 	public final StringExpression third_name;
 	public final IntegerExpression is_user_gen_admin;
+	public final IntegerExpression is_deleted;
+	public final IntegerExpression is_active;
 	public final DateExpression add_date;
 	public final IntegerExpression add_by;
 	public final DateExpression last_edit_date;
 	public final IntegerExpression last_edit_by;
 	public final CollectionExpression user_action;
 	public final CollectionExpression group_user;
+	public final CollectionExpression login_session;
 	
 	public User_detailCriteria(Criteria criteria) {
 		super(criteria);
@@ -46,12 +49,15 @@ public class User_detailCriteria extends AbstractORMCriteria {
 		second_name = new StringExpression("second_name", this);
 		third_name = new StringExpression("third_name", this);
 		is_user_gen_admin = new IntegerExpression("is_user_gen_admin", this);
+		is_deleted = new IntegerExpression("is_deleted", this);
+		is_active = new IntegerExpression("is_active", this);
 		add_date = new DateExpression("add_date", this);
 		add_by = new IntegerExpression("add_by", this);
 		last_edit_date = new DateExpression("last_edit_date", this);
 		last_edit_by = new IntegerExpression("last_edit_by", this);
 		user_action = new CollectionExpression("user_action", this);
 		group_user = new CollectionExpression("group_user", this);
+		login_session = new CollectionExpression("login_session", this);
 	}
 	
 	public User_detailCriteria(PersistentSession session) {
@@ -72,6 +78,10 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	
 	public Group_userCriteria createGroup_userCriteria() {
 		return new Group_userCriteria(createCriteria("group_user"));
+	}
+	
+	public Login_sessionCriteria createLogin_sessionCriteria() {
+		return new Login_sessionCriteria(createCriteria("login_session"));
 	}
 	
 	public User_detail uniqueUser_detail() {

@@ -820,6 +820,28 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
+    <Column name="is_deleted">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>1</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="is_active">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>1</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
     <Column name="add_date">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -1035,6 +1057,30 @@
       <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>true</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="job_card_id">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>job_card.job_card_id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>10</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="delivery_note_id">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>delivery_note.delivery_note_id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>10</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
       <Index>false</Index>
       <UserTypes/>
     </Column>
@@ -1456,6 +1502,141 @@
       <UserTypes/>
     </Column>
   </Entity>
+  <Entity name="login_session" PKClustered="0">
+    <Column name="login_session_id">
+      <PrimaryKey>true</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>10</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="user_detail_id">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>10</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>assigned</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="session_id">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>27</Type>
+      <Length>100</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="remote_ip">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>27</Type>
+      <Length>100</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="remote_host">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>27</Type>
+      <Length>100</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="remote_user">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>27</Type>
+      <Length>100</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="is_active">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>1</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="is_deleted">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>1</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="add_date">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>20</Type>
+      <Length>0</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="add_by">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="last_edit_date">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>20</Type>
+      <Length>0</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="last_edit_by">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+  </Entity>
   <ForeignKey name="FKuser_actio257421">
     <ReferenceTable>user_action</ReferenceTable>
     <ReferencedTable>user_detail</ReferencedTable>
@@ -1574,6 +1755,36 @@
     </Columns>
     <RefColumns>
       <Column>job_card_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKgroup_righ155511">
+    <ReferenceTable>group_right</ReferenceTable>
+    <ReferencedTable>job_card</ReferencedTable>
+    <Columns>
+      <Column>job_card_id</Column>
+    </Columns>
+    <RefColumns>
+      <Column>job_card_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKgroup_righ589541">
+    <ReferenceTable>group_right</ReferenceTable>
+    <ReferencedTable>delivery_note</ReferencedTable>
+    <Columns>
+      <Column>delivery_note_id</Column>
+    </Columns>
+    <RefColumns>
+      <Column>delivery_note_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKlogin_sess511752">
+    <ReferenceTable>login_session</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>user_detail_id</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
     </RefColumns>
   </ForeignKey>
 </Model>

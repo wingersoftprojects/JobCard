@@ -28,12 +28,15 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression second_name;
 	public final StringExpression third_name;
 	public final IntegerExpression is_user_gen_admin;
+	public final IntegerExpression is_deleted;
+	public final IntegerExpression is_active;
 	public final DateExpression add_date;
 	public final IntegerExpression add_by;
 	public final DateExpression last_edit_date;
 	public final IntegerExpression last_edit_by;
 	public final CollectionExpression user_action;
 	public final CollectionExpression group_user;
+	public final CollectionExpression login_session;
 	
 	public User_detailDetachedCriteria() {
 		super(models.User_detail.class, models.User_detailCriteria.class);
@@ -46,12 +49,15 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		second_name = new StringExpression("second_name", this.getDetachedCriteria());
 		third_name = new StringExpression("third_name", this.getDetachedCriteria());
 		is_user_gen_admin = new IntegerExpression("is_user_gen_admin", this.getDetachedCriteria());
+		is_deleted = new IntegerExpression("is_deleted", this.getDetachedCriteria());
+		is_active = new IntegerExpression("is_active", this.getDetachedCriteria());
 		add_date = new DateExpression("add_date", this.getDetachedCriteria());
 		add_by = new IntegerExpression("add_by", this.getDetachedCriteria());
 		last_edit_date = new DateExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_by = new IntegerExpression("last_edit_by", this.getDetachedCriteria());
 		user_action = new CollectionExpression("user_action", this.getDetachedCriteria());
 		group_user = new CollectionExpression("group_user", this.getDetachedCriteria());
+		login_session = new CollectionExpression("login_session", this.getDetachedCriteria());
 	}
 	
 	public User_detailDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -65,12 +71,15 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		second_name = new StringExpression("second_name", this.getDetachedCriteria());
 		third_name = new StringExpression("third_name", this.getDetachedCriteria());
 		is_user_gen_admin = new IntegerExpression("is_user_gen_admin", this.getDetachedCriteria());
+		is_deleted = new IntegerExpression("is_deleted", this.getDetachedCriteria());
+		is_active = new IntegerExpression("is_active", this.getDetachedCriteria());
 		add_date = new DateExpression("add_date", this.getDetachedCriteria());
 		add_by = new IntegerExpression("add_by", this.getDetachedCriteria());
 		last_edit_date = new DateExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_by = new IntegerExpression("last_edit_by", this.getDetachedCriteria());
 		user_action = new CollectionExpression("user_action", this.getDetachedCriteria());
 		group_user = new CollectionExpression("group_user", this.getDetachedCriteria());
+		login_session = new CollectionExpression("login_session", this.getDetachedCriteria());
 	}
 	
 	public User_categoryDetachedCriteria createUser_categoryCriteria() {
@@ -83,6 +92,10 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public Group_userDetachedCriteria createGroup_userCriteria() {
 		return new Group_userDetachedCriteria(createCriteria("group_user"));
+	}
+	
+	public Login_sessionDetachedCriteria createLogin_sessionCriteria() {
+		return new Login_sessionDetachedCriteria(createCriteria("login_session"));
 	}
 	
 	public User_detail uniqueUser_detail(PersistentSession session) {

@@ -448,12 +448,12 @@ public class Customer_detail implements Serializable {
 	
 	@OneToMany(mappedBy="customer_detaill", targetEntity=models.Delivery_note.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set delivery_note = new java.util.HashSet();
 	
 	@OneToMany(mappedBy="customer_detail", targetEntity=models.Job_card.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set job_card = new java.util.HashSet();
 	
 	private void setCustomer_detail_id(int value) {

@@ -428,7 +428,7 @@ public class Paper_type implements Serializable {
 	
 	@OneToMany(mappedBy="paper_type", targetEntity=models.Job_card_item.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set job_card_item = new java.util.HashSet();
 	
 	private void setPaper_type_id(int value) {

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./layout.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:event listener="#{job_cardBean.init()}" type="preRenderView" />
+            <f:event listener="#{job_cardBean.initializelist()}" type="preRenderView" />
+        </f:metadata>
+    </ui:define>
+    <ui:define name="content">
+        <h1>JOB CARD</h1>
+        <div style="width: 100%;">
+
+            <fieldset>
+                <legend>CUSTOMER DETAILS</legend>
+                <table border="0" width="100%">
+                    <tr>
+                        <td><h:outputLabel value="Ms. (Company)"/></td>
+                        <td><h:inputText value="#{job_cardBean.selected.customer_detail}"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>JOB DETAILS</legend>
+                <fieldset>
+                    <legend>POST PRESS DETAILS</legend>
+
+                </fieldset>
+                <fieldset>
+                    <legend>Final Product Details (For delivery and Invoicing Purposes)</legend>
+
+                </fieldset>
+            </fieldset>
+        </div>
+    </ui:define>
+</ui:composition>

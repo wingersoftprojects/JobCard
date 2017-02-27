@@ -437,7 +437,7 @@ public class Supplier_detail implements Serializable {
 	
 	@OneToMany(mappedBy="supplier_detail", targetEntity=models.Job_card_item.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set job_card_item = new java.util.HashSet();
 	
 	private void setSupplier_detail_id(int value) {

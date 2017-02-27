@@ -377,6 +377,10 @@ public class User_detail implements Serializable {
 			for(int i = 0; i < lGroup_users.length; i++) {
 				lGroup_users[i].setUser_detail(null);
 			}
+			models.Login_session[] lLogin_sessions = (models.Login_session[])getLogin_session().toArray(new models.Login_session[getLogin_session().size()]);
+			for(int i = 0; i < lLogin_sessions.length; i++) {
+				lLogin_sessions[i].setUser_detail(null);
+			}
 			return delete();
 		}
 		catch(Exception e) {
@@ -398,6 +402,10 @@ public class User_detail implements Serializable {
 			models.Group_user[] lGroup_users = (models.Group_user[])getGroup_user().toArray(new models.Group_user[getGroup_user().size()]);
 			for(int i = 0; i < lGroup_users.length; i++) {
 				lGroup_users[i].setUser_detail(null);
+			}
+			models.Login_session[] lLogin_sessions = (models.Login_session[])getLogin_session().toArray(new models.Login_session[getLogin_session().size()]);
+			for(int i = 0; i < lLogin_sessions.length; i++) {
+				lLogin_sessions[i].setUser_detail(null);
 			}
 			try {
 				session.delete(this);
@@ -441,6 +449,12 @@ public class User_detail implements Serializable {
 	@Column(name="is_user_gen_admin", nullable=false, length=1)	
 	private int is_user_gen_admin;
 	
+	@Column(name="is_deleted", nullable=false, length=1)	
+	private int is_deleted;
+	
+	@Column(name="is_active", nullable=false, length=1)	
+	private int is_active;
+	
 	@Column(name="add_date", nullable=false)	
 	@Temporal(TemporalType.DATE)	
 	private java.util.Date add_date;
@@ -457,13 +471,18 @@ public class User_detail implements Serializable {
 	
 	@OneToMany(mappedBy="user_detail", targetEntity=models.User_action.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set user_action = new java.util.HashSet();
 	
 	@OneToMany(mappedBy="user_detail", targetEntity=models.Group_user.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set group_user = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="user_detail", targetEntity=models.Login_session.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set login_session = new java.util.HashSet();
 	
 	private void setUser_detail_id(int value) {
 		this.user_detail_id = value;
@@ -561,6 +580,22 @@ public class User_detail implements Serializable {
 		return last_edit_by;
 	}
 	
+	public void setIs_active(int value) {
+		this.is_active = value;
+	}
+	
+	public int getIs_active() {
+		return is_active;
+	}
+	
+	public void setIs_deleted(int value) {
+		this.is_deleted = value;
+	}
+	
+	public int getIs_deleted() {
+		return is_deleted;
+	}
+	
 	public void setUser_category(models.User_category value) {
 		this.user_category = value;
 	}
@@ -584,6 +619,15 @@ public class User_detail implements Serializable {
 	
 	public java.util.Set getGroup_user() {
 		return group_user;
+	}
+	
+	
+	public void setLogin_session(java.util.Set value) {
+		this.login_session = value;
+	}
+	
+	public java.util.Set getLogin_session() {
+		return login_session;
 	}
 	
 	

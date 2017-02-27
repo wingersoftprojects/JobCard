@@ -31,6 +31,7 @@ public class Delivery_noteDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression add_by;
 	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_by;
+	public final CollectionExpression group_right;
 	
 	public Delivery_noteDetachedCriteria() {
 		super(models.Delivery_note.class, models.Delivery_noteCriteria.class);
@@ -46,6 +47,7 @@ public class Delivery_noteDetachedCriteria extends AbstractORMDetachedCriteria {
 		add_by = new IntegerExpression("add_by", this.getDetachedCriteria());
 		last_edit_date = new TimestampExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_by = new IntegerExpression("last_edit_by", this.getDetachedCriteria());
+		group_right = new CollectionExpression("group_right", this.getDetachedCriteria());
 	}
 	
 	public Delivery_noteDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -62,6 +64,7 @@ public class Delivery_noteDetachedCriteria extends AbstractORMDetachedCriteria {
 		add_by = new IntegerExpression("add_by", this.getDetachedCriteria());
 		last_edit_date = new TimestampExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_by = new IntegerExpression("last_edit_by", this.getDetachedCriteria());
+		group_right = new CollectionExpression("group_right", this.getDetachedCriteria());
 	}
 	
 	public Job_cardDetachedCriteria createJob_cardCriteria() {
@@ -70,6 +73,10 @@ public class Delivery_noteDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public Customer_detailDetachedCriteria createCustomer_detaillCriteria() {
 		return new Customer_detailDetachedCriteria(createCriteria("customer_detaill"));
+	}
+	
+	public Group_rightDetachedCriteria createGroup_rightCriteria() {
+		return new Group_rightDetachedCriteria(createCriteria("group_right"));
 	}
 	
 	public Delivery_note uniqueDelivery_note(PersistentSession session) {

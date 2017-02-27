@@ -30,7 +30,7 @@ public class JobCardPersistentManager extends PersistentManager {
 	
 	private JobCardPersistentManager() throws PersistentException {
 		super(_connectionSetting, _sessionType, _timeToAlive, new String[] {}, _extraProperties, _configurationFile);
-		setFlushMode(FlushMode.AUTO);
+		setFlushMode(FlushMode.ALWAYS);
 	}
 	
 	@Override
@@ -48,6 +48,7 @@ public class JobCardPersistentManager extends PersistentManager {
 		configuration.addAnnotatedClass(models.Delivery_note.class);
 		configuration.addAnnotatedClass(models.Group_user.class);
 		configuration.addAnnotatedClass(models.User_category.class);
+		configuration.addAnnotatedClass(models.Login_session.class);
 		configuration.buildMappings();
 		return configuration;
 	}

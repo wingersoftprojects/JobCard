@@ -369,6 +369,14 @@ public class Group_right implements Serializable {
 				getGroup_detail().getGroup_right().remove(this);
 			}
 			
+			if(getJob_card() != null) {
+				getJob_card().getGroup_right().remove(this);
+			}
+			
+			if(getDelivery_note() != null) {
+				getDelivery_note().getGroup_right().remove(this);
+			}
+			
 			return delete();
 		}
 		catch(Exception e) {
@@ -381,6 +389,14 @@ public class Group_right implements Serializable {
 		try {
 			if(getGroup_detail() != null) {
 				getGroup_detail().getGroup_right().remove(this);
+			}
+			
+			if(getJob_card() != null) {
+				getJob_card().getGroup_right().remove(this);
+			}
+			
+			if(getDelivery_note() != null) {
+				getDelivery_note().getGroup_right().remove(this);
 			}
 			
 			try {
@@ -406,6 +422,16 @@ public class Group_right implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns({ @JoinColumn(name="group_detail_id", referencedColumnName="group_detail_id", unique=true, nullable=false) })	
 	private models.Group_detail group_detail;
+	
+	@ManyToOne(targetEntity=models.Job_card.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="job_card_id", referencedColumnName="job_card_id", nullable=false) })	
+	private models.Job_card job_card;
+	
+	@ManyToOne(targetEntity=models.Delivery_note.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="delivery_note_id", referencedColumnName="delivery_note_id", nullable=false) })	
+	private models.Delivery_note delivery_note;
 	
 	@Column(name="allow_view", nullable=false, length=1)	
 	private int allow_view;
@@ -539,6 +565,22 @@ public class Group_right implements Serializable {
 	
 	public models.Group_detail getGroup_detail() {
 		return group_detail;
+	}
+	
+	public void setJob_card(models.Job_card value) {
+		this.job_card = value;
+	}
+	
+	public models.Job_card getJob_card() {
+		return job_card;
+	}
+	
+	public void setDelivery_note(models.Delivery_note value) {
+		this.delivery_note = value;
+	}
+	
+	public models.Delivery_note getDelivery_note() {
+		return delivery_note;
 	}
 	
 	public boolean equals(Object obj) {

@@ -381,6 +381,10 @@ public class Job_card implements Serializable {
 			for(int i = 0; i < lUser_actions.length; i++) {
 				lUser_actions[i].setJob_card(null);
 			}
+			models.Group_right[] lGroup_rights = (models.Group_right[])getGroup_right().toArray(new models.Group_right[getGroup_right().size()]);
+			for(int i = 0; i < lGroup_rights.length; i++) {
+				lGroup_rights[i].setJob_card(null);
+			}
 			return delete();
 		}
 		catch(Exception e) {
@@ -406,6 +410,10 @@ public class Job_card implements Serializable {
 			models.User_action[] lUser_actions = (models.User_action[])getUser_action().toArray(new models.User_action[getUser_action().size()]);
 			for(int i = 0; i < lUser_actions.length; i++) {
 				lUser_actions[i].setJob_card(null);
+			}
+			models.Group_right[] lGroup_rights = (models.Group_right[])getGroup_right().toArray(new models.Group_right[getGroup_right().size()]);
+			for(int i = 0; i < lGroup_rights.length; i++) {
+				lGroup_rights[i].setJob_card(null);
 			}
 			try {
 				session.delete(this);
@@ -454,7 +462,7 @@ public class Job_card implements Serializable {
 	
 	@OneToMany(mappedBy="job_card", targetEntity=models.Job_card_item.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set job_card_item = new java.util.HashSet();
 	
 	@OneToOne(mappedBy="job_card", targetEntity=models.Delivery_note.class, fetch=FetchType.LAZY)	
@@ -463,8 +471,13 @@ public class Job_card implements Serializable {
 	
 	@OneToMany(mappedBy="job_card", targetEntity=models.User_action.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set user_action = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="job_card", targetEntity=models.Group_right.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set group_right = new java.util.HashSet();
 	
 	private void setJob_card_id(int value) {
 		this.job_card_id = value;
@@ -569,6 +582,15 @@ public class Job_card implements Serializable {
 	
 	public java.util.Set getUser_action() {
 		return user_action;
+	}
+	
+	
+	public void setGroup_right(java.util.Set value) {
+		this.group_right = value;
+	}
+	
+	public java.util.Set getGroup_right() {
+		return group_right;
 	}
 	
 	

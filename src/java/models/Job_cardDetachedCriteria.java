@@ -33,6 +33,7 @@ public class Job_cardDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression delivery_noteId;
 	public final AssociationExpression delivery_note;
 	public final CollectionExpression user_action;
+	public final CollectionExpression group_right;
 	
 	public Job_cardDetachedCriteria() {
 		super(models.Job_card.class, models.Job_cardCriteria.class);
@@ -50,6 +51,7 @@ public class Job_cardDetachedCriteria extends AbstractORMDetachedCriteria {
 		delivery_noteId = new IntegerExpression("delivery_note.job_card_id", this.getDetachedCriteria());
 		delivery_note = new AssociationExpression("delivery_note", this.getDetachedCriteria());
 		user_action = new CollectionExpression("user_action", this.getDetachedCriteria());
+		group_right = new CollectionExpression("group_right", this.getDetachedCriteria());
 	}
 	
 	public Job_cardDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -68,6 +70,7 @@ public class Job_cardDetachedCriteria extends AbstractORMDetachedCriteria {
 		delivery_noteId = new IntegerExpression("delivery_note.job_card_id", this.getDetachedCriteria());
 		delivery_note = new AssociationExpression("delivery_note", this.getDetachedCriteria());
 		user_action = new CollectionExpression("user_action", this.getDetachedCriteria());
+		group_right = new CollectionExpression("group_right", this.getDetachedCriteria());
 	}
 	
 	public Customer_detailDetachedCriteria createCustomer_detailCriteria() {
@@ -84,6 +87,10 @@ public class Job_cardDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public User_actionDetachedCriteria createUser_actionCriteria() {
 		return new User_actionDetachedCriteria(createCriteria("user_action"));
+	}
+	
+	public Group_rightDetachedCriteria createGroup_rightCriteria() {
+		return new Group_rightDetachedCriteria(createCriteria("group_right"));
 	}
 	
 	public Job_card uniqueJob_card(PersistentSession session) {
