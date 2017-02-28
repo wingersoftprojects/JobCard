@@ -365,6 +365,14 @@ public class User_detail implements Serializable {
 	
 	public boolean deleteAndDissociate()throws PersistentException {
 		try {
+			if(getAdd_by() != null) {
+				getAdd_by().getUser_detail().remove(this);
+			}
+			
+			if(getLast_edit_by() != null) {
+				getLast_edit_by().getUser_detail1().remove(this);
+			}
+			
 			models.User_action[] lUser_actions = (models.User_action[])getUser_action().toArray(new models.User_action[getUser_action().size()]);
 			for(int i = 0; i < lUser_actions.length; i++) {
 				lUser_actions[i].setUser_detail(null);
@@ -456,6 +464,14 @@ public class User_detail implements Serializable {
 			models.Supplier_detail[] lSupplier_detail1s = (models.Supplier_detail[])getSupplier_detail1().toArray(new models.Supplier_detail[getSupplier_detail1().size()]);
 			for(int i = 0; i < lSupplier_detail1s.length; i++) {
 				lSupplier_detail1s[i].setLast_edit_by(null);
+			}
+			models.User_detail[] lUser_details = (models.User_detail[])getUser_detail().toArray(new models.User_detail[getUser_detail().size()]);
+			for(int i = 0; i < lUser_details.length; i++) {
+				lUser_details[i].setAdd_by(null);
+			}
+			models.User_detail[] lUser_detail1s = (models.User_detail[])getUser_detail1().toArray(new models.User_detail[getUser_detail1().size()]);
+			for(int i = 0; i < lUser_detail1s.length; i++) {
+				lUser_detail1s[i].setLast_edit_by(null);
 			}
 			return delete();
 		}
@@ -467,6 +483,14 @@ public class User_detail implements Serializable {
 	
 	public boolean deleteAndDissociate(org.orm.PersistentSession session)throws PersistentException {
 		try {
+			if(getAdd_by() != null) {
+				getAdd_by().getUser_detail().remove(this);
+			}
+			
+			if(getLast_edit_by() != null) {
+				getLast_edit_by().getUser_detail1().remove(this);
+			}
+			
 			models.User_action[] lUser_actions = (models.User_action[])getUser_action().toArray(new models.User_action[getUser_action().size()]);
 			for(int i = 0; i < lUser_actions.length; i++) {
 				lUser_actions[i].setUser_detail(null);
@@ -558,6 +582,14 @@ public class User_detail implements Serializable {
 			models.Supplier_detail[] lSupplier_detail1s = (models.Supplier_detail[])getSupplier_detail1().toArray(new models.Supplier_detail[getSupplier_detail1().size()]);
 			for(int i = 0; i < lSupplier_detail1s.length; i++) {
 				lSupplier_detail1s[i].setLast_edit_by(null);
+			}
+			models.User_detail[] lUser_details = (models.User_detail[])getUser_detail().toArray(new models.User_detail[getUser_detail().size()]);
+			for(int i = 0; i < lUser_details.length; i++) {
+				lUser_details[i].setAdd_by(null);
+			}
+			models.User_detail[] lUser_detail1s = (models.User_detail[])getUser_detail1().toArray(new models.User_detail[getUser_detail1().size()]);
+			for(int i = 0; i < lUser_detail1s.length; i++) {
+				lUser_detail1s[i].setLast_edit_by(null);
 			}
 			try {
 				session.delete(this);
@@ -606,15 +638,19 @@ public class User_detail implements Serializable {
 	@Temporal(TemporalType.DATE)	
 	private java.util.Date add_date;
 	
-	@Column(name="add_by", nullable=false, length=10)	
-	private int add_by;
+	@ManyToOne(targetEntity=models.User_detail.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="add_by", referencedColumnName="user_detail_id") })	
+	private models.User_detail add_by;
 	
 	@Column(name="last_edit_date", nullable=true)	
 	@Temporal(TemporalType.DATE)	
 	private java.util.Date last_edit_date;
 	
-	@Column(name="last_edit_by", nullable=true, length=10)	
-	private Integer last_edit_by;
+	@ManyToOne(targetEntity=models.User_detail.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="last_edit_by", referencedColumnName="user_detail_id") })	
+	private models.User_detail last_edit_by;
 	
 	@OneToMany(mappedBy="user_detail", targetEntity=models.User_action.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
@@ -731,6 +767,16 @@ public class User_detail implements Serializable {
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set supplier_detail1 = new java.util.HashSet();
 	
+	@OneToMany(mappedBy="add_by", targetEntity=models.User_detail.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set user_detail = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="last_edit_by", targetEntity=models.User_detail.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set user_detail1 = new java.util.HashSet();
+	
 	private void setUser_detail_id(int value) {
 		this.user_detail_id = value;
 	}
@@ -799,32 +845,12 @@ public class User_detail implements Serializable {
 		return add_date;
 	}
 	
-	public void setAdd_by(int value) {
-		this.add_by = value;
-	}
-	
-	public int getAdd_by() {
-		return add_by;
-	}
-	
 	public void setLast_edit_date(java.util.Date value) {
 		this.last_edit_date = value;
 	}
 	
 	public java.util.Date getLast_edit_date() {
 		return last_edit_date;
-	}
-	
-	public void setLast_edit_by(int value) {
-		setLast_edit_by(new Integer(value));
-	}
-	
-	public void setLast_edit_by(Integer value) {
-		this.last_edit_by = value;
-	}
-	
-	public Integer getLast_edit_by() {
-		return last_edit_by;
 	}
 	
 	public void setIs_active(int value) {
@@ -841,6 +867,22 @@ public class User_detail implements Serializable {
 	
 	public int getIs_deleted() {
 		return is_deleted;
+	}
+	
+	public void setAdd_by(models.User_detail value) {
+		this.add_by = value;
+	}
+	
+	public models.User_detail getAdd_by() {
+		return add_by;
+	}
+	
+	public void setLast_edit_by(models.User_detail value) {
+		this.last_edit_by = value;
+	}
+	
+	public models.User_detail getLast_edit_by() {
+		return last_edit_by;
 	}
 	
 	public void setUser_action(java.util.Set value) {
@@ -1047,6 +1089,24 @@ public class User_detail implements Serializable {
 	
 	public java.util.Set getSupplier_detail1() {
 		return supplier_detail1;
+	}
+	
+	
+	public void setUser_detail(java.util.Set value) {
+		this.user_detail = value;
+	}
+	
+	public java.util.Set getUser_detail() {
+		return user_detail;
+	}
+	
+	
+	public void setUser_detail1(java.util.Set value) {
+		this.user_detail1 = value;
+	}
+	
+	public java.util.Set getUser_detail1() {
+		return user_detail1;
 	}
 	
 	

@@ -29,9 +29,11 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression is_deleted;
 	public final IntegerExpression is_active;
 	public final DateExpression add_date;
-	public final IntegerExpression add_by;
+	public final IntegerExpression add_byId;
+	public final AssociationExpression add_by;
 	public final DateExpression last_edit_date;
-	public final IntegerExpression last_edit_by;
+	public final IntegerExpression last_edit_byId;
+	public final AssociationExpression last_edit_by;
 	public final CollectionExpression user_action;
 	public final CollectionExpression group_user;
 	public final CollectionExpression login_session;
@@ -55,6 +57,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final CollectionExpression job_card1;
 	public final CollectionExpression supplier_detail;
 	public final CollectionExpression supplier_detail1;
+	public final CollectionExpression user_detail;
+	public final CollectionExpression user_detail1;
 	
 	public User_detailDetachedCriteria() {
 		super(models.User_detail.class, models.User_detailCriteria.class);
@@ -68,9 +72,11 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		is_deleted = new IntegerExpression("is_deleted", this.getDetachedCriteria());
 		is_active = new IntegerExpression("is_active", this.getDetachedCriteria());
 		add_date = new DateExpression("add_date", this.getDetachedCriteria());
-		add_by = new IntegerExpression("add_by", this.getDetachedCriteria());
+		add_byId = new IntegerExpression("add_by.user_detail_id", this.getDetachedCriteria());
+		add_by = new AssociationExpression("add_by", this.getDetachedCriteria());
 		last_edit_date = new DateExpression("last_edit_date", this.getDetachedCriteria());
-		last_edit_by = new IntegerExpression("last_edit_by", this.getDetachedCriteria());
+		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this.getDetachedCriteria());
+		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
 		user_action = new CollectionExpression("user_action", this.getDetachedCriteria());
 		group_user = new CollectionExpression("group_user", this.getDetachedCriteria());
 		login_session = new CollectionExpression("login_session", this.getDetachedCriteria());
@@ -94,6 +100,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		job_card1 = new CollectionExpression("job_card1", this.getDetachedCriteria());
 		supplier_detail = new CollectionExpression("supplier_detail", this.getDetachedCriteria());
 		supplier_detail1 = new CollectionExpression("supplier_detail1", this.getDetachedCriteria());
+		user_detail = new CollectionExpression("user_detail", this.getDetachedCriteria());
+		user_detail1 = new CollectionExpression("user_detail1", this.getDetachedCriteria());
 	}
 	
 	public User_detailDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -108,9 +116,11 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		is_deleted = new IntegerExpression("is_deleted", this.getDetachedCriteria());
 		is_active = new IntegerExpression("is_active", this.getDetachedCriteria());
 		add_date = new DateExpression("add_date", this.getDetachedCriteria());
-		add_by = new IntegerExpression("add_by", this.getDetachedCriteria());
+		add_byId = new IntegerExpression("add_by.user_detail_id", this.getDetachedCriteria());
+		add_by = new AssociationExpression("add_by", this.getDetachedCriteria());
 		last_edit_date = new DateExpression("last_edit_date", this.getDetachedCriteria());
-		last_edit_by = new IntegerExpression("last_edit_by", this.getDetachedCriteria());
+		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this.getDetachedCriteria());
+		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
 		user_action = new CollectionExpression("user_action", this.getDetachedCriteria());
 		group_user = new CollectionExpression("group_user", this.getDetachedCriteria());
 		login_session = new CollectionExpression("login_session", this.getDetachedCriteria());
@@ -134,6 +144,16 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		job_card1 = new CollectionExpression("job_card1", this.getDetachedCriteria());
 		supplier_detail = new CollectionExpression("supplier_detail", this.getDetachedCriteria());
 		supplier_detail1 = new CollectionExpression("supplier_detail1", this.getDetachedCriteria());
+		user_detail = new CollectionExpression("user_detail", this.getDetachedCriteria());
+		user_detail1 = new CollectionExpression("user_detail1", this.getDetachedCriteria());
+	}
+	
+	public User_detailDetachedCriteria createAdd_byCriteria() {
+		return new User_detailDetachedCriteria(createCriteria("add_by"));
+	}
+	
+	public User_detailDetachedCriteria createLast_edit_byCriteria() {
+		return new User_detailDetachedCriteria(createCriteria("last_edit_by"));
 	}
 	
 	public User_actionDetachedCriteria createUser_actionCriteria() {
@@ -226,6 +246,14 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public Supplier_detailDetachedCriteria createSupplier_detail1Criteria() {
 		return new Supplier_detailDetachedCriteria(createCriteria("supplier_detail1"));
+	}
+	
+	public User_detailDetachedCriteria createUser_detailCriteria() {
+		return new User_detailDetachedCriteria(createCriteria("user_detail"));
+	}
+	
+	public User_detailDetachedCriteria createUser_detail1Criteria() {
+		return new User_detailDetachedCriteria(createCriteria("user_detail1"));
 	}
 	
 	public User_detail uniqueUser_detail(PersistentSession session) {

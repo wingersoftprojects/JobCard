@@ -853,10 +853,11 @@
     </Column>
     <Column name="add_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
-      <Nullable>false</Nullable>
+      <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -875,7 +876,8 @@
     </Column>
     <Column name="last_edit_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>true</Nullable>
@@ -1854,6 +1856,26 @@
   </ForeignKey>
   <ForeignKey name="FKsupplier_d607919">
     <ReferenceTable>supplier_detail</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>last_edit_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKuser_detai917203">
+    <ReferenceTable>user_detail</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>add_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKuser_detai587149">
+    <ReferenceTable>user_detail</ReferenceTable>
     <ReferencedTable>user_detail</ReferencedTable>
     <Columns>
       <Column>last_edit_by</Column>

@@ -29,9 +29,11 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	public final IntegerExpression is_deleted;
 	public final IntegerExpression is_active;
 	public final DateExpression add_date;
-	public final IntegerExpression add_by;
+	public final IntegerExpression add_byId;
+	public final AssociationExpression add_by;
 	public final DateExpression last_edit_date;
-	public final IntegerExpression last_edit_by;
+	public final IntegerExpression last_edit_byId;
+	public final AssociationExpression last_edit_by;
 	public final CollectionExpression user_action;
 	public final CollectionExpression group_user;
 	public final CollectionExpression login_session;
@@ -55,6 +57,8 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	public final CollectionExpression job_card1;
 	public final CollectionExpression supplier_detail;
 	public final CollectionExpression supplier_detail1;
+	public final CollectionExpression user_detail;
+	public final CollectionExpression user_detail1;
 	
 	public User_detailCriteria(Criteria criteria) {
 		super(criteria);
@@ -68,9 +72,11 @@ public class User_detailCriteria extends AbstractORMCriteria {
 		is_deleted = new IntegerExpression("is_deleted", this);
 		is_active = new IntegerExpression("is_active", this);
 		add_date = new DateExpression("add_date", this);
-		add_by = new IntegerExpression("add_by", this);
+		add_byId = new IntegerExpression("add_by.user_detail_id", this);
+		add_by = new AssociationExpression("add_by", this);
 		last_edit_date = new DateExpression("last_edit_date", this);
-		last_edit_by = new IntegerExpression("last_edit_by", this);
+		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this);
+		last_edit_by = new AssociationExpression("last_edit_by", this);
 		user_action = new CollectionExpression("user_action", this);
 		group_user = new CollectionExpression("group_user", this);
 		login_session = new CollectionExpression("login_session", this);
@@ -94,6 +100,8 @@ public class User_detailCriteria extends AbstractORMCriteria {
 		job_card1 = new CollectionExpression("job_card1", this);
 		supplier_detail = new CollectionExpression("supplier_detail", this);
 		supplier_detail1 = new CollectionExpression("supplier_detail1", this);
+		user_detail = new CollectionExpression("user_detail", this);
+		user_detail1 = new CollectionExpression("user_detail1", this);
 	}
 	
 	public User_detailCriteria(PersistentSession session) {
@@ -102,6 +110,14 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	
 	public User_detailCriteria() throws PersistentException {
 		this(models.JobCardPersistentManager.instance().getSession());
+	}
+	
+	public User_detailCriteria createAdd_byCriteria() {
+		return new User_detailCriteria(createCriteria("add_by"));
+	}
+	
+	public User_detailCriteria createLast_edit_byCriteria() {
+		return new User_detailCriteria(createCriteria("last_edit_by"));
 	}
 	
 	public User_actionCriteria createUser_actionCriteria() {
@@ -194,6 +210,14 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	
 	public Supplier_detailCriteria createSupplier_detail1Criteria() {
 		return new Supplier_detailCriteria(createCriteria("supplier_detail1"));
+	}
+	
+	public User_detailCriteria createUser_detailCriteria() {
+		return new User_detailCriteria(createCriteria("user_detail"));
+	}
+	
+	public User_detailCriteria createUser_detail1Criteria() {
+		return new User_detailCriteria(createCriteria("user_detail1"));
 	}
 	
 	public User_detail uniqueUser_detail() {
