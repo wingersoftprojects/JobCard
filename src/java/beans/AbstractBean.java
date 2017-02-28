@@ -64,8 +64,8 @@ public abstract class AbstractBean<T> {
                 String class_name = entityClass.getSimpleName().toLowerCase();
                 if (class_name.equals("region")) {
                     ts = (List<T>) JobCardPersistentManager.instance().getSession().createCriteria(entityClass).add(Restrictions.ne("is_deleted", 1)).addOrder(Order.asc(entityClass.getSimpleName().toLowerCase() + "_name")).list();
-                } else if (class_name.equals("district")) {
-                    ts = (List<T>) JobCardPersistentManager.instance().getSession().createQuery("select d from District d ORDER BY d.region.region_name,d.district_name").list();
+                } else if (class_name.equals("job_card")) {
+                    ts = (List<T>) JobCardPersistentManager.instance().getSession().createQuery("select jc from Job_card jc ORDER BY jc.job_card_number,jc").list();
                 } else if (class_name.equals("sub_district")) {
                     ts = (List<T>) JobCardPersistentManager.instance().getSession().createQuery("select sd from Sub_district sd ORDER BY sd.district.region.region_name,sd.district.district_name,sd.sub_district_name").list();
                 } else if (class_name.equals("county")) {

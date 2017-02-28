@@ -55,6 +55,15 @@ public class LoginBean {
 
     }
 
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+    
+
     public String getUsername() {
         return username;
     }
@@ -79,23 +88,7 @@ public class LoginBean {
         this.isloggedin = isloggedin;
     }
 
-    /**
-     *
-     * @return user_detail
-     */
-    public User_detail getUser_detail() {
-        return user_detail;
-    }
-
-    /**
-     *
-     * @param user_detail the user_detail to set
-     */
-    public void setUser_detail(User_detail user_detail) {
-        this.user_detail = user_detail;
-    }
-
-    public void Login() {
+    public void login() {
         user_detail = null;
         setIsloggedin(false);
         try {
@@ -171,7 +164,7 @@ public class LoginBean {
             lsb.save(user_detail.getUser_detail_id());
 
             ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) context.getApplication().getNavigationHandler();
-            nav.performNavigation("group_detail?faces-redirect=true");
+            nav.performNavigation("user_detail?faces-redirect=true");
 
         } else {
             messageString = "Invalid Login Details Submitted!";
@@ -229,7 +222,23 @@ public class LoginBean {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Completed Successfully", "Completed Successfully"));
     }
+    
+    /**
+     *
+     * @return user_detail
+     */
+    public User_detail getUser_detail() {
+        return user_detail;
+    }
 
+    /**
+     *
+     * @param user_detail the user_detail to set
+     */
+    public void setUser_detail(User_detail user_detail) {
+        this.user_detail = user_detail;
+    }
+    
     public List<Group_right> getGroup_rights() {
         return group_rights;
     }
