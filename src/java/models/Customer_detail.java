@@ -365,6 +365,14 @@ public class Customer_detail implements Serializable {
 	
 	public boolean deleteAndDissociate()throws PersistentException {
 		try {
+			if(getAdd_by() != null) {
+				getAdd_by().getCustomer_detail().remove(this);
+			}
+			
+			if(getLast_edit_by() != null) {
+				getLast_edit_by().getCustomer_detail1().remove(this);
+			}
+			
 			models.Delivery_note[] lDelivery_notes = (models.Delivery_note[])getDelivery_note().toArray(new models.Delivery_note[getDelivery_note().size()]);
 			for(int i = 0; i < lDelivery_notes.length; i++) {
 				lDelivery_notes[i].setCustomer_detaill(null);
@@ -383,6 +391,14 @@ public class Customer_detail implements Serializable {
 	
 	public boolean deleteAndDissociate(org.orm.PersistentSession session)throws PersistentException {
 		try {
+			if(getAdd_by() != null) {
+				getAdd_by().getCustomer_detail().remove(this);
+			}
+			
+			if(getLast_edit_by() != null) {
+				getLast_edit_by().getCustomer_detail1().remove(this);
+			}
+			
 			models.Delivery_note[] lDelivery_notes = (models.Delivery_note[])getDelivery_note().toArray(new models.Delivery_note[getDelivery_note().size()]);
 			for(int i = 0; i < lDelivery_notes.length; i++) {
 				lDelivery_notes[i].setCustomer_detaill(null);
@@ -437,14 +453,18 @@ public class Customer_detail implements Serializable {
 	@Column(name="add_date", nullable=true)	
 	private java.sql.Timestamp add_date;
 	
-	@Column(name="add_by", nullable=true, length=10)	
-	private Integer add_by;
+	@ManyToOne(targetEntity=models.User_detail.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="add_by", referencedColumnName="user_detail_id", nullable=false) })	
+	private models.User_detail add_by;
 	
 	@Column(name="last_edit_date", nullable=true)	
 	private java.sql.Timestamp last_edit_date;
 	
-	@Column(name="last_edit_by", nullable=true, length=10)	
-	private Integer last_edit_by;
+	@ManyToOne(targetEntity=models.User_detail.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="last_edit_by", referencedColumnName="user_detail_id") })	
+	private models.User_detail last_edit_by;
 	
 	@OneToMany(mappedBy="customer_detaill", targetEntity=models.Delivery_note.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
@@ -548,18 +568,6 @@ public class Customer_detail implements Serializable {
 		return add_date;
 	}
 	
-	public void setAdd_by(int value) {
-		setAdd_by(new Integer(value));
-	}
-	
-	public void setAdd_by(Integer value) {
-		this.add_by = value;
-	}
-	
-	public Integer getAdd_by() {
-		return add_by;
-	}
-	
 	public void setLast_edit_date(java.sql.Timestamp value) {
 		this.last_edit_date = value;
 	}
@@ -568,15 +576,19 @@ public class Customer_detail implements Serializable {
 		return last_edit_date;
 	}
 	
-	public void setLast_edit_by(int value) {
-		setLast_edit_by(new Integer(value));
+	public void setAdd_by(models.User_detail value) {
+		this.add_by = value;
 	}
 	
-	public void setLast_edit_by(Integer value) {
+	public models.User_detail getAdd_by() {
+		return add_by;
+	}
+	
+	public void setLast_edit_by(models.User_detail value) {
 		this.last_edit_by = value;
 	}
 	
-	public Integer getLast_edit_by() {
+	public models.User_detail getLast_edit_by() {
 		return last_edit_by;
 	}
 	

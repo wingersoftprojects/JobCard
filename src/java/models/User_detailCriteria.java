@@ -37,6 +37,28 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	public final CollectionExpression user_action;
 	public final CollectionExpression group_user;
 	public final CollectionExpression login_session;
+	public final CollectionExpression login_session1;
+	public final CollectionExpression login_session2;
+	public final CollectionExpression user_category1;
+	public final CollectionExpression user_category2;
+	public final CollectionExpression group_user1;
+	public final CollectionExpression group_user2;
+	public final CollectionExpression group_detail;
+	public final CollectionExpression group_detail1;
+	public final CollectionExpression group_right;
+	public final CollectionExpression group_right1;
+	public final CollectionExpression job_card_item;
+	public final CollectionExpression job_card_item1;
+	public final CollectionExpression customer_detail;
+	public final CollectionExpression customer_detail1;
+	public final CollectionExpression delivery_note;
+	public final CollectionExpression delivery_note1;
+	public final CollectionExpression job_card;
+	public final CollectionExpression paper_type;
+	public final CollectionExpression paper_type1;
+	public final CollectionExpression job_card1;
+	public final CollectionExpression supplier_detail;
+	public final CollectionExpression supplier_detail1;
 	
 	public User_detailCriteria(Criteria criteria) {
 		super(criteria);
@@ -58,6 +80,28 @@ public class User_detailCriteria extends AbstractORMCriteria {
 		user_action = new CollectionExpression("user_action", this);
 		group_user = new CollectionExpression("group_user", this);
 		login_session = new CollectionExpression("login_session", this);
+		login_session1 = new CollectionExpression("login_session1", this);
+		login_session2 = new CollectionExpression("login_session2", this);
+		user_category1 = new CollectionExpression("user_category1", this);
+		user_category2 = new CollectionExpression("user_category2", this);
+		group_user1 = new CollectionExpression("group_user1", this);
+		group_user2 = new CollectionExpression("group_user2", this);
+		group_detail = new CollectionExpression("group_detail", this);
+		group_detail1 = new CollectionExpression("group_detail1", this);
+		group_right = new CollectionExpression("group_right", this);
+		group_right1 = new CollectionExpression("group_right1", this);
+		job_card_item = new CollectionExpression("job_card_item", this);
+		job_card_item1 = new CollectionExpression("job_card_item1", this);
+		customer_detail = new CollectionExpression("customer_detail", this);
+		customer_detail1 = new CollectionExpression("customer_detail1", this);
+		delivery_note = new CollectionExpression("delivery_note", this);
+		delivery_note1 = new CollectionExpression("delivery_note1", this);
+		job_card = new CollectionExpression("job_card", this);
+		paper_type = new CollectionExpression("paper_type", this);
+		paper_type1 = new CollectionExpression("paper_type1", this);
+		job_card1 = new CollectionExpression("job_card1", this);
+		supplier_detail = new CollectionExpression("supplier_detail", this);
+		supplier_detail1 = new CollectionExpression("supplier_detail1", this);
 	}
 	
 	public User_detailCriteria(PersistentSession session) {
@@ -82,6 +126,94 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	
 	public Login_sessionCriteria createLogin_sessionCriteria() {
 		return new Login_sessionCriteria(createCriteria("login_session"));
+	}
+	
+	public Login_sessionCriteria createLogin_session1Criteria() {
+		return new Login_sessionCriteria(createCriteria("login_session1"));
+	}
+	
+	public Login_sessionCriteria createLogin_session2Criteria() {
+		return new Login_sessionCriteria(createCriteria("login_session2"));
+	}
+	
+	public User_categoryCriteria createUser_category1Criteria() {
+		return new User_categoryCriteria(createCriteria("user_category1"));
+	}
+	
+	public User_categoryCriteria createUser_category2Criteria() {
+		return new User_categoryCriteria(createCriteria("user_category2"));
+	}
+	
+	public Group_userCriteria createGroup_user1Criteria() {
+		return new Group_userCriteria(createCriteria("group_user1"));
+	}
+	
+	public Group_userCriteria createGroup_user2Criteria() {
+		return new Group_userCriteria(createCriteria("group_user2"));
+	}
+	
+	public Group_detailCriteria createGroup_detailCriteria() {
+		return new Group_detailCriteria(createCriteria("group_detail"));
+	}
+	
+	public Group_detailCriteria createGroup_detail1Criteria() {
+		return new Group_detailCriteria(createCriteria("group_detail1"));
+	}
+	
+	public Group_rightCriteria createGroup_rightCriteria() {
+		return new Group_rightCriteria(createCriteria("group_right"));
+	}
+	
+	public Group_rightCriteria createGroup_right1Criteria() {
+		return new Group_rightCriteria(createCriteria("group_right1"));
+	}
+	
+	public Job_card_itemCriteria createJob_card_itemCriteria() {
+		return new Job_card_itemCriteria(createCriteria("job_card_item"));
+	}
+	
+	public Job_card_itemCriteria createJob_card_item1Criteria() {
+		return new Job_card_itemCriteria(createCriteria("job_card_item1"));
+	}
+	
+	public Customer_detailCriteria createCustomer_detailCriteria() {
+		return new Customer_detailCriteria(createCriteria("customer_detail"));
+	}
+	
+	public Customer_detailCriteria createCustomer_detail1Criteria() {
+		return new Customer_detailCriteria(createCriteria("customer_detail1"));
+	}
+	
+	public Delivery_noteCriteria createDelivery_noteCriteria() {
+		return new Delivery_noteCriteria(createCriteria("delivery_note"));
+	}
+	
+	public Delivery_noteCriteria createDelivery_note1Criteria() {
+		return new Delivery_noteCriteria(createCriteria("delivery_note1"));
+	}
+	
+	public Job_cardCriteria createJob_cardCriteria() {
+		return new Job_cardCriteria(createCriteria("job_card"));
+	}
+	
+	public Paper_typeCriteria createPaper_typeCriteria() {
+		return new Paper_typeCriteria(createCriteria("paper_type"));
+	}
+	
+	public Paper_typeCriteria createPaper_type1Criteria() {
+		return new Paper_typeCriteria(createCriteria("paper_type1"));
+	}
+	
+	public Job_cardCriteria createJob_card1Criteria() {
+		return new Job_cardCriteria(createCriteria("job_card1"));
+	}
+	
+	public Supplier_detailCriteria createSupplier_detailCriteria() {
+		return new Supplier_detailCriteria(createCriteria("supplier_detail"));
+	}
+	
+	public Supplier_detailCriteria createSupplier_detail1Criteria() {
+		return new Supplier_detailCriteria(createCriteria("supplier_detail1"));
 	}
 	
 	public User_detail uniqueUser_detail() {

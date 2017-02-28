@@ -369,6 +369,14 @@ public class Group_right implements Serializable {
 				getGroup_detail().getGroup_right().remove(this);
 			}
 			
+			if(getAdd_by() != null) {
+				getAdd_by().getGroup_right().remove(this);
+			}
+			
+			if(getLast_edit_by() != null) {
+				getLast_edit_by().getGroup_right1().remove(this);
+			}
+			
 			return delete();
 		}
 		catch(Exception e) {
@@ -381,6 +389,14 @@ public class Group_right implements Serializable {
 		try {
 			if(getGroup_detail() != null) {
 				getGroup_detail().getGroup_right().remove(this);
+			}
+			
+			if(getAdd_by() != null) {
+				getAdd_by().getGroup_right().remove(this);
+			}
+			
+			if(getLast_edit_by() != null) {
+				getLast_edit_by().getGroup_right1().remove(this);
 			}
 			
 			try {
@@ -431,14 +447,18 @@ public class Group_right implements Serializable {
 	@Column(name="add_date", nullable=false)	
 	private java.sql.Timestamp add_date;
 	
-	@Column(name="add_by", nullable=false, length=10)	
-	private int add_by;
+	@ManyToOne(targetEntity=models.User_detail.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="add_by", referencedColumnName="user_detail_id", nullable=false) })	
+	private models.User_detail add_by;
 	
 	@Column(name="last_edit_date", nullable=true)	
 	private java.sql.Timestamp last_edit_date;
 	
-	@Column(name="last_edit_by", nullable=true, length=10)	
-	private Integer last_edit_by;
+	@ManyToOne(targetEntity=models.User_detail.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="last_edit_by", referencedColumnName="user_detail_id") })	
+	private models.User_detail last_edit_by;
 	
 	private void setGroup_right_id(int value) {
 		this.group_right_id = value;
@@ -508,32 +528,12 @@ public class Group_right implements Serializable {
 		return add_date;
 	}
 	
-	public void setAdd_by(int value) {
-		this.add_by = value;
-	}
-	
-	public int getAdd_by() {
-		return add_by;
-	}
-	
 	public void setLast_edit_date(java.sql.Timestamp value) {
 		this.last_edit_date = value;
 	}
 	
 	public java.sql.Timestamp getLast_edit_date() {
 		return last_edit_date;
-	}
-	
-	public void setLast_edit_by(int value) {
-		setLast_edit_by(new Integer(value));
-	}
-	
-	public void setLast_edit_by(Integer value) {
-		this.last_edit_by = value;
-	}
-	
-	public Integer getLast_edit_by() {
-		return last_edit_by;
 	}
 	
 	public void setGroup_right_function(String value) {
@@ -550,6 +550,22 @@ public class Group_right implements Serializable {
 	
 	public models.Group_detail getGroup_detail() {
 		return group_detail;
+	}
+	
+	public void setAdd_by(models.User_detail value) {
+		this.add_by = value;
+	}
+	
+	public models.User_detail getAdd_by() {
+		return add_by;
+	}
+	
+	public void setLast_edit_by(models.User_detail value) {
+		this.last_edit_by = value;
+	}
+	
+	public models.User_detail getLast_edit_by() {
+		return last_edit_by;
 	}
 	
 	public boolean equals(Object obj) {

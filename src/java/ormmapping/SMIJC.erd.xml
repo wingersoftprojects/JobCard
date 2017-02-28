@@ -71,7 +71,8 @@
     </Column>
     <Column name="add_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -85,7 +86,7 @@
       <ForeignKey>false</ForeignKey>
       <Type>20</Type>
       <Length>0</Length>
-      <Nullable>false</Nullable>
+      <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -93,10 +94,11 @@
     </Column>
     <Column name="last_edit_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
-      <Nullable>false</Nullable>
+      <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -318,10 +320,11 @@
     </Column>
     <Column name="add_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
-      <Nullable>true</Nullable>
+      <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -340,7 +343,8 @@
     </Column>
     <Column name="last_edit_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>true</Nullable>
@@ -463,10 +467,11 @@
     </Column>
     <Column name="add_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
-      <Nullable>true</Nullable>
+      <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -485,7 +490,8 @@
     </Column>
     <Column name="last_edit_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>true</Nullable>
@@ -597,10 +603,11 @@
     </Column>
     <Column name="add_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
-      <Nullable>true</Nullable>
+      <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -619,7 +626,8 @@
     </Column>
     <Column name="last_edit_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>true</Nullable>
@@ -698,10 +706,11 @@
     </Column>
     <Column name="add_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
-      <Nullable>true</Nullable>
+      <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -720,7 +729,8 @@
     </Column>
     <Column name="last_edit_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>true</Nullable>
@@ -768,8 +778,8 @@
     <Column name="user_password">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>false</ForeignKey>
-      <Type>27</Type>
-      <Length>50</Length>
+      <Type>34</Type>
+      <Length>0</Length>
       <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
@@ -1004,7 +1014,8 @@
     </Column>
     <Column name="add_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -1026,7 +1037,8 @@
     </Column>
     <Column name="last_edit_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>true</Nullable>
@@ -1150,7 +1162,8 @@
     </Column>
     <Column name="add_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -1172,7 +1185,8 @@
     </Column>
     <Column name="last_edit_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>true</Nullable>
@@ -1264,10 +1278,11 @@
     </Column>
     <Column name="add_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
-      <Length>0</Length>
-      <Nullable>true</Nullable>
+      <Length>10</Length>
+      <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -1286,9 +1301,10 @@
     </Column>
     <Column name="last_edit_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
-      <Length>0</Length>
+      <Length>10</Length>
       <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
@@ -1367,7 +1383,8 @@
     </Column>
     <Column name="add_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -1389,7 +1406,8 @@
     </Column>
     <Column name="last_edit_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>true</Nullable>
@@ -1457,7 +1475,8 @@
     </Column>
     <Column name="add_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
@@ -1479,7 +1498,8 @@
     </Column>
     <Column name="last_edit_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>true</Nullable>
@@ -1592,9 +1612,10 @@
     </Column>
     <Column name="add_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
-      <Length>11</Length>
+      <Length>10</Length>
       <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
@@ -1614,9 +1635,10 @@
     </Column>
     <Column name="last_edit_by">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
-      <Length>11</Length>
+      <Length>10</Length>
       <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
@@ -1752,6 +1774,226 @@
     </Columns>
     <RefColumns>
       <Column>group_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKlogin_sess988079">
+    <ReferenceTable>login_session</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>add_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKlogin_sess658025">
+    <ReferenceTable>login_session</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>last_edit_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKuser_categ253303">
+    <ReferenceTable>user_category</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>add_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKuser_categ923248">
+    <ReferenceTable>user_category</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>last_edit_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKgroup_user246745">
+    <ReferenceTable>group_user</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>add_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKgroup_user576799">
+    <ReferenceTable>group_user</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>last_edit_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKgroup_deta355120">
+    <ReferenceTable>group_detail</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>add_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKgroup_deta25066">
+    <ReferenceTable>group_detail</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>last_edit_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKgroup_righ36926">
+    <ReferenceTable>group_right</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>add_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKgroup_righ366980">
+    <ReferenceTable>group_right</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>last_edit_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKjob_card_i676041">
+    <ReferenceTable>job_card_item</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>add_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKjob_card_i345987">
+    <ReferenceTable>job_card_item</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>last_edit_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKcustomer_d122576">
+    <ReferenceTable>customer_detail</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>add_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKcustomer_d452630">
+    <ReferenceTable>customer_detail</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>last_edit_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKdelivery_n222841">
+    <ReferenceTable>delivery_note</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>add_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKdelivery_n892786">
+    <ReferenceTable>delivery_note</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>last_edit_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKjob_card621922">
+    <ReferenceTable>job_card</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>add_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKpaper_type26181">
+    <ReferenceTable>paper_type</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>add_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKpaper_type356235">
+    <ReferenceTable>paper_type</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>last_edit_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKjob_card291868">
+    <ReferenceTable>job_card</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>last_edit_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKsupplier_d277865">
+    <ReferenceTable>supplier_detail</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>add_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKsupplier_d607919">
+    <ReferenceTable>supplier_detail</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>last_edit_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
     </RefColumns>
   </ForeignKey>
 </Model>
