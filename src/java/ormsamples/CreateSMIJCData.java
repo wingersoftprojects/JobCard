@@ -42,9 +42,6 @@ public class CreateSMIJCData {
 			models.Group_user lmodelsGroup_user = models.Group_user.createGroup_user();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : add_by, add_date, is_deleted, is_active, user_detail, group_detail
 			lmodelsGroup_user.save();
-			models.User_category lmodelsUser_category = models.User_category.createUser_category();
-			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : add_by, add_date, is_deleted, is_active, user_category_name
-			lmodelsUser_category.save();
 			t.commit();
 		}
 		catch (Exception e) {

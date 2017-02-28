@@ -232,7 +232,7 @@ public class Group_rightBean extends AbstractBean<Group_right> implements Serial
                         + "SELECT gu.group_detail FROM Group_user gu"
                         + "INNER JOIN gu.group_detail gd"
                         + "WHERE gd.is_active=1 and gd.is_deleted=0"
-                        + "AND gu.user_detail=" + user_detail + ")"
+                        + "AND gu.user_detail=" + user_detail.getUser_detail_id() + ")"
                         + "").list();
             }
         } catch (PersistentException ex) {
@@ -243,7 +243,7 @@ public class Group_rightBean extends AbstractBean<Group_right> implements Serial
         return grl;
     }
 
-    public int IsUserGroupsFormAccessAllowed(User_detail user_detail, List<Group_right> group_rights, int form_id, String allow) {
+    public int IsUserGroupsFormAccessAllowed(User_detail user_detail, List<Group_right> group_rights, String group_right_function, String allow) {
 
 //first check if user is gen admin
         if (user_detail == null) {
@@ -261,6 +261,30 @@ public class Group_rightBean extends AbstractBean<Group_right> implements Serial
         } catch (NullPointerException npe) {
 
         }
+
+        for (Group_right gr : group_rights) {
+            if (gr.getGroup_right_function().equals(group_right_function) && "View".equals(allow)) {
+                if (gr.getAllow_view() == 1) {
+                    return 1;
+                }
+            }
+            if (gr.getGroup_right_function().equals(group_right_function) && "Add".equals(allow)) {
+                if (gr.getAllow_add() == 1) {
+                    return 1;
+                }
+            }
+            if (gr.getGroup_right_function().equals(group_right_function) && "Delete".equals(allow)) {
+                if (gr.getAllow_delete() == 1) {
+                    return 1;
+                }
+            }
+            if (gr.getGroup_right_function().equals(group_right_function) && "Edit".equals(allow)) {
+                if (gr.getAllow_edit() == 1) {
+                    return 1;
+                }
+            }
+        }
+
         int IsNegativeRightSeen = 0;
         int IsPostiveRightSeen = 0;
 
@@ -272,12 +296,12 @@ public class Group_rightBean extends AbstractBean<Group_right> implements Serial
         } else {
             return 0; //Disallow function Access
         }
+
     }
 
     /**
      * @return the selectedGroup_detail
      */
-
     public Group_detail getSelectedGroup_detail() {
         return selectedGroup_detail;
     }

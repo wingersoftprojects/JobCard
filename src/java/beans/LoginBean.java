@@ -161,7 +161,7 @@ public class LoginBean {
 
             Login_sessionBean lsb = new Login_sessionBean();
             lsb.setSelected(ls);
-            lsb.save(user_detail.getUser_detail_id());
+            lsb.save(user_detail);
 
             ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) context.getApplication().getNavigationHandler();
             nav.performNavigation("user_detail?faces-redirect=true");
@@ -182,9 +182,9 @@ public class LoginBean {
         return conn;
     }
 
-    public boolean IsAllowed(int form_id, String role) {
+    public boolean IsAllowed(String group_right_function, String role) {
         try {
-            return new Group_rightBean().IsUserGroupsFormAccessAllowed(this.getUser_detail(), this.getGroup_rights(), form_id, role) != 0;
+            return new Group_rightBean().IsUserGroupsFormAccessAllowed(this.getUser_detail(), this.getGroup_rights(), group_right_function, role) != 0;
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -202,10 +202,6 @@ public class LoginBean {
 
     public String logout() {
         return "login?faces-redirect=true";
-    }
-
-    public boolean IsAllowed(String functionname, String role) {
-        return false;
     }
 
     public void redirectifnotloggedin() {

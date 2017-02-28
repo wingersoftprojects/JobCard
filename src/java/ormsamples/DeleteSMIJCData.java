@@ -31,8 +31,6 @@ public class DeleteSMIJCData {
 			lmodelsDelivery_note.delete();
 			models.Group_user lmodelsGroup_user = models.Group_user.loadGroup_userByQuery(null, null);
 			lmodelsGroup_user.delete();
-			models.User_category lmodelsUser_category = models.User_category.loadUser_categoryByQuery(null, null);
-			lmodelsUser_category.delete();
 			t.commit();
 		}
 		catch (Exception e) {

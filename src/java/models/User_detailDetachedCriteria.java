@@ -20,8 +20,6 @@ import org.orm.criteria.*;
 
 public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression user_detail_id;
-	public final IntegerExpression user_categoryId;
-	public final AssociationExpression user_category;
 	public final StringExpression user_name;
 	public final StringExpression user_password;
 	public final StringExpression first_name;
@@ -39,8 +37,6 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final CollectionExpression login_session;
 	public final CollectionExpression login_session1;
 	public final CollectionExpression login_session2;
-	public final CollectionExpression user_category1;
-	public final CollectionExpression user_category2;
 	public final CollectionExpression group_user1;
 	public final CollectionExpression group_user2;
 	public final CollectionExpression group_detail;
@@ -63,8 +59,6 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public User_detailDetachedCriteria() {
 		super(models.User_detail.class, models.User_detailCriteria.class);
 		user_detail_id = new IntegerExpression("user_detail_id", this.getDetachedCriteria());
-		user_categoryId = new IntegerExpression("user_category.user_category_id", this.getDetachedCriteria());
-		user_category = new AssociationExpression("user_category", this.getDetachedCriteria());
 		user_name = new StringExpression("user_name", this.getDetachedCriteria());
 		user_password = new StringExpression("user_password", this.getDetachedCriteria());
 		first_name = new StringExpression("first_name", this.getDetachedCriteria());
@@ -82,8 +76,6 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		login_session = new CollectionExpression("login_session", this.getDetachedCriteria());
 		login_session1 = new CollectionExpression("login_session1", this.getDetachedCriteria());
 		login_session2 = new CollectionExpression("login_session2", this.getDetachedCriteria());
-		user_category1 = new CollectionExpression("user_category1", this.getDetachedCriteria());
-		user_category2 = new CollectionExpression("user_category2", this.getDetachedCriteria());
 		group_user1 = new CollectionExpression("group_user1", this.getDetachedCriteria());
 		group_user2 = new CollectionExpression("group_user2", this.getDetachedCriteria());
 		group_detail = new CollectionExpression("group_detail", this.getDetachedCriteria());
@@ -107,8 +99,6 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public User_detailDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, models.User_detailCriteria.class);
 		user_detail_id = new IntegerExpression("user_detail_id", this.getDetachedCriteria());
-		user_categoryId = new IntegerExpression("user_category.user_category_id", this.getDetachedCriteria());
-		user_category = new AssociationExpression("user_category", this.getDetachedCriteria());
 		user_name = new StringExpression("user_name", this.getDetachedCriteria());
 		user_password = new StringExpression("user_password", this.getDetachedCriteria());
 		first_name = new StringExpression("first_name", this.getDetachedCriteria());
@@ -126,8 +116,6 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		login_session = new CollectionExpression("login_session", this.getDetachedCriteria());
 		login_session1 = new CollectionExpression("login_session1", this.getDetachedCriteria());
 		login_session2 = new CollectionExpression("login_session2", this.getDetachedCriteria());
-		user_category1 = new CollectionExpression("user_category1", this.getDetachedCriteria());
-		user_category2 = new CollectionExpression("user_category2", this.getDetachedCriteria());
 		group_user1 = new CollectionExpression("group_user1", this.getDetachedCriteria());
 		group_user2 = new CollectionExpression("group_user2", this.getDetachedCriteria());
 		group_detail = new CollectionExpression("group_detail", this.getDetachedCriteria());
@@ -148,10 +136,6 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		supplier_detail1 = new CollectionExpression("supplier_detail1", this.getDetachedCriteria());
 	}
 	
-	public User_categoryDetachedCriteria createUser_categoryCriteria() {
-		return new User_categoryDetachedCriteria(createCriteria("user_category"));
-	}
-	
 	public User_actionDetachedCriteria createUser_actionCriteria() {
 		return new User_actionDetachedCriteria(createCriteria("user_action"));
 	}
@@ -170,14 +154,6 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public Login_sessionDetachedCriteria createLogin_session2Criteria() {
 		return new Login_sessionDetachedCriteria(createCriteria("login_session2"));
-	}
-	
-	public User_categoryDetachedCriteria createUser_category1Criteria() {
-		return new User_categoryDetachedCriteria(createCriteria("user_category1"));
-	}
-	
-	public User_categoryDetachedCriteria createUser_category2Criteria() {
-		return new User_categoryDetachedCriteria(createCriteria("user_category2"));
 	}
 	
 	public Group_userDetachedCriteria createGroup_user1Criteria() {

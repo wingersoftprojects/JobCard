@@ -20,8 +20,6 @@ import org.orm.criteria.*;
 
 public class User_detailCriteria extends AbstractORMCriteria {
 	public final IntegerExpression user_detail_id;
-	public final IntegerExpression user_categoryId;
-	public final AssociationExpression user_category;
 	public final StringExpression user_name;
 	public final StringExpression user_password;
 	public final StringExpression first_name;
@@ -39,8 +37,6 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	public final CollectionExpression login_session;
 	public final CollectionExpression login_session1;
 	public final CollectionExpression login_session2;
-	public final CollectionExpression user_category1;
-	public final CollectionExpression user_category2;
 	public final CollectionExpression group_user1;
 	public final CollectionExpression group_user2;
 	public final CollectionExpression group_detail;
@@ -63,8 +59,6 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	public User_detailCriteria(Criteria criteria) {
 		super(criteria);
 		user_detail_id = new IntegerExpression("user_detail_id", this);
-		user_categoryId = new IntegerExpression("user_category.user_category_id", this);
-		user_category = new AssociationExpression("user_category", this);
 		user_name = new StringExpression("user_name", this);
 		user_password = new StringExpression("user_password", this);
 		first_name = new StringExpression("first_name", this);
@@ -82,8 +76,6 @@ public class User_detailCriteria extends AbstractORMCriteria {
 		login_session = new CollectionExpression("login_session", this);
 		login_session1 = new CollectionExpression("login_session1", this);
 		login_session2 = new CollectionExpression("login_session2", this);
-		user_category1 = new CollectionExpression("user_category1", this);
-		user_category2 = new CollectionExpression("user_category2", this);
 		group_user1 = new CollectionExpression("group_user1", this);
 		group_user2 = new CollectionExpression("group_user2", this);
 		group_detail = new CollectionExpression("group_detail", this);
@@ -112,10 +104,6 @@ public class User_detailCriteria extends AbstractORMCriteria {
 		this(models.JobCardPersistentManager.instance().getSession());
 	}
 	
-	public User_categoryCriteria createUser_categoryCriteria() {
-		return new User_categoryCriteria(createCriteria("user_category"));
-	}
-	
 	public User_actionCriteria createUser_actionCriteria() {
 		return new User_actionCriteria(createCriteria("user_action"));
 	}
@@ -134,14 +122,6 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	
 	public Login_sessionCriteria createLogin_session2Criteria() {
 		return new Login_sessionCriteria(createCriteria("login_session2"));
-	}
-	
-	public User_categoryCriteria createUser_category1Criteria() {
-		return new User_categoryCriteria(createCriteria("user_category1"));
-	}
-	
-	public User_categoryCriteria createUser_category2Criteria() {
-		return new User_categoryCriteria(createCriteria("user_category2"));
 	}
 	
 	public Group_userCriteria createGroup_user1Criteria() {

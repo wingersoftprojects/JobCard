@@ -96,15 +96,6 @@ public class ListSMIJCData {
 			System.out.println(modelsGroup_users[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
-		
-		System.out.println("Listing User_category...");
-		models.User_category[] modelsUser_categorys = models.User_category.listUser_categoryByQuery(null, null);
-		length = Math.min(modelsUser_categorys.length, ROW_COUNT);
-		for (int i = 0; i < length; i++) {
-			System.out.println(modelsUser_categorys[i]);
-		}
-		System.out.println(length + " record(s) retrieved.");
-		
 	}
 	
 	public void listByCriteria() throws PersistentException {
@@ -240,19 +231,7 @@ public class ListSMIJCData {
 		}
 		System.out.println(length + " Group_user record(s) retrieved."); 
 		
-		System.out.println("Listing User_category by Criteria...");
-		models.User_categoryCriteria lmodelsUser_categoryCriteria = new models.User_categoryCriteria();
-		// Please uncomment the follow line and fill in parameter(s) 
-		//lmodelsUser_categoryCriteria.user_category_id.eq();
-		lmodelsUser_categoryCriteria.setMaxResults(ROW_COUNT);
-		models.User_category[] modelsUser_categorys = lmodelsUser_categoryCriteria.listUser_category();
-		length =modelsUser_categorys== null ? 0 : Math.min(modelsUser_categorys.length, ROW_COUNT); 
-		for (int i = 0; i < length; i++) {
-			 System.out.println(modelsUser_categorys[i]);
-		}
-		System.out.println(length + " User_category record(s) retrieved."); 
-		
-	}
+			}
 	
 	public static void main(String[] args) {
 		try {

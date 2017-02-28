@@ -281,7 +281,7 @@ public abstract class AbstractBean<T> {
         }
     }
 
-    public void save(int aUserDetailId) {
+    public void save(User_detail aUserDetailId) {
         //no paramater
         Class noparams[] = {};
 
@@ -306,7 +306,7 @@ public abstract class AbstractBean<T> {
                 method.invoke(selected, new Timestamp(new Date().getTime()));
                 method = selected.getClass().getMethod("setIs_deleted", paramInteger);
                 method.invoke(selected, 0);
-                method = selected.getClass().getMethod("setAdd_by", paramInteger);
+                method = selected.getClass().getMethod("setAdd_by", paramUser_detail);
                 method.invoke(selected, aUserDetailId);
             }
             if (formstate.equals("edit")) {
@@ -314,7 +314,7 @@ public abstract class AbstractBean<T> {
 //                method.invoke(selected, loginBean.getUser_detail());
                 Method method = selected.getClass().getMethod("setLast_edit_date", paramTimestamp);
                 method.invoke(selected, new Timestamp(new Date().getTime()));
-                method = selected.getClass().getMethod("setLast_edit_by", paramInteger);
+                method = selected.getClass().getMethod("setLast_edit_by", paramUser_detail);
                 method.invoke(selected, aUserDetailId);
             }
             Method method = selected.getClass().getMethod("get" + entityClass.getSimpleName() + "_id", noparams);
