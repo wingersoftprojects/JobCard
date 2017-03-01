@@ -59,6 +59,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final CollectionExpression supplier_detail1;
 	public final CollectionExpression user_detail;
 	public final CollectionExpression user_detail1;
+	public final CollectionExpression item_type;
+	public final CollectionExpression item_type1;
 	
 	public User_detailDetachedCriteria() {
 		super(models.User_detail.class, models.User_detailCriteria.class);
@@ -102,6 +104,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		supplier_detail1 = new CollectionExpression("supplier_detail1", this.getDetachedCriteria());
 		user_detail = new CollectionExpression("user_detail", this.getDetachedCriteria());
 		user_detail1 = new CollectionExpression("user_detail1", this.getDetachedCriteria());
+		item_type = new CollectionExpression("item_type", this.getDetachedCriteria());
+		item_type1 = new CollectionExpression("item_type1", this.getDetachedCriteria());
 	}
 	
 	public User_detailDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -146,6 +150,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		supplier_detail1 = new CollectionExpression("supplier_detail1", this.getDetachedCriteria());
 		user_detail = new CollectionExpression("user_detail", this.getDetachedCriteria());
 		user_detail1 = new CollectionExpression("user_detail1", this.getDetachedCriteria());
+		item_type = new CollectionExpression("item_type", this.getDetachedCriteria());
+		item_type1 = new CollectionExpression("item_type1", this.getDetachedCriteria());
 	}
 	
 	public User_detailDetachedCriteria createAdd_byCriteria() {
@@ -254,6 +260,14 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public User_detailDetachedCriteria createUser_detail1Criteria() {
 		return new User_detailDetachedCriteria(createCriteria("user_detail1"));
+	}
+	
+	public Item_typeDetachedCriteria createItem_typeCriteria() {
+		return new Item_typeDetachedCriteria(createCriteria("item_type"));
+	}
+	
+	public Item_typeDetachedCriteria createItem_type1Criteria() {
+		return new Item_typeDetachedCriteria(createCriteria("item_type1"));
 	}
 	
 	public User_detail uniqueUser_detail(PersistentSession session) {

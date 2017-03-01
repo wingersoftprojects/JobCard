@@ -27,7 +27,10 @@ public class Job_card_itemCriteria extends AbstractORMCriteria {
 	public final IntegerExpression paper_typeId;
 	public final AssociationExpression paper_type;
 	public final StringExpression job_title;
-	public final StringExpression item_type;
+	public final IntegerExpression item_typeId;
+	public final AssociationExpression item_type;
+	public final StringExpression color;
+	public final StringExpression color_other;
 	public final IntegerExpression pages;
 	public final StringExpression paper_size;
 	public final StringExpression cover_type;
@@ -57,7 +60,10 @@ public class Job_card_itemCriteria extends AbstractORMCriteria {
 		paper_typeId = new IntegerExpression("paper_type.paper_type_id", this);
 		paper_type = new AssociationExpression("paper_type", this);
 		job_title = new StringExpression("job_title", this);
-		item_type = new StringExpression("item_type", this);
+		item_typeId = new IntegerExpression("item_type.item_type_id", this);
+		item_type = new AssociationExpression("item_type", this);
+		color = new StringExpression("color", this);
+		color_other = new StringExpression("color_other", this);
 		pages = new IntegerExpression("pages", this);
 		paper_size = new StringExpression("paper_size", this);
 		cover_type = new StringExpression("cover_type", this);
@@ -96,6 +102,10 @@ public class Job_card_itemCriteria extends AbstractORMCriteria {
 	
 	public Paper_typeCriteria createPaper_typeCriteria() {
 		return new Paper_typeCriteria(createCriteria("paper_type"));
+	}
+	
+	public Item_typeCriteria createItem_typeCriteria() {
+		return new Item_typeCriteria(createCriteria("item_type"));
 	}
 	
 	public User_detailCriteria createAdd_byCriteria() {

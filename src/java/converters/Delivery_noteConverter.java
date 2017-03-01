@@ -18,7 +18,7 @@ import org.orm.PersistentException;
  *
  * @author bajuna
  */
-@FacesConverter(value = "customer_detailConverter")
+@FacesConverter(value = "delivery_noteConverter")
 public class Delivery_noteConverter implements Converter {
 
     public Object getAsObject(FacesContext facesContext, UIComponent component, String string) {

@@ -27,7 +27,10 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression paper_typeId;
 	public final AssociationExpression paper_type;
 	public final StringExpression job_title;
-	public final StringExpression item_type;
+	public final IntegerExpression item_typeId;
+	public final AssociationExpression item_type;
+	public final StringExpression color;
+	public final StringExpression color_other;
 	public final IntegerExpression pages;
 	public final StringExpression paper_size;
 	public final StringExpression cover_type;
@@ -57,7 +60,10 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 		paper_typeId = new IntegerExpression("paper_type.paper_type_id", this.getDetachedCriteria());
 		paper_type = new AssociationExpression("paper_type", this.getDetachedCriteria());
 		job_title = new StringExpression("job_title", this.getDetachedCriteria());
-		item_type = new StringExpression("item_type", this.getDetachedCriteria());
+		item_typeId = new IntegerExpression("item_type.item_type_id", this.getDetachedCriteria());
+		item_type = new AssociationExpression("item_type", this.getDetachedCriteria());
+		color = new StringExpression("color", this.getDetachedCriteria());
+		color_other = new StringExpression("color_other", this.getDetachedCriteria());
 		pages = new IntegerExpression("pages", this.getDetachedCriteria());
 		paper_size = new StringExpression("paper_size", this.getDetachedCriteria());
 		cover_type = new StringExpression("cover_type", this.getDetachedCriteria());
@@ -88,7 +94,10 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 		paper_typeId = new IntegerExpression("paper_type.paper_type_id", this.getDetachedCriteria());
 		paper_type = new AssociationExpression("paper_type", this.getDetachedCriteria());
 		job_title = new StringExpression("job_title", this.getDetachedCriteria());
-		item_type = new StringExpression("item_type", this.getDetachedCriteria());
+		item_typeId = new IntegerExpression("item_type.item_type_id", this.getDetachedCriteria());
+		item_type = new AssociationExpression("item_type", this.getDetachedCriteria());
+		color = new StringExpression("color", this.getDetachedCriteria());
+		color_other = new StringExpression("color_other", this.getDetachedCriteria());
 		pages = new IntegerExpression("pages", this.getDetachedCriteria());
 		paper_size = new StringExpression("paper_size", this.getDetachedCriteria());
 		cover_type = new StringExpression("cover_type", this.getDetachedCriteria());
@@ -119,6 +128,10 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public Paper_typeDetachedCriteria createPaper_typeCriteria() {
 		return new Paper_typeDetachedCriteria(createCriteria("paper_type"));
+	}
+	
+	public Item_typeDetachedCriteria createItem_typeCriteria() {
+		return new Item_typeDetachedCriteria(createCriteria("item_type"));
 	}
 	
 	public User_detailDetachedCriteria createAdd_byCriteria() {

@@ -16,6 +16,7 @@ import javax.faces.bean.SessionScoped;
 import models.Customer_detail;
 import models.JobCardPersistentManager;
 import models.Job_card;
+import models.Job_card_item;
 import models.Supplier_detail;
 import org.orm.PersistentException;
 
@@ -27,25 +28,25 @@ import org.orm.PersistentException;
 @SessionScoped
 public class Job_cardBean extends AbstractBean<Job_card> implements Serializable {
 
-    private Customer_detail customer_detail;
-    private Supplier_detail supplier_detail;
+    private Job_card_item job_card_item = new Job_card_item();
+    private List<Job_card_item> job_card_items = new ArrayList<>();
 
-    public Customer_detail getCustomer_detail() {
-        return customer_detail;
+    public Job_card_item getJob_card_item() {
+        return job_card_item;
     }
 
-    public void setCustomer_detail(Customer_detail customer_detail) {
-        this.customer_detail = customer_detail;
+    public void setJob_card_item(Job_card_item job_card_item) {
+        this.job_card_item = job_card_item;
     }
 
-    public Supplier_detail getSupplier_detail() {
-        return supplier_detail;
+    public List<Job_card_item> getJob_card_items() {
+        return job_card_items;
     }
 
-    public void setSupplier_detail(Supplier_detail supplier_detail) {
-        this.supplier_detail = supplier_detail;
+    public void setJob_card_items(List<Job_card_item> job_card_items) {
+        this.job_card_items = job_card_items;
     }
-    
+
     public Job_cardBean() {
         super(Job_card.class);
     }
@@ -66,24 +67,31 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
     public void setLoginBean(LoginBean loginBean) {
         this.loginBean = loginBean;
     }
-    
+
     public List<Customer_detail> completeCustomer_detail(String query) {
         List<Customer_detail> filteredCustomer_details = new ArrayList<>();
         try {
-            filteredCustomer_details = (List<Customer_detail>) JobCardPersistentManager.instance().getSession().createQuery("select de FROM Customer_detail  de where de.is_deleted<>1 AND ( de.customer_name like '%" + query + "%' OR  de.contact_person_name '%" + query + "%' or de.telephone1 like '%" + query + "%' OR de.telephone2 like '%" + query + "%' OR de.email like '%" + query + "%')").list();
+            filteredCustomer_details = (List<Customer_detail>) JobCardPersistentManager.instance().getSession().createQuery("select de FROM Customer_detail  de where de.is_deleted<>1 AND ( de.customer_name like '%" + query + "%' OR  de.contact_person_name like '%" + query + "%' or de.telephone1 like '%" + query + "%' OR de.telephone2 like '%" + query + "%' OR de.email like '%" + query + "%')").list();
         } catch (PersistentException ex) {
             Logger.getLogger(Customer_detailBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return filteredCustomer_details;
     }
-    
+
     public List<Supplier_detail> completeSupplier_detail(String query) {
         List<Supplier_detail> filteredSupplier_details = new ArrayList<>();
         try {
-            filteredSupplier_details = (List<Supplier_detail>) JobCardPersistentManager.instance().getSession().createQuery("select de FROM Supplier_detail  de where de.is_deleted<>1 AND ( de.supplier_name like '%" + query + "%' OR  de.telephone '%" + query + "%')").list();
+            filteredSupplier_details = (List<Supplier_detail>) JobCardPersistentManager.instance().getSession().createQuery("select de FROM Supplier_detail  de where de.is_deleted<>1 AND ( de.supplier_name like '%" + query + "%' OR  de.telephone like '%" + query + "%')").list();
         } catch (PersistentException ex) {
             Logger.getLogger(Customer_detailBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return filteredSupplier_details;
+    }
+
+    public void add_job_card_item() {
+        if (job_card_items == null) {
+            job_card_items = new ArrayList<>();
+        }
+        job_card_items.add(job_card_item);
     }
 }

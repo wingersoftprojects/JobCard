@@ -20,3 +20,10 @@ and open the template in the editor.
     max-width: 960px;
     margin: 0 auto;
 }
+
+.grayed_out{
+    background: aliceblue;
+    height: 25px;
+    font-size: large;
+    font-weight: bold;
+}

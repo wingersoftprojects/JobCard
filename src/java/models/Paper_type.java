@@ -433,13 +433,13 @@ public class Paper_type implements Serializable {
 	@Column(name="add_date", nullable=true)	
 	private java.sql.Timestamp add_date;
 	
+	@Column(name="last_edit_date", nullable=true)	
+	private java.sql.Timestamp last_edit_date;
+	
 	@ManyToOne(targetEntity=models.User_detail.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns({ @JoinColumn(name="add_by", referencedColumnName="user_detail_id", nullable=false) })	
 	private models.User_detail add_by;
-	
-	@Column(name="last_edit_date", nullable=true)	
-	private java.sql.Timestamp last_edit_date;
 	
 	@ManyToOne(targetEntity=models.User_detail.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	

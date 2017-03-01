@@ -51,14 +51,37 @@
                         </tr>
                         <tr>
                             <td><h:outputLabel value="Contact Person"/></td>
-                            <td><h:inputText id="contact_person" value="#{job_cardBean.selected.customer_detail.contact_person_name}"/></td>
+                            <td><h:inputText id="contact_person" value="#{job_cardBean.selected.customer_detail.contact_person_name}" readonly="true" class="grayed_out"/></td>
                             <td><h:outputLabel value="Telephone"/></td>
-                            <td><h:inputText id="telephone" value="#{job_cardBean.selected.customer_detail.telephone1} #{job_cardBean.selected.customer_detail.telephone2}"/></td>
+                            <td><h:inputText id="telephone" value="#{job_cardBean.selected.customer_detail.telephone1}/#{job_cardBean.selected.customer_detail.telephone2}" readonly="true" class="grayed_out"/></td>
                         </tr>
                     </table>
                 </fieldset>
                 <fieldset>
                     <legend>JOB DETAILS</legend>
+                    <table>
+                        <tr>
+                            <td>
+                                <h:outputLabel value="Job title"/>
+                            </td>
+                            <td>
+                                <h:inputText id="job_title" value="#{job_cardBean.job_card_item.job_title}"/>
+                            </td>
+                            <td>
+                                <h:outputLabel value="Paper type"/>
+                            </td>
+                            <td>
+                                <h:inputText id="paper_type" value="#{job_cardBean.job_card_item.paper_type}"/>
+                            </td>
+                            <td>
+                                <h:outputLabel value="Paper Size"/>
+                            </td>
+                            <td>
+                                <h:inputText id="paper_size" value="#{job_cardBean.job_card_item.paper_size}"/>
+                            </td>
+                        </tr>
+                        
+                    </table>
                     <fieldset>
                         <legend>POST PRESS DETAILS</legend>
 

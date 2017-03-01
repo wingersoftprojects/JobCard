@@ -377,6 +377,10 @@ public class Job_card_item implements Serializable {
 				getPaper_type().getJob_card_item().remove(this);
 			}
 			
+			if(getItem_type() != null) {
+				getItem_type().getJob_card_item().remove(this);
+			}
+			
 			if(getAdd_by() != null) {
 				getAdd_by().getJob_card_item().remove(this);
 			}
@@ -405,6 +409,10 @@ public class Job_card_item implements Serializable {
 			
 			if(getPaper_type() != null) {
 				getPaper_type().getJob_card_item().remove(this);
+			}
+			
+			if(getItem_type() != null) {
+				getItem_type().getJob_card_item().remove(this);
 			}
 			
 			if(getAdd_by() != null) {
@@ -452,8 +460,16 @@ public class Job_card_item implements Serializable {
 	@Column(name="job_title", nullable=false, length=100)	
 	private String job_title;
 	
-	@Column(name="item_type", nullable=false, length=100)	
-	private String item_type;
+	@ManyToOne(targetEntity=models.Item_type.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="item_type_id", referencedColumnName="item_type_id", nullable=false) })	
+	private models.Item_type item_type;
+	
+	@Column(name="color", nullable=false, length=100)	
+	private String color;
+	
+	@Column(name="color_other", nullable=false, length=100)	
+	private String color_other;
 	
 	@Column(name="pages", nullable=false, length=10)	
 	private int pages;
@@ -525,14 +541,6 @@ public class Job_card_item implements Serializable {
 	
 	public String getJob_title() {
 		return job_title;
-	}
-	
-	public void setItem_type(String value) {
-		this.item_type = value;
-	}
-	
-	public String getItem_type() {
-		return item_type;
 	}
 	
 	public void setPages(int value) {
@@ -655,6 +663,22 @@ public class Job_card_item implements Serializable {
 		return last_edit_date;
 	}
 	
+	public void setColor(String value) {
+		this.color = value;
+	}
+	
+	public String getColor() {
+		return color;
+	}
+	
+	public void setColor_other(String value) {
+		this.color_other = value;
+	}
+	
+	public String getColor_other() {
+		return color_other;
+	}
+	
 	public void setJob_card(models.Job_card value) {
 		this.job_card = value;
 	}
@@ -693,6 +717,14 @@ public class Job_card_item implements Serializable {
 	
 	public models.User_detail getLast_edit_by() {
 		return last_edit_by;
+	}
+	
+	public void setItem_type(models.Item_type value) {
+		this.item_type = value;
+	}
+	
+	public models.Item_type getItem_type() {
+		return item_type;
 	}
 	
 	public boolean equals(Object obj) {
