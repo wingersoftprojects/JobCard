@@ -251,8 +251,11 @@ public abstract class AbstractBean<T> {
         //formstate = "view";
     }
 
-    public void delete(T t) {
+    public void delete(T t, User_detail aUserDetailId) {
         try {
+            //String parameter
+            Class[] paramUser_detail = new Class[1];
+            paramUser_detail[0] = User_detail.class;
             //no paramater
             Class noparams[] = {};
             Method method = t.getClass().getMethod("get" + entityClass.getSimpleName() + "_id", noparams);
@@ -271,6 +274,8 @@ public abstract class AbstractBean<T> {
             method.invoke(selected, new Timestamp(new Date().getTime()));
             method = selected.getClass().getMethod("setIs_deleted", paramInteger);
             method.invoke(selected, 1);
+            method = selected.getClass().getMethod("setLast_edit_by", paramUser_detail);
+            method.invoke(selected, aUserDetailId);
             JobCardPersistentManager.instance().getSession().merge(selected);
             transaction.commit();
             saveMessage();
