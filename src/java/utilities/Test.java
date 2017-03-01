@@ -16,7 +16,7 @@ public class Test {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println(Security.Decrypt("A6XsH5X3L3a5y6J2m4w1k3Ama4weR3Xtu1ysB6qyw1Zsg5DDP5F3"));
+        System.out.println(Security.Decrypt("T2FyN5g3k1V9L0A2g4F1N9yms3Deo0BtF6oso3Fyu0Tsm9qog9w9"));
     }
     
 }

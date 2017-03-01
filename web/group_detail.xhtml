@@ -121,9 +121,12 @@
                             <p:ajax process="@this"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="Group Right Function:" for="group_right_function"/>
-                        <p:selectOneMenu id="group_right_function" value="#{group_rightBean.selected.group_right_function}" style="width:125px" required="true" requiredMessage="Job Card field is Required" converter="job_cardConverter">
+                        
+                        <p:selectOneMenu id="group_right_function" value="#{group_rightBean.selected.group_right_function}" style="width:125px" required="true" requiredMessage="Group Right Function field is Required" converter="job_cardConverter">
                             <f:selectItem itemLabel="" />
-                            <f:selectItems value="#{report_formBean.tsActive}" var="item" itemLabel="#{item.report_form_name}" itemValue="#{item}"/>
+                            <f:selectItem itemLabel="User Management"/>
+                            <f:selectItem itemLabel="Job Card"/>
+                            <f:selectItem itemLabel="Delivery Note"/>                                                  
                             <p:ajax process="@this"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="View:" for="view"/>
@@ -167,8 +170,8 @@
                     <p:column headerText="Group Name">
                         <h:outputText value="#{item.group_detail.group_name}"/>
                     </p:column>
-                    <p:column headerText="Job Card">
-                        <h:outputText value="#{item.report_form.report_form_name}"/>
+                    <p:column headerText="Group Right Function">
+                        <h:outputText value="#{item.group_right.group_right_function}"/>
                     </p:column>
                     <p:column headerText="View?">
                         <h:outputText value="#{generalUtilities.convertYesNo(item.allow_view)}"/>
