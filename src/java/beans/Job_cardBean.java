@@ -17,6 +17,7 @@ import models.Customer_detail;
 import models.JobCardPersistentManager;
 import models.Job_card;
 import models.Job_card_item;
+import models.Paper_type;
 import models.Supplier_detail;
 import org.orm.PersistentException;
 
@@ -86,6 +87,15 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
             Logger.getLogger(Customer_detailBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return filteredSupplier_details;
+    }
+    public List<Paper_type> completePaper_type(String query) {
+        List<Paper_type> filteredPaper_types = new ArrayList<>();
+        try {
+            filteredPaper_types = (List<Paper_type>) JobCardPersistentManager.instance().getSession().createQuery("select de FROM Paper_type  de where de.is_deleted<>1 AND ( de.paper_type_category like '%" + query + "%' OR  de.paper_type_sub_category like '%" + query + "%')").list();
+        } catch (PersistentException ex) {
+            Logger.getLogger(Customer_detailBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filteredPaper_types;
     }
 
     public void add_job_card_item() {

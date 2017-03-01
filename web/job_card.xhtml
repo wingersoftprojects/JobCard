@@ -15,6 +15,7 @@
     <ui:define name="content">
         <div style="width: 100%;">
             <h:form>
+                <p:growl showDetail="true" id="job_card_messages"/>
                 <fieldset>
                     <legend>CUSTOMER DETAILS</legend>
                     <table border="0" width="100%">
@@ -71,7 +72,21 @@
                                 <h:outputLabel value="Paper type"/>
                             </td>
                             <td>
-                                <h:inputText id="paper_type" value="#{job_cardBean.job_card_item.paper_type}"/>
+                                <p:autoComplete id="paper_type" value="#{job_cardBean.job_card_item.paper_type}"
+                                                completeMethod="#{job_cardBean.completePaper_type}"
+                                                var="paper_type" itemLabel="#{paper_type.paper_type_category}#{paper_type.paper_type_sub_category}" itemValue="#{paper_type}" 
+                                                converter="paper_typeConverter" forceSelection="true" maxResults="8">
+                                    <p:column headerText="Paper Category" style="text-align: left">
+                                        <h:outputText value="#{paper_type.paper_type_category}">
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Paper Type Sub Category" style="text-align: left">
+                                        <h:outputText value="#{paper_type.paper_type_sub_category}">
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:ajax event="itemSelect" process="@this"></p:ajax>
+                                    <p:ajax event="change" process="@this"></p:ajax>
+                                </p:autoComplete>
                             </td>
                             <td>
                                 <h:outputLabel value="Paper Size"/>
@@ -162,7 +177,7 @@
                     <fieldset>
                         <legend>Final Product Details (For delivery and Invoicing Purposes)</legend>
                         <h:outputLabel value="Item type"/>
-                        <h:selectOneMenu id="item_type" value="#{job_cardBean.job_card_item.item_type}" required="true" requiredMessage="Item type field is Required" converter="item_typeConverter">
+                        <h:selectOneMenu id="item_type" value="#{job_cardBean.job_card_item.item_type}" converter="item_typeConverter">
                             <f:selectItem itemLabel="" />
                             <f:selectItems value="#{item_typeBean.tsActive}" var="item" itemLabel="#{item.item_type_name}" itemValue="#{item}"/>
                             <f:ajax event="change" execute="@this"/>
@@ -173,7 +188,7 @@
                         <h:inputText id="rate" value="#{job_cardBean.job_card_item.rate}"/>
                         <h:outputLabel value="AMOUNT"/>
                         <h:inputText id="amount" value="#{job_cardBean.job_card_item.amount}"/>
-                        <p:commandButton value="Add Item" action="#{job_cardBean.add_job_card_item()}"/>
+                        <p:commandButton value="Add Item" action="#{job_cardBean.add_job_card_item()}" update="job_card_item_table,job_card_messages"/>
 
                         <br/>
                         <p:dataTable id="job_card_item_table" value="#{job_cardBean.job_card_items}" var="item">
@@ -181,9 +196,9 @@
                                 <h:outputText value="#{item.item_type.item_type_name}"/>
                             </p:column>
                             <p:column headerText="DESCRIPTION">
-                                <h:outputText value="#{item.job_title}"/>
-                                <h:outputText value="#{item.paper_size}"/>
-                                <h:outputText value="#{item.pages}"/>
+                                <h:outputText value="#{item.job_title}"/><br/>
+                                <h:outputText value="Size:#{item.paper_size}"/><br/>
+                                <h:outputText value="Pages:#{item.pages}"/>
                             </p:column>
                             <p:column headerText="QTY">
                                 <h:outputText value="#{item.quantity}"/>
