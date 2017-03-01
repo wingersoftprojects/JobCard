@@ -93,5 +93,10 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
             job_card_items = new ArrayList<>();
         }
         job_card_items.add(job_card_item);
+        job_card_item = new Job_card_item();
+    }
+
+    public void remove_item(Job_card_item item) {
+        job_card_items.remove(item);
     }
 }

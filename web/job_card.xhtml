@@ -80,15 +80,124 @@
                                 <h:inputText id="paper_size" value="#{job_cardBean.job_card_item.paper_size}"/>
                             </td>
                         </tr>
-                        
+                    </table>
+                    <br/>
+                    <table>
+                        <tr>
+                            <td>  
+                                <h:outputLabel value="Color:"/>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:selectOneRadio id="color" value="#{job_cardBean.job_card_item.color}">
+                                    <f:selectItem itemLabel="Full Color" itemValue="Full Color" />
+                                    <f:selectItem itemLabel="Black" itemValue="Black" />
+                                    <f:selectItem itemLabel="Others" itemValue="Others" />
+                                    <p:ajax process="@this" update="color_other_label,color_other,@form"/>
+                                </p:selectOneRadio>
+                            </td>
+                            <td>
+                                <h:outputLabel id="color_other_label" value="Others Specify" rendered="#{job_cardBean.job_card_item.color=='Others'}"/>
+                                <h:inputText id="color_other" value="#{job_cardBean.job_card_item.color_other}" rendered="#{job_cardBean.job_card_item.color=='Others'}"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table>
+                        <tr>
+                            <td>  
+                                <h:outputLabel value="Machine to Use:"/>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:selectOneRadio id="machine_used" value="#{job_cardBean.job_card_item.machine_used}">
+                                    <f:selectItem itemLabel="Digital Machine" itemValue="Digital Machine" />
+                                    <f:selectItem itemLabel="Offset Machine" itemValue="Offset Machine" />
+                                    <p:ajax process="@this" update="color_other_label,color_other,@form"/>
+                                </p:selectOneRadio>
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
                     </table>
                     <fieldset>
                         <legend>POST PRESS DETAILS</legend>
-
+                        <table>
+                            <tr>
+                                <td>  
+                                    <h:outputLabel value="Lamination type:"/>
+                                </td>
+                                <td>
+                                    <p:selectOneRadio id="lamination_type" value="#{job_cardBean.job_card_item.lamination_type}">
+                                        <f:selectItem itemLabel="Matte" itemValue="Matte" />
+                                        <f:selectItem itemLabel="Gloss" itemValue="Gloss" />
+                                        <f:selectItem itemLabel="None" itemValue="None" />
+                                    </p:selectOneRadio>
+                                </td>
+                                <td>  
+                                    <h:outputLabel value="Type of binding:"/>
+                                </td>
+                                <td>
+                                    <p:selectOneRadio id="binding_type" value="#{job_cardBean.job_card_item.binding_type}">
+                                        <f:selectItem itemLabel="Saddle Stitch" itemValue="Saddle Stitch" />
+                                        <f:selectItem itemLabel="Perfect Binding" itemValue="Perfect Binding" />
+                                        <f:selectItem itemLabel="Spiral" itemValue="Spiral" />
+                                    </p:selectOneRadio>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                    <fieldset>
+                        <legend>POST PRESS DETAILS</legend>
+                        <h:outputLabel value="Other Processes"/>
+                        <h:inputTextarea value="#{job_cardBean.job_card_item.other_processes}" cols="100" rows="7"/>
                     </fieldset>
                     <fieldset>
                         <legend>Final Product Details (For delivery and Invoicing Purposes)</legend>
+                        <h:outputLabel value="Item type"/>
+                        <h:selectOneMenu id="item_type" value="#{job_cardBean.job_card_item.item_type}" required="true" requiredMessage="Item type field is Required" converter="item_typeConverter">
+                            <f:selectItem itemLabel="" />
+                            <f:selectItems value="#{item_typeBean.tsActive}" var="item" itemLabel="#{item.item_type_name}" itemValue="#{item}"/>
+                            <f:ajax event="change" execute="@this"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="QTY"/>
+                        <h:inputText id="quantity" value="#{job_cardBean.job_card_item.quantity}"/>
+                        <h:outputLabel value="UNIT COST"/>
+                        <h:inputText id="rate" value="#{job_cardBean.job_card_item.rate}"/>
+                        <h:outputLabel value="AMOUNT"/>
+                        <h:inputText id="amount" value="#{job_cardBean.job_card_item.amount}"/>
+                        <p:commandButton value="Add Item" action="#{job_cardBean.add_job_card_item()}"/>
 
+                        <br/>
+                        <p:dataTable id="job_card_item_table" value="#{job_cardBean.job_card_items}" var="item">
+                            <p:column headerText="ITEM">
+                                <h:outputText value="#{item.item_type.item_type_name}"/>
+                            </p:column>
+                            <p:column headerText="DESCRIPTION">
+                                <h:outputText value="#{item.job_title}"/>
+                                <h:outputText value="#{item.paper_size}"/>
+                                <h:outputText value="#{item.pages}"/>
+                            </p:column>
+                            <p:column headerText="QTY">
+                                <h:outputText value="#{item.quantity}"/>
+                            </p:column>
+                            <p:column headerText="UNIT COST">
+                                <h:outputText value="#{item.rate}"/>
+                            </p:column>
+                            <p:column headerText="AMOUNT">
+                                <h:outputText value="#{item.amount}"/>
+                            </p:column>
+                            <p:column headerText="">
+                                <p:commandButton value="Remove" action="#{job_cardBean.remove_item(item)}" process="@this" update="job_card_item_table" icon="ui-icon-minusthick"/>
+                            </p:column>
+                        </p:dataTable>
                     </fieldset>
                 </fieldset>
             </h:form>
