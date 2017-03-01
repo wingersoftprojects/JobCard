@@ -13,18 +13,47 @@
         </f:metadata>
     </ui:define>
     <ui:define name="content">
-                <div style="width: 100%;">
+        <div style="width: 100%;">
             <h:form>
                 <fieldset>
                     <legend>CUSTOMER DETAILS</legend>
                     <table border="0" width="100%">
                         <tr>
                             <td><h:outputLabel value="Ms. (Company)"/></td>
-                            <td><h:inputText value="#{job_cardBean.selected.customer_detail}"/></td>
+                            <td><p:autoComplete id="dataelement" value="#{job_cardBean.selected.customer_detail}"
+                                                completeMethod="#{job_cardBean.completeCustomer_detail}"
+                                                var="customer_detail" itemLabel="#{customer_detail.customer_name}" itemValue="#{customer_detail}" 
+                                                converter="customer_detailConverter" forceSelection="true" maxResults="8">
+                                    <p:column headerText="Customer Name" style="text-align: left">
+                                        <h:outputText value="#{customer_detail.customer_name}">
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Contact Person Name" style="text-align: left">
+                                        <h:outputText value="#{customer_detail.contact_person_name}">
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Telephone1" style="text-align: left">
+                                        <h:outputText value="#{customer_detail.telephone1}">
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Telephone2" style="text-align: left">
+                                        <h:outputText value="#{customer_detail.telephone2}">
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Email" style="text-align: left">
+                                        <h:outputText value="#{customer_detail.email}">
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:ajax event="itemSelect" process="@this" update="contact_person,telephone"></p:ajax>
+                                    <p:ajax event="change" process="@this" update="@form"></p:ajax>
+                                </p:autoComplete>
+                            </td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
+                            <td><h:outputLabel value="Contact Person"/></td>
+                            <td><h:inputText id="contact_person" value="#{job_cardBean.selected.customer_detail.contact_person_name}"/></td>
+                            <td><h:outputLabel value="Telephone"/></td>
+                            <td><h:inputText id="telephone" value="#{job_cardBean.selected.customer_detail.telephone1} #{job_cardBean.selected.customer_detail.telephone2}"/></td>
                         </tr>
                     </table>
                 </fieldset>

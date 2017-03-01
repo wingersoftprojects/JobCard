@@ -22,7 +22,9 @@ public class Supplier_detailDetachedCriteria extends AbstractORMDetachedCriteria
 	public final IntegerExpression supplier_detail_id;
 	public final StringExpression supplier_name;
 	public final StringExpression specifications;
-	public final IntegerExpression telephone;
+	public final StringExpression telephone1;
+	public final StringExpression telephone2;
+	public final StringExpression email;
 	public final StringExpression size;
 	public final IntegerExpression quantity;
 	public final IntegerExpression is_active;
@@ -40,7 +42,9 @@ public class Supplier_detailDetachedCriteria extends AbstractORMDetachedCriteria
 		supplier_detail_id = new IntegerExpression("supplier_detail_id", this.getDetachedCriteria());
 		supplier_name = new StringExpression("supplier_name", this.getDetachedCriteria());
 		specifications = new StringExpression("specifications", this.getDetachedCriteria());
-		telephone = new IntegerExpression("telephone", this.getDetachedCriteria());
+		telephone1 = new StringExpression("telephone1", this.getDetachedCriteria());
+		telephone2 = new StringExpression("telephone2", this.getDetachedCriteria());
+		email = new StringExpression("email", this.getDetachedCriteria());
 		size = new StringExpression("size", this.getDetachedCriteria());
 		quantity = new IntegerExpression("quantity", this.getDetachedCriteria());
 		is_active = new IntegerExpression("is_active", this.getDetachedCriteria());
@@ -59,7 +63,9 @@ public class Supplier_detailDetachedCriteria extends AbstractORMDetachedCriteria
 		supplier_detail_id = new IntegerExpression("supplier_detail_id", this.getDetachedCriteria());
 		supplier_name = new StringExpression("supplier_name", this.getDetachedCriteria());
 		specifications = new StringExpression("specifications", this.getDetachedCriteria());
-		telephone = new IntegerExpression("telephone", this.getDetachedCriteria());
+		telephone1 = new StringExpression("telephone1", this.getDetachedCriteria());
+		telephone2 = new StringExpression("telephone2", this.getDetachedCriteria());
+		email = new StringExpression("email", this.getDetachedCriteria());
 		size = new StringExpression("size", this.getDetachedCriteria());
 		quantity = new IntegerExpression("quantity", this.getDetachedCriteria());
 		is_active = new IntegerExpression("is_active", this.getDetachedCriteria());

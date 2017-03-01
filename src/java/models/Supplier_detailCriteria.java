@@ -22,7 +22,9 @@ public class Supplier_detailCriteria extends AbstractORMCriteria {
 	public final IntegerExpression supplier_detail_id;
 	public final StringExpression supplier_name;
 	public final StringExpression specifications;
-	public final IntegerExpression telephone;
+	public final StringExpression telephone1;
+	public final StringExpression telephone2;
+	public final StringExpression email;
 	public final StringExpression size;
 	public final IntegerExpression quantity;
 	public final IntegerExpression is_active;
@@ -40,7 +42,9 @@ public class Supplier_detailCriteria extends AbstractORMCriteria {
 		supplier_detail_id = new IntegerExpression("supplier_detail_id", this);
 		supplier_name = new StringExpression("supplier_name", this);
 		specifications = new StringExpression("specifications", this);
-		telephone = new IntegerExpression("telephone", this);
+		telephone1 = new StringExpression("telephone1", this);
+		telephone2 = new StringExpression("telephone2", this);
+		email = new StringExpression("email", this);
 		size = new StringExpression("size", this);
 		quantity = new IntegerExpression("quantity", this);
 		is_active = new IntegerExpression("is_active", this);

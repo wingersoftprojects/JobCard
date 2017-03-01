@@ -424,8 +424,14 @@ public class Supplier_detail implements Serializable {
 	@Column(name="specifications", nullable=false, length=100)	
 	private String specifications;
 	
-	@Column(name="telephone", nullable=true, length=20)	
-	private Integer telephone;
+	@Column(name="telephone1", nullable=true, length=100)	
+	private String telephone1;
+	
+	@Column(name="telephone2", nullable=true, length=100)	
+	private String telephone2;
+	
+	@Column(name="email", nullable=true, length=100)	
+	private String email;
 	
 	@Column(name="`size`", nullable=false, length=10)	
 	private String size;
@@ -488,16 +494,12 @@ public class Supplier_detail implements Serializable {
 		return specifications;
 	}
 	
-	public void setTelephone(int value) {
-		setTelephone(new Integer(value));
+	public void setTelephone1(String value) {
+		this.telephone1 = value;
 	}
 	
-	public void setTelephone(Integer value) {
-		this.telephone = value;
-	}
-	
-	public Integer getTelephone() {
-		return telephone;
+	public String getTelephone1() {
+		return telephone1;
 	}
 	
 	public void setSize(String value) {
@@ -554,6 +556,22 @@ public class Supplier_detail implements Serializable {
 	
 	public java.sql.Timestamp getLast_edit_date() {
 		return last_edit_date;
+	}
+	
+	public void setTelephone2(String value) {
+		this.telephone2 = value;
+	}
+	
+	public String getTelephone2() {
+		return telephone2;
+	}
+	
+	public void setEmail(String value) {
+		this.email = value;
+	}
+	
+	public String getEmail() {
+		return email;
 	}
 	
 	public void setAdd_by(models.User_detail value) {

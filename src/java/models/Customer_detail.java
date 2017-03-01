@@ -429,17 +429,26 @@ public class Customer_detail implements Serializable {
 	@Column(name="customer_name", nullable=false, length=100)	
 	private String customer_name;
 	
-	@Column(name="contact_person_name", nullable=false, length=100)	
-	private String contact_person_name;
+	@Column(name="telephone1", nullable=false, length=100)	
+	private String telephone1;
 	
-	@Column(name="telephone1", nullable=false, length=20)	
-	private int telephone1;
-	
-	@Column(name="telephone2", nullable=false, length=20)	
-	private int telephone2;
+	@Column(name="telephone2", nullable=false, length=100)	
+	private String telephone2;
 	
 	@Column(name="email", nullable=true, length=100)	
 	private String email;
+	
+	@Column(name="contact_person_name", nullable=false, length=100)	
+	private String contact_person_name;
+	
+	@Column(name="contact_person_telephone1", nullable=true, length=100)	
+	private String contact_person_telephone1;
+	
+	@Column(name="contact_person_telephone2", nullable=true, length=100)	
+	private String contact_person_telephone2;
+	
+	@Column(name="contact_person_email", nullable=true, length=100)	
+	private String contact_person_email;
 	
 	@Column(name="address", nullable=false, length=100)	
 	private String address;
@@ -504,19 +513,19 @@ public class Customer_detail implements Serializable {
 		return contact_person_name;
 	}
 	
-	public void setTelephone1(int value) {
+	public void setTelephone1(String value) {
 		this.telephone1 = value;
 	}
 	
-	public int getTelephone1() {
+	public String getTelephone1() {
 		return telephone1;
 	}
 	
-	public void setTelephone2(int value) {
+	public void setTelephone2(String value) {
 		this.telephone2 = value;
 	}
 	
-	public int getTelephone2() {
+	public String getTelephone2() {
 		return telephone2;
 	}
 	
@@ -574,6 +583,30 @@ public class Customer_detail implements Serializable {
 	
 	public java.sql.Timestamp getLast_edit_date() {
 		return last_edit_date;
+	}
+	
+	public void setContact_person_telephone1(String value) {
+		this.contact_person_telephone1 = value;
+	}
+	
+	public String getContact_person_telephone1() {
+		return contact_person_telephone1;
+	}
+	
+	public void setContact_person_telephone2(String value) {
+		this.contact_person_telephone2 = value;
+	}
+	
+	public String getContact_person_telephone2() {
+		return contact_person_telephone2;
+	}
+	
+	public void setContact_person_email(String value) {
+		this.contact_person_email = value;
+	}
+	
+	public String getContact_person_email() {
+		return contact_person_email;
 	}
 	
 	public void setAdd_by(models.User_detail value) {
