@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -52,7 +54,11 @@ public class LoginBean {
     }
 
     public LoginBean() {
-
+        try {
+            this.setUser_detail(User_detail.getUser_detailByORMID(1));
+        } catch (PersistentException ex) {
+            Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String getAction() {
@@ -62,7 +68,6 @@ public class LoginBean {
     public void setAction(String action) {
         this.action = action;
     }
-    
 
     public String getUsername() {
         return username;
@@ -218,7 +223,7 @@ public class LoginBean {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Completed Successfully", "Completed Successfully"));
     }
-    
+
     /**
      *
      * @return user_detail
@@ -234,7 +239,7 @@ public class LoginBean {
     public void setUser_detail(User_detail user_detail) {
         this.user_detail = user_detail;
     }
-    
+
     public List<Group_right> getGroup_rights() {
         return group_rights;
     }
