@@ -11,3 +11,12 @@ and open the template in the editor.
 #logo a, #topmenu ul li a, #footmenu ul li a, #comments, body {
     color: #3e3e3e!important;
 }
+
+/*#form_menu .ui-helper-clearfix{
+    display: -webkit-box !important;
+}*/
+
+.wrapper{
+    max-width: 960px;
+    margin: 0 auto;
+}

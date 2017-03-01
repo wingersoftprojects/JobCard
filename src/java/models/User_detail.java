@@ -635,8 +635,7 @@ public class User_detail implements Serializable {
 	private int is_active;
 	
 	@Column(name="add_date", nullable=false)	
-	@Temporal(TemporalType.DATE)	
-	private java.util.Date add_date;
+	private java.sql.Timestamp add_date;
 	
 	@ManyToOne(targetEntity=models.User_detail.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
@@ -644,8 +643,7 @@ public class User_detail implements Serializable {
 	private models.User_detail add_by;
 	
 	@Column(name="last_edit_date", nullable=true)	
-	@Temporal(TemporalType.DATE)	
-	private java.util.Date last_edit_date;
+	private java.sql.Timestamp last_edit_date;
 	
 	@ManyToOne(targetEntity=models.User_detail.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
@@ -837,19 +835,19 @@ public class User_detail implements Serializable {
 		return is_user_gen_admin;
 	}
 	
-	public void setAdd_date(java.util.Date value) {
+	public void setAdd_date(java.sql.Timestamp value) {
 		this.add_date = value;
 	}
 	
-	public java.util.Date getAdd_date() {
+	public java.sql.Timestamp getAdd_date() {
 		return add_date;
 	}
 	
-	public void setLast_edit_date(java.util.Date value) {
+	public void setLast_edit_date(java.sql.Timestamp value) {
 		this.last_edit_date = value;
 	}
 	
-	public java.util.Date getLast_edit_date() {
+	public java.sql.Timestamp getLast_edit_date() {
 		return last_edit_date;
 	}
 	

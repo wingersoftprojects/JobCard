@@ -843,7 +843,7 @@
     <Column name="add_date">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>false</ForeignKey>
-      <Type>17</Type>
+      <Type>20</Type>
       <Length>0</Length>
       <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
@@ -866,7 +866,7 @@
     <Column name="last_edit_date">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>false</ForeignKey>
-      <Type>17</Type>
+      <Type>20</Type>
       <Length>0</Length>
       <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>

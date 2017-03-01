@@ -28,10 +28,10 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	public final IntegerExpression is_user_gen_admin;
 	public final IntegerExpression is_deleted;
 	public final IntegerExpression is_active;
-	public final DateExpression add_date;
+	public final TimestampExpression add_date;
 	public final IntegerExpression add_byId;
 	public final AssociationExpression add_by;
-	public final DateExpression last_edit_date;
+	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_byId;
 	public final AssociationExpression last_edit_by;
 	public final CollectionExpression user_action;
@@ -71,10 +71,10 @@ public class User_detailCriteria extends AbstractORMCriteria {
 		is_user_gen_admin = new IntegerExpression("is_user_gen_admin", this);
 		is_deleted = new IntegerExpression("is_deleted", this);
 		is_active = new IntegerExpression("is_active", this);
-		add_date = new DateExpression("add_date", this);
+		add_date = new TimestampExpression("add_date", this);
 		add_byId = new IntegerExpression("add_by.user_detail_id", this);
 		add_by = new AssociationExpression("add_by", this);
-		last_edit_date = new DateExpression("last_edit_date", this);
+		last_edit_date = new TimestampExpression("last_edit_date", this);
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this);
 		last_edit_by = new AssociationExpression("last_edit_by", this);
 		user_action = new CollectionExpression("user_action", this);
