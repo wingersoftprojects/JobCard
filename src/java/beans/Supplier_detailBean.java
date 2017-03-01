@@ -7,30 +7,27 @@ package beans;
 
 import java.io.Serializable;
 import java.util.logging.Level;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import models.Customer_detail;
+import models.Supplier_detail;
 import org.orm.PersistentException;
-
 
 /**
  *
- * @author bajuna
+ * @author philp
  */
 @ManagedBean
 @SessionScoped
-public class Customer_detailBean extends AbstractBean<Customer_detail> implements Serializable {
-
-    public Customer_detailBean() {
-        super(Customer_detail.class);
+public class Supplier_detailBean extends AbstractBean<Supplier_detail> implements Serializable{
+    
+    public Supplier_detailBean(){
+        super(Supplier_detail.class);
     }
-
     @Override
-    public void init() {
-        if (super.getEntityClass() == null) {
+    public void init(){
+        if(super.getEntityClass() == null){
             loginBean.logout();
         }
     }
@@ -44,27 +41,15 @@ public class Customer_detailBean extends AbstractBean<Customer_detail> implement
     public void setLoginBean(LoginBean loginBean) {
         this.loginBean = loginBean;
     }
-//    public void save_customer_detail(int aUserDetailId) {
-//        if (this.getSelected().getCustomer_detail_id() > 0) {
-//            this.save(aUserDetailId);
-//        } else {
-//            int i_d = 0;
-//            i_d = this.save_return_entity_id(aUserDetailId);           
-//        }
-//    }
-
-    public Customer_detail getCutomer_detail_by_ID(int cdi) {
-        Customer_detail cd = new Customer_detail();
+     public Supplier_detail getSupplier_detail_by_ID(int sdi) {
+        Supplier_detail sd = new Supplier_detail();
         try {
-            cd = Customer_detail.getCustomer_detailByORMID(cdi);
+            sd = Supplier_detail.getSupplier_detailByORMID(sdi);
         } catch (PersistentException ex) {
-            cd = null;
+            sd = null;
             //Logger.getLogger(User_detailBean.class.getName()).log(Level.SEVERE, null, ex);
             java.util.logging.Logger.getLogger(User_detailBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return cd;
+        return sd;
     }
-
-   
-
 }
