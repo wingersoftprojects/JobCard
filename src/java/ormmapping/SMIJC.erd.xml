@@ -658,17 +658,6 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="size">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
-      <Type>27</Type>
-      <Length>10</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
     <Column name="quantity">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>false</ForeignKey>

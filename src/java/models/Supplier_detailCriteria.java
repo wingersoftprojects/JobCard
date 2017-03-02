@@ -25,7 +25,6 @@ public class Supplier_detailCriteria extends AbstractORMCriteria {
 	public final StringExpression telephone1;
 	public final StringExpression telephone2;
 	public final StringExpression email;
-	public final StringExpression size;
 	public final IntegerExpression quantity;
 	public final IntegerExpression is_active;
 	public final IntegerExpression is_deleted;
@@ -45,7 +44,6 @@ public class Supplier_detailCriteria extends AbstractORMCriteria {
 		telephone1 = new StringExpression("telephone1", this);
 		telephone2 = new StringExpression("telephone2", this);
 		email = new StringExpression("email", this);
-		size = new StringExpression("size", this);
 		quantity = new IntegerExpression("quantity", this);
 		is_active = new IntegerExpression("is_active", this);
 		is_deleted = new IntegerExpression("is_deleted", this);

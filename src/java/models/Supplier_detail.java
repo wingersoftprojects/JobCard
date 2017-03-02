@@ -433,9 +433,6 @@ public class Supplier_detail implements Serializable {
 	@Column(name="email", nullable=true, length=100)	
 	private String email;
 	
-	@Column(name="`size`", nullable=false, length=10)	
-	private String size;
-	
 	@Column(name="quantity", nullable=false, length=20)	
 	private int quantity;
 	
@@ -500,14 +497,6 @@ public class Supplier_detail implements Serializable {
 	
 	public String getTelephone1() {
 		return telephone1;
-	}
-	
-	public void setSize(String value) {
-		this.size = value;
-	}
-	
-	public String getSize() {
-		return size;
 	}
 	
 	public void setQuantity(int value) {
