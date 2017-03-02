@@ -472,6 +472,17 @@ public class Job_card implements Serializable {
 	@JoinColumns({ @JoinColumn(name="last_edit_by", referencedColumnName="user_detail_id") })	
 	private models.User_detail last_edit_by;
 	
+	@Column(name="job_date", nullable=false)	
+	@Temporal(TemporalType.DATE)	
+	private java.util.Date job_date;
+	
+	@Column(name="status", nullable=false, length=100)	
+	private String status;
+	
+	@Column(name="due_date", nullable=false)	
+	@Temporal(TemporalType.DATE)	
+	private java.util.Date due_date;
+	
 	@OneToMany(mappedBy="job_card", targetEntity=models.Job_card_item.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
@@ -540,6 +551,30 @@ public class Job_card implements Serializable {
 	
 	public java.sql.Timestamp getLast_edit_date() {
 		return last_edit_date;
+	}
+	
+	public void setJob_date(java.util.Date value) {
+		this.job_date = value;
+	}
+	
+	public java.util.Date getJob_date() {
+		return job_date;
+	}
+	
+	public void setStatus(String value) {
+		this.status = value;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setDue_date(java.util.Date value) {
+		this.due_date = value;
+	}
+	
+	public java.util.Date getDue_date() {
+		return due_date;
 	}
 	
 	public void setCustomer_detail(models.Customer_detail value) {

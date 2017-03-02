@@ -13,8 +13,8 @@
                 <p:growl id="messages"/>
                 <p:menubar>
                     <p:submenu label="Job Card" icon="ui-icon-circle-plus">
-                        <p:menuitem value="Add Job Card"  action="upload?faces-redirect=true" icon="ui-icon-arrowthick-1-n" actionListener="#{uploadBean.load_location_hierarchy()}"/>
-                        <p:menuitem value="View Job Cards"  action="dataentry?faces-redirect=true" icon="ui-icon-pencil" update="messages"/>
+                        <p:menuitem value="Add Job Card"  action="job_card?faces-redirect=true" icon="ui-icon-arrowthick-1-n" actionListener="#{uploadBean.load_location_hierarchy()}"/>
+                        <p:menuitem value="View Job Cards"  action="job_card_view?faces-redirect=true" icon="ui-icon-pencil" update="messages"/>
                     </p:submenu>
                 </p:menubar>
             </h:form>

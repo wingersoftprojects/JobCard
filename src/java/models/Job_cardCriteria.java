@@ -31,6 +31,9 @@ public class Job_cardCriteria extends AbstractORMCriteria {
 	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_byId;
 	public final AssociationExpression last_edit_by;
+	public final DateExpression job_date;
+	public final StringExpression status;
+	public final DateExpression due_date;
 	public final CollectionExpression job_card_item;
 	public final IntegerExpression delivery_noteId;
 	public final AssociationExpression delivery_note;
@@ -50,6 +53,9 @@ public class Job_cardCriteria extends AbstractORMCriteria {
 		last_edit_date = new TimestampExpression("last_edit_date", this);
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this);
 		last_edit_by = new AssociationExpression("last_edit_by", this);
+		job_date = new DateExpression("job_date", this);
+		status = new StringExpression("status", this);
+		due_date = new DateExpression("due_date", this);
 		job_card_item = new CollectionExpression("job_card_item", this);
 		delivery_noteId = new IntegerExpression("delivery_note.job_card_id", this);
 		delivery_note = new AssociationExpression("delivery_note", this);

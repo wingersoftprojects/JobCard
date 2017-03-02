@@ -6,7 +6,10 @@
 package beans;
 
 import java.io.Serializable;
+import java.lang.reflect.Method;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +22,9 @@ import models.Job_card;
 import models.Job_card_item;
 import models.Paper_type;
 import models.Supplier_detail;
+import models.User_detail;
 import org.orm.PersistentException;
+import org.orm.PersistentTransaction;
 
 /**
  *
@@ -31,6 +36,27 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
 
     private Job_card_item job_card_item = new Job_card_item();
     private List<Job_card_item> job_card_items = new ArrayList<>();
+
+    Job_card prev_job_card;
+
+    public Job_card getPrev_job_card() {
+        return prev_job_card;
+    }
+
+    public void setPrev_job_card(Job_card prev_job_card) {
+        this.prev_job_card = prev_job_card;
+    }
+
+    private float total_amount;
+
+    public float getTotal_amount() {
+        compute_total();
+        return total_amount;
+    }
+
+    public void setTotal_amount(float total_amount) {
+        this.total_amount = total_amount;
+    }
 
     public Job_card_item getJob_card_item() {
         return job_card_item;
@@ -88,6 +114,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
         }
         return filteredSupplier_details;
     }
+
     public List<Paper_type> completePaper_type(String query) {
         List<Paper_type> filteredPaper_types = new ArrayList<>();
         try {
@@ -103,10 +130,91 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
             job_card_items = new ArrayList<>();
         }
         job_card_items.add(job_card_item);
+        compute_total();
         job_card_item = new Job_card_item();
+    }
+
+    public void compute_total() {
+        total_amount = 0;
+        for (Job_card_item j : job_card_items) {
+            total_amount += j.getAmount();
+        }
     }
 
     public void remove_item(Job_card_item item) {
         job_card_items.remove(item);
     }
+
+    public void compute_amount() {
+        job_card_item.setAmount(job_card_item.getRate() * job_card_item.getQuantity());
+    }
+
+    @Override
+    public void save(User_detail aUserDetailId) {
+        try {
+            PersistentTransaction transaction = JobCardPersistentManager.instance().getSession().beginTransaction();
+            if (this.getFormstate().equals("add")) {
+                this.getSelected().setAdd_by(aUserDetailId);
+                this.getSelected().setAdd_date(new Timestamp(new Date().getTime()));
+                this.getSelected().setIs_active(1);
+                this.getSelected().setIs_deleted(0);
+                this.getSelected().setStatus("Captured");
+                if (this.getSelected().getJob_card_id() > 0) {
+                    JobCardPersistentManager.instance().getSession().merge(this.getSelected());
+                } else {
+                    this.getSelected().save();
+                }
+            }
+            if (this.getFormstate().equals("edit")) {
+                this.getSelected().setLast_edit_by(aUserDetailId);
+                this.getSelected().setLast_edit_date(new Timestamp(new Date().getTime()));
+                JobCardPersistentManager.instance().getSession().merge(this.getSelected());
+            }
+
+            transaction.commit();
+            prev_job_card = this.getSelected();
+
+            /**
+             * Save Job Card Items
+             */
+            transaction = JobCardPersistentManager.instance().getSession().beginTransaction();
+            if (this.getFormstate().equals("add")) {
+                for (Job_card_item j : job_card_items) {
+                    if (j.getIs_deleted() == 0) {
+                        j.setJob_card(prev_job_card);
+                        j.setAdd_by(aUserDetailId);
+                        j.setAdd_date(new Timestamp(new Date().getTime()));
+                        j.setIs_deleted(0);
+                        j.save();
+                    }
+                }
+            }
+            if (this.getFormstate().equals("edit")) {
+                for (Job_card_item j : job_card_items) {
+                    j.setLast_edit_by(aUserDetailId);
+                    j.setLast_edit_date(new Timestamp(new Date().getTime()));
+                    JobCardPersistentManager.instance().getSession().merge(j);
+                }
+            }
+            transaction.commit();
+            /**
+             * End Job Card Items
+             */
+            clearCache(this.getSelected());
+            this.setFormstate("view");
+            add();
+            loginBean.saveMessage();
+        } catch (PersistentException ex) {
+            Logger.getLogger(Job_cardBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @Override
+    public void add() {
+        job_card_items = new ArrayList<>();
+        job_card_item = new Job_card_item();
+        super.add(); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
