@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -25,6 +26,7 @@ import models.Supplier_detail;
 import models.User_detail;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -151,6 +153,10 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
 
     @Override
     public void save(User_detail aUserDetailId) {
+        if (job_card_items.isEmpty()) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", "Please enter atleat one Job Card Item!");
+            RequestContext.getCurrentInstance().showMessageInDialog(message);
+        }
         try {
             PersistentTransaction transaction = JobCardPersistentManager.instance().getSession().beginTransaction();
             if (this.getFormstate().equals("add")) {
@@ -171,19 +177,18 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
                 JobCardPersistentManager.instance().getSession().merge(this.getSelected());
             }
 
-            transaction.commit();
-            prev_job_card = this.getSelected();
-
+            //transaction.commit();
             /**
              * Save Job Card Items
              */
-            transaction = JobCardPersistentManager.instance().getSession().beginTransaction();
+            //transaction = JobCardPersistentManager.instance().getSession().beginTransaction();
             if (this.getFormstate().equals("add")) {
                 for (Job_card_item j : job_card_items) {
-                    if (j.getIs_deleted() == 0) {
-                        j.setJob_card(prev_job_card);
+                    if (j.getIs_deleted() == null) {
+                        j.setJob_card(this.getSelected());
                         j.setAdd_by(aUserDetailId);
                         j.setAdd_date(new Timestamp(new Date().getTime()));
+                        j.setIs_active(1);
                         j.setIs_deleted(0);
                         j.save();
                     }
@@ -200,6 +205,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
             /**
              * End Job Card Items
              */
+            prev_job_card = this.getSelected();
             clearCache(this.getSelected());
             this.setFormstate("view");
             add();

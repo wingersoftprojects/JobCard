@@ -481,6 +481,14 @@ public class User_detail implements Serializable {
 			for(int i = 0; i < lItem_type1s.length; i++) {
 				lItem_type1s[i].setLast_edit_by(null);
 			}
+			models.Cover_type[] lCover_types = (models.Cover_type[])getCover_type().toArray(new models.Cover_type[getCover_type().size()]);
+			for(int i = 0; i < lCover_types.length; i++) {
+				lCover_types[i].setAdd_by(null);
+			}
+			models.Cover_type[] lCover_type1s = (models.Cover_type[])getCover_type1().toArray(new models.Cover_type[getCover_type1().size()]);
+			for(int i = 0; i < lCover_type1s.length; i++) {
+				lCover_type1s[i].setLast_edit_by(null);
+			}
 			return delete();
 		}
 		catch(Exception e) {
@@ -606,6 +614,14 @@ public class User_detail implements Serializable {
 			models.Item_type[] lItem_type1s = (models.Item_type[])getItem_type1().toArray(new models.Item_type[getItem_type1().size()]);
 			for(int i = 0; i < lItem_type1s.length; i++) {
 				lItem_type1s[i].setLast_edit_by(null);
+			}
+			models.Cover_type[] lCover_types = (models.Cover_type[])getCover_type().toArray(new models.Cover_type[getCover_type().size()]);
+			for(int i = 0; i < lCover_types.length; i++) {
+				lCover_types[i].setAdd_by(null);
+			}
+			models.Cover_type[] lCover_type1s = (models.Cover_type[])getCover_type1().toArray(new models.Cover_type[getCover_type1().size()]);
+			for(int i = 0; i < lCover_type1s.length; i++) {
+				lCover_type1s[i].setLast_edit_by(null);
 			}
 			try {
 				session.delete(this);
@@ -800,6 +816,16 @@ public class User_detail implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set item_type1 = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="add_by", targetEntity=models.Cover_type.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set cover_type = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="last_edit_by", targetEntity=models.Cover_type.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set cover_type1 = new java.util.HashSet();
 	
 	private void setUser_detail_id(int value) {
 		this.user_detail_id = value;
@@ -1149,6 +1175,24 @@ public class User_detail implements Serializable {
 	
 	public java.util.Set getItem_type1() {
 		return item_type1;
+	}
+	
+	
+	public void setCover_type(java.util.Set value) {
+		this.cover_type = value;
+	}
+	
+	public java.util.Set getCover_type() {
+		return cover_type;
+	}
+	
+	
+	public void setCover_type1(java.util.Set value) {
+		this.cover_type1 = value;
+	}
+	
+	public java.util.Set getCover_type1() {
+		return cover_type1;
 	}
 	
 	

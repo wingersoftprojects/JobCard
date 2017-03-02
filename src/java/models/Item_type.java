@@ -421,13 +421,13 @@ public class Item_type implements Serializable {
 	@Column(name="item_type_name", nullable=false, length=100)	
 	private String item_type_name;
 	
-	@Column(name="is_active", nullable=true, length=1)	
+	@Column(name="is_active", nullable=false, length=1)	
 	private Integer is_active;
 	
-	@Column(name="is_deleted", nullable=true, length=1)	
+	@Column(name="is_deleted", nullable=false, length=1)	
 	private Integer is_deleted;
 	
-	@Column(name="add_date", nullable=true)	
+	@Column(name="add_date", nullable=false)	
 	private java.sql.Timestamp add_date;
 	
 	@Column(name="last_edit_date", nullable=true)	

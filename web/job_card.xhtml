@@ -94,7 +94,7 @@
                             <td>
                                 <p:autoComplete id="paper_type" value="#{job_cardBean.job_card_item.paper_type}"
                                                 completeMethod="#{job_cardBean.completePaper_type}"
-                                                var="paper_type" itemLabel="#{paper_type.paper_type_category}#{paper_type.paper_type_sub_category}" itemValue="#{paper_type}" 
+                                                var="paper_type" itemLabel="#{paper_type.paper_type_category} #{paper_type.paper_type_sub_category}" itemValue="#{paper_type}" 
                                                 converter="paper_typeConverter" forceSelection="true" maxResults="8" required="true" resultsMessage="Paper Type field is required!">
                                     <p:column headerText="Paper Category" style="text-align: left">
                                         <h:outputText value="#{paper_type.paper_type_category}">
@@ -142,7 +142,9 @@
                             </td>
                             <td>
                                 <h:outputLabel id="color_other_label" value="Others Specify" rendered="#{job_cardBean.job_card_item.color=='Others'}"/>
-                                <h:inputText id="color_other" value="#{job_cardBean.job_card_item.color_other}" rendered="#{job_cardBean.job_card_item.color=='Others'}" required="true" requiredMessage="Other Colors field is required!"/>
+                                <h:inputText id="color_other" value="#{job_cardBean.job_card_item.color_other}" rendered="#{job_cardBean.job_card_item.color=='Others'}" required="true" requiredMessage="Other Colors field is required!">
+                                    <p:ajax process="@this" event="blur"/>
+                                </h:inputText>
                             </td>
                         </tr>
                     </table>
@@ -154,17 +156,31 @@
                             </td>
                             <td>
                             </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
                         </tr>
                         <tr>
                             <td>
                                 <p:selectOneRadio id="machine_used" value="#{job_cardBean.job_card_item.machine_used}" required="true" requiredMessage="Machine used field is required!">
                                     <f:selectItem itemLabel="Digital Machine" itemValue="Digital Machine" />
                                     <f:selectItem itemLabel="Offset Machine" itemValue="Offset Machine" />
-                                    <p:ajax process="@this" update="color_other_label,color_other,@form"/>
+                                    <p:ajax process="@this"/>
                                 </p:selectOneRadio>
                             </td>
                             <td>
 
+                            </td>
+                            <td>
+                                <h:outputLabel value="Cover type:"/>
+                            </td>
+                            <td>
+                                <h:selectOneMenu id="cover_type" value="#{job_cardBean.job_card_item.cover_type}" converter="cover_typeConverter">
+                                    <f:selectItem itemLabel="" />
+                                    <f:selectItems value="#{cover_typeBean.tsActive}" var="item" itemLabel="#{item.cover_type_name}" itemValue="#{item}"/>
+                                    <f:ajax execute="@this"/>
+                                </h:selectOneMenu>
                             </td>
                         </tr>
                     </table>
@@ -180,6 +196,7 @@
                                         <f:selectItem itemLabel="Matte" itemValue="Matte" />
                                         <f:selectItem itemLabel="Gloss" itemValue="Gloss" />
                                         <f:selectItem itemLabel="None" itemValue="None" />
+                                        <p:ajax process="@this"/>
                                     </p:selectOneRadio>
                                 </td>
                                 <td>  
@@ -190,6 +207,7 @@
                                         <f:selectItem itemLabel="Saddle Stitch" itemValue="Saddle Stitch" />
                                         <f:selectItem itemLabel="Perfect Binding" itemValue="Perfect Binding" />
                                         <f:selectItem itemLabel="Spiral" itemValue="Spiral" />
+                                        <p:ajax process="@this"/>
                                     </p:selectOneRadio>
                                 </td>
                             </tr>
@@ -199,7 +217,11 @@
                         <legend>POST PRESS DETAILS</legend>
                         <table>
                             <tr>
-                                <td><h:outputLabel value="Other Processes"/><h:inputTextarea value="#{job_cardBean.job_card_item.other_processes}" cols="100" rows="7"/></td>
+                                <td><h:outputLabel value="Other Processes"/>
+                                    <h:inputTextarea value="#{job_cardBean.job_card_item.other_processes}" cols="100" rows="7">
+                                        <f:ajax execute="@this"/>
+                                    </h:inputTextarea>
+                                </td>
                             </tr>
                         </table>
                     </fieldset>
@@ -217,16 +239,21 @@
                                 <td>
                                     <h:inputText id="quantity" value="#{job_cardBean.job_card_item.quantity}" size="10" required="true" requiredMessage="Quantity field is required!">
                                         <f:ajax event="blur" execute="@this" render="amount" listener="#{job_cardBean.compute_amount()}"/>
+                                        <f:ajax event="keyup" execute="@this" render="amount" listener="#{job_cardBean.compute_amount()}"/>
                                     </h:inputText>
                                 </td>
                                 <td><h:outputLabel value="UNIT COST"/></td>
                                 <td>
                                     <h:inputText id="rate" value="#{job_cardBean.job_card_item.rate}" size="10" required="true" requiredMessage="Unit cost field is required">
                                         <f:ajax event="blur" execute="@this" render="amount" listener="#{job_cardBean.compute_amount()}"/>
+                                        <f:ajax event="keyup" execute="@this" render="amount" listener="#{job_cardBean.compute_amount()}"/>
                                     </h:inputText>
                                 </td>
                                 <td><h:outputLabel value="AMOUNT"/></td>
-                                <td><h:inputText id="amount" value="#{job_cardBean.job_card_item.amount}" size="15" readonly="true" required="true" requiredMessage="Amount field is required!"/></td>
+                                <td><h:inputText id="amount" value="#{job_cardBean.job_card_item.amount}" size="15" readonly="true" required="true" requiredMessage="Amount field is required!">
+                                        <f:convertNumber pattern="#,###.##"/>
+                                    </h:inputText>
+                                </td>
                                 <td><p:commandButton value="Add Item" action="#{job_cardBean.add_job_card_item()}" update="@form"/></td>
                             </tr>
                         </table>
@@ -241,8 +268,9 @@
                                 <h:outputText value="Pages:#{item.pages}"/><br/>
                                 <h:outputText value="Color:#{item.color}"/><br/>
                                 <h:outputText value="Machine:#{item.machine_used}"/><br/>
-                                <h:outputText value="Lamination Type:#{item.lamination_type}"/><br/>
-                                <h:outputText value="Type of binding:#{item.binding_type}"/>
+                                <h:outputText value="Laminating:#{item.lamination_type}"/><br/>
+                                <h:outputText value="Binding:#{item.binding_type}"/><br/>
+                                <h:outputText value="Cover:#{item.cover_type.cover_type_name}" rendered="#{item.cover_type!=null}"/>
                             </p:column>
                             <p:column headerText="QTY">
                                 <h:outputText value="#{item.quantity}"/>
@@ -254,7 +282,7 @@
                             </p:column>
                             <p:column headerText="AMOUNT">
                                 <h:outputText value="#{item.amount}">
-                                    <f:convertNumber pattern="#,###.00"/>
+                                    <f:convertNumber pattern="#,###.##"/>
                                 </h:outputText>
                             </p:column>
                             <p:column headerText="">

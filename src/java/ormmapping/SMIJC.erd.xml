@@ -225,7 +225,7 @@
       <ForeignKey>false</ForeignKey>
       <Type>27</Type>
       <Length>100</Length>
-      <Nullable>false</Nullable>
+      <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -253,11 +253,12 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="cover_type">
+    <Column name="cover_type_id">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
-      <Type>27</Type>
-      <Length>50</Length>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>cover_type.cover_type_id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>10</Length>
       <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
@@ -291,7 +292,7 @@
       <ForeignKey>false</ForeignKey>
       <Type>27</Type>
       <Length>200</Length>
-      <Nullable>false</Nullable>
+      <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -346,7 +347,7 @@
       <ForeignKey>false</ForeignKey>
       <Type>9</Type>
       <Length>1</Length>
-      <Nullable>true</Nullable>
+      <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -1683,7 +1684,7 @@
       <ForeignKey>false</ForeignKey>
       <Type>9</Type>
       <Length>1</Length>
-      <Nullable>true</Nullable>
+      <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -1694,7 +1695,7 @@
       <ForeignKey>false</ForeignKey>
       <Type>9</Type>
       <Length>1</Length>
-      <Nullable>true</Nullable>
+      <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -1705,7 +1706,7 @@
       <ForeignKey>false</ForeignKey>
       <Type>20</Type>
       <Length>0</Length>
-      <Nullable>true</Nullable>
+      <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -1740,6 +1741,98 @@
       <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+  </Entity>
+  <Entity name="cover_type" PKClustered="0">
+    <Column name="cover_type_id">
+      <PrimaryKey>true</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>10</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="cover_type_name">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>27</Type>
+      <Length>100</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="is_active">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>1</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="is_deleted">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>1</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="add_by">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>10</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="add_date">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>20</Type>
+      <Length>0</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="last_edit_by">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>10</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="last_edit_date">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>20</Type>
+      <Length>0</Length>
       <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
@@ -2115,6 +2208,36 @@
     </Columns>
     <RefColumns>
       <Column>item_type_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKcover_type948607">
+    <ReferenceTable>cover_type</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>add_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKcover_type278662">
+    <ReferenceTable>cover_type</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>last_edit_by</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKjob_card_i580199">
+    <ReferenceTable>job_card_item</ReferenceTable>
+    <ReferencedTable>cover_type</ReferencedTable>
+    <Columns>
+      <Column>cover_type_id</Column>
+    </Columns>
+    <RefColumns>
+      <Column>cover_type_id</Column>
     </RefColumns>
   </ForeignKey>
 </Model>

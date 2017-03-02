@@ -61,6 +61,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final CollectionExpression user_detail1;
 	public final CollectionExpression item_type;
 	public final CollectionExpression item_type1;
+	public final CollectionExpression cover_type;
+	public final CollectionExpression cover_type1;
 	
 	public User_detailDetachedCriteria() {
 		super(models.User_detail.class, models.User_detailCriteria.class);
@@ -106,6 +108,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		user_detail1 = new CollectionExpression("user_detail1", this.getDetachedCriteria());
 		item_type = new CollectionExpression("item_type", this.getDetachedCriteria());
 		item_type1 = new CollectionExpression("item_type1", this.getDetachedCriteria());
+		cover_type = new CollectionExpression("cover_type", this.getDetachedCriteria());
+		cover_type1 = new CollectionExpression("cover_type1", this.getDetachedCriteria());
 	}
 	
 	public User_detailDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -152,6 +156,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		user_detail1 = new CollectionExpression("user_detail1", this.getDetachedCriteria());
 		item_type = new CollectionExpression("item_type", this.getDetachedCriteria());
 		item_type1 = new CollectionExpression("item_type1", this.getDetachedCriteria());
+		cover_type = new CollectionExpression("cover_type", this.getDetachedCriteria());
+		cover_type1 = new CollectionExpression("cover_type1", this.getDetachedCriteria());
 	}
 	
 	public User_detailDetachedCriteria createAdd_byCriteria() {
@@ -268,6 +274,14 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public Item_typeDetachedCriteria createItem_type1Criteria() {
 		return new Item_typeDetachedCriteria(createCriteria("item_type1"));
+	}
+	
+	public Cover_typeDetachedCriteria createCover_typeCriteria() {
+		return new Cover_typeDetachedCriteria(createCriteria("cover_type"));
+	}
+	
+	public Cover_typeDetachedCriteria createCover_type1Criteria() {
+		return new Cover_typeDetachedCriteria(createCriteria("cover_type1"));
 	}
 	
 	public User_detail uniqueUser_detail(PersistentSession session) {

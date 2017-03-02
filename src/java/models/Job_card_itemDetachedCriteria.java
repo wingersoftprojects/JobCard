@@ -33,7 +33,8 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression color_other;
 	public final IntegerExpression pages;
 	public final StringExpression paper_size;
-	public final StringExpression cover_type;
+	public final IntegerExpression cover_typeId;
+	public final AssociationExpression cover_type;
 	public final StringExpression lamination_type;
 	public final StringExpression binding_type;
 	public final StringExpression other_processes;
@@ -66,7 +67,8 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 		color_other = new StringExpression("color_other", this.getDetachedCriteria());
 		pages = new IntegerExpression("pages", this.getDetachedCriteria());
 		paper_size = new StringExpression("paper_size", this.getDetachedCriteria());
-		cover_type = new StringExpression("cover_type", this.getDetachedCriteria());
+		cover_typeId = new IntegerExpression("cover_type.cover_type_id", this.getDetachedCriteria());
+		cover_type = new AssociationExpression("cover_type", this.getDetachedCriteria());
 		lamination_type = new StringExpression("lamination_type", this.getDetachedCriteria());
 		binding_type = new StringExpression("binding_type", this.getDetachedCriteria());
 		other_processes = new StringExpression("other_processes", this.getDetachedCriteria());
@@ -100,7 +102,8 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 		color_other = new StringExpression("color_other", this.getDetachedCriteria());
 		pages = new IntegerExpression("pages", this.getDetachedCriteria());
 		paper_size = new StringExpression("paper_size", this.getDetachedCriteria());
-		cover_type = new StringExpression("cover_type", this.getDetachedCriteria());
+		cover_typeId = new IntegerExpression("cover_type.cover_type_id", this.getDetachedCriteria());
+		cover_type = new AssociationExpression("cover_type", this.getDetachedCriteria());
 		lamination_type = new StringExpression("lamination_type", this.getDetachedCriteria());
 		binding_type = new StringExpression("binding_type", this.getDetachedCriteria());
 		other_processes = new StringExpression("other_processes", this.getDetachedCriteria());
@@ -132,6 +135,10 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public Item_typeDetachedCriteria createItem_typeCriteria() {
 		return new Item_typeDetachedCriteria(createCriteria("item_type"));
+	}
+	
+	public Cover_typeDetachedCriteria createCover_typeCriteria() {
+		return new Cover_typeDetachedCriteria(createCriteria("cover_type"));
 	}
 	
 	public User_detailDetachedCriteria createAdd_byCriteria() {

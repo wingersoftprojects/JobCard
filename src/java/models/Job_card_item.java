@@ -381,6 +381,10 @@ public class Job_card_item implements Serializable {
 				getItem_type().getJob_card_item().remove(this);
 			}
 			
+			if(getCover_type() != null) {
+				getCover_type().getJob_card_item().remove(this);
+			}
+			
 			if(getAdd_by() != null) {
 				getAdd_by().getJob_card_item().remove(this);
 			}
@@ -413,6 +417,10 @@ public class Job_card_item implements Serializable {
 			
 			if(getItem_type() != null) {
 				getItem_type().getJob_card_item().remove(this);
+			}
+			
+			if(getCover_type() != null) {
+				getCover_type().getJob_card_item().remove(this);
 			}
 			
 			if(getAdd_by() != null) {
@@ -468,7 +476,7 @@ public class Job_card_item implements Serializable {
 	@Column(name="color", nullable=false, length=100)	
 	private String color;
 	
-	@Column(name="color_other", nullable=false, length=100)	
+	@Column(name="color_other", nullable=true, length=100)	
 	private String color_other;
 	
 	@Column(name="pages", nullable=false, length=10)	
@@ -477,8 +485,10 @@ public class Job_card_item implements Serializable {
 	@Column(name="paper_size", nullable=false, length=10)	
 	private String paper_size;
 	
-	@Column(name="cover_type", nullable=false, length=50)	
-	private String cover_type;
+	@ManyToOne(targetEntity=models.Cover_type.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="cover_type_id", referencedColumnName="cover_type_id", nullable=false) })	
+	private models.Cover_type cover_type;
 	
 	@Column(name="lamination_type", nullable=false, length=50)	
 	private String lamination_type;
@@ -486,7 +496,7 @@ public class Job_card_item implements Serializable {
 	@Column(name="binding_type", nullable=false, length=50)	
 	private String binding_type;
 	
-	@Column(name="other_processes", nullable=false, length=200)	
+	@Column(name="other_processes", nullable=true, length=200)	
 	private String other_processes;
 	
 	@Column(name="machine_used", nullable=false, length=50)	
@@ -501,7 +511,7 @@ public class Job_card_item implements Serializable {
 	@Column(name="amount", nullable=false, length=20)	
 	private int amount;
 	
-	@Column(name="is_active", nullable=true, length=1)	
+	@Column(name="is_active", nullable=false, length=1)	
 	private Integer is_active;
 	
 	@Column(name="is_deleted", nullable=true, length=1)	
@@ -557,14 +567,6 @@ public class Job_card_item implements Serializable {
 	
 	public String getPaper_size() {
 		return paper_size;
-	}
-	
-	public void setCover_type(String value) {
-		this.cover_type = value;
-	}
-	
-	public String getCover_type() {
-		return cover_type;
 	}
 	
 	public void setLamination_type(String value) {
@@ -725,6 +727,14 @@ public class Job_card_item implements Serializable {
 	
 	public models.Item_type getItem_type() {
 		return item_type;
+	}
+	
+	public void setCover_type(models.Cover_type value) {
+		this.cover_type = value;
+	}
+	
+	public models.Cover_type getCover_type() {
+		return cover_type;
 	}
 	
 	public boolean equals(Object obj) {
