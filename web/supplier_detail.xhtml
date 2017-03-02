@@ -26,8 +26,6 @@
                         <p:inputText id="telephone2" value="#{supplier_detailBean.selected.telephone2}" required="false" requiredMessage=""/>
                         <p:outputLabel value="Email:" for="email"/>
                         <p:inputText id="email" value="#{supplier_detailBean.selected.email}" required="false"/>                        
-                        <p:outputLabel value="Paper Size:" for="size"/>
-                        <p:inputText id="size" value="#{supplier_detailBean.selected.size}" required="false"/>                        
                         <p:outputLabel value="Specifications:" for="specifications"/>
                         <p:inputText id="specifications" value="#{supplier_detailBean.selected.specifications}" required="true"/>                                               
                         <p:outputLabel value="Is Active?:" for="is_active"/>
@@ -36,7 +34,7 @@
                             <f:selectItem itemLabel="Yes" itemValue="1" />
                             <f:selectItem itemLabel="No" itemValue="0" />
                         </p:selectOneMenu>
-                        <p:commandButton value="SAVE" icon="ui-icon-disk" action="#{supplier_detailBean.save(loginBean.user_detail)}" process="@this,supplier_name,telephone1,telephone2,size,specifications,email,is_active" update="@form"/>
+                        <p:commandButton value="SAVE" icon="ui-icon-disk" action="#{supplier_detailBean.save(loginBean.user_detail)}" process="@this,supplier_name,telephone1,telephone2,specifications,email,is_active" update="@form"/>
                         <p:commandButton value="CLEAR" action="#{supplier_detailBean.cancel()}" icon="ui-icon-cancel" process="@this" update="@form"/>
                     </p:panelGrid>
                 </p:fieldset>

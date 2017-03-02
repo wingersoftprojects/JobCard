@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="./Layout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="metadata">
+        <f:metadata>            
+            <f:event listener="#{paper_typeBean.init()}" type="preRenderView" />
+            <f:event listener="#{paper_typeBean.initializelist()}" type="preRenderView" />            
+        </f:metadata>
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="main_form" rendered="#{loginBean.IsAllowed(0, 'View')}">
+            <p:growl id="messages" showDetail="true" />
+            <p:panelGrid columns="2">                                
+                <p:fieldset legend="Paper Type Detail">
+                    <p:panelGrid columns="2" id="paper_type_category">                                                
+                        <p:outputLabel value="Paper Category:" for="paper_type_category"/>
+                        <p:selectOneMenu id="paper_type_name" value="#{paper_typeBean.selected.paper_type_category}" style="width:125px" required="true" requiredMessage="Paper type field is Required">
+                            <f:selectItem itemLabel="" />
+                            <f:selectItem itemLabel="Art Paper" itemValue="Art Paper"/>
+                            <f:selectItem itemLabel="Bond" itemValue="Bond"/>
+                            <f:selectItem itemLabel="Sticker Paper" itemValue="Sticker Paper"/>
+                            <f:selectItem itemLabel="Pastel White" itemValue="Pastel White"/> 
+                            <f:selectItem itemLabel="NCR-Carbonised" itemValue="NCR-Carbonised"/> 
+                            <f:selectItem itemLabel="Headed Paper" itemValue="Headed Paper"/> 
+                            <p:ajax process="@this"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Paper Sub-Category:" for="paper_type_sub_category"/>
+                        <p:selectOneMenu id="paper_type_sub_category" value="#{paper_typeBean.selected.paper_type_sub_category}" style="width:125px" required="false" requiredMessage="">
+                            <f:selectItem itemLabel="" />
+                            <f:selectItem itemLabel="80GSM" itemValue="80GSM"/>
+                            <f:selectItem itemLabel="130GSM" itemValue="130GSM"/>
+                            <f:selectItem itemLabel="170GSM" itemValue="170GSM"/>
+                            <f:selectItem itemLabel="250GSM" itemValue="250GSM"/> 
+                            <f:selectItem itemLabel="300GSM" itemValue="300GSM"/> 
+                            <f:selectItem itemLabel="350GSM" itemValue="350GSM"/> 
+                            <p:ajax process="@this"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Is Active?:" for="is_active"/>
+                        <p:selectOneMenu id="is_active" value="#{paper_typeBean.selected.is_active}" required="true" requiredMessage="Is active field is required">
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItem itemLabel="Yes" itemValue="1" />
+                            <f:selectItem itemLabel="No" itemValue="0" />
+                        </p:selectOneMenu>
+                        <p:commandButton value="SAVE" icon="ui-icon-disk" action="#{paper_typeBean.save(loginBean.user_detail)}" process="@this,paper_type_category,paper_type_sub_category,is_active" update="@form"/>
+                        <p:commandButton value="CLEAR" action="#{paper_typeBean.cancel()}" icon="ui-icon-cancel" process="@this" update="@form"/>
+                    </p:panelGrid>
+                </p:fieldset>
+                <p:dataTable id="paper_type_table" value="#{paper_typeBean.ts}" var="item">
+                    <p:column headerText="Paper Category">
+                        #{item.paper_type_category}
+                    </p:column>
+                    <p:column headerText="Paper Sub Category">
+                        #{item.paper_type_sub_category}
+                    </p:column>
+                    <p:column headerText="Active?">
+                        #{generalUtilities.convertYesNo(item.is_active)}
+                    </p:column>
+                    <p:column headerText="">
+                        <p:commandButton value="Edit" action="#{paper_typeBean.edit(item)}" process="@this" update="@form" icon="ui-icon-pencil" title="View">
+                        </p:commandButton>
+                        <p:commandButton value="Delete" actionListener="#{paper_typeBean.delete(item,loginBean.user_detail)}" update="@form" process="@this">
+                            <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
+                        </p:commandButton>
+
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                    </p:column>
+                </p:dataTable>
+
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
+
