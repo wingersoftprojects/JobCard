@@ -31,6 +31,9 @@ public class Job_cardDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_byId;
 	public final AssociationExpression last_edit_by;
+	public final DateExpression job_date;
+	public final StringExpression status;
+	public final DateExpression due_date;
 	public final CollectionExpression job_card_item;
 	public final IntegerExpression delivery_noteId;
 	public final AssociationExpression delivery_note;
@@ -50,6 +53,9 @@ public class Job_cardDetachedCriteria extends AbstractORMDetachedCriteria {
 		last_edit_date = new TimestampExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this.getDetachedCriteria());
 		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
+		job_date = new DateExpression("job_date", this.getDetachedCriteria());
+		status = new StringExpression("status", this.getDetachedCriteria());
+		due_date = new DateExpression("due_date", this.getDetachedCriteria());
 		job_card_item = new CollectionExpression("job_card_item", this.getDetachedCriteria());
 		delivery_noteId = new IntegerExpression("delivery_note.job_card_id", this.getDetachedCriteria());
 		delivery_note = new AssociationExpression("delivery_note", this.getDetachedCriteria());
@@ -70,6 +76,9 @@ public class Job_cardDetachedCriteria extends AbstractORMDetachedCriteria {
 		last_edit_date = new TimestampExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this.getDetachedCriteria());
 		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
+		job_date = new DateExpression("job_date", this.getDetachedCriteria());
+		status = new StringExpression("status", this.getDetachedCriteria());
+		due_date = new DateExpression("due_date", this.getDetachedCriteria());
 		job_card_item = new CollectionExpression("job_card_item", this.getDetachedCriteria());
 		delivery_noteId = new IntegerExpression("delivery_note.job_card_id", this.getDetachedCriteria());
 		delivery_note = new AssociationExpression("delivery_note", this.getDetachedCriteria());

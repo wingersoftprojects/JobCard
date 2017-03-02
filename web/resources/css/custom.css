@@ -27,3 +27,16 @@ and open the template in the editor.
     font-size: large;
     font-weight: bold;
 }
+
+input[type=text],select {
+    font-size: 15px !important;
+}
+
+.ui-datatable {
+    display: table;
+    width: 100%;
+}
+
+.ui-datatable table {
+    table-layout: auto !important;
+}
