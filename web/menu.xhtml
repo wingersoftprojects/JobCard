@@ -12,11 +12,11 @@
             <h:form id="form_menu">
                 <p:growl id="messages"/>
                 <p:menubar>
-                    <p:submenu label="Job Card" icon="ui-icon-circle-plus">
-                        <p:menuitem value="Add Job Card"  action="job_card?faces-redirect=true" icon="ui-icon-arrowthick-1-n" actionListener="#{job_cardBean.add()}"/>
-                        <p:menuitem value="View Job Cards"  action="job_card_view?faces-redirect=true" icon="ui-icon-pencil"/>
+                    <p:submenu label="Job Card" icon="ui-icon-document">
+                        <p:menuitem value="Add Job Card"  action="job_card?faces-redirect=true" icon="ui-icon-plusthick" actionListener="#{job_cardBean.add()}"/>
+                        <p:menuitem value="View Job Cards"  action="job_card_view?faces-redirect=true" icon="ui-icon-folder-open"/>
                     </p:submenu>
-                    <p:submenu label="Client" icon="ui-icon-circle-plus">
+                    <p:submenu label="Client" icon="ui-icon-person">
                         <p:menuitem value="Customer Detail"  action="customer_detail?faces-redirect=true" icon="ui-icon-pencil"/>
                         <p:menuitem value="Supplier Detail"  action="supplier_detail?faces-redirect=true" icon="ui-icon-pencil"/>
                     </p:submenu>
