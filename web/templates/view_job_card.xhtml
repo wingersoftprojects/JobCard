@@ -7,7 +7,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <ui:composition> 
-        <center>
+<center>
             <table>
                 <tr>
                     <td>
@@ -19,10 +19,11 @@
             </table>
         </center>
         <br/>
+                        
         <p:panel id="toprint">
             <h:panelGrid columns="4">
                 <h:panelGrid columns="1">
-                    <p:graphicImage value="#{company_settingBean.image}" width="150" style=" margin: 0 auto;" cache="false"/>
+                    <img src="../resources/images/logo.png" alt="" width="150"/>
                     <p:outputLabel style="font-weight: bold; font-style: italic;" value="#{company_settingBean.company_setting.sloghan}"/>
                 </h:panelGrid>
                 <h:panelGrid columns="1">

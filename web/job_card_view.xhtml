@@ -14,21 +14,28 @@
 
     <ui:define name="content">
         <f:view>
-            <h:form>
-                <p:dataTable id="job_card_table" value="#{job_cardBean.ts}" var="item" rows="10"
+            <h:form id="form_job_card_view">
+                <p:dataTable id="job_card_table" widgetVar="widget_job_card_table" value="#{job_cardBean.ts}" var="item" rows="10"
                              paginator="true"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15,30,50,100">
-                    <p:column headerText="Customer Name">
+                    <p:column headerText="Customer Name" filterMatchMode="contains" filterBy="#{item.customer_detail.customer_name}">
                         #{item.customer_detail.customer_name}
                     </p:column>
                     <p:column headerText="Job Card Number">
-                        #{item.job_card_number}
+                        #{item.job_card_id}
                     </p:column>
                     <p:column headerText="Job Date Name">
                         #{item.job_date}
-                    </p:column>                    
-                    <p:column headerText="Status">
+                    </p:column> 
+                    <p:column  filterBy="#{item.status}" headerText="Status" filterMatchMode="in">
+                        <f:facet name="filter">
+                            <p:selectCheckboxMenu label="Status" onchange="PF('widget_job_card_table').filter()" panelStyle="width:125px" scrollHeight="150">
+                                <f:selectItem itemValue="Captured" itemLabel="Captured" />
+                                <f:selectItem itemValue="Ready" itemLabel="Ready" />
+                                <f:selectItem itemValue="Delivered" itemLabel="Delivered" />
+                            </p:selectCheckboxMenu>
+                        </f:facet>
                         #{item.status}
                     </p:column>
                     <p:column headerText="Due Date">
@@ -49,6 +56,7 @@
                         </p:confirmDialog>
                     </p:column>
                 </p:dataTable>
+
             </h:form>
         </f:view>
         <ui:include src="dialog_view_job_card.xhtml"/>
