@@ -14,69 +14,7 @@
     </ui:define>
     <ui:define name="content">
         <h:form id="main_form" rendered="#{loginBean.IsAllowed(0, 'View')}">
-            <p:growl id="messages" showDetail="true" />
-            <p:panelGrid columns="2">                                
-                <p:fieldset legend="Customer Detail">
-                    <p:panelGrid columns="2" id="customer_detail">                                                
-                        <p:outputLabel value="Customer Name:" for="customer_name"/>
-                        <p:inputText id="customer_name" value="#{customer_detailBean.selected.customer_name}" required="true" requiredMessage=" is required"/>
-                        <p:outputLabel value="Tel 1:" for="telephone1"/>
-                        <p:inputText id="telephone1" value="#{customer_detailBean.selected.telephone1}" required="true" requiredMessage="First Name is required"/>
-                        <p:outputLabel value="Tel 2:" for="telephone2"/>
-                        <p:inputText id="telephone2" value="#{customer_detailBean.selected.telephone2}" required="false" requiredMessage="Second Name is required"/>
-                        <p:outputLabel value="Email:" for="email"/>
-                        <p:inputText id="email" value="#{customer_detailBean.selected.email}" required="false"/>                        
-                        <p:outputLabel value="Contact Person Name?:" for="contact_person_name"/>
-                        <p:inputText id="contact_person_name" value="#{customer_detailBean.selected.contact_person_name}" required="true"/>
-                        <p:outputLabel value="Tel 1:" for="contact_person_telephone1"/>
-                        <p:inputText id="contact_person_telephone1" value="#{customer_detailBean.selected.contact_person_telephone1}" required="true" requiredMessage="First Name is required"/>
-                        <p:outputLabel value="Tel 2:" for="contact_person_telephone2"/>
-                        <p:inputText id="contact_person_telephone2" value="#{customer_detailBean.selected.contact_person_telephone2}" required="false" requiredMessage="Second Name is required"/>
-                        <p:outputLabel value="Email:" for="contact_person_email"/>                        
-                        <p:inputText id="contact_person_email" value="#{customer_detailBean.selected.contact_person_email}" required="true"/>
-                        <p:outputLabel value="Customer Location:" for="address"/>
-                        <p:inputText id="address" value="#{customer_detailBean.selected.address}"/>                        
-                        <p:outputLabel value="Is Active?:" for="is_active2"/>
-                        <p:selectOneMenu id="is_active2" value="#{customer_detailBean.selected.is_active}" required="true" requiredMessage="Is active field is required">
-                            <f:selectItem itemLabel="" itemValue=""/>
-                            <f:selectItem itemLabel="Yes" itemValue="1" />
-                            <f:selectItem itemLabel="No" itemValue="0" />
-                        </p:selectOneMenu>
-                        <p:commandButton value="SAVE" icon="ui-icon-disk" action="#{customer_detailBean.save(loginBean.user_detail)}" process="@this,customer_name,telephone1,telephone2,email,contact_person_name,contact_person_telephone1,contact_person_telephone1,contact_person_telephone2,contact_person_email,address,is_active2" update="@form"/>
-                        <p:commandButton value="CLEAR" action="#{customer_detailBean.cancel()}" icon="ui-icon-cancel" process="@this" update="@form"/>
-                    </p:panelGrid>
-                </p:fieldset>
-                <p:dataTable id="customer_detail_table" value="#{customer_detailBean.ts}" var="item">
-                    <p:column headerText="Customer Name">
-                        #{item.customer_name}
-                    </p:column>
-                    <p:column headerText="Contact Person's Name">
-                        #{item.contact_person_name}
-                    </p:column>
-                    <p:column headerText="Tel 1">
-                        #{item.contact_person_telephone1}
-                    </p:column>                    
-                    <p:column headerText="Email Address">
-                        #{item.contact_person_email}
-                    </p:column>
-                    <p:column headerText="Active?">
-                        #{generalUtilities.convertYesNo(item.is_active)}
-                    </p:column>
-                    <p:column headerText="">
-                        <p:commandButton value="Edit" action="#{customer_detailBean.edit(item)}" process="@this" update="@form" icon="ui-icon-pencil" title="View">
-                        </p:commandButton>
-                        <p:commandButton value="Delete" actionListener="#{customer_detailBean.delete(item,loginBean.user_detail)}" update="@form" process="@this">
-                            <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
-                        </p:commandButton>
-
-                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                        </p:confirmDialog>
-                    </p:column>
-                </p:dataTable>
-
-            </p:panelGrid>
+            <ui:include src="templates/create_customer_detail.xhtml"/>
         </h:form>
     </ui:define>
 

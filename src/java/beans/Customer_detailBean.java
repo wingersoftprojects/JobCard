@@ -13,8 +13,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import models.Customer_detail;
+import models.User_detail;
 import org.orm.PersistentException;
-
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -65,6 +66,16 @@ public class Customer_detailBean extends AbstractBean<Customer_detail> implement
         return cd;
     }
 
-   
+    @Override
+    public void save(User_detail aUserDetailId) {
+        super.save(aUserDetailId); //To change body of generated methods, choose Tools | Templates.
+        RequestContext.getCurrentInstance().execute("PF('Dialog_Customer_Detail').hide()");
+    }
+    
+    
+
+    public void cancelcloseDialog() {
+        RequestContext.getCurrentInstance().execute("PF('Dialog_Customer_Detail').hide()");
+    }
 
 }

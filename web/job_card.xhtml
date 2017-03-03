@@ -10,6 +10,8 @@
         <f:metadata>
             <f:event listener="#{job_cardBean.init()}" type="preRenderView" />
             <f:event listener="#{job_cardBean.initializelist()}" type="preRenderView" />
+            <f:event listener="#{customer_detailBean.init()}" type="preRenderView" />
+            <f:event listener="#{customer_detailBean.initializelist()}" type="preRenderView" />            
         </f:metadata>
     </ui:define>
     <ui:define name="content">
@@ -48,6 +50,8 @@
                                     <p:ajax event="itemSelect" process="@this" update="contact_person,telephone"></p:ajax>
                                     <p:ajax event="change" process="@this" update="@form"></p:ajax>
                                 </p:autoComplete>
+                                <p:commandButton id="new_customer" value="New" process="@this" update=":form_customer_detail" oncomplete="PF('Dialog_Customer_Detail').show();">
+                                </p:commandButton>
                             </td>
                             <td>
                                 <h:outputLabel value="Job Card Date"/>
@@ -302,9 +306,17 @@
                             </p:columnGroup>
                         </p:dataTable>
                     </fieldset>
+                    <br/>
+                    <table>
+                        <tr>
+                            <td>
+                                <p:commandButton value="Save Job Card" process="@this,customer_detail,due_date,job_date" action="#{job_cardBean.save(loginBean.user_detail)}" update="@form" icon="ui-icon-disk"/>            
+                            </td>
+                        </tr>
+                    </table>
                 </fieldset>
-                <p:commandButton value="Save Job Card" process="@this,customer_detail,due_date,job_date" action="#{job_cardBean.save(loginBean.user_detail)}" update="@form" icon="ui-icon-disk"/>
             </h:form>
+            <ui:include src="dialog_customer_detail.xhtml"/>
         </div>
     </ui:define>
 </ui:composition>

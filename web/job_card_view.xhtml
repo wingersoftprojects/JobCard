@@ -20,7 +20,7 @@
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15,30,50,100">
                     <p:column headerText="Customer Name">
-                        #{item.customer_detail.customer_detail_name}
+                        #{item.customer_detail.customer_name}
                     </p:column>
                     <p:column headerText="Job Card Number">
                         #{item.job_card_number}
@@ -31,10 +31,12 @@
                     <p:column headerText="Status">
                         #{item.status}
                     </p:column>
-                    <p:column headerText="Due Date?">
+                    <p:column headerText="Due Date">
                         #{item.due_date}
                     </p:column>
                     <p:column headerText="">
+                        <p:commandButton id="view_job_card" value="View" process="@this" actionListener="#{job_cardBean.view_job_card(item.job_card_id)}" update=":form_view_job_card" oncomplete="PF('Dialog_View_Job_Card').show();">
+                        </p:commandButton>
                         <p:commandButton value="Edit" action="#{job_cardBean.edit(item)}" process="@this" update="@form" icon="ui-icon-pencil" title="View">
                         </p:commandButton>
                         <p:commandButton value="Delete" actionListener="#{job_cardBean.delete(item,loginBean.user_detail)}" update="@form" process="@this">
@@ -49,7 +51,7 @@
                 </p:dataTable>
             </h:form>
         </f:view>
-
+        <ui:include src="dialog_view_job_card.xhtml"/>
     </ui:define>
 
 </ui:composition>

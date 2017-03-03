@@ -213,7 +213,6 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
         } catch (PersistentException ex) {
             Logger.getLogger(Job_cardBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @Override
@@ -221,6 +220,15 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
         job_card_items = new ArrayList<>();
         job_card_item = new Job_card_item();
         super.add(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void view_job_card(int job_card_id) {
+        try {
+            this.setSelected(Job_card.getJob_cardByORMID(job_card_id));
+            job_card_items = new ArrayList<>(this.getSelected().getJob_card_item());
+        } catch (PersistentException ex) {
+            Logger.getLogger(Job_cardBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

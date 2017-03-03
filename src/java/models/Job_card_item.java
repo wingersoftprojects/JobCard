@@ -457,7 +457,7 @@ public class Job_card_item implements Serializable {
 	
 	@ManyToOne(targetEntity=models.Supplier_detail.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns({ @JoinColumn(name="supplier_detail_id", referencedColumnName="supplier_detail_id", nullable=false) })	
+	@JoinColumns({ @JoinColumn(name="supplier_detail_id", referencedColumnName="supplier_detail_id") })	
 	private models.Supplier_detail supplier_detail;
 	
 	@ManyToOne(targetEntity=models.Paper_type.class, fetch=FetchType.LAZY)	
@@ -487,7 +487,7 @@ public class Job_card_item implements Serializable {
 	
 	@ManyToOne(targetEntity=models.Cover_type.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns({ @JoinColumn(name="cover_type_id", referencedColumnName="cover_type_id", nullable=false) })	
+	@JoinColumns({ @JoinColumn(name="cover_type_id", referencedColumnName="cover_type_id") })	
 	private models.Cover_type cover_type;
 	
 	@Column(name="lamination_type", nullable=false, length=50)	
