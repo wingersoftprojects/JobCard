@@ -63,6 +63,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final CollectionExpression item_type1;
 	public final CollectionExpression cover_type;
 	public final CollectionExpression cover_type1;
+	public final CollectionExpression company_setting;
+	public final CollectionExpression company_setting1;
 	
 	public User_detailDetachedCriteria() {
 		super(models.User_detail.class, models.User_detailCriteria.class);
@@ -110,6 +112,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		item_type1 = new CollectionExpression("item_type1", this.getDetachedCriteria());
 		cover_type = new CollectionExpression("cover_type", this.getDetachedCriteria());
 		cover_type1 = new CollectionExpression("cover_type1", this.getDetachedCriteria());
+		company_setting = new CollectionExpression("company_setting", this.getDetachedCriteria());
+		company_setting1 = new CollectionExpression("company_setting1", this.getDetachedCriteria());
 	}
 	
 	public User_detailDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -158,6 +162,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		item_type1 = new CollectionExpression("item_type1", this.getDetachedCriteria());
 		cover_type = new CollectionExpression("cover_type", this.getDetachedCriteria());
 		cover_type1 = new CollectionExpression("cover_type1", this.getDetachedCriteria());
+		company_setting = new CollectionExpression("company_setting", this.getDetachedCriteria());
+		company_setting1 = new CollectionExpression("company_setting1", this.getDetachedCriteria());
 	}
 	
 	public User_detailDetachedCriteria createAdd_byCriteria() {
@@ -282,6 +288,14 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public Cover_typeDetachedCriteria createCover_type1Criteria() {
 		return new Cover_typeDetachedCriteria(createCriteria("cover_type1"));
+	}
+	
+	public Company_settingDetachedCriteria createCompany_settingCriteria() {
+		return new Company_settingDetachedCriteria(createCriteria("company_setting"));
+	}
+	
+	public Company_settingDetachedCriteria createCompany_setting1Criteria() {
+		return new Company_settingDetachedCriteria(createCriteria("company_setting1"));
 	}
 	
 	public User_detail uniqueUser_detail(PersistentSession session) {

@@ -120,7 +120,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
     public List<Paper_type> completePaper_type(String query) {
         List<Paper_type> filteredPaper_types = new ArrayList<>();
         try {
-            filteredPaper_types = (List<Paper_type>) JobCardPersistentManager.instance().getSession().createQuery("select de FROM Paper_type  de where de.is_deleted<>1 AND ( de.paper_type_category like '%" + query + "%' OR  de.paper_type_sub_category like '%" + query + "%')").list();
+            filteredPaper_types = (List<Paper_type>) JobCardPersistentManager.instance().getSession().createQuery("select de FROM Paper_type  de where de.is_deleted<>1 AND ( de.paper_type_category like '%" + query.trim() + "%' OR  de.paper_type_sub_category like '%" + query + "%')").list();
         } catch (PersistentException ex) {
             Logger.getLogger(Customer_detailBean.class.getName()).log(Level.SEVERE, null, ex);
         }

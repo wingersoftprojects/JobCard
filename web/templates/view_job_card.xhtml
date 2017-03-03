@@ -7,19 +7,38 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <ui:composition> 
+        <table>
+            <tr>
+                <td>
+                    <p:graphicImage value="#{company_settingBean.image}" width="150" style=" margin: 0 auto;" cache="false"/><br/>
+                    <i><b><p:outputLabel value="#{company_settingBean.company_setting.sloghan}"/></b></i>
+                </td>
+                <td style="padding-left: 20px;">
+                    <p:outputLabel value="#{company_settingBean.company_setting.building}"/><br/>
+                    <p:outputLabel value="#{company_settingBean.company_setting.street_address}"/><br/>
+                    <p:outputLabel value="Tel: #{company_settingBean.company_setting.telephone}"/><br/>
+                    <p:outputLabel value="Mob: #{company_settingBean.company_setting.mobile}"/><br/>
+                </td>
+                <td></td>
+                <td>
+                    <h1>Quote</h1>
+                    <b>Date:</b><p:outputLabel value="#{job_cardBean.selected.job_date}"><f:convertDateTime pattern="#{company_settingBean.company_setting.dateformat}" timeZone="#{company_settingBean.company_setting.timezone}"/></p:outputLabel>
+                </td>
+            </tr>
+        </table>
         <fieldset>
             <legend>CUSTOMER DETAILS</legend>
             <table border="0" width="100%">
                 <tr>
                     <td><h:outputLabel value="Ms. (Company)"/></td>
-                    <td><h:outputLabel value="#{job_cardBean.selected.customer_detail}"/>
+                    <td><h:outputLabel value="#{job_cardBean.selected.customer_detail.customer_name}"/>
                     </td>
                     <td>
                         <h:outputLabel value="Job Card Date"/>
                     </td>
                     <td>
                         <h:outputLabel value="#{job_cardBean.selected.job_date}">
-                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="EAT"/>
+                            <f:convertDateTime pattern="#{company_settingBean.company_setting.dateformat}" timeZone="#{company_settingBean.company_setting.timezone}"/>
                         </h:outputLabel>
                     </td>
                 </tr>
@@ -29,7 +48,7 @@
                     </td>
                     <td>
                         <h:outputLabel value="#{job_cardBean.selected.due_date}">
-                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="EAT"/>
+                            <f:convertDateTime pattern="#{company_settingBean.company_setting.dateformat}" timeZone="#{company_settingBean.company_setting.timezone}"/>
                         </h:outputLabel>
                     </td>
                 </tr>

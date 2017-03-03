@@ -489,6 +489,14 @@ public class User_detail implements Serializable {
 			for(int i = 0; i < lCover_type1s.length; i++) {
 				lCover_type1s[i].setLast_edit_by(null);
 			}
+			models.Company_setting[] lCompany_settings = (models.Company_setting[])getCompany_setting().toArray(new models.Company_setting[getCompany_setting().size()]);
+			for(int i = 0; i < lCompany_settings.length; i++) {
+				lCompany_settings[i].setAdd_by(null);
+			}
+			models.Company_setting[] lCompany_setting1s = (models.Company_setting[])getCompany_setting1().toArray(new models.Company_setting[getCompany_setting1().size()]);
+			for(int i = 0; i < lCompany_setting1s.length; i++) {
+				lCompany_setting1s[i].setLast_edit_by(null);
+			}
 			return delete();
 		}
 		catch(Exception e) {
@@ -622,6 +630,14 @@ public class User_detail implements Serializable {
 			models.Cover_type[] lCover_type1s = (models.Cover_type[])getCover_type1().toArray(new models.Cover_type[getCover_type1().size()]);
 			for(int i = 0; i < lCover_type1s.length; i++) {
 				lCover_type1s[i].setLast_edit_by(null);
+			}
+			models.Company_setting[] lCompany_settings = (models.Company_setting[])getCompany_setting().toArray(new models.Company_setting[getCompany_setting().size()]);
+			for(int i = 0; i < lCompany_settings.length; i++) {
+				lCompany_settings[i].setAdd_by(null);
+			}
+			models.Company_setting[] lCompany_setting1s = (models.Company_setting[])getCompany_setting1().toArray(new models.Company_setting[getCompany_setting1().size()]);
+			for(int i = 0; i < lCompany_setting1s.length; i++) {
+				lCompany_setting1s[i].setLast_edit_by(null);
 			}
 			try {
 				session.delete(this);
@@ -826,6 +842,16 @@ public class User_detail implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set cover_type1 = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="add_by", targetEntity=models.Company_setting.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set company_setting = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="last_edit_by", targetEntity=models.Company_setting.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set company_setting1 = new java.util.HashSet();
 	
 	private void setUser_detail_id(int value) {
 		this.user_detail_id = value;
@@ -1193,6 +1219,24 @@ public class User_detail implements Serializable {
 	
 	public java.util.Set getCover_type1() {
 		return cover_type1;
+	}
+	
+	
+	public void setCompany_setting(java.util.Set value) {
+		this.company_setting = value;
+	}
+	
+	public java.util.Set getCompany_setting() {
+		return company_setting;
+	}
+	
+	
+	public void setCompany_setting1(java.util.Set value) {
+		this.company_setting1 = value;
+	}
+	
+	public java.util.Set getCompany_setting1() {
+		return company_setting1;
 	}
 	
 	

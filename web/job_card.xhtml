@@ -57,7 +57,7 @@
                                 <h:outputLabel value="Job Card Date"/>
                             </td>
                             <td>
-                                <p:calendar styleClass="clsInput" id="job_date" pattern="dd-MM-yyyy" navigator="true" showButtonPanel="true" readonlyInput="true" value="#{job_cardBean.selected.job_date}">
+                                <p:calendar styleClass="clsInput" id="job_date" pattern="#{company_settingBean.company_setting.dateformat}" navigator="true" showButtonPanel="true" readonlyInput="true" value="#{job_cardBean.selected.job_date}">
                                     <p:ajax event="dateSelect" process="@this"/>
                                 </p:calendar>
                             </td>
@@ -67,7 +67,7 @@
                                 <h:outputLabel value="Due Date"/>
                             </td>
                             <td>
-                                <p:calendar styleClass="clsInput" id="due_date" pattern="dd-MM-yyyy" navigator="true" showButtonPanel="true" readonlyInput="true" value="#{job_cardBean.selected.due_date}">
+                                <p:calendar styleClass="clsInput" id="due_date" pattern="#{company_settingBean.company_setting.dateformat}" navigator="true" showButtonPanel="true" readonlyInput="true" value="#{job_cardBean.selected.due_date}">
                                     <p:ajax event="dateSelect" process="@this"/>
                                 </p:calendar>
                             </td>
