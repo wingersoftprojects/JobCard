@@ -16,6 +16,17 @@
                         <p:menuitem value="Add Job Card"  action="job_card?faces-redirect=true" icon="ui-icon-arrowthick-1-n" actionListener="#{job_cardBean.add()}"/>
                         <p:menuitem value="View Job Cards"  action="job_card_view?faces-redirect=true" icon="ui-icon-pencil"/>
                     </p:submenu>
+                    <p:submenu label="Client" icon="ui-icon-circle-plus">
+                        <p:menuitem value="Customer Detail"  action="customer_detail?faces-redirect=true" icon="ui-icon-pencil"/>
+                        <p:menuitem value="Supplier Detail"  action="supplier_detail?faces-redirect=true" icon="ui-icon-pencil"/>
+                    </p:submenu>
+                    <p:submenu label="Settings" icon="ui-icon-gear">
+                        <p:submenu label="User Management" icon="ui-icon-person">
+                        <p:menuitem value="User Detail"  action="user_detail?faces-redirect=true"/>
+                        <p:menuitem value="Group Detail"  action="group_detail?faces-redirect=true"/>
+                        </p:submenu>
+                        <p:menuitem value="Company Settings"  action="company_setting?faces-redirect=true" icon="ui-icon-pencil"/>
+                    </p:submenu>
                 </p:menubar>
             </h:form>
         </f:view>
