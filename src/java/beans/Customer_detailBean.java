@@ -70,9 +70,8 @@ public class Customer_detailBean extends AbstractBean<Customer_detail> implement
     public void save(User_detail aUserDetailId) {
         super.save(aUserDetailId); //To change body of generated methods, choose Tools | Templates.
         RequestContext.getCurrentInstance().execute("PF('Dialog_Customer_Detail').hide()");
+        RequestContext.getCurrentInstance().update(":form_job_card");
     }
-    
-    
 
     public void cancelcloseDialog() {
         RequestContext.getCurrentInstance().execute("PF('Dialog_Customer_Detail').hide()");

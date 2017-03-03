@@ -100,7 +100,8 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
     public List<Customer_detail> completeCustomer_detail(String query) {
         List<Customer_detail> filteredCustomer_details = new ArrayList<>();
         try {
-            filteredCustomer_details = (List<Customer_detail>) JobCardPersistentManager.instance().getSession().createQuery("select de FROM Customer_detail  de where de.is_deleted<>1 AND ( de.customer_name like '%" + query + "%' OR  de.contact_person_name like '%" + query + "%' or de.telephone1 like '%" + query + "%' OR de.telephone2 like '%" + query + "%' OR de.email like '%" + query + "%')").list();
+            String sql = "select de FROM Customer_detail  de where de.is_deleted<>1 AND ( de.customer_name like '%" + query + "%' OR  de.contact_person_name like '%" + query + "%' or de.telephone1 like '%" + query + "%' OR de.telephone2 like '%" + query + "%' OR de.email like '%" + query + "%')";
+            filteredCustomer_details = (List<Customer_detail>) JobCardPersistentManager.instance().getSession().createQuery(sql).list();
         } catch (PersistentException ex) {
             Logger.getLogger(Customer_detailBean.class.getName()).log(Level.SEVERE, null, ex);
         }

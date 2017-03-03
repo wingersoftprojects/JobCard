@@ -16,7 +16,7 @@
     </ui:define>
     <ui:define name="content">
         <div style="width: 100%;">
-            <h:form>
+            <h:form id="form_job_card">
                 <p:growl showDetail="true" id="job_card_messages"/>
                 <fieldset>
                     <legend>CUSTOMER DETAILS</legend>
@@ -48,7 +48,6 @@
                                         </h:outputText>
                                     </p:column>
                                     <p:ajax event="itemSelect" process="@this" update="contact_person,telephone"></p:ajax>
-                                    <p:ajax event="change" process="@this" update="@form"></p:ajax>
                                 </p:autoComplete>
                                 <p:commandButton id="new_customer" value="New" process="@this" update=":form_customer_detail" oncomplete="PF('Dialog_Customer_Detail').show();">
                                 </p:commandButton>
