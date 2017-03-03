@@ -7,112 +7,129 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <ui:composition> 
-        <table>
-            <tr>
-                <td>
-                    <p:graphicImage value="#{company_settingBean.image}" width="150" style=" margin: 0 auto;" cache="false"/><br/>
-                    <i><b><p:outputLabel value="#{company_settingBean.company_setting.sloghan}"/></b></i>
-                </td>
-                <td style="padding-left: 20px;">
-                    <p:outputLabel value="#{company_settingBean.company_setting.building}"/><br/>
-                    <p:outputLabel value="#{company_settingBean.company_setting.street_address}"/><br/>
-                    <p:outputLabel value="Tel: #{company_settingBean.company_setting.telephone}"/><br/>
-                    <p:outputLabel value="Mob: #{company_settingBean.company_setting.mobile}"/><br/>
-                </td>
-                <td></td>
-                <td>
-                    <h1>Quote</h1>
-                    <b>Date:</b><p:outputLabel value="#{job_cardBean.selected.job_date}"><f:convertDateTime pattern="#{company_settingBean.company_setting.dateformat}" timeZone="#{company_settingBean.company_setting.timezone}"/></p:outputLabel>
-                </td>
-            </tr>
-        </table>
-        <fieldset>
-            <legend>CUSTOMER DETAILS</legend>
-            <table border="0" width="100%">
-                <tr>
-                    <td><h:outputLabel value="Ms. (Company)"/></td>
-                    <td><h:outputLabel value="#{job_cardBean.selected.customer_detail.customer_name}"/>
-                    </td>
-                    <td>
-                        <h:outputLabel value="Job Card Date"/>
-                    </td>
-                    <td>
-                        <h:outputLabel value="#{job_cardBean.selected.job_date}">
-                            <f:convertDateTime pattern="#{company_settingBean.company_setting.dateformat}" timeZone="#{company_settingBean.company_setting.timezone}"/>
-                        </h:outputLabel>
-                    </td>
-                </tr>
+        <center>
+            <table>
                 <tr>
                     <td>
-                        <h:outputLabel value="Due Date"/>
-                    </td>
-                    <td>
-                        <h:outputLabel value="#{job_cardBean.selected.due_date}">
-                            <f:convertDateTime pattern="#{company_settingBean.company_setting.dateformat}" timeZone="#{company_settingBean.company_setting.timezone}"/>
-                        </h:outputLabel>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h:outputLabel value="Contact Person"/>
-                    </td>
-                    <td>
-                        <h:outputLabel value="#{job_cardBean.selected.customer_detail.contact_person_name}"/>
-                    </td>
-                    <td><h:outputLabel value="Telephone"/></td>
-                    <td>
-                        <h:outputLabel value="#{job_cardBean.selected.customer_detail.telephone1}/#{job_cardBean.selected.customer_detail.telephone2}"/>
+                        <p:commandButton styleClass="clsButtonBigLonger" value="Print (ALT+P)" icon="ui-icon-print" type="button" accesskey="p">
+                            <p:printer target="toprint" />
+                        </p:commandButton>            
                     </td>
                 </tr>
             </table>
-        </fieldset>
-        <fieldset>
-            <legend>JOB DETAILS</legend>
+        </center>
+        <br/>
+        <p:panel id="toprint">
+            <h:panelGrid columns="4">
+                <h:panelGrid columns="1">
+                    <p:graphicImage value="#{company_settingBean.image}" width="150" style=" margin: 0 auto;" cache="false"/>
+                    <p:outputLabel style="font-weight: bold; font-style: italic;" value="#{company_settingBean.company_setting.sloghan}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <p:outputLabel value="#{company_settingBean.company_setting.building}"/>
+                    <p:outputLabel value="#{company_settingBean.company_setting.street_address}"/>
+                    <p:outputLabel value="Tel: #{company_settingBean.company_setting.telephone}"/>
+                    <p:outputLabel value="Mob: #{company_settingBean.company_setting.mobile}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <p:outputLabel value=""/>
+                </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <p:outputLabel value="Quote" style="font-weight: bolder; font-size: larger; font-style: italic;"/>
+                    <p:outputLabel value="Date: #{job_cardBean.selected.job_date}">
+                        <f:convertDateTime pattern="#{company_settingBean.company_setting.dateformat}" timeZone="#{company_settingBean.company_setting.timezone}"/>
+                    </p:outputLabel>
+                </h:panelGrid>
+            </h:panelGrid>
+            <hr/>
             <fieldset>
-                <legend>Final Product Details (For delivery and Invoicing Purposes)</legend>
-                <br/>
-                <p:dataTable id="job_card_item_table" value="#{job_cardBean.job_card_items}" var="item">
-                    <p:column headerText="ITEM">
-                        <h:outputText value="#{item.item_type.item_type_name}"/>
-                    </p:column>
-                    <p:column headerText="DESCRIPTION">
-                        <h:outputText value="#{item.job_title}"/><br/>
-                        <h:outputText value="Size:#{item.paper_size}"/><br/>
-                        <h:outputText value="Pages:#{item.pages}"/><br/>
-                        <h:outputText value="Color:#{item.color}"/><br/>
-                        <h:outputText value="Machine:#{item.machine_used}"/><br/>
-                        <h:outputText value="Laminating:#{item.lamination_type}"/><br/>
-                        <h:outputText value="Binding:#{item.binding_type}"/><br/>
-                        <h:outputText value="Cover:#{item.cover_type.cover_type_name}" rendered="#{item.cover_type!=null}"/>
-                    </p:column>
-                    <p:column headerText="QTY">
-                        <h:outputText value="#{item.quantity}"/>
-                    </p:column>
-                    <p:column headerText="UNIT COST">
-                        <h:outputText value="#{item.rate}">
-                            <f:convertNumber pattern="#,###.##"/>
-                        </h:outputText>
-                    </p:column>
-                    <p:column headerText="AMOUNT">
-                        <h:outputText value="#{item.amount}">
-                            <f:convertNumber pattern="#,###.##"/>
-                        </h:outputText>
-                    </p:column>
-                    <p:columnGroup type="footer">
-                        <p:row>
-                            <p:column colspan="4" style="text-align:right" footerText="Totals:" />
-                            <p:column >
-                                <f:facet name="footer">
-                                    <h:outputText value="#{job_cardBean.total_amount}">
-                                        <f:convertNumber pattern="##,###.00" />
-                                    </h:outputText>
-                                </f:facet>
-                            </p:column>
-                        </p:row>
-                    </p:columnGroup>
-                </p:dataTable>
+                <legend>CUSTOMER DETAILS</legend>
+                <table border="0" width="100%">
+                    <tr>
+                        <td><h:outputLabel value="Ms. (Company)"/></td>
+                        <td><h:outputLabel value="#{job_cardBean.selected.customer_detail.customer_name}"/>
+                        </td>
+                        <td>
+                            <h:outputLabel value="Job Card Date"/>
+                        </td>
+                        <td>
+                            <h:outputLabel value="#{job_cardBean.selected.job_date}">
+                                <f:convertDateTime pattern="#{company_settingBean.company_setting.dateformat}" timeZone="#{company_settingBean.company_setting.timezone}"/>
+                            </h:outputLabel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Due Date"/>
+                        </td>
+                        <td>
+                            <h:outputLabel value="#{job_cardBean.selected.due_date}">
+                                <f:convertDateTime pattern="#{company_settingBean.company_setting.dateformat}" timeZone="#{company_settingBean.company_setting.timezone}"/>
+                            </h:outputLabel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Contact Person"/>
+                        </td>
+                        <td>
+                            <h:outputLabel value="#{job_cardBean.selected.customer_detail.contact_person_name}"/>
+                        </td>
+                        <td><h:outputLabel value="Telephone"/></td>
+                        <td>
+                            <h:outputLabel value="#{job_cardBean.selected.customer_detail.telephone1}/#{job_cardBean.selected.customer_detail.telephone2}"/>
+                        </td>
+                    </tr>
+                </table>
             </fieldset>
-        </fieldset>
+            <fieldset>
+                <legend>JOB DETAILS</legend>
+                <fieldset>
+                    <legend>Final Product Details (For delivery and Invoicing Purposes)</legend>
+                    <br/>
+                    <p:dataTable id="job_card_item_table" value="#{job_cardBean.job_card_items}" var="item">
+                        <p:column headerText="ITEM">
+                            <h:outputText value="#{item.item_type.item_type_name}"/>
+                        </p:column>
+                        <p:column headerText="DESCRIPTION">
+                            <h:outputText value="#{item.job_title}"/><br/>
+                            <h:outputText value="Size:#{item.paper_size}"/><br/>
+                            <h:outputText value="Pages:#{item.pages}"/><br/>
+                            <h:outputText value="Color:#{item.color}"/><br/>
+                            <h:outputText value="Machine:#{item.machine_used}"/><br/>
+                            <h:outputText value="Laminating:#{item.lamination_type}"/><br/>
+                            <h:outputText value="Binding:#{item.binding_type}"/><br/>
+                            <h:outputText value="Cover:#{item.cover_type.cover_type_name}" rendered="#{item.cover_type!=null}"/>
+                        </p:column>
+                        <p:column headerText="QTY">
+                            <h:outputText value="#{item.quantity}"/>
+                        </p:column>
+                        <p:column headerText="UNIT COST">
+                            <h:outputText value="#{item.rate}">
+                                <f:convertNumber pattern="#,###.##"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="AMOUNT">
+                            <h:outputText value="#{item.amount}">
+                                <f:convertNumber pattern="#,###.##"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:columnGroup type="footer">
+                            <p:row>
+                                <p:column colspan="4" style="text-align:right" footerText="Totals:" />
+                                <p:column >
+                                    <f:facet name="footer">
+                                        <h:outputText value="#{job_cardBean.total_amount}">
+                                            <f:convertNumber pattern="##,###.00" />
+                                        </h:outputText>
+                                    </f:facet>
+                                </p:column>
+                            </p:row>
+                        </p:columnGroup>
+                    </p:dataTable>
+                </fieldset>
+            </fieldset>
+        </p:panel>
     </ui:composition>
 </html>
 
