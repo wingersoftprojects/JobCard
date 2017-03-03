@@ -14,7 +14,7 @@
 
     <ui:define name="content">
         <f:view>
-            <h:form>
+            <h:form id="form_job_card_view">
                 <p:dataTable id="job_card_table" value="#{job_cardBean.ts}" var="item" rows="10"
                              paginator="true"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -23,7 +23,7 @@
                         #{item.customer_detail.customer_name}
                     </p:column>
                     <p:column headerText="Job Card Number">
-                        #{item.job_card_number}
+                        #{item.job_card_id}
                     </p:column>
                     <p:column headerText="Job Date Name">
                         #{item.job_date}
@@ -37,7 +37,7 @@
                     <p:column headerText="">
                         <p:commandButton id="view_job_card" value="View" process="@this" actionListener="#{job_cardBean.view_job_card(item.job_card_id)}" update=":form_view_job_card" oncomplete="PF('Dialog_View_Job_Card').show();">
                         </p:commandButton>
-                        <p:commandButton value="Edit" action="#{job_cardBean.edit(item)}" process="@this" update="@form" icon="ui-icon-pencil" title="View">
+                                                <p:commandButton value="Edit" action="#{job_cardBean.edit(item)}" process="@this" update="@form" icon="ui-icon-pencil" title="View">
                         </p:commandButton>
                         <p:commandButton value="Delete" actionListener="#{job_cardBean.delete(item,loginBean.user_detail)}" update="@form" process="@this">
                             <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
@@ -49,6 +49,7 @@
                         </p:confirmDialog>
                     </p:column>
                 </p:dataTable>
+        
             </h:form>
         </f:view>
         <ui:include src="dialog_view_job_card.xhtml"/>
