@@ -7,6 +7,7 @@ package beans;
 
 import java.io.Serializable;
 import java.util.logging.Level;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -74,7 +75,30 @@ public class User_detailBean extends AbstractBean<User_detail> implements Serial
     public void setOverridePassword(boolean OverridePassword) {
         this.OverridePassword = OverridePassword;
     }
-
+    
+    public void changeUserPassword(User_detail ud) {
+        if (!this.CurrentPassword.equals(Security.Decrypt(ud.getUser_password()))) {
+            //current passord is right
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Current password", "Current password is wrong"));
+        } else if (this.NewPassword.length() < 8) {
+            //passord less than 8 characters
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("New password", "New password cannot be less than 8 characters!"));
+        } else if (!this.NewPassword.equals(this.ConfirmPassword)) {
+            //password not equal
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Match failed", "New and Confirm passwords do not match"));
+        } else {
+            //update password here
+            this.setSelected(ud);
+            this.getSelected().setUser_password(Security.Encrypt(this.NewPassword));
+            super.save(ud);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("CHANGED", "Password changed successfully!"));
+            //return to login
+            FacesContext fc = FacesContext.getCurrentInstance();
+            ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
+            nav.performNavigation("login?faces-redirect=true");
+        }
+    }
+    
     public void save_User_detail(User_detail id) {
         if ((this.OverridePassword && this.getSelected().getUser_detail_id() > 0) || this.getSelected().getUser_detail_id() == 0) {
             if (this.getSelected().getUser_password().length() < 8) {
