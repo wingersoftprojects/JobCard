@@ -169,7 +169,7 @@ public class LoginBean {
             lsb.save(user_detail);
 
             ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) context.getApplication().getNavigationHandler();
-            nav.performNavigation("user_detail?faces-redirect=true");
+            nav.performNavigation("menu?faces-redirect=true");
 
         } else {
             messageString = "Invalid Login Details Submitted!";
