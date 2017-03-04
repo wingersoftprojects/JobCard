@@ -30,7 +30,8 @@
                     <f:facet name="options">
                         <p:menubar>
                         <p:submenu label="#{loginBean.user_detail.first_name}" icon="ui-icon-person">              
-                        <p:menuitem value="Logout" action="#{loginBean.logout()}" update="@all" ajax="false" icon="ui-icon-extlink"/>
+                        <p:menuitem value="Change Password" action="current_user_detail?faces-redirect=true" icon="ui-icon-pencil"/>
+                        <p:menuitem value="Log Out" action="#{loginBean.logout()}" update="@all" ajax="false" icon="ui-icon-extlink"/>
                         </p:submenu>
                         </p:menubar>
                     </f:facet>
