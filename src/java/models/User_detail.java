@@ -497,6 +497,14 @@ public class User_detail implements Serializable {
 			for(int i = 0; i < lCompany_setting1s.length; i++) {
 				lCompany_setting1s[i].setLast_edit_by(null);
 			}
+			models.Job_card_status[] lJob_card_statuss = (models.Job_card_status[])getJob_card_status().toArray(new models.Job_card_status[getJob_card_status().size()]);
+			for(int i = 0; i < lJob_card_statuss.length; i++) {
+				lJob_card_statuss[i].setAdd_by(null);
+			}
+			models.Job_card_status[] lJob_card_status1s = (models.Job_card_status[])getJob_card_status1().toArray(new models.Job_card_status[getJob_card_status1().size()]);
+			for(int i = 0; i < lJob_card_status1s.length; i++) {
+				lJob_card_status1s[i].setLast_edit_by(null);
+			}
 			return delete();
 		}
 		catch(Exception e) {
@@ -638,6 +646,14 @@ public class User_detail implements Serializable {
 			models.Company_setting[] lCompany_setting1s = (models.Company_setting[])getCompany_setting1().toArray(new models.Company_setting[getCompany_setting1().size()]);
 			for(int i = 0; i < lCompany_setting1s.length; i++) {
 				lCompany_setting1s[i].setLast_edit_by(null);
+			}
+			models.Job_card_status[] lJob_card_statuss = (models.Job_card_status[])getJob_card_status().toArray(new models.Job_card_status[getJob_card_status().size()]);
+			for(int i = 0; i < lJob_card_statuss.length; i++) {
+				lJob_card_statuss[i].setAdd_by(null);
+			}
+			models.Job_card_status[] lJob_card_status1s = (models.Job_card_status[])getJob_card_status1().toArray(new models.Job_card_status[getJob_card_status1().size()]);
+			for(int i = 0; i < lJob_card_status1s.length; i++) {
+				lJob_card_status1s[i].setLast_edit_by(null);
 			}
 			try {
 				session.delete(this);
@@ -852,6 +868,16 @@ public class User_detail implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set company_setting1 = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="add_by", targetEntity=models.Job_card_status.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set job_card_status = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="last_edit_by", targetEntity=models.Job_card_status.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set job_card_status1 = new java.util.HashSet();
 	
 	private void setUser_detail_id(int value) {
 		this.user_detail_id = value;
@@ -1237,6 +1263,24 @@ public class User_detail implements Serializable {
 	
 	public java.util.Set getCompany_setting1() {
 		return company_setting1;
+	}
+	
+	
+	public void setJob_card_status(java.util.Set value) {
+		this.job_card_status = value;
+	}
+	
+	public java.util.Set getJob_card_status() {
+		return job_card_status;
+	}
+	
+	
+	public void setJob_card_status1(java.util.Set value) {
+		this.job_card_status1 = value;
+	}
+	
+	public java.util.Set getJob_card_status1() {
+		return job_card_status1;
 	}
 	
 	
