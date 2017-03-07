@@ -19,7 +19,7 @@
                 <p:fieldset legend="Item Detail">
                     <p:panelGrid columns="2" id="item_detail">                                                
                         <p:outputLabel value="Item Name:" for="item_type_name"/>
-                        <p:inputText id="item_type_name" value="#{item_typeBean.selected.item_type_name}" required="true" requiredMessage="Item Name is required"/>
+                        <p:inputText id="item_type_name" placeholder="e.g Books" value="#{item_typeBean.selected.item_type_name}" required="true" requiredMessage="Item Name is required"/>
                         <p:outputLabel value="Is Active?:" for="is_active"/>
                         <p:selectOneMenu id="is_active" value="#{item_typeBean.selected.is_active}" required="true" requiredMessage="Is active field is required">
                             <f:selectItem itemLabel="" itemValue=""/>

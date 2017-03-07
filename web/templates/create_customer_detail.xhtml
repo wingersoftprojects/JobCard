@@ -14,19 +14,25 @@
                     <p:outputLabel value="Customer Name:" for="customer_name"/>
                     <p:inputText id="customer_name" value="#{customer_detailBean.selected.customer_name}" required="true" requiredMessage=" is required"/>
                     <p:outputLabel value="Tel 1:" for="telephone1"/>
-                    <p:inputText id="telephone1" value="#{customer_detailBean.selected.telephone1}" required="true" requiredMessage="First Name is required"/>
+                    <p:inputMask id="telephone1" value="#{customer_detailBean.selected.telephone1}" mask="(999) 999-9999" required="true" requiredMessage="First Name is required"/>
                     <p:outputLabel value="Tel 2:" for="telephone2"/>
-                    <p:inputText id="telephone2" value="#{customer_detailBean.selected.telephone2}" required="false" requiredMessage="Second Name is required"/>
+                    <p:inputMask id="telephone2" value="#{customer_detailBean.selected.telephone2}" mask="(999) 999-999" required="false" requiredMessage="Second Name is required"/>
                     <p:outputLabel value="Email:" for="email"/>
-                    <p:inputText id="email" value="#{customer_detailBean.selected.email}" required="false"/>                        
+                    <p:inputText id="email" value="#{customer_detailBean.selected.email}" validatorMessage="Invalid email format" required="false">
+                        <f:validateRegex
+                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>                            
+                    </p:inputText>                        
                     <p:outputLabel value="Contact Person Name:" for="contact_person_name"/>
                     <p:inputText id="contact_person_name" value="#{customer_detailBean.selected.contact_person_name}" required="true"/>
                     <p:outputLabel value="Tel 1:" for="contact_person_telephone1"/>
-                    <p:inputText id="contact_person_telephone1" value="#{customer_detailBean.selected.contact_person_telephone1}" required="true" requiredMessage="First Name is required"/>
+                    <p:inputMask id="contact_person_telephone1" value="#{customer_detailBean.selected.contact_person_telephone1}" mask="(999) 999-9999" required="true" requiredMessage="First Name is required"/>
                     <p:outputLabel value="Tel 2:" for="contact_person_telephone2"/>
-                    <p:inputText id="contact_person_telephone2" value="#{customer_detailBean.selected.contact_person_telephone2}" required="false" requiredMessage="Second Name is required"/>
+                    <p:inputMask id="contact_person_telephone2" value="#{customer_detailBean.selected.contact_person_telephone2}" mask="(999) 999-9999" required="false" requiredMessage="Second Name is required"/>
                     <p:outputLabel value="Email:" for="contact_person_email"/>                        
-                    <p:inputText id="contact_person_email" value="#{customer_detailBean.selected.contact_person_email}" required="true"/>
+                    <p:inputText id="contact_person_email" value="#{customer_detailBean.selected.contact_person_email}" validatorMessage="Invalid email format" required="true">
+                        <f:validateRegex
+                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>                            
+                    </p:inputText>
                     <p:outputLabel value="Customer Location:" for="address"/>
                     <p:inputText id="address" value="#{customer_detailBean.selected.address}"/>                        
                     <p:outputLabel value="Is Active?:" for="is_active2"/>

@@ -19,16 +19,7 @@
                 <p:fieldset legend="Cover Type Detail">
                     <p:panelGrid columns="2" id="cover_type">                                                
                         <p:outputLabel value="Cover Name:" for="cover_type_name"/>
-                        <p:selectOneMenu id="cover_type_name" value="#{cover_typeBean.selected.cover_type_name}" style="width:125px" required="true" requiredMessage="Paper type field is Required">
-                            <f:selectItem itemLabel="" />
-                            <f:selectItem itemLabel="Art Board 250GSM " itemValue="Art Board 250GSM"/>
-                            <f:selectItem itemLabel="Art Board 300GSM" itemValue="Art Board 300GSM"/>
-                            <f:selectItem itemLabel="Art Board 350GSM" itemValue="Art Board 350GSM"/>
-                            <f:selectItem itemLabel="Straw Board Hard Cover" itemValue="Straw Board Hard Cover"/> 
-                            <f:selectItem itemLabel="Manilla" itemValue="Manilla"/> 
-                            <f:selectItem itemLabel="Transparent Plastic" itemValue="Transparent Plastic"/> 
-                            <p:ajax process="@this"/>
-                        </p:selectOneMenu>
+                        <p:inputText placeholder="e.g Art Board 250GSM" value="#{cover_typeBean.selected.cover_type_name}" id="cover_type_name" required="true" requiredMessage="Cover Name is required" />
                         <p:outputLabel value="Is Active?:" for="is_active"/>
                         <p:selectOneMenu id="is_active" value="#{cover_typeBean.selected.is_active}" required="true" requiredMessage="Is active field is required">
                             <f:selectItem itemLabel="" itemValue=""/>

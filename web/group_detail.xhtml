@@ -124,9 +124,9 @@
                         
                         <p:selectOneMenu id="group_right_function" value="#{group_rightBean.selected.group_right_function}" style="width:125px" required="true" requiredMessage="Group Right Function field is Required">
                             <f:selectItem itemLabel="" />
-                            <f:selectItem itemLabel="User Management" itemValue="User Management"/>
-                            <f:selectItems itemLabel="Job Card" itemValue="Job Card"/>
-                            <f:selectItems itemLabel="Delivery Note" itemValue="Delivery"/>                                                  
+                            <f:selectItem itemLabel="Settings" itemValue="Settings"/>
+                            <f:selectItem itemLabel="Client" itemValue="Client"/>
+                            <f:selectItem itemLabel="Job Card" itemValue="Job Card b"/>                                                  
                             <p:ajax process="@this"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="View:" for="view"/>

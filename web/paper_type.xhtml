@@ -16,31 +16,12 @@
         <h:form id="main_form" rendered="#{loginBean.IsAllowed(0, 'View')}">
             <p:growl id="messages" showDetail="true" />
             <p:panelGrid columns="2">                                
-                <p:fieldset legend="Paper Type Detail">
-                    <p:panelGrid columns="2" id="paper_type_category">                                                
+                <p:fieldset legend="Paper Detail">
+                    <p:panelGrid columns="2" id="paper_type">                                                
                         <p:outputLabel value="Paper Category:" for="paper_type_category"/>
-                        <p:selectOneMenu id="paper_type_name" value="#{paper_typeBean.selected.paper_type_category}" style="width:125px" required="true" requiredMessage="Paper type field is Required">
-                            <f:selectItem itemLabel="" />
-                            <f:selectItem itemLabel="Art Paper" itemValue="Art Paper"/>
-                            <f:selectItem itemLabel="Bond" itemValue="Bond"/>
-                            <f:selectItem itemLabel="Sticker Paper" itemValue="Sticker Paper"/>
-                            <f:selectItem itemLabel="Pastel White" itemValue="Pastel White"/> 
-                            <f:selectItem itemLabel="NCR-Carbonised" itemValue="NCR-Carbonised"/> 
-                            <f:selectItem itemLabel="Headed Paper" itemValue="Headed Paper"/> 
-                            <p:ajax process="@this"/>
-                        </p:selectOneMenu>
+                        <p:inputText id="paper_type_category" placeholder="e.g Art Paper"  value="#{paper_typeBean.selected.paper_type_category}" required="true" requiredMessage="Paper Type Category is required"/>
                         <p:outputLabel value="Paper Sub-Category:" for="paper_type_sub_category"/>
-                        <p:selectOneMenu id="paper_type_sub_category" value="#{paper_typeBean.selected.paper_type_sub_category}" style="width:125px" required="false" requiredMessage="">
-                            <f:selectItem itemLabel="" />
-                            <f:selectItem itemLabel="80GSM" itemValue="80GSM"/>
-                            <f:selectItem itemLabel="130GSM" itemValue="130GSM"/>
-                            <f:selectItem itemLabel="170GSM" itemValue="170GSM"/>
-                            <f:selectItem itemLabel="250GSM" itemValue="250GSM"/> 
-                            <f:selectItem itemLabel="300GSM" itemValue="300GSM"/> 
-                            <f:selectItem itemLabel="350GSM" itemValue="350GSM"/> 
-                            <p:ajax process="@this"/>
-                        </p:selectOneMenu>
-
+                        <p:inputText id="paper_type_sub_category" placeholder="e.g 80GSM" value="#{paper_typeBean.selected.paper_type_sub_category}" required="true" requiredMessage="Paper Type Sub Category is required"/>
                         <p:outputLabel value="Is Active?:" for="is_active"/>
                         <p:selectOneMenu id="is_active" value="#{paper_typeBean.selected.is_active}" required="true" requiredMessage="Is active field is required">
                             <f:selectItem itemLabel="" itemValue=""/>
