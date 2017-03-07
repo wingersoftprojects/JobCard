@@ -34,6 +34,7 @@
                                 <f:selectItem itemValue="Captured" itemLabel="Captured" />
                                 <f:selectItem itemValue="Ready" itemLabel="Ready" />
                                 <f:selectItem itemValue="Delivered" itemLabel="Delivered" />
+                                <f:selectItem itemValue="Cancelled" itemLabel="Cancelled" />
                             </p:selectCheckboxMenu>
                         </f:facet>
                         #{item.status}
@@ -42,13 +43,20 @@
                         #{item.due_date}
                     </p:column>
                     <p:column headerText="">
-                        <p:commandButton id="view_job_card" value="View" process="@this" actionListener="#{job_cardBean.view_job_card(item.job_card_id)}" update=":form_view_job_card" oncomplete="PF('Dialog_View_Job_Card').show();">
-                        </p:commandButton>
-                        <p:commandButton value="Edit" action="#{job_cardBean.edit(item)}" process="@this" update="@form" icon="ui-icon-pencil" title="View">
-                        </p:commandButton>
-                        <p:commandButton value="Delete" actionListener="#{job_cardBean.delete(item,loginBean.user_detail)}" update="@form" process="@this">
-                            <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
-                        </p:commandButton>
+                        <p:commandLink id="view_job_card" value="View" process="@this" actionListener="#{job_cardBean.view_job_card(item.job_card_id)}" update=":form_view_job_card" oncomplete="PF('Dialog_View_Job_Card').show();">
+                        </p:commandLink>
+                        
+                        <p:commandLink value=" | Ready" action="#{job_cardBean.change_job_card_status(item, 'Ready')}" process="@this" update="@form" title="Ready" rendered="#{item.status=='Captured'}">
+                            <p:confirm header="Confirmation" message="Are you sure the job is ready?" icon="ui-icon-alert" />
+                        </p:commandLink>
+                        
+                        <p:commandLink value=" | Deliver" action="#{job_cardBean.change_job_card_status(item, 'Delivered')}" process="@this" update="@form" title="Deliver" rendered="#{item.status=='Ready'}">
+                            <p:confirm header="Confirmation" message="Are you sure the job is ready for delivery?" icon="ui-icon-alert" />
+                        </p:commandLink>
+                        
+                        <p:commandLink value=" | Cancel" action="#{job_cardBean.change_job_card_status(item, 'Cancelled')}" process="@this" update="@form" title="Cancel" rendered="#{item.status=='Captured'}">
+                            <p:confirm header="Confirmation" message="Are you sure you want to cancel the job?" icon="ui-icon-alert" />
+                        </p:commandLink>
 
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                             <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />

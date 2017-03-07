@@ -21,6 +21,7 @@ import models.Customer_detail;
 import models.JobCardPersistentManager;
 import models.Job_card;
 import models.Job_card_item;
+import models.Job_card_status;
 import models.Paper_type;
 import models.Supplier_detail;
 import models.User_detail;
@@ -171,6 +172,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
                 } else {
                     this.getSelected().save();
                 }
+                add_job_card_status("Captured", this.getSelected());
             }
             if (this.getFormstate().equals("edit")) {
                 this.getSelected().setLast_edit_by(aUserDetailId);
@@ -230,6 +232,32 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
         } catch (PersistentException ex) {
             Logger.getLogger(Job_cardBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void change_job_card_status(Job_card j, String status) {
+
+        if (j != null) {
+            try {
+                PersistentTransaction transaction = JobCardPersistentManager.instance().getSession().beginTransaction();
+                j.setLast_edit_by(loginBean.getUser_detail());
+                j.setLast_edit_date(new Timestamp(new Date().getTime()));
+                j.setStatus(status);
+                JobCardPersistentManager.instance().getSession().merge(j);
+                add_job_card_status(status, j);
+                transaction.commit();
+            } catch (PersistentException ex) {
+                Logger.getLogger(Job_cardBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+
+    public void add_job_card_status(String status, Job_card j) {
+        Job_card_status job_card_status = new Job_card_status();
+        job_card_status.setStatus(status);
+        job_card_status.setJob_card(j);
+        job_card_status.setAdd_by(loginBean.getUser_detail());
+        job_card_status.setAdd_date(new Timestamp(new Date().getTime()));
     }
 
 }

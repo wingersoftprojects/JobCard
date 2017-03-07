@@ -65,6 +65,8 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	public final CollectionExpression cover_type1;
 	public final CollectionExpression company_setting;
 	public final CollectionExpression company_setting1;
+	public final CollectionExpression job_card_status;
+	public final CollectionExpression job_card_status1;
 	
 	public User_detailCriteria(Criteria criteria) {
 		super(criteria);
@@ -114,6 +116,8 @@ public class User_detailCriteria extends AbstractORMCriteria {
 		cover_type1 = new CollectionExpression("cover_type1", this);
 		company_setting = new CollectionExpression("company_setting", this);
 		company_setting1 = new CollectionExpression("company_setting1", this);
+		job_card_status = new CollectionExpression("job_card_status", this);
+		job_card_status1 = new CollectionExpression("job_card_status1", this);
 	}
 	
 	public User_detailCriteria(PersistentSession session) {
@@ -254,6 +258,14 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	
 	public Company_settingCriteria createCompany_setting1Criteria() {
 		return new Company_settingCriteria(createCriteria("company_setting1"));
+	}
+	
+	public Job_card_statusCriteria createJob_card_statusCriteria() {
+		return new Job_card_statusCriteria(createCriteria("job_card_status"));
+	}
+	
+	public Job_card_statusCriteria createJob_card_status1Criteria() {
+		return new Job_card_statusCriteria(createCriteria("job_card_status1"));
 	}
 	
 	public User_detail uniqueUser_detail() {

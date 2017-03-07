@@ -65,6 +65,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final CollectionExpression cover_type1;
 	public final CollectionExpression company_setting;
 	public final CollectionExpression company_setting1;
+	public final CollectionExpression job_card_status;
+	public final CollectionExpression job_card_status1;
 	
 	public User_detailDetachedCriteria() {
 		super(models.User_detail.class, models.User_detailCriteria.class);
@@ -114,6 +116,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		cover_type1 = new CollectionExpression("cover_type1", this.getDetachedCriteria());
 		company_setting = new CollectionExpression("company_setting", this.getDetachedCriteria());
 		company_setting1 = new CollectionExpression("company_setting1", this.getDetachedCriteria());
+		job_card_status = new CollectionExpression("job_card_status", this.getDetachedCriteria());
+		job_card_status1 = new CollectionExpression("job_card_status1", this.getDetachedCriteria());
 	}
 	
 	public User_detailDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -164,6 +168,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		cover_type1 = new CollectionExpression("cover_type1", this.getDetachedCriteria());
 		company_setting = new CollectionExpression("company_setting", this.getDetachedCriteria());
 		company_setting1 = new CollectionExpression("company_setting1", this.getDetachedCriteria());
+		job_card_status = new CollectionExpression("job_card_status", this.getDetachedCriteria());
+		job_card_status1 = new CollectionExpression("job_card_status1", this.getDetachedCriteria());
 	}
 	
 	public User_detailDetachedCriteria createAdd_byCriteria() {
@@ -296,6 +302,14 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public Company_settingDetachedCriteria createCompany_setting1Criteria() {
 		return new Company_settingDetachedCriteria(createCriteria("company_setting1"));
+	}
+	
+	public Job_card_statusDetachedCriteria createJob_card_statusCriteria() {
+		return new Job_card_statusDetachedCriteria(createCriteria("job_card_status"));
+	}
+	
+	public Job_card_statusDetachedCriteria createJob_card_status1Criteria() {
+		return new Job_card_statusDetachedCriteria(createCriteria("job_card_status1"));
 	}
 	
 	public User_detail uniqueUser_detail(PersistentSession session) {

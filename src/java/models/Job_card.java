@@ -389,6 +389,10 @@ public class Job_card implements Serializable {
 			for(int i = 0; i < lUser_actions.length; i++) {
 				lUser_actions[i].setJob_card(null);
 			}
+			models.Job_card_status[] lJob_card_statuss = (models.Job_card_status[])getJob_card_status().toArray(new models.Job_card_status[getJob_card_status().size()]);
+			for(int i = 0; i < lJob_card_statuss.length; i++) {
+				lJob_card_statuss[i].setJob_card(null);
+			}
 			return delete();
 		}
 		catch(Exception e) {
@@ -422,6 +426,10 @@ public class Job_card implements Serializable {
 			models.User_action[] lUser_actions = (models.User_action[])getUser_action().toArray(new models.User_action[getUser_action().size()]);
 			for(int i = 0; i < lUser_actions.length; i++) {
 				lUser_actions[i].setJob_card(null);
+			}
+			models.Job_card_status[] lJob_card_statuss = (models.Job_card_status[])getJob_card_status().toArray(new models.Job_card_status[getJob_card_status().size()]);
+			for(int i = 0; i < lJob_card_statuss.length; i++) {
+				lJob_card_statuss[i].setJob_card(null);
 			}
 			try {
 				session.delete(this);
@@ -496,6 +504,11 @@ public class Job_card implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set user_action = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="job_card", targetEntity=models.Job_card_status.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set job_card_status = new java.util.HashSet();
 	
 	private void setJob_card_id(int value) {
 		this.job_card_id = value;
@@ -624,6 +637,15 @@ public class Job_card implements Serializable {
 	
 	public java.util.Set getUser_action() {
 		return user_action;
+	}
+	
+	
+	public void setJob_card_status(java.util.Set value) {
+		this.job_card_status = value;
+	}
+	
+	public java.util.Set getJob_card_status() {
+		return job_card_status;
 	}
 	
 	

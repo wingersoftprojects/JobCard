@@ -51,6 +51,7 @@ public class JobCardPersistentManager extends PersistentManager {
 		configuration.addAnnotatedClass(models.Item_type.class);
 		configuration.addAnnotatedClass(models.Cover_type.class);
 		configuration.addAnnotatedClass(models.Company_setting.class);
+		configuration.addAnnotatedClass(models.Job_card_status.class);
 		configuration.buildMappings();
 		return configuration;
 	}
