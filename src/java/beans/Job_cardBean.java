@@ -28,6 +28,8 @@ import models.User_detail;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 import org.primefaces.context.RequestContext;
+import utilities.GeneralUtilities;
+import utilities.SendMail;
 
 /**
  *
@@ -235,7 +237,6 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
     }
 
     public void change_job_card_status(Job_card j, String status) {
-
         if (j != null) {
             try {
                 PersistentTransaction transaction = JobCardPersistentManager.instance().getSession().beginTransaction();
@@ -245,6 +246,20 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
                 JobCardPersistentManager.instance().getSession().merge(j);
                 add_job_card_status(status, j);
                 transaction.commit();
+                try {
+                    String contact = "+256" + j.getCustomer_detail().getContact_person_telephone1().substring(1).replace("(", "").replace(")", "").replace(" ", "").replace("-", "");
+                    if ("Ready".equals(status)) {
+                        new GeneralUtilities().send_sms(contact, "Please note that the printing job at SHARK Media is ready for delivery");
+                        new SendMail().send_mail("Please note that the printing job at SHARK Media is ready for delivery", j.getCustomer_detail().getContact_person_email(), j.getCustomer_detail().getContact_person_name());
+                    }
+                    if ("Delivered".equals(status)) {
+                        new GeneralUtilities().send_sms(contact, "Please note that the printing job at SHARK Media has been for delivered");
+                        new SendMail().send_mail("Please note that the printing job at SHARK Media has been delivered", j.getCustomer_detail().getContact_person_email(), j.getCustomer_detail().getContact_person_name());
+                    }
+                } catch (Exception ex) {
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", ex.getMessage());
+                    RequestContext.getCurrentInstance().showMessageInDialog(message);
+                }
             } catch (PersistentException ex) {
                 Logger.getLogger(Job_cardBean.class.getName()).log(Level.SEVERE, null, ex);
             }

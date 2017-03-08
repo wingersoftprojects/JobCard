@@ -17,27 +17,29 @@
                         <p:menuitem value="View Job Cards"  action="job_card_view?faces-redirect=true" icon="ui-icon-folder-open"/>
                     </p:submenu>
                     <p:submenu label="Client" icon="ui-icon-person">
-                        <p:menuitem value="Customer Details"  action="customer_detail?faces-redirect=true" icon="ui-icon-pencil"/>
+                        <p:menuitem value="Customer Details"  action="customer_detail?faces-redirect=true" icon="ui-icon-pencil">
+                            <f:setPropertyActionListener target="#{customer_detailBean.is_dialog}" value="#{false}"/>
+                        </p:menuitem>
                         <p:menuitem value="Supplier Details"  action="supplier_detail?faces-redirect=true" icon="ui-icon-pencil"/>
                     </p:submenu>
                     <p:submenu label="Settings" icon="ui-icon-gear">
                         <p:submenu label="User Management" icon="ui-icon-person">
-                        <p:menuitem value="User Details"  action="user_detail?faces-redirect=true"/>
-                        <p:menuitem value="Group Details"  action="group_detail?faces-redirect=true"/>                       
+                            <p:menuitem value="User Details"  action="user_detail?faces-redirect=true"/>
+                            <p:menuitem value="Group Details"  action="group_detail?faces-redirect=true"/>                       
                         </p:submenu>
                         <p:menuitem value="Company Settings"  action="company_setting?faces-redirect=true" icon="ui-icon-contact"/>
                         <p:submenu label="Product Settings" icon="ui-icon-cart">
-                        <p:menuitem value="Paper Details"  action="paper_type?faces-redirect=true"/>
-                        <p:menuitem value="Cover Details"  action="cover_type?faces-redirect=true"/>                       
-                        <p:menuitem value="Item Details"  action="item_type?faces-redirect=true"/>                       
+                            <p:menuitem value="Paper Details"  action="paper_type?faces-redirect=true"/>
+                            <p:menuitem value="Cover Details"  action="cover_type?faces-redirect=true"/>                       
+                            <p:menuitem value="Item Details"  action="item_type?faces-redirect=true"/>                       
                         </p:submenu>
                     </p:submenu>
                     <f:facet name="options">
                         <p:menubar>
-                        <p:submenu label="#{loginBean.user_detail.first_name}" icon="ui-icon-person">              
-                        <p:menuitem value="Change Password" action="current_user_detail?faces-redirect=true" icon="ui-icon-pencil"/>
-                        <p:menuitem value="Log Out" action="#{loginBean.logout()}" update="@all" ajax="false" icon="ui-icon-extlink"/>
-                        </p:submenu>
+                            <p:submenu label="#{loginBean.user_detail.first_name}" icon="ui-icon-person">              
+                                <p:menuitem value="Change Password" action="current_user_detail?faces-redirect=true" icon="ui-icon-pencil"/>
+                                <p:menuitem value="Log Out" action="#{loginBean.logout()}" update="@all" ajax="false" icon="ui-icon-extlink"/>
+                            </p:submenu>
                         </p:menubar>
                     </f:facet>
                 </p:menubar>

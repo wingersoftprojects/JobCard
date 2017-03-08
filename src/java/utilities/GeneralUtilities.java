@@ -17,6 +17,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.orm.PersistentException;
 
 /**
@@ -112,6 +114,40 @@ public class GeneralUtilities implements Serializable {
     private void execute_success() {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Completed successfully", "Completed successfully"));
+    }
+
+    public void send_sms(String recipients, String message) throws Exception {
+        // Specify your login credentials
+        String username = "newtonajuna";
+        String apiKey = "0e941114ffd27b4cac7dfc24908aac57f3025d3bcb7810dc0ff45f1307a31c4d";
+
+        // NOTE: If connecting to the sandbox, please use your sandbox login credentials
+        // Specify the numbers that you want to send to in a comma-separated list
+        // Please ensure you include the country code (+256 for Uganda in this case)
+        //String recipients = "+256782760115";
+        // And of course we want our recipients to know what we really do
+        //String message = "We are lumberjacks. We code all day and sleep all night";
+        // Create a new instance of our awesome gateway class
+        AfricasTalkingGateway gateway = new AfricasTalkingGateway(username, apiKey);
+
+        // NOTE: If connecting to the sandbox, please add the sandbox flag to the constructor:
+        /**
+         * ***********************************************************************************
+         ****SANDBOX**** $gateway = new AfricasTalkingGateway(username, apiKey,
+         * "sandbox");
+         * ************************************************************************************
+         */
+        // Thats it, hit send and we'll take care of the rest. Any errors will
+        // be captured in the Exception class below
+        JSONArray results = gateway.sendMessage(recipients, message);
+
+        for (int i = 0; i < results.length(); ++i) {
+            JSONObject result = results.getJSONObject(i);
+            System.out.print(result.getString("status") + ","); // status is either "Success" or "error message"
+            System.out.print(result.getString("number") + ",");
+            System.out.print(result.getString("messageId") + ",");
+            System.out.println(result.getString("cost"));
+        }
     }
 
 }
