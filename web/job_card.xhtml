@@ -50,6 +50,7 @@
                                     <p:ajax event="itemSelect" process="@this" update="contact_person,telephone"></p:ajax>
                                 </p:autoComplete>
                                 <p:commandButton id="new_customer" value="New" process="@this" update=":form_customer_detail" oncomplete="PF('Dialog_Customer_Detail').show();">
+                                    <f:setPropertyActionListener target="#{customer_detailBean.is_dialog}" value="#{true}"/>
                                 </p:commandButton>
                             </td>
                             <td>
