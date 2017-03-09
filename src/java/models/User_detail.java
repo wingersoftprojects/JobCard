@@ -505,6 +505,10 @@ public class User_detail implements Serializable {
 			for(int i = 0; i < lJob_card_status1s.length; i++) {
 				lJob_card_status1s[i].setLast_edit_by(null);
 			}
+			models.Job_card[] lJob_card2s = (models.Job_card[])getJob_card2().toArray(new models.Job_card[getJob_card2().size()]);
+			for(int i = 0; i < lJob_card2s.length; i++) {
+				lJob_card2s[i].setJob_manager(null);
+			}
 			return delete();
 		}
 		catch(Exception e) {
@@ -655,6 +659,10 @@ public class User_detail implements Serializable {
 			for(int i = 0; i < lJob_card_status1s.length; i++) {
 				lJob_card_status1s[i].setLast_edit_by(null);
 			}
+			models.Job_card[] lJob_card2s = (models.Job_card[])getJob_card2().toArray(new models.Job_card[getJob_card2().size()]);
+			for(int i = 0; i < lJob_card2s.length; i++) {
+				lJob_card2s[i].setJob_manager(null);
+			}
 			try {
 				session.delete(this);
 				return true;
@@ -713,6 +721,9 @@ public class User_detail implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns({ @JoinColumn(name="last_edit_by", referencedColumnName="user_detail_id") })	
 	private models.User_detail last_edit_by;
+	
+	@Column(name="email", nullable=true, length=100)	
+	private String email;
 	
 	@OneToMany(mappedBy="user_detail", targetEntity=models.User_action.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
@@ -879,6 +890,11 @@ public class User_detail implements Serializable {
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set job_card_status1 = new java.util.HashSet();
 	
+	@OneToMany(mappedBy="job_manager", targetEntity=models.Job_card.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set job_card2 = new java.util.HashSet();
+	
 	private void setUser_detail_id(int value) {
 		this.user_detail_id = value;
 	}
@@ -969,6 +985,14 @@ public class User_detail implements Serializable {
 	
 	public int getIs_deleted() {
 		return is_deleted;
+	}
+	
+	public void setEmail(String value) {
+		this.email = value;
+	}
+	
+	public String getEmail() {
+		return email;
 	}
 	
 	public void setAdd_by(models.User_detail value) {
@@ -1281,6 +1305,15 @@ public class User_detail implements Serializable {
 	
 	public java.util.Set getJob_card_status1() {
 		return job_card_status1;
+	}
+	
+	
+	public void setJob_card2(java.util.Set value) {
+		this.job_card2 = value;
+	}
+	
+	public java.util.Set getJob_card2() {
+		return job_card2;
 	}
 	
 	

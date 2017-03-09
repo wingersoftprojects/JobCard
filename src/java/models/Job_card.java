@@ -377,6 +377,10 @@ public class Job_card implements Serializable {
 				getLast_edit_by().getJob_card1().remove(this);
 			}
 			
+			if(getJob_manager() != null) {
+				getJob_manager().getJob_card2().remove(this);
+			}
+			
 			models.Job_card_item[] lJob_card_items = (models.Job_card_item[])getJob_card_item().toArray(new models.Job_card_item[getJob_card_item().size()]);
 			for(int i = 0; i < lJob_card_items.length; i++) {
 				lJob_card_items[i].setJob_card(null);
@@ -413,6 +417,10 @@ public class Job_card implements Serializable {
 			
 			if(getLast_edit_by() != null) {
 				getLast_edit_by().getJob_card1().remove(this);
+			}
+			
+			if(getJob_manager() != null) {
+				getJob_manager().getJob_card2().remove(this);
 			}
 			
 			models.Job_card_item[] lJob_card_items = (models.Job_card_item[])getJob_card_item().toArray(new models.Job_card_item[getJob_card_item().size()]);
@@ -490,6 +498,17 @@ public class Job_card implements Serializable {
 	@Column(name="due_date", nullable=false)	
 	@Temporal(TemporalType.DATE)	
 	private java.util.Date due_date;
+	
+	@ManyToOne(targetEntity=models.User_detail.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="job_manager_id", referencedColumnName="user_detail_id") })	
+	private models.User_detail job_manager;
+	
+	@Column(name="delivered_by", nullable=true, length=100)	
+	private String delivered_by;
+	
+	@Column(name="delivered_by_phone_number", nullable=true, length=100)	
+	private String delivered_by_phone_number;
 	
 	@OneToMany(mappedBy="job_card", targetEntity=models.Job_card_item.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
@@ -590,6 +609,22 @@ public class Job_card implements Serializable {
 		return due_date;
 	}
 	
+	public void setDelivered_by(String value) {
+		this.delivered_by = value;
+	}
+	
+	public String getDelivered_by() {
+		return delivered_by;
+	}
+	
+	public void setDelivered_by_phone_number(String value) {
+		this.delivered_by_phone_number = value;
+	}
+	
+	public String getDelivered_by_phone_number() {
+		return delivered_by_phone_number;
+	}
+	
 	public void setCustomer_detail(models.Customer_detail value) {
 		this.customer_detail = value;
 	}
@@ -612,6 +647,14 @@ public class Job_card implements Serializable {
 	
 	public models.User_detail getLast_edit_by() {
 		return last_edit_by;
+	}
+	
+	public void setJob_manager(models.User_detail value) {
+		this.job_manager = value;
+	}
+	
+	public models.User_detail getJob_manager() {
+		return job_manager;
 	}
 	
 	public void setJob_card_item(java.util.Set value) {
