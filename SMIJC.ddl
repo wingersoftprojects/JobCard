@@ -1,4 +1,5 @@
-CREATE TABLE job_card_status (job_card_status_id int(11) NOT NULL AUTO_INCREMENT, job_card int(10) NOT NULL, status varchar(100) NOT NULL, is_active int(1), is_deleted int(1), add_date datetime NULL, add_by int(10) NOT NULL, last_edit_date datetime NULL, last_edit_by int(10), PRIMARY KEY (job_card_status_id)) ENGINE=InnoDB;
-ALTER TABLE job_card_status ADD INDEX FKjob_card_s312527 (job_card), ADD CONSTRAINT FKjob_card_s312527 FOREIGN KEY (job_card) REFERENCES job_card (job_card_id);
-ALTER TABLE job_card_status ADD INDEX FKjob_card_s790281 (add_by), ADD CONSTRAINT FKjob_card_s790281 FOREIGN KEY (add_by) REFERENCES user_detail (user_detail_id);
-ALTER TABLE job_card_status ADD INDEX FKjob_card_s120336 (last_edit_by), ADD CONSTRAINT FKjob_card_s120336 FOREIGN KEY (last_edit_by) REFERENCES user_detail (user_detail_id);
+ALTER TABLE job_card ADD COLUMN job_manager_id int(10);
+ALTER TABLE job_card ADD COLUMN delivered_by varchar(100);
+ALTER TABLE job_card ADD COLUMN delivered_by_phone_number varchar(100);
+ALTER TABLE user_detail ADD COLUMN email varchar(100);
+ALTER TABLE job_card ADD INDEX FKjob_card213367 (job_manager_id), ADD CONSTRAINT FKjob_card213367 FOREIGN KEY (job_manager_id) REFERENCES user_detail (user_detail_id);

@@ -34,6 +34,10 @@ public class Job_cardDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final DateExpression job_date;
 	public final StringExpression status;
 	public final DateExpression due_date;
+	public final IntegerExpression job_managerId;
+	public final AssociationExpression job_manager;
+	public final StringExpression delivered_by;
+	public final StringExpression delivered_by_phone_number;
 	public final CollectionExpression job_card_item;
 	public final IntegerExpression delivery_noteId;
 	public final AssociationExpression delivery_note;
@@ -57,6 +61,10 @@ public class Job_cardDetachedCriteria extends AbstractORMDetachedCriteria {
 		job_date = new DateExpression("job_date", this.getDetachedCriteria());
 		status = new StringExpression("status", this.getDetachedCriteria());
 		due_date = new DateExpression("due_date", this.getDetachedCriteria());
+		job_managerId = new IntegerExpression("job_manager.user_detail_id", this.getDetachedCriteria());
+		job_manager = new AssociationExpression("job_manager", this.getDetachedCriteria());
+		delivered_by = new StringExpression("delivered_by", this.getDetachedCriteria());
+		delivered_by_phone_number = new StringExpression("delivered_by_phone_number", this.getDetachedCriteria());
 		job_card_item = new CollectionExpression("job_card_item", this.getDetachedCriteria());
 		delivery_noteId = new IntegerExpression("delivery_note.job_card_id", this.getDetachedCriteria());
 		delivery_note = new AssociationExpression("delivery_note", this.getDetachedCriteria());
@@ -81,6 +89,10 @@ public class Job_cardDetachedCriteria extends AbstractORMDetachedCriteria {
 		job_date = new DateExpression("job_date", this.getDetachedCriteria());
 		status = new StringExpression("status", this.getDetachedCriteria());
 		due_date = new DateExpression("due_date", this.getDetachedCriteria());
+		job_managerId = new IntegerExpression("job_manager.user_detail_id", this.getDetachedCriteria());
+		job_manager = new AssociationExpression("job_manager", this.getDetachedCriteria());
+		delivered_by = new StringExpression("delivered_by", this.getDetachedCriteria());
+		delivered_by_phone_number = new StringExpression("delivered_by_phone_number", this.getDetachedCriteria());
 		job_card_item = new CollectionExpression("job_card_item", this.getDetachedCriteria());
 		delivery_noteId = new IntegerExpression("delivery_note.job_card_id", this.getDetachedCriteria());
 		delivery_note = new AssociationExpression("delivery_note", this.getDetachedCriteria());
@@ -98,6 +110,10 @@ public class Job_cardDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public User_detailDetachedCriteria createLast_edit_byCriteria() {
 		return new User_detailDetachedCriteria(createCriteria("last_edit_by"));
+	}
+	
+	public User_detailDetachedCriteria createJob_managerCriteria() {
+		return new User_detailDetachedCriteria(createCriteria("job_manager"));
 	}
 	
 	public Job_card_itemDetachedCriteria createJob_card_itemCriteria() {

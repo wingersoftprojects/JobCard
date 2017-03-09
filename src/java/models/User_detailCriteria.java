@@ -34,6 +34,7 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_byId;
 	public final AssociationExpression last_edit_by;
+	public final StringExpression email;
 	public final CollectionExpression user_action;
 	public final CollectionExpression group_user;
 	public final CollectionExpression login_session;
@@ -67,6 +68,7 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	public final CollectionExpression company_setting1;
 	public final CollectionExpression job_card_status;
 	public final CollectionExpression job_card_status1;
+	public final CollectionExpression job_card2;
 	
 	public User_detailCriteria(Criteria criteria) {
 		super(criteria);
@@ -85,6 +87,7 @@ public class User_detailCriteria extends AbstractORMCriteria {
 		last_edit_date = new TimestampExpression("last_edit_date", this);
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this);
 		last_edit_by = new AssociationExpression("last_edit_by", this);
+		email = new StringExpression("email", this);
 		user_action = new CollectionExpression("user_action", this);
 		group_user = new CollectionExpression("group_user", this);
 		login_session = new CollectionExpression("login_session", this);
@@ -118,6 +121,7 @@ public class User_detailCriteria extends AbstractORMCriteria {
 		company_setting1 = new CollectionExpression("company_setting1", this);
 		job_card_status = new CollectionExpression("job_card_status", this);
 		job_card_status1 = new CollectionExpression("job_card_status1", this);
+		job_card2 = new CollectionExpression("job_card2", this);
 	}
 	
 	public User_detailCriteria(PersistentSession session) {
@@ -266,6 +270,10 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	
 	public Job_card_statusCriteria createJob_card_status1Criteria() {
 		return new Job_card_statusCriteria(createCriteria("job_card_status1"));
+	}
+	
+	public Job_cardCriteria createJob_card2Criteria() {
+		return new Job_cardCriteria(createCriteria("job_card2"));
 	}
 	
 	public User_detail uniqueUser_detail() {
