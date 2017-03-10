@@ -448,6 +448,9 @@ public class Job_card_status implements Serializable {
 	@JoinColumns({ @JoinColumn(name="last_edit_by", referencedColumnName="user_detail_id") })	
 	private models.User_detail last_edit_by;
 	
+	@Column(name="comment", nullable=true)	
+	private String comment;
+	
 	private void setJob_card_status_id(int value) {
 		this.job_card_status_id = value;
 	}
@@ -506,6 +509,14 @@ public class Job_card_status implements Serializable {
 	
 	public java.sql.Timestamp getLast_edit_date() {
 		return last_edit_date;
+	}
+	
+	public void setComment(String value) {
+		this.comment = value;
+	}
+	
+	public String getComment() {
+		return comment;
 	}
 	
 	public void setJob_card(models.Job_card value) {

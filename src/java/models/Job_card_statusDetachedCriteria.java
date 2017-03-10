@@ -31,6 +31,7 @@ public class Job_card_statusDetachedCriteria extends AbstractORMDetachedCriteria
 	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_byId;
 	public final AssociationExpression last_edit_by;
+	public final StringExpression comment;
 	
 	public Job_card_statusDetachedCriteria() {
 		super(models.Job_card_status.class, models.Job_card_statusCriteria.class);
@@ -46,6 +47,7 @@ public class Job_card_statusDetachedCriteria extends AbstractORMDetachedCriteria
 		last_edit_date = new TimestampExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this.getDetachedCriteria());
 		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
+		comment = new StringExpression("comment", this.getDetachedCriteria());
 	}
 	
 	public Job_card_statusDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -62,6 +64,7 @@ public class Job_card_statusDetachedCriteria extends AbstractORMDetachedCriteria
 		last_edit_date = new TimestampExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this.getDetachedCriteria());
 		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
+		comment = new StringExpression("comment", this.getDetachedCriteria());
 	}
 	
 	public Job_cardDetachedCriteria createJob_cardCriteria() {

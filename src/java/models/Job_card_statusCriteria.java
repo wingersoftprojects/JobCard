@@ -31,6 +31,7 @@ public class Job_card_statusCriteria extends AbstractORMCriteria {
 	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_byId;
 	public final AssociationExpression last_edit_by;
+	public final StringExpression comment;
 	
 	public Job_card_statusCriteria(Criteria criteria) {
 		super(criteria);
@@ -46,6 +47,7 @@ public class Job_card_statusCriteria extends AbstractORMCriteria {
 		last_edit_date = new TimestampExpression("last_edit_date", this);
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this);
 		last_edit_by = new AssociationExpression("last_edit_by", this);
+		comment = new StringExpression("comment", this);
 	}
 	
 	public Job_card_statusCriteria(PersistentSession session) {
