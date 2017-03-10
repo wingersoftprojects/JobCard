@@ -130,7 +130,24 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
         }
         return filteredPaper_types;
     }
-
+    public List<User_detail> completeUser_detail(String query) {
+        List<User_detail> filteredUser_details = new ArrayList<>();
+        try {
+            String sql = "select de FROM User_detail  de where de.is_deleted<>1 AND ( de.first_name like '%" + query + "%' OR  de.second_name like '%" + query + "%' OR de.email like '%" + query + "%')";
+            filteredUser_details = (List<User_detail>) JobCardPersistentManager.instance().getSession().createQuery(sql).list();
+        } catch (PersistentException ex) {
+            Logger.getLogger(User_detailBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filteredUser_details;
+    }
+    public List<String> completeText(String query) {
+        List<String> results = new ArrayList<>();
+        for(int i = 0; i < 10; i++) {
+            results.add(query + i);
+        }
+         
+        return results;
+    }
     public void add_job_card_item() {
         if (job_card_items == null) {
             job_card_items = new ArrayList<>();

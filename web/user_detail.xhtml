@@ -37,6 +37,12 @@
                         <p:inputText id="second_name" value="#{user_detailBean.selected.second_name}" required="true" requiredMessage="Second Name is required"/>
                         <p:outputLabel value="Third Name:" for="third_name"/>
                         <p:inputText id="third_name" value="#{user_detailBean.selected.third_name}" required="false"/>
+                        <p:outputLabel value="Email Address:" for="email"/>
+                        <p:inputText id="email" value="#{user_detailBean.selected.email}" validatorMessage="Invalid email format" required="true" requiredMessage="Email Address Field is required">
+                            <f:validateRegex
+                                pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>                            
+                        </p:inputText>                        
+
                         <p:outputLabel value="Is General Admin?:" for="is_user_gen_admin"/>
                         <p:selectOneMenu id="is_user_gen_admin" value="#{user_detailBean.selected.is_user_gen_admin}" required="true" requiredMessage="Is general admin field is required">
                             <f:selectItem itemLabel="" itemValue=""/>
@@ -62,7 +68,10 @@
                     </p:column>
                     <p:column headerText="Second Name">
                         #{item.second_name}
-                    </p:column>                    
+                    </p:column>
+                    <p:column headerText="Email Address">
+                        #{item.email}
+                    </p:column>                                        
                     <p:column headerText="General Admin?">
                         #{generalUtilities.convertYesNo(item.is_user_gen_admin)}
                     </p:column>

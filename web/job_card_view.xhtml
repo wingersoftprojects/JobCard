@@ -25,8 +25,11 @@
                     <p:column headerText="Job Card Number">
                         #{item.job_card_id}
                     </p:column>
-                    <p:column headerText="Job Date Name">
+                    <p:column headerText="Job Date">
                         #{item.job_date}
+                    </p:column> 
+                    <p:column headerText="Job Manager" filterMatchMode="contains" filterBy="#{job_cardBean.selected.job_manager.first_name}">
+                        #{job_cardBean.selected.job_manager.first_name} #{job_cardBean.selected.job_manager.second_name}
                     </p:column> 
                     <p:column  filterBy="#{item.status}" headerText="Status" filterMatchMode="in">
                         <f:facet name="filter">
