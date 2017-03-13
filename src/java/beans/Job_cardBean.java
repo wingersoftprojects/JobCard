@@ -17,6 +17,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
 import models.Customer_detail;
 import models.JobCardPersistentManager;
 import models.Job_card;
@@ -232,6 +234,14 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
             this.setFormstate("view");
             add();
             loginBean.saveMessage();
+                    try {
+                         new SendMail().send_mail("Please note that you have a new job assigned to you. Login to the systemn to view the job ", aUserDetailId.getEmail(), aUserDetailId.getFirst_name() + aUserDetailId.getSecond_name());                         
+                    }
+                    catch (Exception ex) {
+                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", ex.getMessage());
+                        RequestContext.getCurrentInstance().showMessageInDialog(message);
+                    }
+
         } catch (PersistentException ex) {
             Logger.getLogger(Job_cardBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -245,6 +255,14 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
     }
 
     public void view_job_card(int job_card_id) {
+        try {
+            this.setSelected(Job_card.getJob_cardByORMID(job_card_id));
+            job_card_items = new ArrayList<>(this.getSelected().getJob_card_item());
+        } catch (PersistentException ex) {
+            Logger.getLogger(Job_cardBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void create_delivery_note(int job_card_id) {
         try {
             this.setSelected(Job_card.getJob_cardByORMID(job_card_id));
             job_card_items = new ArrayList<>(this.getSelected().getJob_card_item());

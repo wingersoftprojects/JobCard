@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      
+    <ui:composition> 
+<center>
+            <table>
+                <tr>
+                    <td>
+                        <p:commandButton styleClass="clsButtonBigLonger" value="Print (ALT+P)" icon="ui-icon-print" type="button" accesskey="p">
+                            <p:printer target="toprint" />
+                        </p:commandButton>            
+                    </td>
+                </tr>
+            </table>
+        </center>
+        <br/>
+                        
+        <p:panel id="toprint">
+            <h:panelGrid columns="4">
+                <h:panelGrid columns="1">
+                    <img src="../resources/images/logo.png" alt="" width="150"/>
+                    <p:outputLabel style="font-weight: bold; font-style: italic;" value="#{company_settingBean.company_setting.sloghan}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <p:outputLabel value="#{company_settingBean.company_setting.building}"/>
+                    <p:outputLabel value="#{company_settingBean.company_setting.street_address}"/>
+                    <p:outputLabel value="Tel: #{company_settingBean.company_setting.telephone}"/>
+                    <p:outputLabel value="Mob: #{company_settingBean.company_setting.mobile}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <p:outputLabel value=""/>
+                </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <p:outputLabel value="Delivery Note" style="font-weight: bolder; font-size: larger; font-style: italic;"/>
+                    <p:outputLabel value="Date: #{job_cardBean.selected.due_date}">
+                        <f:convertDateTime pattern="#{company_settingBean.company_setting.dateformat}" timeZone="#{company_settingBean.company_setting.timezone}"/>
+                    </p:outputLabel>
+                </h:panelGrid>
+            </h:panelGrid>
+            <hr/>
+            <fieldset>
+                <legend>CUSTOMER DETAILS</legend>
+                <table border="0" width="100%">
+                    <tr>
+                        <td><h:outputLabel value="Ms. (Company):"/></td>
+                        <td><h:outputLabel value="#{job_cardBean.selected.customer_detail.customer_name}"/>
+                        </td>
+                        <td>
+                            <h:outputLabel value="Contact Person:"/>
+                        </td>
+                        <td>
+                            <h:outputLabel value="#{job_cardBean.selected.customer_detail.contact_person_name}">                                
+                            </h:outputLabel>
+                        </td>
+                        <td>
+                            <h:outputLabel value="Telephone:"/>
+                        </td>
+                        <td>
+                            <h:outputLabel value="#{job_cardBean.selected.customer_detail.contact_person_telephone1}/#{job_cardBean.selected.customer_detail.contact_person_telephone2}">                                
+                            </h:outputLabel>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>JOB DETAILS</legend>
+                <fieldset>
+                    <legend>Final Product Details (For delivery and Invoicing Purposes)</legend>
+                    <br/>
+                    <p:dataTable id="job_card_item_table" value="#{job_cardBean.job_card_items}" var="item">
+                        <p:column headerText="ITEM">
+                            <h:outputText value="#{item.item_type.item_type_name}"/>
+                        </p:column>
+                        <p:column headerText="DESCRIPTION">
+                            <h:outputText value="#{item.job_title}"/><br/>
+                            <h:outputText value="Size:#{item.paper_size}"/><br/>
+                            <h:outputText value="Pages:#{item.pages}"/><br/>
+                            <h:outputText value="Paper:#{item.paper_type.paper_type_category} #{item.paper_type.paper_type_sub_category}"/><br/>
+                            <h:outputText value="Color:#{item.color}"/><br/>
+                            <h:outputText value="Machine Used:#{item.machine_used}"/><br/>
+                            <h:outputText value="Laminating:#{item.lamination_type}"/><br/>
+                            <h:outputText value="Binding:#{item.binding_type}"/><br/>
+                            <h:outputText value="Cover:#{item.cover_type.cover_type_name}" rendered="#{item.cover_type!=null}"/><br/>
+                            <h:outputText value="Job Manager:#{job_cardBean.selected.job_manager.first_name} #{job_cardBean.selected.job_manager.second_name}"/>
+                        </p:column>
+                        <p:column headerText="QTY">
+                            <h:outputText value="#{item.quantity}"/>
+                        </p:column>
+                    </p:dataTable>
+                </fieldset>
+            </fieldset>
+            <fieldset>
+                <legend>DELIVERY DETAILS</legend>
+                <table border="0" width="100%">
+                    <tr>
+                        <td><h:outputLabel value="Delivered By:"/></td>
+                        <td><h:inputText value="#{job_cardBean.selected.delivered_by}" required="true" requiredMessage="Delivered By field is required"/>
+                        </td>
+                        <td>
+                            <h:outputLabel value="Telephone:"/>
+                        </td>
+                        <td>
+                            <p:inputMask id="telephone" value="#{job_cardBean.selected.delivered_by_phone_number}" mask="(999) 999-999" required="true" requiredMessage="Telephone Field is required"/>                                                            
+                        </td>
+                        <td>
+                            <h:outputLabel value="Sigmature:"/>
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" width="100%">
+                    <tr>
+                        <td><h:outputLabel value="Recieved By:"/></td>                       
+                        <td>
+                            <h:outputLabel value="Telephone:"/>
+                        </td>
+                        <td>
+                            <h:outputLabel value="Sigmature:"/>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </p:panel>
+    </ui:composition>
+</html>
+

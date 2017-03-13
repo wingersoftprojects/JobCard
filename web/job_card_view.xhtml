@@ -9,6 +9,8 @@
         <f:metadata>
             <f:event listener="#{job_cardBean.init()}" type="preRenderView" />
             <f:event listener="#{job_cardBean.initializelist()}" type="preRenderView" />
+            <f:event listener="#{job_card_statusBean.init()}" type="preRenderView" />
+            <f:event listener="#{job_card_statusBean.initializelist()}" type="preRenderView" />
         </f:metadata>
     </ui:define>
 
@@ -19,17 +21,17 @@
                              paginator="true"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15,30,50,100">
-                    <p:column headerText="Customer Name" filterMatchMode="contains" filterBy="#{item.customer_detail.customer_name}">
+                    <p:column headerText="Customer Name" filterMatchMode="contains" filterBy="#{item.customer_detail.customer_name}" style="width: 20px">
                         #{item.customer_detail.customer_name}
                     </p:column>
-                    <p:column headerText="Job Card Number">
+                    <p:column headerText="Job Card Number" style="width: 20px" >
                         #{item.job_card_id}
                     </p:column>
                     <p:column headerText="Job Date">
                         #{item.job_date}
                     </p:column> 
-                    <p:column headerText="Job Manager" filterMatchMode="contains" filterBy="#{job_cardBean.selected.job_manager.first_name}">
-                        #{job_cardBean.selected.job_manager.first_name} #{job_cardBean.selected.job_manager.second_name}
+                    <p:column headerText="Job Manager" filterMatchMode="contains" filterBy="#{item.job_manager.first_name}" style="width: 20px">
+                        #{item.job_manager.first_name} #{item.job_manager.second_name}
                     </p:column> 
                     <p:column  filterBy="#{item.status}" headerText="Status" filterMatchMode="in">
                         <f:facet name="filter">
@@ -58,13 +60,15 @@
                         </p:commandLink>
 
                         <p:commandLink value=" | Cancel" action="#{job_cardBean.change_job_card_status(item, 'Cancelled')}" process="@this" update="@form" title="Cancel" rendered="#{item.status=='Captured'}">
-                            <p:confirm header="Confirmation" message="Are you sure you want to cancel the job?" icon="ui-icon-alert" />
+                            <p:confirm header="Confirmation" message="Are you sure you want to cancel the job?" icon="ui-icon-alert"/>                            
                         </p:commandLink>
-
-                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">                                                                                             
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/> 
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                         </p:confirmDialog>
+                    </p:column>
+                    <p:column headerText="Comments">
+                       #{job_card_status.comment} 
                     </p:column>
                 </p:dataTable>
 
