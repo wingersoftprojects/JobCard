@@ -53,6 +53,29 @@
                                     <f:setPropertyActionListener target="#{customer_detailBean.is_dialog}" value="#{true}"/>
                                 </p:commandButton>
                             </td>
+                            <td><h:outputLabel value="Job Manager"/></td>
+                            <td><p:autoComplete id="user_detail" value="#{job_cardBean.selected.job_manager}"
+                                                completeMethod="#{job_cardBean.completeUser_detail}"
+                                                var="user_detail" itemLabel="#{user_detail.first_name} #{user_detail.second_name}" itemValue="#{user_detail}" 
+                                                converter="user_detailConverter" forceSelection="true" maxResults="8" required="true" requiredMessage="Job Manager Field is required">
+                                    <p:column headerText="First Name" style="text-align: left">
+                                        <h:outputText value="#{user_detail.first_name}">
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Second Name" style="text-align: left">
+                                        <h:outputText value="#{user_detail.second_name}">
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Email Address" style="text-align: left">
+                                        <h:outputText value="#{user_detail.email}">
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:ajax event="itemSelect" process="@this"></p:ajax>
+                                </p:autoComplete>
+                            </td>
+                        </tr>
+                        <tr>
+
                             <td>
                                 <h:outputLabel value="Job Card Date"/>
                             </td>
@@ -61,8 +84,6 @@
                                     <p:ajax event="dateSelect" process="@this"/>
                                 </p:calendar>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <h:outputLabel value="Due Date"/>
                             </td>
@@ -88,10 +109,15 @@
                                 <h:outputLabel value="Job title"/>
                             </td>
                             <td>
-                                <h:inputTextarea id="job_title" value="#{job_cardBean.job_card_item.job_title}" required="true" requiredMessage="Job Title Field is required!" cols="40" rows="4">
+                                <h:inputTextarea id="job_title" value="#{job_cardBean.job_card_item.job_title}" required="true" requiredMessage="Job Title Field is required!" cols="70" rows="4">
                                     <f:ajax execute="@this"/>
                                 </h:inputTextarea>
                             </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table>
+                        <tr>
                             <td>
                                 <h:outputLabel value="Paper type"/>
                             </td>
@@ -124,6 +150,12 @@
                                     <f:ajax execute="@this"/>
                                 </h:selectOneMenu>
                             </td>
+                            <td>
+                                <h:outputLabel value="Pages" for="pages"/>
+                            </td>
+                            <td>
+                                <p:autoComplete id="pages" dropdown="true" value="#{job_cardBean.job_card_item.pages}" completeMethod="#{job_cardBean.completeText}" size="10" required="true" requiredMessage="Number of Pages field is required"></p:autoComplete>
+                            </td>
                         </tr>
                     </table>
                     <br/>
@@ -133,32 +165,6 @@
                                 <h:outputLabel value="Color:"/>
                             </td>
                             <td>
-                            </td>
-                            <td>
-                            <h:outputLabel value="Pages" for="pages"/>
-                            </td>
-                            <td>
-                                <p:autoComplete id="pages" dropdown="true" value="#{job_cardBean.job_card_item.pages}" completeMethod="#{job_cardBean.completeText}" size="10" required="true" requiredMessage="Number of Pages field is required"></p:autoComplete>
-                            </td>
-                            <td><h:outputLabel value="Job Manager"/></td>
-                            <td><p:autoComplete id="user_detail" value="#{job_cardBean.selected.job_manager}"
-                                                completeMethod="#{job_cardBean.completeUser_detail}"
-                                                var="user_detail" itemLabel="#{user_detail.first_name} #{user_detail.second_name}" itemValue="#{user_detail}" 
-                                                converter="user_detailConverter" forceSelection="true" maxResults="8" required="true" requiredMessage="Job Manager Field is required">
-                                    <p:column headerText="First Name" style="text-align: left">
-                                        <h:outputText value="#{user_detail.first_name}">
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:column headerText="Second Name" style="text-align: left">
-                                        <h:outputText value="#{user_detail.second_name}">
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:column headerText="Email Address" style="text-align: left">
-                                        <h:outputText value="#{user_detail.email}">
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:ajax event="itemSelect" process="@this"></p:ajax>
-                                </p:autoComplete>
                             </td>
                         </tr>
                         <tr>
@@ -302,7 +308,7 @@
                                 <h:outputText value="Laminating:#{item.lamination_type}"/><br/>
                                 <h:outputText value="Binding:#{item.binding_type}"/><br/>
                                 <h:outputText value="Cover:#{item.cover_type.cover_type_name}" rendered="#{item.cover_type!=null}"/><br/>
-                                <h:outputText value="Job Manager:#{job_cardBean.selected.job_manager.first_name} #{job_cardBean.selected.job_manager.second_name}"/>
+                                <h:outputText value="Pages:#{item.pages}"/>
                             </p:column>
                             <p:column headerText="QTY">
                                 <h:outputText value="#{item.quantity}"/>

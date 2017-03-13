@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition>
+        <p:dialog id="Dlg_change_job_card_status" widgetVar="Dialog_Change_Job_Card_Status" modal="true" resizable="false"  appendTo="@(body)" header="Job Card Status">
+            <h:form id="form_change_job_card_status">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Customer"/>
+                    <p:outputLabel value="#{job_cardBean.prev_job_card.customer_detail.customer_name}"/>
+                    <p:outputLabel value="Status"/>
+                    <p:outputLabel value="#{job_cardBean.status}"/>
+                    <p:outputLabel value="Delivered By" rendered="#{job_cardBean.status=='Delivered'}"/>
+                    <h:inputText value="#{job_cardBean.prev_job_card.delivered_by}" rendered="#{job_cardBean.status=='Delivered'}"/>
+                    <p:outputLabel value="Delivered By Telephone" rendered="#{job_cardBean.status=='Delivered'}"/>
+                    <p:inputMask value="#{job_cardBean.prev_job_card.delivered_by_phone_number}" rendered="#{job_cardBean.status=='Delivered'}" mask="(999) 999-9999"/>
+                    <p:outputLabel value="Comment"/>
+                    <h:inputTextarea cols="80" rows="5" value="#{job_cardBean.comment}"/>
+                    <p:commandButton value="Process" update="@form,:form_job_card_view" action="#{job_cardBean.change_job_card_status()}"/>
+                    <p:commandButton value="Cancel" process="@this" action="#{job_cardBean.cancel_status()}"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>
+

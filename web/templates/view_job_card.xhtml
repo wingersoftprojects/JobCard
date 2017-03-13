@@ -102,7 +102,7 @@
                             <h:outputText value="Laminating:#{item.lamination_type}"/><br/>
                             <h:outputText value="Binding:#{item.binding_type}"/><br/>
                             <h:outputText value="Cover:#{item.cover_type.cover_type_name}" rendered="#{item.cover_type!=null}"/><br/>
-                            <h:outputText value="Job Manager:#{job_cardBean.selected.job_manager.first_name} #{job_cardBean.selected.job_manager.second_name}"/>
+                            <h:outputText value="Pages:#{item.pages}"/>
                         </p:column>
                         <p:column headerText="QTY">
                             <h:outputText value="#{item.quantity}"/>
