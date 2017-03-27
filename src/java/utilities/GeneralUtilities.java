@@ -53,7 +53,7 @@ public class GeneralUtilities implements Serializable {
     }
 
     public static SimpleDateFormat simpleDateFormatDate() {
-        return new SimpleDateFormat("yyyy-MM-ddd");
+        return new SimpleDateFormat("yyyy-MM-dd");
     }
 
     public static Integer getCurrentYear() {
