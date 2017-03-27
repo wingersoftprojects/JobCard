@@ -8,48 +8,47 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html">
     <ui:define name="content">
         <f:view>
-            <h:form rendered="#{loginBean.IsAllowed(0, 'View')}">
+            <h:form>
                 <p:growl/>
                 <p:fieldset legend="Job Manager Report">
-                    <p:panelGrid columns="4" id="header_panel_grid">
-                        <p:outputLabel value="Select Date:" />
-                                <p:calendar styleClass="clsInput" id="job_date" pattern="#{company_settingBean.company_setting.dateformat}" navigator="true" showButtonPanel="true" readonlyInput="true" value="#{job_cardBean.selected.job_date}">
-                                    <p:ajax event="dateSelect" process="@this"/>
-                                </p:calendar> 
-                        <p:commandLink value="Today's Date"/>
-                        <h:commandButton value="SHOW REPORT"/>
+                    <p:panelGrid columns="5" id="header_panel_grid">
+                        <p:outputLabel value="Select Start Date:" />
+                        <p:calendar styleClass="clsInput" id="start_date" pattern="#{company_settingBean.company_setting.dateformat}" navigator="true" showButtonPanel="true" readonlyInput="true" value="#{reportBean.start_date}" required="true" requiredMessage="Please Select Start Date">
+                            <p:ajax event="dateSelect" process="@this"/>
+                        </p:calendar> 
+                        <p:outputLabel value="Select End Date:" />
+                        <p:calendar styleClass="clsInput" id="end_date" pattern="#{company_settingBean.company_setting.dateformat}" navigator="true" showButtonPanel="true" readonlyInput="true" value="#{reportBean.end_date}" required="true" requiredMessage="Please Select End Date">
+                            <p:ajax event="dateSelect" process="@this"/>
+                        </p:calendar> 
+                        <p:commandButton value="SHOW REPORT" action="#{reportBean.query_job_card()}" update="@form"/>
                     </p:panelGrid>
-                    <p:dataTable var="rf">
-                        <p:columnGroup type="header">
-                            <p:row>
-                                <p:column headerText="Job Manager Name" />
-                                <p:column headerText="Captured"/>
-                                <p:column headerText="Cancelled"/>
-                                <p:column headerText="Completed"/>
-                                <p:column headerText="Delivered"/>
-                            </p:row>
-                        </p:columnGroup>
-                        <p:subTable var="fg">
-                            <f:facet name="header">
-                                <h:outputText value="#{item.job_date}" />
+                    <p:dataTable var="item" value="#{reportBean.job_card_list}" widgetVar="widget_job_card_table">
+                        <p:column headerText="Job Manager Name">
+                            #{item.job_manager.first_name} #{item.job_manager.second_name}
+                        </p:column>
+                        <p:column headerText="Job Date">
+                            #{item.job_date}
+                        </p:column>
+                        <p:column  filterBy="#{item.status}" headerText="Status" filterMatchMode="in">
+                            <f:facet name="filter">
+                                <p:selectCheckboxMenu label="Status" onchange="PF('widget_job_card_table').filter()" panelStyle="width:125px" scrollHeight="150">
+                                    <f:selectItem itemValue="Captured" itemLabel="Captured" />
+                                    <f:selectItem itemValue="Ready" itemLabel="Ready" />
+                                    <f:selectItem itemValue="Delivered" itemLabel="Delivered" />
+                                    <f:selectItem itemValue="Cancelled" itemLabel="Cancelled" />
+                                </p:selectCheckboxMenu>
                             </f:facet>
-                            <p:column>
-                                <h:outputLabel value="Captured" />
-                            </p:column>
-                            <p:column>
-                                <h:outputLabel value="Cancelled" />
-                            </p:column>
-                            <p:column>
-                                <h:outputLabel value="Ready" />
-                            </p:column>
-                            <p:column>
-                                <h:outputLabel value="Delivered" />
-                            </p:column>
-                        </p:subTable>
+                            #{item.status}
+                        </p:column> 
+                        <p:column headerText="">
+                        <p:commandLink id="view_job_card" value="View" process="@this" actionListener="#{job_cardBean.view_job_card(item.job_card_id)}" update=":form_view_job_card" oncomplete="PF('Dialog_View_Job_Card').show();">
+                        </p:commandLink>
+                        </p:column>
                     </p:dataTable>
                 </p:fieldset>
             </h:form>
         </f:view>
+        <ui:include src="dialog_view_job_card.xhtml"/>
     </ui:define>                
 </ui:composition>
 

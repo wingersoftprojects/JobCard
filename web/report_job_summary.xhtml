@@ -8,46 +8,31 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html">
     <ui:define name="content">
         <f:view>
-            <h:form rendered="#{loginBean.IsAllowed(0, 'View')}">
+            <h:form>
                 <p:growl/>
-                <p:fieldset legend="Job Summary Report">
-                    <p:panelGrid columns="4" id="header_panel_grid">
-                        <p:outputLabel value="Select Date:" />
-                                <p:calendar styleClass="clsInput" id="job_date" pattern="#{company_settingBean.company_setting.dateformat}" navigator="true" showButtonPanel="true" readonlyInput="true" value="#{job_cardBean.selected.job_date}">
-                                    <p:ajax event="dateSelect" process="@this"/>
-                                </p:calendar>
-                        <p:commandLink value="Today's Date"/>
-                        <h:commandButton value="SHOW REPORT"/>
+                <p:fieldset legend="All Jobs Summary Report">
+                    <p:panelGrid columns="5" id="header_panel_grid">
+                        <p:outputLabel value="Select Start Date:" />
+                        <p:calendar styleClass="clsInput" id="start_date" pattern="#{company_settingBean.company_setting.dateformat}" navigator="true" showButtonPanel="true" readonlyInput="true" value="#{reportBean.start_date}" required="true" requiredMessage="Please Select Start Date">
+                            <p:ajax event="dateSelect" process="@this"/>
+                        </p:calendar> 
+                        <p:outputLabel value="Select End Date:"/>
+                        <p:calendar styleClass="clsInput" id="end_date" pattern="#{company_settingBean.company_setting.dateformat}" navigator="true" showButtonPanel="true" readonlyInput="true" value="#{reportBean.end_date}" required="true" requiredMessage="Please Select End Date" >
+                            <p:ajax event="dateSelect" process="@this"/>
+                        </p:calendar> 
+                        <p:commandButton value="SHOW REPORT" action="#{reportBean.query_status_total()}" update="@form"/>
                     </p:panelGrid>
-                    <p:dataTable var="rf" >
-                        <p:columnGroup type="header">
-                            <p:row>
-                                <p:column headerText="Job Card Status" />
-                                <p:column headerText="Number" />
-                            </p:row>
-                        </p:columnGroup>
-                        <p:subTable var="fg">
-                            <f:facet name="header">
-                                <h:outputText value="#{item.job_date}" />
-                            </f:facet>
-                            <p:column>
-                                <h:outputText value="Captured" />
-                            </p:column>
-                            <p:column>
-                                <h:outputText value="Cancelled" />
-                            </p:column>
-                            <p:column>
-                                <h:outputText value="Ready" />
-                            </p:column>
-                            <p:column>
-                                <h:outputText value="Delivered" />
-                            </p:column>
-                        </p:subTable>
-                                                                            
-                </p:dataTable>
-                </p:fieldset>
-            </h:form>
-        </f:view>
-    </ui:define>                
+                    <p:dataTable var="item" value="#{reportBean.job_status_count}">                       
+                        <p:column headerText="Job Card Status">
+                           #{item[0]}
+                        </p:column>    
+                        <p:column headerText="Number of Jobs" >
+                            #{item[1]}
+                        </p:column> 
+                    </p:dataTable>
+            </p:fieldset>
+        </h:form>
+    </f:view>
+</ui:define>                
 </ui:composition>
 

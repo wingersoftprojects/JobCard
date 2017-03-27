@@ -263,7 +263,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
             add();
             loginBean.saveMessage();
             try {
-                new SendMail().send_mail("Please note that you have a new job assigned to you. Login to the systemn to view the job ", aUserDetailId.getEmail(), aUserDetailId.getFirst_name() + aUserDetailId.getSecond_name());
+                new SendMail().send_mail("Please note that you have a new job assigned to you. Login to view the job details. Thank You ", prev_job_card.getJob_manager().getEmail(), prev_job_card.getJob_manager().getFirst_name() +" "+ prev_job_card.getJob_manager().getSecond_name());              
             } catch (Exception ex) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", ex.getMessage());
                 RequestContext.getCurrentInstance().showMessageInDialog(message);
