@@ -29,6 +29,7 @@ import org.orm.PersistentTransaction;
 import org.primefaces.context.RequestContext;
 import utilities.GeneralUtilities;
 import utilities.SendMail;
+import utilities.Sender;
 
 /**
  *
@@ -263,7 +264,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
             add();
             loginBean.saveMessage();
             try {
-                new SendMail().send_mail("Please note that you have a new job assigned to you. Login to view the job details. Thank You ", prev_job_card.getJob_manager().getEmail(), prev_job_card.getJob_manager().getFirst_name() +" "+ prev_job_card.getJob_manager().getSecond_name());              
+                new SendMail().send_mail("Please note that you have a new job assigned to you. Login to view the job details. Thank You ", prev_job_card.getJob_manager().getEmail(), prev_job_card.getJob_manager().getFirst_name() + " " + prev_job_card.getJob_manager().getSecond_name());
             } catch (Exception ex) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", ex.getMessage());
                 RequestContext.getCurrentInstance().showMessageInDialog(message);
@@ -312,11 +313,15 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
                 try {
                     String contact = "+256" + prev_job_card.getCustomer_detail().getContact_person_telephone1().substring(1).replace("(", "").replace(")", "").replace(" ", "").replace("-", "");
                     if ("Ready".equals(status)) {
+                        Sender s = new Sender("121.241.242.114", 8080, "wing-ajuna", "ajbrne", "Please note that the printing job at SHARK Media is ready for delivery", "1", "0", "256782760115", "SHARK-MEDIA");
+                        s.submitMessage();
                         //new GeneralUtilities().send_sms(contact, "Please note that the printing job at SHARK Media is ready for delivery");
                         new SendMail().send_mail("Please note that the printing job at SHARK Media is ready for delivery", prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
                     }
                     if ("Delivered".equals(status)) {
-                        //new GeneralUtilities().send_sms(contact, "Please note that the printing job at SHARK Media has been for delivered");
+                        //new GeneralUtilities().send_sms(contact, "Please note that the printing job at SHARK Media has been delivered");
+                        Sender s = new Sender("121.241.242.114", 8080, "wing-ajuna", "ajbrne", "Please note that the printing job at SHARK Media has been delivered", "1", "0", "256782760115", "SHARK-MEDIA");
+                        s.submitMessage();
                         new SendMail().send_mail("Please note that the printing job at SHARK Media has been delivered<br/> By: " + prev_job_card.getDelivered_by() + " <br/> Telephone: " + prev_job_card.getDelivered_by_phone_number(), prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
                     }
                 } catch (Exception ex) {
