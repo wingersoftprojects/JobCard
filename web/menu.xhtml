@@ -12,6 +12,7 @@
             <h:form id="form_menu">
                 <p:growl id="messages"/>
                 <p:menubar>
+                    <p:menuitem value="Home" action="home?faces-redirect=true" icon="ui-icon-home"/>
                     <p:submenu label="Job Card" icon="ui-icon-document">
                         <p:menuitem value="Add Job Card"  action="job_card?faces-redirect=true" icon="ui-icon-plusthick" actionListener="#{job_cardBean.add()}"/>
                         <p:menuitem value="View Job Cards"  action="job_card_view?faces-redirect=true" icon="ui-icon-folder-open"/>

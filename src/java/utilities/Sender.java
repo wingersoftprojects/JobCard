@@ -127,7 +127,7 @@ public class Sender {
     public static void main(String[] args) {
         try {
 // Below exmaple is for sending Plain text
-            Sender s = new Sender("121.241.242.114", 8080, "wing-ajuna", "ajbrne", "Please note that the printing job at SHARK Media has been delivered", "1", "0", "256782760115", "SHARK-MEDIA");
+            Sender s = new Sender("121.241.242.114", 8080, "wing-sharkmedia", "sharkmed", "Please note that the printing job at SHARK Media has been delivered", "1", "0", "256782760115", "SHARK-MEDIA");
             s.submitMessage();
 // Below exmaple is for sending unicode
 //            Sender s1 = new Sender("121.241.242.114", 8080, "wing-ajuna",

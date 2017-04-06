@@ -21,9 +21,9 @@
                         <p:outputLabel value="Supplier Name:" for="supplier_name"/>
                         <p:inputText id="supplier_name" value="#{supplier_detailBean.selected.supplier_name}" required="true" requiredMessage="Supplier Name is required"/>
                         <p:outputLabel value="Tel 1:" for="telephone1"/>
-                        <p:inputMask id="telephone1" value="#{supplier_detailBean.selected.telephone1}" mask="(999) 999-9999" required="true" requiredMessage="Tel 1 is required"/>
+                        <p:inputMask id="telephone1" value="#{supplier_detailBean.selected.telephone1}" mask="(999) 999-999" required="true" requiredMessage="Tel 1 is required" placeholder="e.g(706) 267-475"/>
                         <p:outputLabel value="Tel 2:" for="telephone2"/>
-                        <p:inputMask id="telephone2" value="#{supplier_detailBean.selected.telephone2}" mask="(999) 999-9999" required="false" requiredMessage=""/>
+                        <p:inputMask id="telephone2" value="#{supplier_detailBean.selected.telephone2}" mask="(999) 999-999" required="false" requiredMessage="" placeholder="e.g(706) 267-475"/>
                         <p:outputLabel value="Email:" for="email"/>
                         <p:inputText id="email" value="#{supplier_detailBean.selected.email}" validatorMessage="Invalid email format" required="false">
                             <f:validateRegex

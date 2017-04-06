@@ -22,16 +22,16 @@
                 <f:view>
                     <h:form>
                         <p:growl id="messages"/>
-                        <p:panel>
+                        <p:panel style="background-color: #DCDCDC">
                             <center>
                                 <p:graphicImage value="#{company_settingBean.image}" width="200" style=" margin: 0 auto;" cache="false"/>
                                 <h:panelGrid style="border-style: none">
                                     <h:outputLabel value="JOB CARD LOGIN" style="font-size :16px; font-weight :bold" />                    
                                 </h:panelGrid>
                                 <p:panelGrid columns="2">
-                                    <p:outputLabel value="Username:*" for="username"/>
+                                    <p:outputLabel value="Username:" for="username" style="font-weight: bolder;"/>
                                     <p:inputText id="username" value="#{loginBean.username}" title="Username" required="true" requiredMessage="The Username is required"/>
-                                    <p:outputLabel value="Password:*" for="password"/>
+                                    <p:outputLabel value="Password:" for="password" style="font-weight: bolder;"/>
                                     <p:password id="password" value="#{loginBean.password}" title="Password" required="true" requiredMessage="The Password is required"/>
                                 </p:panelGrid>                   
                                 <p:commandButton value="Login" icon="ui-icon-key" action="#{loginBean.login()}" update="@form"/> 

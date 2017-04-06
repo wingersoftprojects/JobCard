@@ -207,7 +207,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", "Please enter atleat one Job Card Item!");
             RequestContext.getCurrentInstance().showMessageInDialog(message);
         }
-        try {
+          try {
             PersistentTransaction transaction = JobCardPersistentManager.instance().getSession().beginTransaction();
             if (this.getFormstate().equals("add")) {
                 this.getSelected().setAdd_by(aUserDetailId);
@@ -313,14 +313,14 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
                 try {
                     String contact = "+256" + prev_job_card.getCustomer_detail().getContact_person_telephone1().substring(1).replace("(", "").replace(")", "").replace(" ", "").replace("-", "");
                     if ("Ready".equals(status)) {
-                        Sender s = new Sender("121.241.242.114", 8080, "wing-ajuna", "ajbrne", "Please note that the printing job at SHARK Media is ready for delivery", "1", "0", "256782760115", "SHARK-MEDIA");
+                        Sender s = new Sender("121.241.242.114", 8080, "wing-sharkmedia", "sharkmed", "Please note that the printing job at SHARK Media is ready for delivery", "1", "0", "256782760115", "SHARK-MEDIA");
                         s.submitMessage();
                         //new GeneralUtilities().send_sms(contact, "Please note that the printing job at SHARK Media is ready for delivery");
                         new SendMail().send_mail("Please note that the printing job at SHARK Media is ready for delivery", prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
                     }
                     if ("Delivered".equals(status)) {
                         //new GeneralUtilities().send_sms(contact, "Please note that the printing job at SHARK Media has been delivered");
-                        Sender s = new Sender("121.241.242.114", 8080, "wing-ajuna", "ajbrne", "Please note that the printing job at SHARK Media has been delivered", "1", "0", "256782760115", "SHARK-MEDIA");
+                        Sender s = new Sender("121.241.242.114", 8080, "wing-sharkmedia", "sharkmed", "Please note that the printing job at SHARK Media has been delivered", "1", "0", "256782760115", "SHARK-MEDIA");
                         s.submitMessage();
                         new SendMail().send_mail("Please note that the printing job at SHARK Media has been delivered<br/> By: " + prev_job_card.getDelivered_by() + " <br/> Telephone: " + prev_job_card.getDelivered_by_phone_number(), prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
                     }
@@ -328,7 +328,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", ex.getMessage());
                     RequestContext.getCurrentInstance().showMessageInDialog(message);
                 }
-                RequestContext.getCurrentInstance().execute("PF('Dialog_Change_Job_Card_Status').hide()");
+                RequestContext.getCurrentInstance().execute("PF('Dialog_Change_Job_Card_Status').hide()");               
                 RequestContext.getCurrentInstance().update(":form_job_card_view");
                 clear_comment();
             } catch (PersistentException ex) {
@@ -369,7 +369,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
             if (x == 0) {
                 comments += j1.getComment();
             } else {
-                comments += "<br/>" + j1.getComment();
+                comments += "" + j1.getComment();
             }
             x++;
         }

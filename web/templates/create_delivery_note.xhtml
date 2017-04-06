@@ -47,18 +47,18 @@
                 <legend>CUSTOMER DETAILS</legend>
                 <table border="0" width="100%">
                     <tr>
-                        <td><h:outputLabel value="Ms. (Company):"/></td>
+                        <td><h:outputLabel value="Ms. (Company):" style="font-weight: bolder;"/></td>
                         <td><h:outputLabel value="#{job_cardBean.selected.customer_detail.customer_name}"/>
                         </td>
                         <td>
-                            <h:outputLabel value="Contact Person:"/>
+                            <h:outputLabel value="Contact Person:" style="font-weight: bolder;"/>
                         </td>
                         <td>
                             <h:outputLabel value="#{job_cardBean.selected.customer_detail.contact_person_name}">                                
                             </h:outputLabel>
                         </td>
                         <td>
-                            <h:outputLabel value="Telephone:"/>
+                            <h:outputLabel value="Telephone:" style="font-weight: bolder;"/>
                         </td>
                         <td>
                             <h:outputLabel value="#{job_cardBean.selected.customer_detail.contact_person_telephone1}/#{job_cardBean.selected.customer_detail.contact_person_telephone2}">                                
@@ -69,8 +69,7 @@
             </fieldset>
             <fieldset>
                 <legend>JOB DETAILS</legend>
-                <fieldset>
-                    <legend>Final Product Details (For delivery and Invoicing Purposes)</legend>
+                <fieldset>                    
                     <br/>
                     <p:dataTable id="job_card_item_table" value="#{job_cardBean.job_card_items}" var="item">
                         <p:column headerText="ITEM">
@@ -86,7 +85,6 @@
                             <h:outputText value="Laminating:#{item.lamination_type}"/><br/>
                             <h:outputText value="Binding:#{item.binding_type}"/><br/>
                             <h:outputText value="Cover:#{item.cover_type.cover_type_name}" rendered="#{item.cover_type!=null}"/><br/>
-                            <h:outputText value="Job Manager:#{job_cardBean.selected.job_manager.first_name} #{job_cardBean.selected.job_manager.second_name}"/>
                         </p:column>
                         <p:column headerText="QTY">
                             <h:outputText value="#{item.quantity}"/>
@@ -98,29 +96,15 @@
                 <legend>DELIVERY DETAILS</legend>
                 <table border="0" width="100%">
                     <tr>
-                        <td><h:outputLabel value="Delivered By:"/></td>
-                        <td><h:inputText value="#{job_cardBean.selected.delivered_by}" required="true" requiredMessage="Delivered By field is required"/>
-                        </td>
-                        <td>
-                            <h:outputLabel value="Telephone:"/>
-                        </td>
-                        <td>
-                            <p:inputMask id="telephone" value="#{job_cardBean.selected.delivered_by_phone_number}" mask="(999) 999-999" required="true" requiredMessage="Telephone Field is required"/>                                                            
-                        </td>
-                        <td>
-                            <h:outputLabel value="Sigmature:"/>
-                        </td>
+                        <td><h:outputLabel value="Delivered By:" style="font-weight: bolder;"/></td>
+                        <td><h:outputText value="#{job_cardBean.prev_job_card.delivered_by}"/></td>
+                        <td><h:outputLabel value="Signature:" style="font-weight: bolder;"/></td>
                     </tr>
                 </table>
                 <table border="0" width="100%">
                     <tr>
-                        <td><h:outputLabel value="Recieved By:"/></td>                       
-                        <td>
-                            <h:outputLabel value="Telephone:"/>
-                        </td>
-                        <td>
-                            <h:outputLabel value="Sigmature:"/>
-                        </td>
+                        <td><h:outputLabel value="Recieved By: .........................." style="font-weight: bolder;"/></td>                       
+                        <td><h:outputLabel value="Signature: ..................." style="font-weight: bolder;"/></td>
                     </tr>
                 </table>
             </fieldset>
