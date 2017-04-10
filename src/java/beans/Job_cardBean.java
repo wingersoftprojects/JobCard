@@ -311,7 +311,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
                 add_job_card_status();
                 transaction.commit();
                 try {
-                    String contact = "+256" + prev_job_card.getCustomer_detail().getContact_person_telephone1().substring(1).replace("(", "").replace(")", "").replace(" ", "").replace("-", "");
+                    //String contact = "+256" + prev_job_card.getCustomer_detail().getContact_person_telephone1().substring(1).replace("(", "").replace(")", "").replace(" ", "").replace("-", "");
                     if ("Ready".equals(status)) {
                         Sender s = new Sender("121.241.242.114", 8080, "wing-sharkmedia", "sharkmed", "Please note that the printing job at SHARK Media is ready for delivery", "1", "0", "256782760115", "SHARK-MEDIA");
                         s.submitMessage();
