@@ -5,9 +5,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-      
+
     <ui:composition> 
-<center>
+        <center>
             <table>
                 <tr>
                     <td>
@@ -19,7 +19,7 @@
             </table>
         </center>
         <br/>
-                        
+
         <p:panel id="toprint">
             <h:panelGrid columns="4">
                 <h:panelGrid columns="1">
@@ -37,7 +37,7 @@
                 </h:panelGrid>
                 <h:panelGrid columns="1">
                     <p:outputLabel value="Delivery Note" style="font-weight: bolder; font-size: larger; font-style: italic;"/>
-                    <p:outputLabel value="Date: #{job_cardBean.selected.due_date}">
+                    <p:outputLabel value="Date: #{job_cardBean.prev_job_card.due_date}">
                         <f:convertDateTime pattern="#{company_settingBean.company_setting.dateformat}" timeZone="#{company_settingBean.company_setting.timezone}"/>
                     </p:outputLabel>
                 </h:panelGrid>
@@ -48,20 +48,20 @@
                 <table border="0" width="100%">
                     <tr>
                         <td><h:outputLabel value="Ms. (Company):" style="font-weight: bolder;"/></td>
-                        <td><h:outputLabel value="#{job_cardBean.selected.customer_detail.customer_name}"/>
+                        <td><h:outputLabel value="#{job_cardBean.prev_job_card.customer_detail.customer_name}"/>
                         </td>
                         <td>
                             <h:outputLabel value="Contact Person:" style="font-weight: bolder;"/>
                         </td>
                         <td>
-                            <h:outputLabel value="#{job_cardBean.selected.customer_detail.contact_person_name}">                                
+                            <h:outputLabel value="#{job_cardBean.prev_job_card.customer_detail.contact_person_name}">                                
                             </h:outputLabel>
                         </td>
                         <td>
                             <h:outputLabel value="Telephone:" style="font-weight: bolder;"/>
                         </td>
                         <td>
-                            <h:outputLabel value="#{job_cardBean.selected.customer_detail.contact_person_telephone1}/#{job_cardBean.selected.customer_detail.contact_person_telephone2}">                                
+                            <h:outputLabel value="#{job_cardBean.prev_job_card.customer_detail.contact_person_telephone1}/#{job_cardBean.prev_job_card.customer_detail.contact_person_telephone2}">                                
                             </h:outputLabel>
                         </td>
                     </tr>
@@ -96,8 +96,9 @@
                 <legend>DELIVERY DETAILS</legend>
                 <table border="0" width="100%">
                     <tr>
-                        <td><h:outputLabel value="Delivered By:" style="font-weight: bolder;"/></td>
-                        <td><h:outputText value="#{job_cardBean.prev_job_card.delivered_by}"/></td>
+                        <td><h:outputLabel value="Delivered By:" style="font-weight: bolder;"/>
+                            <h:outputText value="#{job_cardBean.prev_job_card.delivered_by}"/>
+                        </td>
                         <td><h:outputLabel value="Signature:" style="font-weight: bolder;"/></td>
                     </tr>
                 </table>

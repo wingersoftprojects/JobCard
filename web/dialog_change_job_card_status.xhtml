@@ -19,7 +19,8 @@
                     <p:inputMask value="#{job_cardBean.prev_job_card.delivered_by_phone_number}" rendered="#{job_cardBean.status=='Delivered'}" mask="(999) 999-9999"/>
                     <p:outputLabel value="Comment"/>
                     <h:inputTextarea cols="80" rows="5" value="#{job_cardBean.comment}"/>
-                    <p:commandButton value="Process" update="@form,:form_job_card_view" action="#{job_cardBean.change_job_card_status()}"/>
+                    <p:commandButton value="Process" update="@form,:form_job_card_view" action="#{job_cardBean.change_job_card_status()}" rendered="#{job_cardBean.status=='Ready'}"/>
+                    <p:commandButton value="Process" update="@form,:form_job_card_view,:form_create_delivery_note" action="#{job_cardBean.change_job_card_status()}" rendered="#{job_cardBean.status=='Delivered'}" onsuccess="PF('Dialog_Create_Delivery_Note').show();"/>
                     <p:commandButton value="Cancel" process="@this" action="#{job_cardBean.cancel_status()}"/>
                 </h:panelGrid>
             </h:form>

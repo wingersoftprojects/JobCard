@@ -162,7 +162,7 @@
                                 <h:outputLabel value="Pages" for="pages" style="font-weight: bolder"/>
                             </td>
                             <td>
-                                <p:autoComplete id="pages" dropdown="true" value="#{job_cardBean.job_card_item.pages}" completeMethod="#{job_cardBean.completeText}" size="10" required="true" requiredMessage="Number of Pages field is required">
+                                <p:autoComplete id="pages" dropdown="true" value="#{job_cardBean.job_card_item.pages}" completeMethod="#{job_cardBean.completeText}" size="10" required="false" requiredMessage="Number of Pages field is required">
                                     <p:ajax event="itemSelect" process="@this"></p:ajax>
                                 </p:autoComplete>
                             </td>
@@ -209,7 +209,7 @@
                             </td>
                             <td>
                                 <h:selectOneMenu id="cover_type" value="#{job_cardBean.job_card_item.cover_type}" converter="cover_typeConverter">
-                                    <f:selectItem itemLabel="" />
+                                    <f:selectItem itemLabel="Please Select" />
                                     <f:selectItems value="#{cover_typeBean.tsActive}" var="item" itemLabel="#{item.cover_type_name}" itemValue="#{item}"/>
                                     <f:ajax execute="@this"/>
                                 </h:selectOneMenu>
@@ -245,6 +245,8 @@
                                         <p:ajax process="@this"/>
                                     </p:selectOneRadio>
                                 </td>
+                            </tr>
+                            <tr>
                                 <td>  
                                     <h:outputLabel value="Type of binding:" style="font-weight: bolder"/>
                                 </td>
@@ -252,7 +254,8 @@
                                     <p:selectOneRadio id="binding_type" value="#{job_cardBean.job_card_item.binding_type}" required="true" requiredMessage="Binding type method">
                                         <f:selectItem itemLabel="Saddle Stitch" itemValue="Saddle Stitch"/>
                                         <f:selectItem itemLabel="Perfect Binding" itemValue="Perfect Binding"/>
-                                        <f:selectItem itemLabel="Spiral" itemValue="Spiral"/>                                      
+                                        <f:selectItem itemLabel="Spiral" itemValue="Spiral"/>
+                                        <f:selectItem itemLabel="None" itemValue="None" />
                                         <p:ajax process="@this"/>
                                     </p:selectOneRadio>
                                 </td>
@@ -354,7 +357,11 @@
                     <table>
                         <tr>
                             <td>
-                                <p:commandButton value="Save Job Card" process="@this,customer_detail,due_date,job_date" action="#{job_cardBean.save(loginBean.user_detail)}" update="@form" icon="ui-icon-disk"/>            
+                                <p:commandButton value="Save Job Card" process="@this,customer_detail,due_date,job_date" action="#{job_cardBean.save(loginBean.user_detail)}" update="@form" icon="ui-icon-disk" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()">                                                                                                          
+                                    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                        <p:graphicImage name="/images/ajax-loader.gif"/>
+                                    </p:dialog>
+                                </p:commandButton>
                             </td>
                         </tr>
                     </table>

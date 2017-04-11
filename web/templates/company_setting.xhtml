@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./layout.xhtml">
+            <ui:define name="metadata">
+                <f:metadata>
+
+                </f:metadata>
+            </ui:define>
+            <ui:define name="content">
+                <h:form rendered="#{loginBean.IsAllowed('COMPANY DETAILS', 'View')}">
+                    <p:growl id="messages" />
+                    <p:panel header="Customer Details" rendered="#{company_settingBean.company_setting!=null and (company_settingBean.formstate.equals('add') or company_settingBean.formstate.equals('edit'))}">
+                        <h:panelGrid columns="2">
+                            <h:panelGrid columns="4">
+                                <p:outputLabel value="Company Name:" for="company_settingname" />
+                                <h:inputText id="company_settingname" value="#{company_settingBean.company_setting.company_name}" title="Companyname" required="true" requiredMessage="The Companyname field is required.">
+                                    <p:ajax process="@this" event="blur"/>
+                                </h:inputText>
+                                <p:outputLabel value="Street Address:" for="street_address" />
+                                <h:inputText id="street_address" value="#{company_settingBean.company_setting.street_address}" title="StreetAddress" />
+                                <p:outputLabel value="Telephone:" for="telephone" />
+                                <h:inputText id="telephone" value="#{company_settingBean.company_setting.telephone}" title="Phone" required="true" requiredMessage="The telephone field is required." />
+                                <p:outputLabel value="Mobile:" for="mobile" />
+                                <h:inputText id="mobile" value="#{company_settingBean.company_setting.mobile}" title="Phone" required="true" requiredMessage="The telephone field is required." />
+                                <p:outputLabel value="Fax:" for="fax" />
+                                <h:inputText id="fax" value="#{company_settingBean.company_setting.fax}" title="Fax" />
+                                <p:outputLabel value="Email:" for="email" />
+                                <h:inputText id="email" value="#{company_settingBean.company_setting.email}" title="Email" />
+                                <p:outputLabel value="Website:" for="website" />
+                                <h:inputText id="website" value="#{company_settingBean.company_setting.website}" title="Website" />
+                                <p:outputLabel value="Sloghan:" for="sloghan" />
+                                <h:inputText id="sloghan" value="#{company_settingBean.company_setting.sloghan}" title="Sloghan" />
+                                <p:outputLabel value="Showdeveloper:" for="showdeveloper" />
+                                <h:selectOneMenu id="showdeveloper" value="#{company_settingBean.company_setting.showdeveloper}" required="true" requiredMessage="The Show Developer field is required.">
+                                    <f:selectItem itemLabel="No" itemValue="No" />
+                                    <f:selectItem itemLabel="Yes" itemValue="Yes" />
+                                </h:selectOneMenu>
+                                <p:outputLabel value="TAX IDENTIFICATION NUMBER:" for="tin" />
+                                <h:inputText id="tin" value="#{company_settingBean.company_setting.tin}" title="tin" />
+                                <p:outputLabel value="VAT Percentage:" for="vatpercentage" />
+                                <h:inputText id="vatpercentage" value="#{company_settingBean.company_setting.vatpercentage}" title="vatpercentage" />
+                                <p:outputLabel value="Currency:" for="currency" />
+                                <h:inputText id="currency" value="#{company_settingBean.company_setting.currency}" title="currency"  required="true" requiredMessage="The Currency field is required." />
+                                <p:outputLabel value="Developer E-mail:" for="developeremail" />
+                                <h:inputText id="developeremail" value="#{company_settingBean.company_setting.developeremail}" title="developeremail"  required="true" requiredMessage="The Developer E-mail field is required." />
+                                <p:outputLabel value="Developer Phone:" for="developerphone" />
+                                <h:inputText id="developerphone" value="#{company_settingBean.company_setting.developerphone}" title="developerphone" />
+                                <p:outputLabel value="Timezone:" for="timezone" />
+                                <h:inputText id="timezone" value="#{company_settingBean.company_setting.timezone}" title="timezone"  required="true" requiredMessage="The Timezone field is required." />
+                                <p:outputLabel value="Date Format:" for="dateformat" />
+                                <h:inputText id="dateformat" value="#{company_settingBean.company_setting.dateformat}" title="dateformat"  required="true" requiredMessage="The Date Format field is required." />
+                                <p:outputLabel value="Logo:" for="imageattachement" />
+                                <p:fileUpload id="imageattachement" fileUploadListener="#{company_settingBean.handleFileUpload}" mode="advanced"
+                                              auto="true" allowTypes="/(\.|\/)(jpg|png|jpeg|gif)$/" update="att,att2" multiple="false" />
+                                <p:outputLabel value="City:" for="city" />
+                                <h:inputText id="city" value="#{company_settingBean.company_setting.city}" title="city" />
+                                <p:outputLabel value="Account Number:" for="accountnumber" />
+                                <h:inputText id="accountnumber" value="#{company_settingBean.company_setting.accountnumber}" title="accountnumber" />
+                                <p:outputLabel value="Bank Name:" for="bankname" />
+                                <h:inputText id="bankname" value="#{company_settingBean.company_setting.bankname}" title="bankname" />
+                                <p:outputLabel value="Branch Name:" for="branchname" />
+                                <h:inputText id="branchname" value="#{company_settingBean.company_setting.branchname}" title="branchname" />
+                                <p:outputLabel value="Bank Code:" for="bankcode" />
+                                <h:inputText id="bankcode" value="#{company_settingBean.company_setting.bankcode}" title="bankcode"/>
+                                <p:outputLabel value="Swift Code:" for="swiftcode" />
+                                <h:inputText id="swiftcode" value="#{company_settingBean.company_setting.swiftcode}" title="swiftcode"/>
+                                <p:outputLabel value="Flag Days Before:" for="flagdays" />
+                                <h:inputText id="flagdays" value="#{company_settingBean.company_setting.flagdays}" title="flagdays"/>
+                            </h:panelGrid>                                                          
+                            <p:graphicImage value="#{company_settingBean.image}" id="att"  cache="false" height="100" rendered="#{!company_settingBean.company_setting.imageattachement.equals(null)}"  />
+                            <p:graphicImage library="images" name="NoImage.png" id="att2" cache="false" height="231" rendered="#{company_settingBean.company_setting.imageattachement.equals(null)}" />
+                        </h:panelGrid>
+                        <p:commandButton value="Update" actionListener="#{company_settingBean.save}" update="@form,:frmheader" icon="ui-icon-disk" style="padding: 5px;" rendered="#{loginBean.IsAllowed('COMPANY DETAILS', 'Edit')}"/>
+                        <p:commandButton value="Cancel" action="#{company_settingBean.cancel()}" process="@this" update="@form" icon="ui-icon-cancel" style="padding: 5px;" rendered="#{company_settingBean.formstate.equals('add')}"/>
+                    </p:panel>
+                    <br/>
+                    <center>
+                        <p:commandButton value="Add Customer" action="#{company_settingBean.add()}" update="@form" process="@this" icon="ui-icon-plus" rendered="#{loginBean.IsAllowed('COMPANY DETAILS', 'Add') and company_settingBean.company_setting==null}" />
+                    </center>
+                    <br/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
