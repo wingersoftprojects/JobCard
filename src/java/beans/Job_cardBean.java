@@ -207,7 +207,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", "Please enter atleat one Job Card Item!");
             RequestContext.getCurrentInstance().showMessageInDialog(message);
         }
-          try {
+        try {
             PersistentTransaction transaction = JobCardPersistentManager.instance().getSession().beginTransaction();
             if (this.getFormstate().equals("add")) {
                 this.getSelected().setAdd_by(aUserDetailId);
@@ -265,6 +265,19 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
             loginBean.saveMessage();
             try {
                 new SendMail().send_mail("Please note that you have a new job assigned to you. Login to view the job details. Thank You ", prev_job_card.getJob_manager().getEmail(), prev_job_card.getJob_manager().getFirst_name() + " " + prev_job_card.getJob_manager().getSecond_name());
+
+                try {
+                    Sender s = new Sender("121.241.242.114", 8080, "wing-sharkmedia", "sharkmed", "Please note that your job at SHARK Media has commenced. Thank You", "1", "0", "256782760115", "SHARK-MEDIA");
+                    new SendMail().send_mail("Please note that your job at SHARK Media has commenced. Thank You ", prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
+                } catch (Exception ex) {
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", ex.getMessage());
+                    RequestContext.getCurrentInstance().showMessageInDialog(message);
+                }
+            } catch (Exception ex) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", ex.getMessage());
+                RequestContext.getCurrentInstance().showMessageInDialog(message);
+            }
+            try {
             } catch (Exception ex) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", ex.getMessage());
                 RequestContext.getCurrentInstance().showMessageInDialog(message);
@@ -328,7 +341,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", ex.getMessage());
                     RequestContext.getCurrentInstance().showMessageInDialog(message);
                 }
-                RequestContext.getCurrentInstance().execute("PF('Dialog_Change_Job_Card_Status').hide()");               
+                RequestContext.getCurrentInstance().execute("PF('Dialog_Change_Job_Card_Status').hide()");
                 RequestContext.getCurrentInstance().update(":form_job_card_view");
                 clear_comment();
             } catch (PersistentException ex) {

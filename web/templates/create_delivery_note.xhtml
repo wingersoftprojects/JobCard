@@ -85,6 +85,7 @@
                             <h:outputText value="Laminating:#{item.lamination_type}"/><br/>
                             <h:outputText value="Binding:#{item.binding_type}"/><br/>
                             <h:outputText value="Cover:#{item.cover_type.cover_type_name}" rendered="#{item.cover_type!=null}"/><br/>
+                            <h:outputText value="Other processes:#{item.other_processes}"/><br/> 
                         </p:column>
                         <p:column headerText="QTY">
                             <h:outputText value="#{item.quantity}"/>
@@ -96,15 +97,14 @@
                 <legend>DELIVERY DETAILS</legend>
                 <table border="0" width="100%">
                     <tr>
-                        <td><h:outputLabel value="Delivered By:" style="font-weight: bolder;"/>
+                        <td><h:outputLabel value="Delivered By: " style="font-weight: bolder;"/>
                             <h:outputText value="#{job_cardBean.prev_job_card.delivered_by}"/>
                         </td>
                         <td><h:outputLabel value="Signature:" style="font-weight: bolder;"/></td>
-                    </tr>
-                </table>
-                <table border="0" width="100%">
+                    </tr>                
                     <tr>
-                        <td><h:outputLabel value="Recieved By: .........................." style="font-weight: bolder;"/></td>                       
+                        <td><h:outputLabel value="Recieved By: .........................." style="font-weight: bolder;"/>
+                        </td>                       
                         <td><h:outputLabel value="Signature: ..................." style="font-weight: bolder;"/></td>
                     </tr>
                 </table>
