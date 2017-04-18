@@ -122,22 +122,12 @@
                                 <h:outputLabel value="Paper type" style="font-weight: bolder"/>
                             </td>
                             <td>
-                                <p:autoComplete id="paper_type" value="#{job_cardBean.job_card_item.paper_type}"
-                                                completeMethod="#{job_cardBean.completePaper_type}"
-                                                var="paper_type" itemLabel="#{paper_type.paper_type_category} #{paper_type.paper_type_sub_category}" itemValue="#{paper_type}" 
-                                                converter="paper_typeConverter" forceSelection="true" maxResults="8" required="true" resultsMessage="Paper Type field is required!">
-                                    <p:column headerText="Paper Category" style="text-align: left">
-                                        <h:outputText value="#{paper_type.paper_type_category}">
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:column headerText="Paper Type Sub Category" style="text-align: left">
-                                        <h:outputText value="#{paper_type.paper_type_sub_category}">
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:ajax event="itemSelect" process="@this"></p:ajax>
-                                    <p:ajax event="change" process="@this"></p:ajax>
-                                </p:autoComplete>
-                            </td>
+                                <h:selectOneMenu id="paper_type" value="#{job_cardBean.job_card_item.paper_type}" converter="paper_typeConverter" required="true" requiredMessage="Paper Type field is required">
+                                    <f:selectItem itemLabel="Please Select" />                                    
+                                    <f:selectItems value="#{paper_typeBean.tsActive}" var="item" itemLabel="#{item.paper_type_category} #{item.paper_type_sub_category}" itemValue="#{item}"/>
+                                    <f:ajax execute="@this"/>
+                                </h:selectOneMenu>
+                            </td>                            
                             <td>
                             </td>
                             <td>
@@ -151,20 +141,19 @@
                                     <f:selectItem itemLabel="A3" itemValue="A3" />
                                     <f:selectItem itemLabel="A4" itemValue="A4" />
                                     <f:selectItem itemLabel="A5" itemValue="A5" />
-                                    <f:ajax execute="@this"/>
+                                    <f:selectItem itemLabel="Custom.." itemValue="Custom.." />                                    
+                                    <p:ajax process="@this" update="custom_size_label,custom_size,@form"/>                                    
                                 </h:selectOneMenu>
                             </td>
                             <td>
                             </td>
                             <td>
-                            </td>                                                        
-                            <td>
-                                <h:outputLabel value="Pages" for="pages" style="font-weight: bolder"/>
+                                <h:outputLabel id="custom_size_label" value="Custom size" rendered="#{job_cardBean.job_card_item.paper_size=='Custom..'}" style="font-weight: bold"/>                            
                             </td>
                             <td>
-                                <p:autoComplete id="pages" dropdown="true" value="#{job_cardBean.job_card_item.pages}" completeMethod="#{job_cardBean.completeText}" size="10" required="false" requiredMessage="Number of Pages field is required">
-                                    <p:ajax event="itemSelect" process="@this"></p:ajax>
-                                </p:autoComplete>
+                                <h:inputText id="custom_size" rendered="#{job_cardBean.job_card_item.paper_size=='Custom..'}" required="true" requiredMessage="Custom size field is required!">
+                                    <p:ajax process="@this" event="blur"/>
+                                </h:inputText>                                                                
                             </td>
                         </tr>
                     </table>
@@ -176,6 +165,15 @@
                             </td>
                             <td>
                             </td>
+                            <td>
+                                <h:outputLabel value="Pages" for="pages" style="font-weight: bolder"/>
+                            </td>
+                            <td>
+                                <p:autoComplete id="pages" dropdown="true" value="#{job_cardBean.job_card_item.pages}" completeMethod="#{job_cardBean.completeText}" size="10" required="false" requiredMessage="Number of Pages field is required">
+                                    <p:ajax event="itemSelect" process="@this"></p:ajax>
+                                </p:autoComplete>
+                            </td>
+                            
                         </tr>
                         <tr>
                             <td>
@@ -208,8 +206,8 @@
                                 <h:outputLabel value="Cover type:" style="font-weight: bolder"/>
                             </td>
                             <td>
-                                <h:selectOneMenu id="cover_type" value="#{job_cardBean.job_card_item.cover_type}" converter="cover_typeConverter">
-                                    <f:selectItem itemLabel="Please Select" />
+                                <h:selectOneMenu id="cover_type" value="#{job_cardBean.job_card_item.cover_type}" converter="cover_typeConverter" required="true" requiredMessage="Cover Type field is required">
+                                    <f:selectItem itemLabel="Please Select" />                                    
                                     <f:selectItems value="#{cover_typeBean.tsActive}" var="item" itemLabel="#{item.cover_type_name}" itemValue="#{item}"/>
                                     <f:ajax execute="@this"/>
                                 </h:selectOneMenu>
@@ -317,11 +315,12 @@
                                 <h:outputText value="Size:#{item.paper_size}"/><br/>
                                 <h:outputText value="Pages:#{item.pages}"/><br/>
                                 <h:outputText value="Paper:#{item.paper_type.paper_type_category} #{item.paper_type.paper_type_sub_category}"/><br/>
+                                <h:outputText value="Cover:#{item.cover_type.cover_type_name}" rendered="#{item.cover_type!=null}"/><br/>
                                 <h:outputText value="Color:#{item.color}"/><br/>
                                 <h:outputText value="Machine:#{item.machine_used}"/><br/>
                                 <h:outputText value="Laminating:#{item.lamination_type}"/><br/>
-                                <h:outputText value="Binding:#{item.binding_type}"/><br/>
-                                <h:outputText value="Cover:#{item.cover_type.cover_type_name}" rendered="#{item.cover_type!=null}"/><br/>                                
+                                <h:outputText value="Binding:#{item.binding_type}"/><br/>                                                               
+                                <h:outputText value="Other processes:#{item.other_processes}"/><br/>                                                               
                             </p:column>
                             <p:column headerText="QTY">
                                 <h:outputText value="#{item.quantity}"/>

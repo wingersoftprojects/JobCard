@@ -85,6 +85,7 @@
                             <h:outputText value="Laminating:#{item.lamination_type}"/><br/>
                             <h:outputText value="Binding:#{item.binding_type}"/><br/>
                             <h:outputText value="Cover:#{item.cover_type.cover_type_name}" rendered="#{item.cover_type!=null}"/><br/>
+                            <h:outputText value="Other processes:#{item.other_processes}"/><br/> 
                         </p:column>
                         <p:column headerText="QTY">
                             <h:outputText value="#{item.quantity}"/>
