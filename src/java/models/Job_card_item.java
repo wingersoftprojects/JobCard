@@ -485,6 +485,9 @@ public class Job_card_item implements Serializable {
 	@Column(name="paper_size", nullable=false, length=10)	
 	private String paper_size;
 	
+	@Column(name="paper_size_custom", nullable=true, length=100)	
+	private String paper_size_custom;
+	
 	@ManyToOne(targetEntity=models.Cover_type.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns({ @JoinColumn(name="cover_type_id", referencedColumnName="cover_type_id") })	
@@ -679,6 +682,14 @@ public class Job_card_item implements Serializable {
 	
 	public String getColor_other() {
 		return color_other;
+	}
+	
+	public void setPaper_size_custom(String value) {
+		this.paper_size_custom = value;
+	}
+	
+	public String getPaper_size_custom() {
+		return paper_size_custom;
 	}
 	
 	public void setJob_card(models.Job_card value) {

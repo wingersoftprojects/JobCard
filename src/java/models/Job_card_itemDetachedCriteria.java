@@ -33,6 +33,7 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression color_other;
 	public final IntegerExpression pages;
 	public final StringExpression paper_size;
+	public final StringExpression paper_size_custom;
 	public final IntegerExpression cover_typeId;
 	public final AssociationExpression cover_type;
 	public final StringExpression lamination_type;
@@ -67,6 +68,7 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 		color_other = new StringExpression("color_other", this.getDetachedCriteria());
 		pages = new IntegerExpression("pages", this.getDetachedCriteria());
 		paper_size = new StringExpression("paper_size", this.getDetachedCriteria());
+		paper_size_custom = new StringExpression("paper_size_custom", this.getDetachedCriteria());
 		cover_typeId = new IntegerExpression("cover_type.cover_type_id", this.getDetachedCriteria());
 		cover_type = new AssociationExpression("cover_type", this.getDetachedCriteria());
 		lamination_type = new StringExpression("lamination_type", this.getDetachedCriteria());
@@ -102,6 +104,7 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 		color_other = new StringExpression("color_other", this.getDetachedCriteria());
 		pages = new IntegerExpression("pages", this.getDetachedCriteria());
 		paper_size = new StringExpression("paper_size", this.getDetachedCriteria());
+		paper_size_custom = new StringExpression("paper_size_custom", this.getDetachedCriteria());
 		cover_typeId = new IntegerExpression("cover_type.cover_type_id", this.getDetachedCriteria());
 		cover_type = new AssociationExpression("cover_type", this.getDetachedCriteria());
 		lamination_type = new StringExpression("lamination_type", this.getDetachedCriteria());
