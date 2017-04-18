@@ -51,7 +51,7 @@ public class SendMail {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject("Print Job");
+            message.setSubject("Shark Media Job");
 
             MimeBodyPart textPart = new MimeBodyPart();
             String textContent = "Plain text";
@@ -103,7 +103,7 @@ public class SendMail {
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(user));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(email_to));
-        message.setSubject("Print Job");
+        message.setSubject("Shark Media Job");
 
         MimeBodyPart htmlPart = new MimeBodyPart();
         String htmlContent = "<html>"
