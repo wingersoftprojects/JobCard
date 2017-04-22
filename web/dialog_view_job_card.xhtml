@@ -6,11 +6,14 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <ui:composition>
-        <p:dialog id="Dlg_view_job_card" widgetVar="Dialog_View_Job_Card" modal="true" resizable="false"  appendTo="@(body)" header="Job Card">
-            <h:form id="form_view_job_card">
-                <ui:include src="templates/view_job_card.xhtml"/>
-            </h:form>
+        <p:dialog id="Dlg_view_job_card" widgetVar="Dialog_View_Job_Card" modal="true" responsive="true" resizable="false" appendTo="@(body)" header="Job Card">
+            <p:scrollPanel mode="native" style="height: 720px">
+                <h:form id="form_view_job_card">
+                    <ui:include src="templates/view_job_card.xhtml"/>
+                </h:form>
+            </p:scrollPanel>
         </p:dialog>
+
     </ui:composition>
 </html>
 

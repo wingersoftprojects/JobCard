@@ -16,6 +16,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import models.Customer_detail;
 import models.JobCardPersistentManager;
 import models.Job_card;
@@ -302,6 +304,17 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
         } catch (PersistentException ex) {
             Logger.getLogger(Job_cardBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public Job_card getJob_card(int job_card_id) {
+        Job_card aJob_card = new Job_card();
+        try {
+            this.setSelected(Job_card.getJob_cardByORMID(job_card_id));
+            job_card_items = new ArrayList<>(this.getSelected().getJob_card_item());
+        } catch (PersistentException ex) {
+            Logger.getLogger(Job_cardBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return aJob_card;
     }
 
     public void create_delivery_note(int job_card_id) {

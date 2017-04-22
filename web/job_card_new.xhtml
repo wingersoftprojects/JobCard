@@ -20,9 +20,9 @@
                 <p:growl showDetail="true" id="job_card_messages"/>
                 <fieldset>
                     <legend>CUSTOMER DETAILS</legend>
-                    <table border="0" width="100%">
+                    <table border="0" width="50%">
                         <tr>
-                            <td><h:outputLabel value="Ms. (Company)" style="font-weight: bolder"/></td>
+                            <td><h:outputLabel value="Ms. (Company):" style="font-weight: bolder"/></td>
                             <td><p:autoComplete id="customer_detail" value="#{job_cardBean.selected.customer_detail}"
                                                 completeMethod="#{job_cardBean.completeCustomer_detail}"
                                                 var="customer_detail" itemLabel="#{customer_detail.customer_name}" itemValue="#{customer_detail}" 
@@ -52,9 +52,66 @@
                                 <p:commandButton id="new_customer" value="New" process="@this" update=":form_customer_detail" oncomplete="PF('Dialog_Customer_Detail').show();">
                                     <f:setPropertyActionListener target="#{customer_detailBean.is_dialog}" value="#{true}"/>
                                 </p:commandButton>
+                            </td>                        
+                        </tr>
+                        <tr>
+                            <td><h:outputLabel value="Contact Person:" style="font-weight: bolder"/></td>
+                            <td>
+                                <h:selectOneMenu id="contact_person" value="#{job_cardBean.selected.customer_detail.contact_person_name}" converter="customer_detailConverter" required="true" requiredMessage="Paper Type field is required">
+                                    <f:selectItem itemLabel="Please Select" />                                    
+                                    <f:selectItems value="#{customer_detailBean.tsActive}" var="item" itemLabel="#{item.contact_person_name}" itemValue="#{item}"/>
+                                    <f:ajax execute="@this"/>
+                                </h:selectOneMenu>                            
                             </td>
-                            <td><h:outputLabel value="Job Manager" style="font-weight: bolder"/></td>
-                            <td><p:autoComplete id="user_detail" value="#{job_cardBean.selected.job_manager}"
+                        </tr>
+                        <tr>
+                            <td><h:outputLabel value="Telephone:" style="font-weight: bolder"/></td>
+                            <td><h:inputText id="telephone" value="#{job_cardBean.selected.customer_detail.telephone1}/#{job_cardBean.selected.customer_detail.telephone2}" readonly="true" class="grayed_out"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputLabel value="Job Card Date:" style="font-weight: bolder"/>
+                            </td>
+                            <td>
+                                <p:calendar styleClass="clsInput" id="job_date" pattern="#{company_settingBean.company_setting.dateformat}" navigator="true" showButtonPanel="true" readonlyInput="true" value="#{job_cardBean.selected.job_date}">
+                                    <p:ajax event="dateSelect" process="@this"/>
+                                </p:calendar>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputLabel value="Due Date:" style="font-weight: bolder"/>
+                            </td>
+                            <td>
+                                <p:calendar styleClass="clsInput" id="due_date" pattern="#{company_settingBean.company_setting.dateformat}" navigator="true" showButtonPanel="true" readonlyInput="true" value="#{job_cardBean.selected.due_date}">
+                                    <p:ajax event="dateSelect" process="@this"/>
+                                </p:calendar>
+                            </td>
+                        </tr>                        
+                    </table>
+                </fieldset>
+                <fieldset>
+                    <legend>JOB DETAILS</legend>
+                    <table>
+                        <tr>
+                            <td>
+                                <h:outputLabel value="Job title:" style="font-weight: bolder"/>
+                            </td>
+                            <td>
+                                <h:inputTextarea id="job_title" value="#{job_cardBean.job_card_item.job_title}" required="true" requiredMessage="Job Title Field is required!" cols="70" rows="4">
+                                    <f:ajax execute="@this"/>
+                                </h:inputTextarea>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table>
+                        <tr>
+                            <td>
+                                <h:outputLabel value="Job Manager:" style="font-weight: bolder"/>
+                            </td>
+                            <td>
+                                <p:autoComplete id="user_detail" value="#{job_cardBean.selected.job_manager}"
                                                 completeMethod="#{job_cardBean.completeUser_detail}"
                                                 var="user_detail" itemLabel="#{user_detail.first_name} #{user_detail.second_name}" itemValue="#{user_detail}" 
                                                 converter="user_detailConverter" forceSelection="true" maxResults="8" required="true" requiredMessage="Job Manager Field is required">
@@ -71,69 +128,37 @@
                                         </h:outputText>
                                     </p:column>
                                     <p:ajax event="itemSelect" process="@this"></p:ajax>
-                                </p:autoComplete>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td>
-                                <h:outputLabel value="Job Card Date" style="font-weight: bolder"/>
-                            </td>
-                            <td>
-                                <p:calendar styleClass="clsInput" id="job_date" pattern="#{company_settingBean.company_setting.dateformat}" navigator="true" showButtonPanel="true" readonlyInput="true" value="#{job_cardBean.selected.job_date}">
-                                    <p:ajax event="dateSelect" process="@this"/>
-                                </p:calendar>
-                            </td>
-                            <td>
-                                <h:outputLabel value="Due Date" style="font-weight: bolder"/>
-                            </td>
-                            <td>
-                                <p:calendar styleClass="clsInput" id="due_date" pattern="#{company_settingBean.company_setting.dateformat}" navigator="true" showButtonPanel="true" readonlyInput="true" value="#{job_cardBean.selected.due_date}">
-                                    <p:ajax event="dateSelect" process="@this"/>
-                                </p:calendar>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><h:outputLabel value="Contact Person" style="font-weight: bolder"/></td>
-                            <td><h:inputText id="contact_person" value="#{job_cardBean.selected.customer_detail.contact_person_name}" readonly="true" class="grayed_out"/></td>
-                            <td><h:outputLabel value="Telephone" style="font-weight: bolder"/></td>
-                            <td><h:inputText id="telephone" value="#{job_cardBean.selected.customer_detail.telephone1}/#{job_cardBean.selected.customer_detail.telephone2}" readonly="true" class="grayed_out"/></td>
-                        </tr>
-                    </table>
-                </fieldset>
-                <fieldset>
-                    <legend>JOB DETAILS</legend>
-                    <table>
-                        <tr>
-                            <td>
-                                <h:outputLabel value="Job title" style="font-weight: bolder"/>
-                            </td>
-                            <td>
-                                <h:inputTextarea id="job_title" value="#{job_cardBean.job_card_item.job_title}" required="true" requiredMessage="Job Title Field is required!" cols="70" rows="4">
-                                    <f:ajax execute="@this"/>
-                                </h:inputTextarea>
+                                </p:autoComplete>  
                             </td>
                         </tr>
                     </table>
                     <br/>
                     <table>
                         <tr>
-                            <td>
-                                <h:outputLabel value="Paper type" style="font-weight: bolder"/>
+                            <td>  
+                                <h:outputLabel value="Color:" style="font-weight: bolder"/>
                             </td>
                             <td>
-                                <h:selectOneMenu id="paper_type" value="#{job_cardBean.job_card_item.paper_type}" converter="paper_typeConverter" required="true" requiredMessage="Paper Type field is required">
-                                    <f:selectItem itemLabel="Please Select" />                                    
-                                    <f:selectItems value="#{paper_typeBean.tsActive}" var="item" itemLabel="#{item.paper_type_category} #{item.paper_type_sub_category}" itemValue="#{item}"/>
-                                    <f:ajax execute="@this"/>
-                                </h:selectOneMenu>
-                            </td>                            
-                            <td>
+                                <p:selectOneRadio id="color" value="#{job_cardBean.job_card_item.color}" required="true" requiredMessage="Color field is required!">
+                                    <f:selectItem itemLabel="Full Color" itemValue="Full Color" />
+                                    <f:selectItem itemLabel="Black" itemValue="Black" />
+                                    <f:selectItem itemLabel="Others" itemValue="Others" />
+                                    <p:ajax process="@this" update="color_other_label,color_other,@form"/>
+                                </p:selectOneRadio>
                             </td>
                             <td>
-                            </td>                            
+                                <h:outputLabel id="color_other_label" value="Others Specify" rendered="#{job_cardBean.job_card_item.color=='Others'}"/>
+                                <h:inputText id="color_other" value="#{job_cardBean.job_card_item.color_other}" rendered="#{job_cardBean.job_card_item.color=='Others'}" required="true" requiredMessage="Other Colors field is required!">
+                                    <p:ajax process="@this" event="blur"/>
+                                </h:inputText>
+                            </td>                                                           
+                        </tr>
+                    </table>
+                    <br/>
+                    <table>
+                        <tr>
                             <td>
-                                <h:outputLabel value="Paper Size" style="font-weight: bolder"/>
+                                <h:outputLabel value="Paper Size:" style="font-weight: bolder"/>
                             </td>
                             <td>
                                 <h:selectOneMenu id="paper_size" value="#{job_cardBean.job_card_item.paper_size}" required="true" requiredMessage="Paper size field is required!">
@@ -160,35 +185,55 @@
                     <br/>
                     <table>
                         <tr>
-                            <td>  
-                                <h:outputLabel value="Color:" style="font-weight: bolder"/>
-                            </td>
                             <td>
-                            </td>
-                            <td>
-                                <h:outputLabel value="Pages" for="pages" style="font-weight: bolder"/>
+                                <h:outputLabel value="Pages:" for="pages" style="font-weight: bolder"/>
                             </td>
                             <td>
                                 <p:autoComplete id="pages" dropdown="true" value="#{job_cardBean.job_card_item.pages}" completeMethod="#{job_cardBean.completeText}" size="10" required="false" requiredMessage="Number of Pages field is required">
                                     <p:ajax event="itemSelect" process="@this"></p:ajax>
                                 </p:autoComplete>
-                            </td>
-                            
+                            </td>                            
+                            <td>
+                                <td>
+                                    <h:outputLabel value="Paper type:" style="font-weight: bolder"/>                                                      
+                                </td>
+                                <td>
+                                    <h:selectOneMenu id="paper_type" value="#{job_cardBean.job_card_item.paper_type}" converter="paper_typeConverter" required="true" requiredMessage="Paper Type field is required">
+                                        <f:selectItem itemLabel="Please Select" />                                    
+                                        <f:selectItems value="#{paper_typeBean.tsActive}" var="item" itemLabel="#{item.paper_type_category} #{item.paper_type_sub_category}" itemValue="#{item}"/>
+                                        <f:ajax execute="@this"/>
+                                    </h:selectOneMenu>
+                                </td>
+                            </td>                            
+                            <td>
+                                <td>
+                                    <h:outputLabel value="Cover type:" style="font-weight: bolder"/>
+                                </td>
+                                <td>
+                                    <h:selectOneMenu id="cover_type" value="#{job_cardBean.job_card_item.cover_type}" converter="cover_typeConverter" required="true" requiredMessage="Cover Type field is required">
+                                        <f:selectItem itemLabel="Please Select" />                                    
+                                        <f:selectItems value="#{cover_typeBean.tsActive}" var="item" itemLabel="#{item.cover_type_name}" itemValue="#{item}"/>
+                                        <f:ajax execute="@this"/>
+                                    </h:selectOneMenu>
+                                </td>
+                            </td>                            
+                            <td>
+                            </td>                            
                         </tr>
+                    </table>                                                          
+                    <br/>
+                    <table>
                         <tr>
-                            <td>
-                                <p:selectOneRadio id="color" value="#{job_cardBean.job_card_item.color}" required="true" requiredMessage="Color field is required!">
-                                    <f:selectItem itemLabel="Full Color" itemValue="Full Color" />
-                                    <f:selectItem itemLabel="Black" itemValue="Black" />
-                                    <f:selectItem itemLabel="Others" itemValue="Others" />
-                                    <p:ajax process="@this" update="color_other_label,color_other,@form"/>
-                                </p:selectOneRadio>
+                            <td>  
+                                <h:outputLabel value="Lamination type:" style="font-weight: bolder"/>
                             </td>
                             <td>
-                                <h:outputLabel id="color_other_label" value="Others Specify" rendered="#{job_cardBean.job_card_item.color=='Others'}"/>
-                                <h:inputText id="color_other" value="#{job_cardBean.job_card_item.color_other}" rendered="#{job_cardBean.job_card_item.color=='Others'}" required="true" requiredMessage="Other Colors field is required!">
-                                    <p:ajax process="@this" event="blur"/>
-                                </h:inputText>
+                                <p:selectOneRadio id="lamination_type" value="#{job_cardBean.job_card_item.lamination_type}" required="true" requiredMessage="Lamination type field is required!">
+                                    <f:selectItem itemLabel="Matte" itemValue="Matte" />
+                                    <f:selectItem itemLabel="Gloss" itemValue="Gloss" />
+                                    <f:selectItem itemLabel="None" itemValue="None" />
+                                    <p:ajax process="@this"/>
+                                </p:selectOneRadio>
                             </td>
                         </tr>
                     </table>
@@ -196,26 +241,25 @@
                     <table>
                         <tr>
                             <td>  
-                                <h:outputLabel value="Machine to Use:" style="font-weight: bolder"/>
+                                <h:outputLabel value="Type of binding:" style="font-weight: bolder"/>
                             </td>
                             <td>
-                            </td>                            
-                            <td>
-                            </td>                            
-                            <td>
-                                <h:outputLabel value="Cover type:" style="font-weight: bolder"/>
-                            </td>
-                            <td>
-                                <h:selectOneMenu id="cover_type" value="#{job_cardBean.job_card_item.cover_type}" converter="cover_typeConverter" required="true" requiredMessage="Cover Type field is required">
-                                    <f:selectItem itemLabel="Please Select" />                                    
-                                    <f:selectItems value="#{cover_typeBean.tsActive}" var="item" itemLabel="#{item.cover_type_name}" itemValue="#{item}"/>
-                                    <f:ajax execute="@this"/>
-                                </h:selectOneMenu>
-                            </td>                            
-                            <td>
+                                <p:selectOneRadio id="binding_type" value="#{job_cardBean.job_card_item.binding_type}" required="true" requiredMessage="Binding type method">
+                                    <f:selectItem itemLabel="Saddle Stitch" itemValue="Saddle Stitch"/>
+                                    <f:selectItem itemLabel="Perfect Binding" itemValue="Perfect Binding"/>
+                                    <f:selectItem itemLabel="Spiral" itemValue="Spiral"/>
+                                    <f:selectItem itemLabel="None" itemValue="None" />
+                                    <p:ajax process="@this"/>
+                                </p:selectOneRadio>
                             </td>
                         </tr>
+                    </table>
+                    <br/>
+                    <table>
                         <tr>
+                            <td>  
+                                <h:outputLabel value="Machine to Use:" style="font-weight: bolder"/>                       
+                            </td>
                             <td>
                                 <p:selectOneRadio id="machine_used" value="#{job_cardBean.job_card_item.machine_used}" required="true" requiredMessage="Machine used field is required!">
                                     <f:selectItem itemLabel="Digital Machine" itemValue="Digital Machine" />
@@ -224,55 +268,21 @@
                                 </p:selectOneRadio>
                             </td>
                             <td>
-
                             </td>
                         </tr>
                     </table>
-                    <fieldset>
-                        <legend>POST PRESS DETAILS</legend>
-                        <table>
-                            <tr>
-                                <td>  
-                                    <h:outputLabel value="Lamination type:" style="font-weight: bolder"/>
-                                </td>
-                                <td>
-                                    <p:selectOneRadio id="lamination_type" value="#{job_cardBean.job_card_item.lamination_type}" required="true" requiredMessage="Lamination type field is required!">
-                                        <f:selectItem itemLabel="Matte" itemValue="Matte" />
-                                        <f:selectItem itemLabel="Gloss" itemValue="Gloss" />
-                                        <f:selectItem itemLabel="None" itemValue="None" />
-                                        <p:ajax process="@this"/>
-                                    </p:selectOneRadio>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>  
-                                    <h:outputLabel value="Type of binding:" style="font-weight: bolder"/>
-                                </td>
-                                <td>
-                                    <p:selectOneRadio id="binding_type" value="#{job_cardBean.job_card_item.binding_type}" required="true" requiredMessage="Binding type method">
-                                        <f:selectItem itemLabel="Saddle Stitch" itemValue="Saddle Stitch"/>
-                                        <f:selectItem itemLabel="Perfect Binding" itemValue="Perfect Binding"/>
-                                        <f:selectItem itemLabel="Spiral" itemValue="Spiral"/>
-                                        <f:selectItem itemLabel="None" itemValue="None" />
-                                        <p:ajax process="@this"/>
-                                    </p:selectOneRadio>
-                                </td>
-                            </tr>
-                        </table>
-                    </fieldset>
-                    <fieldset>
-                        <legend>POST PRESS DETAILS</legend>
-                        <table>
-                            <tr>
-                                <td><h:outputLabel value="Other Processes" style="font-weight: bolder"/></td>
-                                <td>    
-                                    <h:inputTextarea value="#{job_cardBean.job_card_item.other_processes}" cols="100" rows="7">
-                                        <f:ajax execute="@this"/>
-                                    </h:inputTextarea>
-                                </td>
-                            </tr>
-                        </table>
-                    </fieldset>
+                    <br/>
+                    <table>
+                        <tr>
+                            <td><h:outputLabel value="Other Processes:" style="font-weight: bolder"/></td>
+                            <td>    
+                                <h:inputTextarea value="#{job_cardBean.job_card_item.other_processes}" cols="100" rows="7">
+                                    <f:ajax execute="@this"/>
+                                </h:inputTextarea>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
                     <fieldset>
                         <legend>Final Product Details (For delivery and Invoicing Purposes)</legend>
                         <table>
@@ -312,13 +322,13 @@
                             </p:column>
                             <p:column headerText="DESCRIPTION">
                                 <h:outputText value="#{item.job_title}"/><br/>
+                                <h:outputText value="Color:#{item.color}"/><br/>                                
                                 <h:outputText value="Size:#{item.paper_size}"/><br/> 
                                 <h:outputText value="Pages:#{item.pages}"/><br/>
                                 <h:outputText value="Paper:#{item.paper_type.paper_type_category} #{item.paper_type.paper_type_sub_category}"/><br/>
                                 <h:outputText value="Cover:#{item.cover_type.cover_type_name}" rendered="#{item.cover_type!=null}"/><br/>
-                                <h:outputText value="Color:#{item.color}"/><br/>
+                                <h:outputText value="Lamination:#{item.lamination_type}"/><br/>                                
                                 <h:outputText value="Machine:#{item.machine_used}"/><br/>
-                                <h:outputText value="Laminating:#{item.lamination_type}"/><br/>
                                 <h:outputText value="Binding:#{item.binding_type}"/><br/>                                                               
                                 <h:outputText value="Other processes:#{item.other_processes}"/><br/>                                                               
                             </p:column>

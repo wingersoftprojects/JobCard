@@ -48,7 +48,7 @@
                 <table border="0" width="100%">
                     <tr>
                         <td><h:outputLabel value="Ms. (Company):" style="font-weight: bolder"/></td>
-                         <td><h:outputLabel value="#{job_cardBean.selected.customer_detail.customer_name}"/>
+                        <td><h:outputLabel value="#{job_cardBean.selected.customer_detail.customer_name}"/>
                         </td>
                         <td>
                             <h:outputLabel value="Job Card Date:" style="font-weight: bolder"/>
@@ -84,7 +84,9 @@
                 </table>
             </fieldset>
             <fieldset>
+                 
                 <legend>JOB DETAILS</legend>
+                <p:scrollPanel mode="native" style="height: 290px">
                 <fieldset>
                     <legend>Final Product Details (For delivery and Invoicing Purposes)</legend>
                     <br/>
@@ -131,6 +133,7 @@
                         </p:columnGroup>
                     </p:dataTable>
                 </fieldset>
+                    </p:scrollPanel>
                 <fieldset>
                     <table border="0" width="100%">
                         <tr>
@@ -143,8 +146,28 @@
                                 <p:outputLabel value="Signature ............................................" style="font-weight: bolder"/>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="Prepared By: " style="font-weight: bolder"/>
+                                <h:outputText value="#{job_cardBean.selected.add_by.first_name} #{job_cardBean.selected.add_by.second_name}"/>
+                            </td>
+                        </tr>
+                    </table><br></br>
+                    <table>
+                        <tr>
+                        <footer id="notice">
+                            <center>
+                            <h:outputText value="*Please READ AND UNDERSTAND the Job Card carefully before printing." style="font-weight: bolder; color: tomato"/>                          
+                            <center>
+                            <h:outputText value="Please ask for details in case you don't understand" style="font-weight: bolder; color: tomato"/>                          
+                            </center>
+                            <h:outputText value="The job manager is liable for all errors during the job process*" style="font-weight: bolder; color: tomato"/>                                                      
+                            </center>
+                        </footer>
+                        </tr>                       
                     </table>
                 </fieldset>
+                
             </fieldset>
         </p:panel>
     </ui:composition>

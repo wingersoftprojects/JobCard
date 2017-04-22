@@ -15,18 +15,19 @@
                     <p:menuitem value="Home" action="home?faces-redirect=true" icon="ui-icon-home"/>
                     <p:submenu label="Job Card" icon="ui-icon-document">
                         <p:menuitem value="Add Job Card"  action="job_card?faces-redirect=true" icon="ui-icon-plusthick" actionListener="#{job_cardBean.add()}"/>
+                        <p:menuitem value="Add Job Card(Clone)"  action="job_card_new?faces-redirect=true" icon="ui-icon-plusthick" actionListener="#{job_cardBean.add()}"/>
                         <p:menuitem value="View Job Cards"  action="job_card_view?faces-redirect=true" icon="ui-icon-folder-open"/>
                     </p:submenu>
                     <p:submenu label="Client" icon="ui-icon-person">
                         <p:menuitem value="Customer Details"  action="customer_detail?faces-redirect=true" icon="ui-icon-pencil">
                             <f:setPropertyActionListener target="#{customer_detailBean.is_dialog}" value="#{false}"/>
                         </p:menuitem>
+                        <p:menuitem value="Customer Details(Clone)"  action="contact_person?faces-redirect=true" icon="ui-icon-pencil"/>
                         <p:menuitem value="Supplier Details"  action="supplier_detail?faces-redirect=true" icon="ui-icon-pencil"/>
                     </p:submenu>
                     <p:submenu label="Settings" icon="ui-icon-gear">
                         <p:submenu label="User Management" icon="ui-icon-person">
                             <p:menuitem value="User Details"  action="user_detail?faces-redirect=true"/>
-                            <p:menuitem value="Group Details"  action="group_detail?faces-redirect=true"/>                       
                         </p:submenu>
                         <p:menuitem value="Company Settings"  action="company_setting?faces-redirect=true" icon="ui-icon-contact"/>
                         <p:submenu label="Product Settings" icon="ui-icon-cart">
