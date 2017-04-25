@@ -8,8 +8,8 @@
  */
 
 /**
- * Licensee: bajuna
- * License Type: Purchased
+ * Licensee: 
+ * License Type: Evaluation
  */
 package models;
 
@@ -69,6 +69,8 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	public final CollectionExpression job_card_status;
 	public final CollectionExpression job_card_status1;
 	public final CollectionExpression job_card2;
+	public final CollectionExpression contact_person_detail;
+	public final CollectionExpression contact_person_detail1;
 	
 	public User_detailCriteria(Criteria criteria) {
 		super(criteria);
@@ -122,6 +124,8 @@ public class User_detailCriteria extends AbstractORMCriteria {
 		job_card_status = new CollectionExpression("job_card_status", this);
 		job_card_status1 = new CollectionExpression("job_card_status1", this);
 		job_card2 = new CollectionExpression("job_card2", this);
+		contact_person_detail = new CollectionExpression("contact_person_detail", this);
+		contact_person_detail1 = new CollectionExpression("contact_person_detail1", this);
 	}
 	
 	public User_detailCriteria(PersistentSession session) {
@@ -274,6 +278,14 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	
 	public Job_cardCriteria createJob_card2Criteria() {
 		return new Job_cardCriteria(createCriteria("job_card2"));
+	}
+	
+	public Contact_person_detailCriteria createContact_person_detailCriteria() {
+		return new Contact_person_detailCriteria(createCriteria("contact_person_detail"));
+	}
+	
+	public Contact_person_detailCriteria createContact_person_detail1Criteria() {
+		return new Contact_person_detailCriteria(createCriteria("contact_person_detail1"));
 	}
 	
 	public User_detail uniqueUser_detail() {

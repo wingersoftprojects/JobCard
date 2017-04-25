@@ -8,8 +8,8 @@
  */
 
 /**
- * Licensee: bajuna
- * License Type: Purchased
+ * Licensee: 
+ * License Type: Evaluation
  */
 package models;
 
@@ -509,6 +509,14 @@ public class User_detail implements Serializable {
 			for(int i = 0; i < lJob_card2s.length; i++) {
 				lJob_card2s[i].setJob_manager(null);
 			}
+			models.Contact_person_detail[] lContact_person_details = (models.Contact_person_detail[])getContact_person_detail().toArray(new models.Contact_person_detail[getContact_person_detail().size()]);
+			for(int i = 0; i < lContact_person_details.length; i++) {
+				lContact_person_details[i].setAdd_by(null);
+			}
+			models.Contact_person_detail[] lContact_person_detail1s = (models.Contact_person_detail[])getContact_person_detail1().toArray(new models.Contact_person_detail[getContact_person_detail1().size()]);
+			for(int i = 0; i < lContact_person_detail1s.length; i++) {
+				lContact_person_detail1s[i].setLast_edit_by(null);
+			}
 			return delete();
 		}
 		catch(Exception e) {
@@ -662,6 +670,14 @@ public class User_detail implements Serializable {
 			models.Job_card[] lJob_card2s = (models.Job_card[])getJob_card2().toArray(new models.Job_card[getJob_card2().size()]);
 			for(int i = 0; i < lJob_card2s.length; i++) {
 				lJob_card2s[i].setJob_manager(null);
+			}
+			models.Contact_person_detail[] lContact_person_details = (models.Contact_person_detail[])getContact_person_detail().toArray(new models.Contact_person_detail[getContact_person_detail().size()]);
+			for(int i = 0; i < lContact_person_details.length; i++) {
+				lContact_person_details[i].setAdd_by(null);
+			}
+			models.Contact_person_detail[] lContact_person_detail1s = (models.Contact_person_detail[])getContact_person_detail1().toArray(new models.Contact_person_detail[getContact_person_detail1().size()]);
+			for(int i = 0; i < lContact_person_detail1s.length; i++) {
+				lContact_person_detail1s[i].setLast_edit_by(null);
 			}
 			try {
 				session.delete(this);
@@ -894,6 +910,16 @@ public class User_detail implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set job_card2 = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="add_by", targetEntity=models.Contact_person_detail.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set contact_person_detail = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="last_edit_by", targetEntity=models.Contact_person_detail.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set contact_person_detail1 = new java.util.HashSet();
 	
 	private void setUser_detail_id(int value) {
 		this.user_detail_id = value;
@@ -1314,6 +1340,24 @@ public class User_detail implements Serializable {
 	
 	public java.util.Set getJob_card2() {
 		return job_card2;
+	}
+	
+	
+	public void setContact_person_detail(java.util.Set value) {
+		this.contact_person_detail = value;
+	}
+	
+	public java.util.Set getContact_person_detail() {
+		return contact_person_detail;
+	}
+	
+	
+	public void setContact_person_detail1(java.util.Set value) {
+		this.contact_person_detail1 = value;
+	}
+	
+	public java.util.Set getContact_person_detail1() {
+		return contact_person_detail1;
 	}
 	
 	

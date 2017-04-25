@@ -8,8 +8,8 @@
  */
 
 /**
- * Licensee: bajuna
- * License Type: Purchased
+ * Licensee: 
+ * License Type: Evaluation
  */
 package models;
 
@@ -536,6 +536,9 @@ public class Job_card_item implements Serializable {
 	@JoinColumns({ @JoinColumn(name="last_edit_by", referencedColumnName="user_detail_id") })	
 	private models.User_detail last_edit_by;
 	
+	@Column(name="flag", nullable=false, length=100)	
+	private String flag;
+	
 	private void setJob_card_item_id(int value) {
 		this.job_card_item_id = value;
 	}
@@ -690,6 +693,14 @@ public class Job_card_item implements Serializable {
 	
 	public String getPaper_size_custom() {
 		return paper_size_custom;
+	}
+	
+	public void setFlag(String value) {
+		this.flag = value;
+	}
+	
+	public String getFlag() {
+		return flag;
 	}
 	
 	public void setJob_card(models.Job_card value) {

@@ -243,7 +243,7 @@
   </Setting>
   <Setting type="1048576">
     <Driver>MySQL5 (Connector/J Driver)</Driver>
-    <DriverFiles>D:\mysql-connector-java-5.1.26.jar</DriverFiles>
+    <DriverFiles>E:\WEB\Web Server Installs\mysql-connector-java-5.1.39\mysql-connector-java-5.1.39-bin.jar</DriverFiles>
     <Dialect>org.hibernate.dialect.MySQL5InnoDBDialect</Dialect>
     <DriverClass>com.mysql.jdbc.Driver</DriverClass>
     <URL>jdbc:mysql://localhost:3306/jobcard</URL>

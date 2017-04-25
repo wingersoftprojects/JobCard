@@ -8,8 +8,8 @@
  */
 
 /**
- * Licensee: bajuna
- * License Type: Purchased
+ * Licensee: 
+ * License Type: Evaluation
  */
 package models;
 
@@ -52,6 +52,7 @@ public class JobCardPersistentManager extends PersistentManager {
 		configuration.addAnnotatedClass(models.Cover_type.class);
 		configuration.addAnnotatedClass(models.Company_setting.class);
 		configuration.addAnnotatedClass(models.Job_card_status.class);
+		configuration.addAnnotatedClass(models.Contact_person_detail.class);
 		configuration.buildMappings();
 		return configuration;
 	}

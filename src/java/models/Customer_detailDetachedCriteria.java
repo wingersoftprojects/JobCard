@@ -8,8 +8,8 @@
  */
 
 /**
- * Licensee: bajuna
- * License Type: Purchased
+ * Licensee: 
+ * License Type: Evaluation
  */
 package models;
 
@@ -39,6 +39,7 @@ public class Customer_detailDetachedCriteria extends AbstractORMDetachedCriteria
 	public final AssociationExpression last_edit_by;
 	public final CollectionExpression delivery_note;
 	public final CollectionExpression job_card;
+	public final CollectionExpression contact_person_detail;
 	
 	public Customer_detailDetachedCriteria() {
 		super(models.Customer_detail.class, models.Customer_detailCriteria.class);
@@ -62,6 +63,7 @@ public class Customer_detailDetachedCriteria extends AbstractORMDetachedCriteria
 		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
 		delivery_note = new CollectionExpression("delivery_note", this.getDetachedCriteria());
 		job_card = new CollectionExpression("job_card", this.getDetachedCriteria());
+		contact_person_detail = new CollectionExpression("contact_person_detail", this.getDetachedCriteria());
 	}
 	
 	public Customer_detailDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -86,6 +88,7 @@ public class Customer_detailDetachedCriteria extends AbstractORMDetachedCriteria
 		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
 		delivery_note = new CollectionExpression("delivery_note", this.getDetachedCriteria());
 		job_card = new CollectionExpression("job_card", this.getDetachedCriteria());
+		contact_person_detail = new CollectionExpression("contact_person_detail", this.getDetachedCriteria());
 	}
 	
 	public User_detailDetachedCriteria createAdd_byCriteria() {
@@ -102,6 +105,10 @@ public class Customer_detailDetachedCriteria extends AbstractORMDetachedCriteria
 	
 	public Job_cardDetachedCriteria createJob_cardCriteria() {
 		return new Job_cardDetachedCriteria(createCriteria("job_card"));
+	}
+	
+	public Contact_person_detailDetachedCriteria createContact_person_detailCriteria() {
+		return new Contact_person_detailDetachedCriteria(createCriteria("contact_person_detail"));
 	}
 	
 	public Customer_detail uniqueCustomer_detail(PersistentSession session) {

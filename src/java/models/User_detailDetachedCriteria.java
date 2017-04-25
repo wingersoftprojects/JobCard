@@ -8,8 +8,8 @@
  */
 
 /**
- * Licensee: bajuna
- * License Type: Purchased
+ * Licensee: 
+ * License Type: Evaluation
  */
 package models;
 
@@ -69,6 +69,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final CollectionExpression job_card_status;
 	public final CollectionExpression job_card_status1;
 	public final CollectionExpression job_card2;
+	public final CollectionExpression contact_person_detail;
+	public final CollectionExpression contact_person_detail1;
 	
 	public User_detailDetachedCriteria() {
 		super(models.User_detail.class, models.User_detailCriteria.class);
@@ -122,6 +124,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		job_card_status = new CollectionExpression("job_card_status", this.getDetachedCriteria());
 		job_card_status1 = new CollectionExpression("job_card_status1", this.getDetachedCriteria());
 		job_card2 = new CollectionExpression("job_card2", this.getDetachedCriteria());
+		contact_person_detail = new CollectionExpression("contact_person_detail", this.getDetachedCriteria());
+		contact_person_detail1 = new CollectionExpression("contact_person_detail1", this.getDetachedCriteria());
 	}
 	
 	public User_detailDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -176,6 +180,8 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		job_card_status = new CollectionExpression("job_card_status", this.getDetachedCriteria());
 		job_card_status1 = new CollectionExpression("job_card_status1", this.getDetachedCriteria());
 		job_card2 = new CollectionExpression("job_card2", this.getDetachedCriteria());
+		contact_person_detail = new CollectionExpression("contact_person_detail", this.getDetachedCriteria());
+		contact_person_detail1 = new CollectionExpression("contact_person_detail1", this.getDetachedCriteria());
 	}
 	
 	public User_detailDetachedCriteria createAdd_byCriteria() {
@@ -320,6 +326,14 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public Job_cardDetachedCriteria createJob_card2Criteria() {
 		return new Job_cardDetachedCriteria(createCriteria("job_card2"));
+	}
+	
+	public Contact_person_detailDetachedCriteria createContact_person_detailCriteria() {
+		return new Contact_person_detailDetachedCriteria(createCriteria("contact_person_detail"));
+	}
+	
+	public Contact_person_detailDetachedCriteria createContact_person_detail1Criteria() {
+		return new Contact_person_detailDetachedCriteria(createCriteria("contact_person_detail1"));
 	}
 	
 	public User_detail uniqueUser_detail(PersistentSession session) {

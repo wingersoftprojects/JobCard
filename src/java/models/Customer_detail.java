@@ -8,8 +8,8 @@
  */
 
 /**
- * Licensee: bajuna
- * License Type: Purchased
+ * Licensee: 
+ * License Type: Evaluation
  */
 package models;
 
@@ -381,6 +381,10 @@ public class Customer_detail implements Serializable {
 			for(int i = 0; i < lJob_cards.length; i++) {
 				lJob_cards[i].setCustomer_detail(null);
 			}
+			models.Contact_person_detail[] lContact_person_details = (models.Contact_person_detail[])getContact_person_detail().toArray(new models.Contact_person_detail[getContact_person_detail().size()]);
+			for(int i = 0; i < lContact_person_details.length; i++) {
+				lContact_person_details[i].setCustomer_detail(null);
+			}
 			return delete();
 		}
 		catch(Exception e) {
@@ -406,6 +410,10 @@ public class Customer_detail implements Serializable {
 			models.Job_card[] lJob_cards = (models.Job_card[])getJob_card().toArray(new models.Job_card[getJob_card().size()]);
 			for(int i = 0; i < lJob_cards.length; i++) {
 				lJob_cards[i].setCustomer_detail(null);
+			}
+			models.Contact_person_detail[] lContact_person_details = (models.Contact_person_detail[])getContact_person_detail().toArray(new models.Contact_person_detail[getContact_person_detail().size()]);
+			for(int i = 0; i < lContact_person_details.length; i++) {
+				lContact_person_details[i].setCustomer_detail(null);
 			}
 			try {
 				session.delete(this);
@@ -484,6 +492,11 @@ public class Customer_detail implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set job_card = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="customer_detail", targetEntity=models.Contact_person_detail.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set contact_person_detail = new java.util.HashSet();
 	
 	private void setCustomer_detail_id(int value) {
 		this.customer_detail_id = value;
@@ -640,6 +653,15 @@ public class Customer_detail implements Serializable {
 	
 	public java.util.Set getJob_card() {
 		return job_card;
+	}
+	
+	
+	public void setContact_person_detail(java.util.Set value) {
+		this.contact_person_detail = value;
+	}
+	
+	public java.util.Set getContact_person_detail() {
+		return contact_person_detail;
 	}
 	
 	
