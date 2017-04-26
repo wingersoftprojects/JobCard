@@ -86,7 +86,6 @@
             <fieldset>
                  
                 <legend>JOB DETAILS</legend>
-                <p:scrollPanel mode="native" style="height: 290px">
                 <fieldset>
                     <legend>Final Product Details (For delivery and Invoicing Purposes)</legend>
                     <br/>
@@ -133,7 +132,6 @@
                         </p:columnGroup>
                     </p:dataTable>
                 </fieldset>
-                    </p:scrollPanel>
                 <fieldset>
                     <table border="0" width="100%">
                         <tr>
@@ -151,6 +149,8 @@
                                 <p:outputLabel value="Prepared By: " style="font-weight: bolder"/>
                                 <h:outputText value="#{job_cardBean.selected.add_by.first_name} #{job_cardBean.selected.add_by.second_name}"/>
                             </td>
+                            <td></td>
+                           
                         </tr>
                     </table><br></br>
                     <table>

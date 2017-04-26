@@ -23,11 +23,11 @@
                             pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>                            
                     </p:inputText>                        
                     <p:outputLabel value="Contact Person Name:" for="contact_person_name"/>
-                    <p:inputText id="contact_person_name" value="#{customer_detailBean.selected.contact_person_name}" required="true"/>
+                    <p:inputText id="contact_person_name" value="#{customer_detailBean.selected.contact_person_name}" required="true" requiredMessage="Contact person name field is required"/>
                     <p:outputLabel value="Tel 1:" for="contact_person_telephone1"/>
-                    <p:inputMask id="contact_person_telephone1" value="#{customer_detailBean.selected.contact_person_telephone1}" mask="(999) 999-999" required="true" requiredMessage="First Name is required" placeholder="e.g(706) 267-475"/>
+                    <p:inputMask id="contact_person_telephone1" value="#{customer_detailBean.selected.contact_person_telephone1}" mask="(999) 999-999" required="true" requiredMessage="Tel 1 field is required" placeholder="e.g(706) 267-475"/>
                     <p:outputLabel value="Tel 2:" for="contact_person_telephone2"/>
-                    <p:inputMask id="contact_person_telephone2" value="#{customer_detailBean.selected.contact_person_telephone2}" mask="(999) 999-999" required="false" requiredMessage="Second Name is required" placeholder="e.g(706) 267-475"/>
+                    <p:inputMask id="contact_person_telephone2" value="#{customer_detailBean.selected.contact_person_telephone2}" mask="(999) 999-999" required="false" requiredMessage="Tel 2 field is required" placeholder="e.g(706) 267-475"/>
                     <p:outputLabel value="Email:" for="contact_person_email"/>                        
                     <p:inputText id="contact_person_email" value="#{customer_detailBean.selected.contact_person_email}" validatorMessage="Invalid email format" required="true">
                         <f:validateRegex

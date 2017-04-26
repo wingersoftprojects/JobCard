@@ -60,7 +60,7 @@
                             <f:setPropertyActionListener target="#{job_cardBean.status}" value="#{'Cancelled'}"/>
                             <f:setPropertyActionListener target="#{job_cardBean.prev_job_card}" value="#{item}"/>
                         </p:commandLink>
-                        <p:commandLink  value=" | Edit"  process="@this" actionListener="#{job_cardBean.edit(job_cardBean.getJob_card(item.job_card_id))}" rendered="#{loginBean.user_detail.is_user_gen_admin == '1'}" update=":form_edit_job_card" oncomplete="PF('Dialog_Edit_Job_Card').show();"/>                           
+                        <p:commandLink  value=" | Edit"  process="@this" actionListener="#{job_cardBean.edit(job_cardBean.getJob_card(item.job_card_id))}" rendered="#{loginBean.user_detail.is_user_gen_admin == '1'}" update=":form_edit_job_card" action="edit_job_card?faces-redirect=true"/>                           
                     </p:column>
                     <p:column headerText="Comments">
                         #{job_cardBean.get_job_status_comments(item)} 

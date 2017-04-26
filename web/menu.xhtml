@@ -15,14 +15,12 @@
                     <p:menuitem value="Home" action="home?faces-redirect=true" icon="ui-icon-home"/>
                     <p:submenu label="Job Card" icon="ui-icon-document">
                         <p:menuitem value="Add Job Card"  action="job_card?faces-redirect=true" icon="ui-icon-plusthick" actionListener="#{job_cardBean.add()}"/>
-                        <p:menuitem value="Add Job Card(Clone)"  action="job_card_new?faces-redirect=true" icon="ui-icon-plusthick" actionListener="#{job_cardBean.add()}"/>
                         <p:menuitem value="View Job Cards"  action="job_card_view?faces-redirect=true" icon="ui-icon-folder-open"/>
                     </p:submenu>
                     <p:submenu label="Client" icon="ui-icon-person">
                         <p:menuitem value="Customer Details"  action="customer_detail?faces-redirect=true" icon="ui-icon-pencil">
                             <f:setPropertyActionListener target="#{customer_detailBean.is_dialog}" value="#{false}"/>
                         </p:menuitem>
-                        <p:menuitem value="Customer Details(Clone)"  action="contact_person?faces-redirect=true" icon="ui-icon-pencil"/>
                         <p:menuitem value="Supplier Details"  action="supplier_detail?faces-redirect=true" icon="ui-icon-pencil"/>
                     </p:submenu>
                     <p:submenu label="Settings" icon="ui-icon-gear">

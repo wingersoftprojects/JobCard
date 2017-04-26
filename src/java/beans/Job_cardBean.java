@@ -18,6 +18,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import models.Contact_person_detail;
 import models.Customer_detail;
 import models.JobCardPersistentManager;
 import models.Job_card;
@@ -131,12 +132,22 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
     public List<Customer_detail> completeCustomer_detail(String query) {
         List<Customer_detail> filteredCustomer_details = new ArrayList<>();
         try {
-            String sql = "select de FROM Customer_detail  de where de.is_deleted<>1 AND ( de.customer_name like '%" + query + "%' OR  de.contact_person_name like '%" + query + "%' or de.telephone1 like '%" + query + "%' OR de.telephone2 like '%" + query + "%' OR de.email like '%" + query + "%')";
+            String sql = "select de FROM Customer_detail  de where de.is_deleted<>1 AND ( de.customer_name like '%" + query + "%' or de.telephone1 like '%" + query + "%' OR de.telephone2 like '%" + query + "%' OR de.email like '%" + query + "%')";            
             filteredCustomer_details = (List<Customer_detail>) JobCardPersistentManager.instance().getSession().createQuery(sql).list();
         } catch (PersistentException ex) {
             Logger.getLogger(Customer_detailBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return filteredCustomer_details;
+    }
+    public List<Contact_person_detail> completeContact_person_detail(String query) {
+        List<Contact_person_detail> filteredContact_person_details = new ArrayList<>();
+        try {
+            String sql = "select de FROM Contact_person_detail  de where de.is_deleted<>1 AND ( de.contact_person_name like '%" + query + "%' or de.contact_person_telephone1 like '%" + query + "%' OR de.contact_person_telephone2 like '%" + query + "%' OR de.contact_person_email like '%" + query + "%')";
+            filteredContact_person_details = (List<Contact_person_detail>) JobCardPersistentManager.instance().getSession().createQuery(sql).list();
+        } catch (PersistentException ex) {
+            Logger.getLogger(Contact_person_detailBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filteredContact_person_details;
     }
 
     public List<Supplier_detail> completeSupplier_detail(String query) {
@@ -269,7 +280,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
                 new SendMail().send_mail("Please note that you have a new job assigned to you. Login to view the job details. Thank You ", prev_job_card.getJob_manager().getEmail(), prev_job_card.getJob_manager().getFirst_name() + " " + prev_job_card.getJob_manager().getSecond_name());
 
                 try {
-                    Sender s = new Sender("121.241.242.114", 8080, "wing-sharkmedia", "sharkmed", "Please note that your job at SHARK Media has commenced. Thank You", "1", "0", "256782760115", "SHARK-MEDIA");
+                    Sender s = new Sender("121.241.242.114", 8080, "wing-sharkmedia", "sharkmed", "Please note that your job at SHARK Media has commenced. Thank You", "1", "0", "256706267475", "SHARK-MEDIA");
                     new SendMail().send_mail("Please note that your job at SHARK Media has commenced. Thank You ", prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
                 } catch (Exception ex) {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", ex.getMessage());
@@ -339,14 +350,14 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
                 try {
                     //String contact = "+256" + prev_job_card.getCustomer_detail().getContact_person_telephone1().substring(1).replace("(", "").replace(")", "").replace(" ", "").replace("-", "");
                     if ("Ready".equals(status)) {
-                        Sender s = new Sender("121.241.242.114", 8080, "wing-sharkmedia", "sharkmed", "Please note that the printing job at SHARK Media is ready for delivery", "1", "0", "256782760115", "SHARK-MEDIA");
+                        Sender s = new Sender("121.241.242.114", 8080, "wing-sharkmedia", "sharkmed", "Please note that the printing job at SHARK Media is ready for delivery", "1", "0", "256706267475", "SHARK-MEDIA");
                         s.submitMessage();
                         //new GeneralUtilities().send_sms(contact, "Please note that the printing job at SHARK Media is ready for delivery");
                         new SendMail().send_mail("Please note that the printing job at SHARK Media is ready for delivery", prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
                     }
                     if ("Delivered".equals(status)) {
                         //new GeneralUtilities().send_sms(contact, "Please note that the printing job at SHARK Media has been delivered");
-                        Sender s = new Sender("121.241.242.114", 8080, "wing-sharkmedia", "sharkmed", "Please note that the printing job at SHARK Media has been delivered", "1", "0", "256782760115", "SHARK-MEDIA");
+                        Sender s = new Sender("121.241.242.114", 8080, "wing-sharkmedia", "sharkmed", "Please note that the printing job at SHARK Media has been delivered", "1", "0", "256706267475", "SHARK-MEDIA");
                         s.submitMessage();
                         new SendMail().send_mail("Please note that the printing job at SHARK Media has been delivered<br/> By: " + prev_job_card.getDelivered_by() + " <br/> Telephone: " + prev_job_card.getDelivered_by_phone_number(), prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
                     }
