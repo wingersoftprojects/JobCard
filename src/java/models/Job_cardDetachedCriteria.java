@@ -8,8 +8,8 @@
  */
 
 /**
- * Licensee: 
- * License Type: Evaluation
+ * Licensee: rlumala
+ * License Type: Purchased
  */
 package models;
 
@@ -33,6 +33,7 @@ public class Job_cardDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final AssociationExpression last_edit_by;
 	public final DateExpression job_date;
 	public final StringExpression status;
+	public final StringExpression flag;
 	public final DateExpression due_date;
 	public final IntegerExpression job_managerId;
 	public final AssociationExpression job_manager;
@@ -60,6 +61,7 @@ public class Job_cardDetachedCriteria extends AbstractORMDetachedCriteria {
 		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
 		job_date = new DateExpression("job_date", this.getDetachedCriteria());
 		status = new StringExpression("status", this.getDetachedCriteria());
+		flag = new StringExpression("flag", this.getDetachedCriteria());
 		due_date = new DateExpression("due_date", this.getDetachedCriteria());
 		job_managerId = new IntegerExpression("job_manager.user_detail_id", this.getDetachedCriteria());
 		job_manager = new AssociationExpression("job_manager", this.getDetachedCriteria());
@@ -88,6 +90,7 @@ public class Job_cardDetachedCriteria extends AbstractORMDetachedCriteria {
 		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
 		job_date = new DateExpression("job_date", this.getDetachedCriteria());
 		status = new StringExpression("status", this.getDetachedCriteria());
+		flag = new StringExpression("flag", this.getDetachedCriteria());
 		due_date = new DateExpression("due_date", this.getDetachedCriteria());
 		job_managerId = new IntegerExpression("job_manager.user_detail_id", this.getDetachedCriteria());
 		job_manager = new AssociationExpression("job_manager", this.getDetachedCriteria());

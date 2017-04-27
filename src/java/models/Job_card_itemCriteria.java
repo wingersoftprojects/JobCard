@@ -8,8 +8,8 @@
  */
 
 /**
- * Licensee: 
- * License Type: Evaluation
+ * Licensee: rlumala
+ * License Type: Purchased
  */
 package models;
 
@@ -51,7 +51,6 @@ public class Job_card_itemCriteria extends AbstractORMCriteria {
 	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_byId;
 	public final AssociationExpression last_edit_by;
-	public final StringExpression flag;
 	
 	public Job_card_itemCriteria(Criteria criteria) {
 		super(criteria);
@@ -87,7 +86,6 @@ public class Job_card_itemCriteria extends AbstractORMCriteria {
 		last_edit_date = new TimestampExpression("last_edit_date", this);
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this);
 		last_edit_by = new AssociationExpression("last_edit_by", this);
-		flag = new StringExpression("flag", this);
 	}
 	
 	public Job_card_itemCriteria(PersistentSession session) {

@@ -8,8 +8,8 @@
  */
 
 /**
- * Licensee: 
- * License Type: Evaluation
+ * Licensee: rlumala
+ * License Type: Purchased
  */
 package models;
 
@@ -33,6 +33,7 @@ public class Job_cardCriteria extends AbstractORMCriteria {
 	public final AssociationExpression last_edit_by;
 	public final DateExpression job_date;
 	public final StringExpression status;
+	public final StringExpression flag;
 	public final DateExpression due_date;
 	public final IntegerExpression job_managerId;
 	public final AssociationExpression job_manager;
@@ -60,6 +61,7 @@ public class Job_cardCriteria extends AbstractORMCriteria {
 		last_edit_by = new AssociationExpression("last_edit_by", this);
 		job_date = new DateExpression("job_date", this);
 		status = new StringExpression("status", this);
+		flag = new StringExpression("flag", this);
 		due_date = new DateExpression("due_date", this);
 		job_managerId = new IntegerExpression("job_manager.user_detail_id", this);
 		job_manager = new AssociationExpression("job_manager", this);

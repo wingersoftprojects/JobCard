@@ -1,15 +1,1 @@
-ALTER TABLE contact_person_detail modify column contact_person_telephone1 varchar(100) NOT NULL;
-ALTER TABLE contact_person_detail modify column contact_person_email varchar(100) NOT NULL;
-ALTER TABLE contact_person_detail modify column is_active int(1) NOT NULL;
-ALTER TABLE contact_person_detail modify column is_deleted int(1) NOT NULL;
-ALTER TABLE contact_person_detail modify column add_date datetime NOT NULL;
-ALTER TABLE contact_person_detail DROP FOREIGN KEY FKcontact_pe762308;
-ALTER TABLE contact_person_detail DROP INDEX FKcontact_pe762308;
-ALTER TABLE contact_person_detail DROP FOREIGN KEY FKcontact_pe164503;
-ALTER TABLE contact_person_detail DROP INDEX FKcontact_pe164503;
-ALTER TABLE contact_person_detail DROP FOREIGN KEY FKcontact_pe432254;
-ALTER TABLE contact_person_detail DROP INDEX FKcontact_pe432254;
-ALTER TABLE contact_person_detail modify column last_edit_by int(10);
-ALTER TABLE contact_person_detail ADD INDEX FKcontact_pe762308 (add_by), ADD CONSTRAINT FKcontact_pe762308 FOREIGN KEY (add_by) REFERENCES user_detail (user_detail_id);
-ALTER TABLE contact_person_detail ADD INDEX FKcontact_pe432254 (last_edit_by), ADD CONSTRAINT FKcontact_pe432254 FOREIGN KEY (last_edit_by) REFERENCES user_detail (user_detail_id);
-ALTER TABLE contact_person_detail ADD INDEX FKcontact_pe164503 (customer_detail_id), ADD CONSTRAINT FKcontact_pe164503 FOREIGN KEY (customer_detail_id) REFERENCES customer_detail (customer_detail_id);
+alter table job_card add column flag varchar(100) not null;

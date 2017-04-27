@@ -8,8 +8,8 @@
  */
 
 /**
- * Licensee: 
- * License Type: Evaluation
+ * Licensee: rlumala
+ * License Type: Purchased
  */
 package models;
 
@@ -495,6 +495,9 @@ public class Job_card implements Serializable {
 	@Column(name="status", nullable=false, length=100)	
 	private String status;
 	
+	@Column(name="flag", nullable=false, length=100)	
+	private String flag;
+	
 	@Column(name="due_date", nullable=false)	
 	@Temporal(TemporalType.DATE)	
 	private java.util.Date due_date;
@@ -623,6 +626,14 @@ public class Job_card implements Serializable {
 	
 	public String getDelivered_by_phone_number() {
 		return delivered_by_phone_number;
+	}
+	
+	public void setFlag(String value) {
+		this.flag = value;
+	}
+	
+	public String getFlag() {
+		return flag;
 	}
 	
 	public void setCustomer_detail(models.Customer_detail value) {
