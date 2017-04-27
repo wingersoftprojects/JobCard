@@ -8,8 +8,8 @@
  */
 
 /**
- * Licensee: rlumala
- * License Type: Purchased
+ * Licensee: 
+ * License Type: Evaluation
  */
 package models;
 
@@ -51,6 +51,7 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_byId;
 	public final AssociationExpression last_edit_by;
+	public final StringExpression flag;
 	
 	public Job_card_itemDetachedCriteria() {
 		super(models.Job_card_item.class, models.Job_card_itemCriteria.class);
@@ -86,6 +87,7 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 		last_edit_date = new TimestampExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this.getDetachedCriteria());
 		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
+		flag = new StringExpression("flag", this.getDetachedCriteria());
 	}
 	
 	public Job_card_itemDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -122,6 +124,7 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 		last_edit_date = new TimestampExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this.getDetachedCriteria());
 		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
+		flag = new StringExpression("flag", this.getDetachedCriteria());
 	}
 	
 	public Job_cardDetachedCriteria createJob_cardCriteria() {

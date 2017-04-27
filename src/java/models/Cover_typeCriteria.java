@@ -8,8 +8,8 @@
  */
 
 /**
- * Licensee: rlumala
- * License Type: Purchased
+ * Licensee: 
+ * License Type: Evaluation
  */
 package models;
 
