@@ -8,8 +8,8 @@
  */
 
 /**
- * Licensee: 
- * License Type: Evaluation
+ * Licensee: rlumala
+ * License Type: Purchased
  */
 package models;
 
@@ -29,6 +29,7 @@ public class Job_card_itemCriteria extends AbstractORMCriteria {
 	public final StringExpression job_title;
 	public final IntegerExpression item_typeId;
 	public final AssociationExpression item_type;
+	public final StringExpression priority;
 	public final StringExpression color;
 	public final StringExpression color_other;
 	public final IntegerExpression pages;
@@ -51,7 +52,6 @@ public class Job_card_itemCriteria extends AbstractORMCriteria {
 	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_byId;
 	public final AssociationExpression last_edit_by;
-	public final StringExpression flag;
 	
 	public Job_card_itemCriteria(Criteria criteria) {
 		super(criteria);
@@ -65,6 +65,7 @@ public class Job_card_itemCriteria extends AbstractORMCriteria {
 		job_title = new StringExpression("job_title", this);
 		item_typeId = new IntegerExpression("item_type.item_type_id", this);
 		item_type = new AssociationExpression("item_type", this);
+		priority = new StringExpression("priority", this);
 		color = new StringExpression("color", this);
 		color_other = new StringExpression("color_other", this);
 		pages = new IntegerExpression("pages", this);
@@ -87,7 +88,6 @@ public class Job_card_itemCriteria extends AbstractORMCriteria {
 		last_edit_date = new TimestampExpression("last_edit_date", this);
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this);
 		last_edit_by = new AssociationExpression("last_edit_by", this);
-		flag = new StringExpression("flag", this);
 	}
 	
 	public Job_card_itemCriteria(PersistentSession session) {

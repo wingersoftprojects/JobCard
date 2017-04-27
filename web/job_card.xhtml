@@ -365,7 +365,7 @@
                         <tr>
                             <td>
                                 <p:commandButton value="Save Job Card" process="@this,customer_detail,due_date,job_date" action="#{job_cardBean.save(loginBean.user_detail)}" update="@form" icon="ui-icon-disk" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()">                                                                                                          
-                                    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                    <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                                         <p:graphicImage name="/images/ajax-loader.gif"/>
                                     </p:dialog>
                                 </p:commandButton>

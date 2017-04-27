@@ -8,8 +8,8 @@
  */
 
 /**
- * Licensee: 
- * License Type: Evaluation
+ * Licensee: rlumala
+ * License Type: Purchased
  */
 package models;
 
@@ -29,6 +29,7 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression job_title;
 	public final IntegerExpression item_typeId;
 	public final AssociationExpression item_type;
+	public final StringExpression priority;
 	public final StringExpression color;
 	public final StringExpression color_other;
 	public final IntegerExpression pages;
@@ -51,7 +52,6 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_byId;
 	public final AssociationExpression last_edit_by;
-	public final StringExpression flag;
 	
 	public Job_card_itemDetachedCriteria() {
 		super(models.Job_card_item.class, models.Job_card_itemCriteria.class);
@@ -65,6 +65,7 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 		job_title = new StringExpression("job_title", this.getDetachedCriteria());
 		item_typeId = new IntegerExpression("item_type.item_type_id", this.getDetachedCriteria());
 		item_type = new AssociationExpression("item_type", this.getDetachedCriteria());
+		priority = new StringExpression("priority", this.getDetachedCriteria());
 		color = new StringExpression("color", this.getDetachedCriteria());
 		color_other = new StringExpression("color_other", this.getDetachedCriteria());
 		pages = new IntegerExpression("pages", this.getDetachedCriteria());
@@ -87,7 +88,6 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 		last_edit_date = new TimestampExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this.getDetachedCriteria());
 		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
-		flag = new StringExpression("flag", this.getDetachedCriteria());
 	}
 	
 	public Job_card_itemDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -102,6 +102,7 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 		job_title = new StringExpression("job_title", this.getDetachedCriteria());
 		item_typeId = new IntegerExpression("item_type.item_type_id", this.getDetachedCriteria());
 		item_type = new AssociationExpression("item_type", this.getDetachedCriteria());
+		priority = new StringExpression("priority", this.getDetachedCriteria());
 		color = new StringExpression("color", this.getDetachedCriteria());
 		color_other = new StringExpression("color_other", this.getDetachedCriteria());
 		pages = new IntegerExpression("pages", this.getDetachedCriteria());
@@ -124,7 +125,6 @@ public class Job_card_itemDetachedCriteria extends AbstractORMDetachedCriteria {
 		last_edit_date = new TimestampExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this.getDetachedCriteria());
 		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
-		flag = new StringExpression("flag", this.getDetachedCriteria());
 	}
 	
 	public Job_cardDetachedCriteria createJob_cardCriteria() {

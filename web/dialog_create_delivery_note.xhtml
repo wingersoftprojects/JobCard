@@ -6,9 +6,11 @@
       xmlns:p="http://primefaces.org/ui">
     <ui:composition>
         <p:dialog id="Dlg_create_delivery_note" widgetVar="Dialog_Create_Delivery_Note" modal="true" resizable="false"  appendTo="@(body)" header="Job Card">
+            <p:scrollPanel mode="native" style="height: 650px">
             <h:form id="form_create_delivery_note">
                 <ui:include src="templates/create_delivery_note.xhtml"/>
             </h:form>
+            </p:scrollPanel>
         </p:dialog>
     </ui:composition>
 </html>
