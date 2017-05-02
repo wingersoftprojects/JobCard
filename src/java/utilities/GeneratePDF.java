@@ -5,6 +5,7 @@
  */
 package utilities;
 
+import beans.Company_settingBean;
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
 import com.lowagie.text.Paragraph;
@@ -15,6 +16,7 @@ import java.util.Properties;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.mail.Message;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -59,8 +61,9 @@ public class GeneratePDF {
                  
         String sender = "philliparinaitwe@wingersoft.co.ug"; //replace this with a valid sender email address
         String recipient = "newtonajuna@wingersoft.co.ug"; //replace this with a valid recipient email address
-        String content = "testing"; //this will be the text of the email
-        String subject = "pdf test"; //this will be the subject of the email
+        String recipient2 = "philliparinaitwe@wingersoft.co.ug"; //replace this with a valid recipient email address
+        String content = "Hello From Shark"; //this will be the text of the email
+        String subject = "Shark Media Job Card"; //this will be the subject of the email
          
         
         String host = "mail.wingersoft.co.ug";
@@ -91,11 +94,32 @@ public class GeneratePDF {
             ByteArrayOutputStream outputStream = null;
          
         try {           
-            //construct the text body part
-            MimeBodyPart textBodyPart = new MimeBodyPart();
-            textBodyPart.setText(content);
-             
-            //now write the PDF content to the output stream
+            
+            Multipart multipart = new MimeMultipart("alternative");
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(user));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient2));
+            message.setSubject("Shark Media Job");
+            
+            MimeBodyPart textPart = new MimeBodyPart();
+            String textContent = "Plain text";
+            textPart.setText(textContent);
+            Company_settingBean cb = new Company_settingBean();
+            cb.init();
+            MimeBodyPart htmlPart = new MimeBodyPart();
+            String htmlContent = "<html>"
+                    + "<div style='padding:10px;background:#EC4A24;font-size:15px;color:#ffffff;font-weight:1000'>"
+                    + "<p>Dear,</p>"
+                    + "<p>Please note that your printing Job with SHARK Media is Ready</p>"
+                    + "<p>Regards<br/>SHARK MEDIA TEAM<br/><img src='http://sharkmediaug.com/wp-content/themes/Scyllalite/images/shark-logo.png'></img></p>"
+                    + "</div>"
+                    + "</html>";
+            htmlPart.setContent(htmlContent, "text/html");
+            multipart.addBodyPart(htmlPart);
+            
+               //now write the PDF content to the output stream
             outputStream = new ByteArrayOutputStream();
             writePdf(outputStream);
             byte[] bytes = outputStream.toByteArray();
@@ -104,30 +128,57 @@ public class GeneratePDF {
             DataSource dataSource = new ByteArrayDataSource(bytes, "application/pdf");
             MimeBodyPart pdfBodyPart = new MimeBodyPart();
             pdfBodyPart.setDataHandler(new DataHandler(dataSource));
-            pdfBodyPart.setFileName("test.pdf");
+            pdfBodyPart.setFileName("Shark Media Job Card.pdf");
                          
             //construct the mime multi part
             MimeMultipart mimeMultipart = new MimeMultipart();
-            mimeMultipart.addBodyPart(textBodyPart);
+            //multipart.addBodyPart(textBodyPart);
+            mimeMultipart.addBodyPart(htmlPart);
             mimeMultipart.addBodyPart(pdfBodyPart);
-             
-            //create the sender/recipient addresses
-            InternetAddress iaSender = new InternetAddress(sender);
-            InternetAddress iaRecipient = new InternetAddress(recipient);
-             
-            //construct the mime message
-            MimeMessage mimeMessage = new MimeMessage(session);
-            mimeMessage.setSender(iaSender);
-            mimeMessage.setSubject(subject);
-            mimeMessage.setRecipient(Message.RecipientType.TO, iaRecipient);
-            mimeMessage.setContent(mimeMultipart);
-             
-            //send off the email
-            Transport.send(mimeMessage);
-             
-            System.out.println("sent from " + sender + 
-                    ", to " + recipient + 
-                    "; server = " + smtpHost + ", port = " + smtpPort);         
+
+            message.setContent(mimeMultipart);
+
+            //send the message  
+            Transport.send(message);
+            System.out.println("message sent successfully...");
+
+//            //construct the text body part
+//            MimeBodyPart textBodyPart = new MimeBodyPart();
+//            textBodyPart.setText(content);
+//             
+//            //now write the PDF content to the output stream
+//            outputStream = new ByteArrayOutputStream();
+//            writePdf(outputStream);
+//            byte[] bytes = outputStream.toByteArray();
+//             
+//            //construct the pdf body part
+//            DataSource dataSource = new ByteArrayDataSource(bytes, "application/pdf");
+//            MimeBodyPart pdfBodyPart = new MimeBodyPart();
+//            pdfBodyPart.setDataHandler(new DataHandler(dataSource));
+//            pdfBodyPart.setFileName("Shark Media Job Card.pdf");
+//                         
+//            //construct the mime multi part
+//            MimeMultipart mimeMultipart = new MimeMultipart();
+//            mimeMultipart.addBodyPart(textBodyPart);
+//            //mimeMultipart.addBodyPart(pdfBodyPart);
+//             
+//            //create the sender/recipient addresses
+//            InternetAddress iaSender = new InternetAddress(sender);
+//            InternetAddress iaRecipient = new InternetAddress(recipient);
+//             
+//            //construct the mime message
+//            MimeMessage mimeMessage = new MimeMessage(session);
+//            mimeMessage.setSender(iaSender);
+//            mimeMessage.setSubject(subject);
+//            mimeMessage.setRecipient(Message.RecipientType.TO, iaRecipient);
+//            mimeMessage.setContent(mimeMultipart);
+//             
+//            //send off the email
+//            Transport.send(mimeMessage);
+//             
+//            System.out.println("sent from " + sender + 
+//                    ", to " + recipient + 
+//                    "; server = " + smtpHost + ", port = " + smtpPort);         
         } catch(Exception ex) {
             ex.printStackTrace();
         } finally {
