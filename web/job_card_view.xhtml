@@ -56,11 +56,15 @@
                             <f:setPropertyActionListener target="#{job_cardBean.status}" value="#{'Delivered'}"/>
                             <f:setPropertyActionListener target="#{job_cardBean.prev_job_card}" value="#{item}"/>
                         </p:commandLink>
-                        <p:commandLink  value=" | Cancel" process="@this" update=":form_change_job_card_status" oncomplete="PF('Dialog_Change_Job_Card_Status').show();" rendered="#{item.status=='Captured'}">
-                            <f:setPropertyActionListener target="#{job_cardBean.status}" value="#{'Cancelled'}"/>
-                            <f:setPropertyActionListener target="#{job_cardBean.prev_job_card}" value="#{item}"/>
+                        <p:commandLink  value=" | Cancel" process="@this" actionListener="#{job_cardBean.delete(item, loginBean.user_detail)}" update=":form_change_job_card_status,@form" rendered="#{item.status=='Captured' and (loginBean.user_detail.is_user_gen_admin=='1')}">
+                            <p:confirm header="Confirmation" message="Are you sure you want to cancel this job?" icon="ui-icon-alert" />
                         </p:commandLink>
-                        <p:commandLink  value=" | Edit"  process="@this" actionListener="#{job_cardBean.edit(job_cardBean.getJob_card(item.job_card_id))}" rendered="#{loginBean.user_detail.is_user_gen_admin == '1'}" update=":form_edit_job_card" action="edit_job_card?faces-redirect=true"/>                           
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Yes" actionListener="#{job_cardBean.delete(item, loginBean.user_detail)}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>                           
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>                                               
+
+                        <p:commandLink  value=" | Edit"  process="@this" actionListener="#{job_cardBean.edit(job_cardBean.getJob_card(item.job_card_id))}" rendered="#{loginBean.user_detail.is_user_gen_admin == '1' and (item.status !='Delivered')}" action="edit_job_card?faces-redirect=true"/>                           
                     </p:column>
                     <p:column headerText="Comments">
                         #{job_cardBean.get_job_status_comments(item)} 
@@ -72,7 +76,7 @@
         <ui:include src="dialog_view_job_card.xhtml"/>
         <ui:include src="dialog_change_job_card_status.xhtml"/> 
         <ui:include src="dialog_create_delivery_note.xhtml"/>
-        <ui:include src="dialog_edit_job_card.xhtml"/>
+        
         <p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;">
             <f:facet name="default">
                 <h:outputText value="Status: StandBy" />
@@ -92,7 +96,7 @@
         <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
             <p:graphicImage name="/images/ajax-loader.gif" />
         </p:dialog>
-        
+
     </ui:define>
 
 </ui:composition>

@@ -12,6 +12,8 @@
             <f:event listener="#{job_cardBean.initializelist()}" type="preRenderView" />
             <f:event listener="#{customer_detailBean.init()}" type="preRenderView" />
             <f:event listener="#{customer_detailBean.initializelist()}" type="preRenderView" />            
+            <f:event listener="#{contact_person_detailBean.init()}" type="preRenderView" />
+            <f:event listener="#{contact_person_detailBean.initializelist()}" type="preRenderView" />            
         </f:metadata>
     </ui:define>
     <ui:define name="content">
@@ -29,10 +31,6 @@
                                                 converter="customer_detailConverter" forceSelection="true" maxResults="8">
                                     <p:column headerText="Customer Name" style="text-align: left">
                                         <h:outputText value="#{customer_detail.customer_name}">
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:column headerText="Contact Person Name" style="text-align: left; font-weight: bolder">
-                                        <h:outputText value="#{customer_detail.contact_person_name}">
                                         </h:outputText>
                                     </p:column>
                                     <p:column headerText="Telephone1" style="text-align: left">
@@ -57,9 +55,9 @@
                         <tr>
                             <td><h:outputLabel value="Contact Person:" style="font-weight: bolder"/></td>
                             <td>
-                                <h:selectOneMenu id="contact_person" value="#{job_cardBean.selected.customer_detail.contact_person_name}" converter="customer_detailConverter" required="true" requiredMessage="Paper Type field is required">
+                                <h:selectOneMenu id="contact_person" value="#{contact_person_detailBean}" required="true" requiredMessage="Contact person field is required">
                                     <f:selectItem itemLabel="Please Select" />                                    
-                                    <f:selectItems value="#{customer_detailBean.tsActive}" var="item" itemLabel="#{item.contact_person_name}" itemValue="#{item}"/>
+                                    <f:selectItems value="#{contact_person_detailBean.tsActive}" var="item" itemLabel="#{item.contact_person_name}" itemValue="#{item}"/>
                                     <f:ajax execute="@this"/>
                                 </h:selectOneMenu>                            
                             </td>
