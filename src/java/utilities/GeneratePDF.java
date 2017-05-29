@@ -25,6 +25,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.mail.Message;
@@ -39,6 +41,7 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 import models.Job_card;
 import models.Job_card_item;
+import org.orm.PersistentException;
 
 /**
  *
@@ -48,7 +51,11 @@ public class GeneratePDF {
 
     public static void main(String[] args) {
         GeneratePDF demo = new GeneratePDF();
-        demo.email(null, "", "", "");
+        try {
+            demo.email(Job_card.getJob_cardByORMID(72), "Test", "newtonajuna@gmail.com", "Ajuna");
+        } catch (PersistentException ex) {
+            Logger.getLogger(GeneratePDF.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void writePdf(OutputStream outputStream, Job_card previous_job_card) throws Exception {
@@ -56,8 +63,9 @@ public class GeneratePDF {
         float[] job_card_columnWidths = {4, 7, 3};
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, outputStream);
-        PdfWriter.getInstance(document, new FileOutputStream("e:/Job Card.pdf"));
-        Image image = Image.getInstance("e://OneDrive/PROJECTS/NetBeansProjects/JobCard/web/resources/images/logo.png");
+        //PdfWriter.getInstance(document, new FileOutputStream("e:/Job Card.pdf"));
+        //Image image = Image.getInstance("e://OneDrive/PROJECTS/NetBeansProjects/JobCard/web/resources/images/logo.png");
+        Image image = Image.getInstance("src/java/images/logo.png");
         image.scalePercent(23f);
         Font font1 = new Font(Font.BOLD);
         Font font2 = new Font(Font.BOLD);
@@ -130,6 +138,7 @@ public class GeneratePDF {
         pdfPTable.addCell(amount);
 
         List<Job_card_item> job_card_items = new ArrayList<>(previous_job_card.getJob_card_item());
+        int total = 0;
         for (Job_card_item job_card_item : job_card_items) {
             PdfPCell item_details = new PdfPCell(new Phrase(job_card_item.getItem_type().getItem_type_name(), font1));
             item_details.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -146,53 +155,60 @@ public class GeneratePDF {
                     + "Other processes: " + job_card_item.getOther_processes() + "\n"));
             PdfPCell qty_details = new PdfPCell(new Phrase(job_card_item.getQuantity()));
             qty_details.setHorizontalAlignment(Element.ALIGN_CENTER);
-            pdfPTable.addCell(qty_details);
+            //pdfPTable.addCell(qty_details);
+            pdfPTable.addCell(String.format("%,d", job_card_item.getQuantity()));
 
             PdfPCell uc_details = new PdfPCell(new Phrase(job_card_item.getRate()));
             uc_details.setHorizontalAlignment(Element.ALIGN_CENTER);
-            pdfPTable.addCell(uc_details);
+            //pdfPTable.addCell(uc_details);
+            pdfPTable.addCell(String.format("%,d", job_card_item.getRate()));
 
             PdfPCell amount_details = new PdfPCell(new Phrase(job_card_item.getAmount()));
             amount_details.setHorizontalAlignment(Element.ALIGN_CENTER);
-            pdfPTable.addCell(amount_details);
+            //pdfPTable.addCell(amount_details);
+            pdfPTable.addCell(String.format("%,d", job_card_item.getAmount()));
 
-            PdfPCell footer1 = new PdfPCell(new Phrase(""));
-            footer1.setBackgroundColor(Color.LIGHT_GRAY);
-            pdfPTable.addCell(footer1);
-
-            PdfPCell footer2 = new PdfPCell(new Phrase(""));
-            footer2.setBackgroundColor(Color.LIGHT_GRAY);
-            pdfPTable.addCell(footer2);
-
-            PdfPCell footer3 = new PdfPCell(new Phrase(""));
-            footer3.setBackgroundColor(Color.LIGHT_GRAY);
-            pdfPTable.addCell(footer3);
-
-            PdfPCell footer4 = new PdfPCell(new Phrase("TOTALS", font1));
-            footer4.setHorizontalAlignment(Element.ALIGN_CENTER);
-            footer4.setBackgroundColor(Color.LIGHT_GRAY);
-            pdfPTable.addCell(footer4);
-
-            PdfPCell footer5 = new PdfPCell(new Phrase("10101"));
-            footer5.setHorizontalAlignment(Element.ALIGN_CENTER);
-            footer5.setBackgroundColor(Color.LIGHT_GRAY);
-            pdfPTable.addCell(footer5);
-
-            Paragraph job_manager = new Paragraph("Job Manager: " + previous_job_card.getJob_manager().getFirst_name() + "" + previous_job_card.getJob_manager().getSecond_name() + "" + previous_job_card.getJob_manager().getThird_name() + "                                 Signature: " + "\n");
-            Paragraph prepared_by = new Paragraph("Prepared By: " + previous_job_card.getAdd_by().getFirst_name() + "" + previous_job_card.getAdd_by().getSecond_name() + "" + previous_job_card.getAdd_by().getThird_name() + "\n\n");
-            Paragraph precaution1 = new Paragraph(new Phrase("               *Please READ AND UNDERSTAND the Job Card carefully before printing." + "\n" + "                                Please ask for details in case you don't understand" + "\n" + "                        The job manager is liable for all errors during the job process*", font2));
-
-            document.add(job_card);
-            document.add(sectionHeader1);
-            document.add(section4);
-            document.add(section5);
-            document.add(section6);
-            document.add(sectionHeader2);
-            document.add(pdfPTable);
-            document.add(job_manager);
-            document.add(prepared_by);
-            document.add(precaution1);
+            //Add total
+            total += job_card_item.getAmount();
         }
+
+        PdfPCell footer1 = new PdfPCell(new Phrase(""));
+        footer1.setBackgroundColor(Color.LIGHT_GRAY);
+        pdfPTable.addCell(footer1);
+
+        PdfPCell footer2 = new PdfPCell(new Phrase(""));
+        footer2.setBackgroundColor(Color.LIGHT_GRAY);
+        pdfPTable.addCell(footer2);
+
+        PdfPCell footer3 = new PdfPCell(new Phrase(""));
+        footer3.setBackgroundColor(Color.LIGHT_GRAY);
+        pdfPTable.addCell(footer3);
+
+        PdfPCell footer4 = new PdfPCell(new Phrase("TOTALS", font1));
+        footer4.setHorizontalAlignment(Element.ALIGN_CENTER);
+        footer4.setBackgroundColor(Color.LIGHT_GRAY);
+        pdfPTable.addCell(footer4);
+
+        PdfPCell footer5 = new PdfPCell(new Phrase("10101"));
+        footer5.setHorizontalAlignment(Element.ALIGN_CENTER);
+        footer5.setBackgroundColor(Color.LIGHT_GRAY);
+        //pdfPTable.addCell(footer5);
+        pdfPTable.addCell(String.format("%,d", total));
+
+        Paragraph job_manager = new Paragraph("Job Manager: " + previous_job_card.getJob_manager().getFirst_name() + " " + previous_job_card.getJob_manager().getSecond_name() + " " + previous_job_card.getJob_manager().getThird_name() + "                                 Signature: " + "\n");
+        Paragraph prepared_by = new Paragraph("Prepared By: " + previous_job_card.getAdd_by().getFirst_name() + " " + previous_job_card.getAdd_by().getSecond_name() + " " + previous_job_card.getAdd_by().getThird_name() + "\n\n");
+        Paragraph precaution1 = new Paragraph(new Phrase("               *Please READ AND UNDERSTAND the Job Card carefully before printing." + "\n" + "                                Please ask for details in case you don't understand" + "\n" + "                        The job manager is liable for all errors during the job process*", font2));
+
+        document.add(job_card);
+        document.add(sectionHeader1);
+        document.add(section4);
+        document.add(section5);
+        document.add(section6);
+        document.add(sectionHeader2);
+        document.add(pdfPTable);
+        document.add(job_manager);
+        document.add(prepared_by);
+        document.add(precaution1);
         document.close();
     }
 

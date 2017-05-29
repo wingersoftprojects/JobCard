@@ -230,9 +230,9 @@ public class Group_rightBean extends AbstractBean<Group_right> implements Serial
                 grl = (List<Group_right>) JobCardPersistentManager.instance().getSession().createQuery(""
                         + "SELECT gr FROM Group_right gr WHERE gr.group_detail IN("
                         + "SELECT gu.group_detail FROM Group_user gu"
-                        + "INNER JOIN gu.group_detail gd"
-                        + "WHERE gd.is_active=1 and gd.is_deleted=0"
-                        + "AND gu.user_detail=" + user_detail.getUser_detail_id() + ")"
+                        + " INNER JOIN gu.group_detail gd"
+                        + " WHERE gd.is_active=1 and gd.is_deleted=0"
+                        + " AND gu.user_detail=" + user_detail.getUser_detail_id() + ")"
                         + "").list();
             }
         } catch (PersistentException ex) {
