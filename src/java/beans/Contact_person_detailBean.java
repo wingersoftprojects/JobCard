@@ -19,6 +19,7 @@ import models.Contact_person_detail;
 import models.Customer_detail;
 import models.JobCardPersistentManager;
 import models.User_detail;
+import org.hibernate.HibernateException;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
@@ -53,6 +54,7 @@ public class Contact_person_detailBean extends AbstractBean<Contact_person_detai
     public void setLoginBean(LoginBean loginBean) {
         this.loginBean = loginBean;
     }
+
     public void SaveContact_person_details() {
         try {
             PersistentTransaction transaction = JobCardPersistentManager.instance().getSession().beginTransaction();
@@ -69,6 +71,7 @@ public class Contact_person_detailBean extends AbstractBean<Contact_person_detai
             java.util.logging.Logger.getLogger(Contact_person_detailBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public Contact_person_detail getContact_person_detail_by_ID(int cpdi) {
         Contact_person_detail cpd = new Contact_person_detail();
         try {
@@ -81,6 +84,32 @@ public class Contact_person_detailBean extends AbstractBean<Contact_person_detai
         return cpd;
     }
 
+    public List<Contact_person_detail> getts(Customer_detail customer_detail) {
+        List<Contact_person_detail> contact_person_detailList = new ArrayList<>();
+        try {
+            if (this.getEntityClass() != null && customer_detail != null) {
+                contact_person_detailList = Contact_person_detail.queryContact_person_detail("customer_detail=" + customer_detail.getCustomer_detail_id(), null);
+//                (List<Contact_person_detail>) JobCardPersistentManager.instance().getSession().createQuery("select d FROM Contact_person_detail  d where d.is_deleted<>1 AND d.customer_detail" + customer_detail.getCustomer_detail_id()).list();
+
+            } else {
+                contact_person_detailList = new ArrayList<>();
+            }
+        } catch (PersistentException | HibernateException ex) {
+            Logger.getLogger(AbstractBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return contact_person_detailList;
+    }
+    public List<Contact_person_detail> completeContact_person_detail(String query) {
+        List<Contact_person_detail> filteredContact_person_details = new ArrayList<>();
+        try {
+            String sql = "select de FROM Contact_person_detail  de where de.is_deleted<>1 AND ( de.contact_person_telephone1 like '%" + query + "%' OR de.contact_person_telephone2 like '%" + query + "%')";
+            filteredContact_person_details = (List<Contact_person_detail>) JobCardPersistentManager.instance().getSession().createQuery(sql).list();
+        } catch (PersistentException ex) {
+            Logger.getLogger(Contact_person_detailBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filteredContact_person_details;
+    }
+    
     @Override
     public void save(User_detail aUserDetailId) {
         try {
@@ -130,5 +159,5 @@ public class Contact_person_detailBean extends AbstractBean<Contact_person_detai
     public void setContact_person_details(List<Contact_person_detail> contact_person_details) {
         this.contact_person_details = contact_person_details;
     }
-    
+
 }

@@ -36,6 +36,7 @@
                     <p:outputLabel value=""/>
                 </h:panelGrid>
                 <h:panelGrid columns="1">
+                    <p:outputLabel value="" style="font-weight: bolder; font-size: larger; font-style: italic;"/>
                     <p:outputLabel value="Job Card" style="font-weight: bolder; font-size: larger; font-style: italic;"/>
                     <p:outputLabel value="Date: #{job_cardBean.selected.job_date}">
                         <f:convertDateTime pattern="#{company_settingBean.company_setting.dateformat}" timeZone="#{company_settingBean.company_setting.timezone}"/>
@@ -50,6 +51,8 @@
                         <td><h:outputLabel value="Ms. (Company):" style="font-weight: bolder"/></td>
                         <td><h:outputLabel value="#{job_cardBean.selected.customer_detail.customer_name}"/>
                         </td>
+                    </tr>
+                    <tr>
                         <td>
                             <h:outputLabel value="Job Card Date:" style="font-weight: bolder"/>
                         </td>
@@ -58,8 +61,7 @@
                                 <f:convertDateTime pattern="#{company_settingBean.company_setting.dateformat}" timeZone="#{company_settingBean.company_setting.timezone}"/>
                             </h:outputLabel>
                         </td>
-                    </tr>
-                    <tr>
+
                         <td>
                             <h:outputLabel value="Due Date:" style="font-weight: bolder"/>
                         </td>
@@ -84,7 +86,7 @@
                 </table>
             </fieldset>
             <fieldset>
-                 
+
                 <legend>JOB DETAILS</legend>
                 <fieldset>
                     <legend>Final Product Details (For delivery and Invoicing Purposes)</legend>
@@ -98,11 +100,11 @@
                             <h:outputText value="Size:#{item.paper_size}"/><br/>
                             <h:outputText value="Pages:#{item.pages}"/><br/>
                             <h:outputText value="Paper:#{item.paper_type.paper_type_category} #{item.paper_type.paper_type_sub_category}"/><br/>
+                            <h:outputText value="Cover:#{item.cover_type.cover_type_name}" rendered="#{item.cover_type!=null}"/><br/>                            
                             <h:outputText value="Color:#{item.color}"/><br/>
                             <h:outputText value="Machine:#{item.machine_used}"/><br/>
                             <h:outputText value="Laminating:#{item.lamination_type}"/><br/>
                             <h:outputText value="Binding:#{item.binding_type}"/><br/>
-                            <h:outputText value="Cover:#{item.cover_type.cover_type_name}" rendered="#{item.cover_type!=null}"/><br/>
                             <h:outputText value="Other processes:#{item.other_processes}"/><br/> 
                         </p:column>
                         <p:column headerText="QTY">
@@ -149,25 +151,29 @@
                                 <p:outputLabel value="Prepared By: " style="font-weight: bolder"/>
                                 <h:outputText value="#{job_cardBean.selected.add_by.first_name} #{job_cardBean.selected.add_by.second_name}"/>
                             </td>
+                            <td>
+                                <p:outputLabel value="Job Priority: " style="font-weight: bolder"/>
+                                <h:outputText value="#{job_cardBean.job_card_item.priority}"/>
+                            </td>
                             <td></td>
-                           
+
                         </tr>
                     </table><br></br>
                     <table>
                         <tr>
-                        <footer id="notice">
-                            <center>
-                            <h:outputText value="*Please READ AND UNDERSTAND the Job Card carefully before printing." style="font-weight: bolder; color: tomato"/>                          
-                            <center>
-                            <h:outputText value="Please ask for details in case you don't understand" style="font-weight: bolder; color: tomato"/>                          
-                            </center>
-                            <h:outputText value="The job manager is liable for all errors during the job process*" style="font-weight: bolder; color: tomato"/>                                                      
-                            </center>
-                        </footer>
+                            <footer id="notice">
+                                <center>
+                                    <h:outputText value="*Please READ AND UNDERSTAND the Job Card carefully before printing." style="font-weight: bolder; color: tomato"/>                          
+                                    <center>
+                                        <h:outputText value="Please ask for details in case you don't understand" style="font-weight: bolder; color: tomato"/>                          
+                                    </center>
+                                    <h:outputText value="The job manager is liable for all errors during the job process*" style="font-weight: bolder; color: tomato"/>                                                      
+                                </center>
+                            </footer>
                         </tr>                       
                     </table>
                 </fieldset>
-                
+
             </fieldset>
         </p:panel>
     </ui:composition>

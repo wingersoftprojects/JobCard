@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./layout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:event listener="#{job_cardBean.init()}" type="preRenderView" />
+            <f:event listener="#{job_cardBean.initializelist()}" type="preRenderView" />
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="content">
+        <f:view>
+            <h:form id="form_delivery_note_view">
+                <p:dataTable id="delivery_note_table" widgetVar="delivery_note_table" value="#{job_cardBean.ts}" var="item" rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15,30,50,100">
+                    <p:column headerText="Customer Name" filterMatchMode="contains" filterBy="#{item.customer_detail.customer_name}" style="width: 20px">
+                        #{item.customer_detail.customer_name}
+                    </p:column>
+                    <p:column headerText="Job Card Number">
+                        #{item.job_card_id}
+                    </p:column>
+                    <p:column headerText="Delivery Note Number">
+                        
+                    </p:column>                   
+                    <p:column headerText="Delivery Date">
+                      #{item.add_date}  
+                    </p:column>
+                    <p:column headerText="Delivered By">
+                       #{item.delivered_by} 
+                    </p:column>
+                    <p:column headerText="">
+                        <p:commandLink id="view_delivery_note" value="View" process="@this" actionListener="#{job_cardBean.view_delivery_note(item.job_card_id)}" update="form_view_delivery_note" oncomplete="PF('Dialog_View_Delivery_Note').show();">
+                        </p:commandLink>                       
+                    </p:column>
+                </p:dataTable>              
+            </h:form>
+        </f:view>  
+        <ui:include src="dialog_view_delivery_note.xhtml"/>
+        <p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;">
+            <f:facet name="default">
+                <h:outputText value="Status: StandBy" />
+            </f:facet>
+
+            <f:facet name="start">
+
+            </f:facet>
+
+            <f:facet name="complete">
+                <h:outputText value="Status: Completed" />
+            </f:facet>
+        </p:ajaxStatus>
+
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <p:graphicImage name="/images/ajax-loader.gif" />
+        </p:dialog>
+
+    </ui:define>
+
+</ui:composition>
+

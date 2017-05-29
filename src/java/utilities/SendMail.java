@@ -10,14 +10,9 @@ package utilities;
  * @author bajuna
  */
 import beans.Company_settingBean;
-import java.io.File;
-import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.mail.*;
 import javax.mail.internet.*;
-import resources.Image;
 
 public class SendMail {
 
@@ -60,10 +55,10 @@ public class SendMail {
             cb.init();
             MimeBodyPart htmlPart = new MimeBodyPart();
             String htmlContent = "<html>"
-                    + "<div style='padding:10px;background:#EC4A24;font-size:15px;color:#ffffff;font-weight:1000'>"
+                    + "<div style='padding:10px;background:#ffffff;font-size:15px;color:#000000;font-weight:1000'>"
                     + "<p>Dear,</p>"
                     + "<p>Please note that your printing Job with SHARK Media is Ready</p>"
-                    + "<p>Regards<br/>SHARK MEDIA TEAM<br/><img src='http://sharkmediaug.com/wp-content/themes/Scyllalite/images/shark-logo.png'></img></p>"
+                    + "<p>Regards<br/>SHARK MEDIA TEAM<br/><img src='../resources/images/logo_email.png'></img></p>"
                     + "</div>"
                     + "</html>";
             htmlPart.setContent(htmlContent, "text/html");
@@ -107,10 +102,139 @@ public class SendMail {
 
         MimeBodyPart htmlPart = new MimeBodyPart();
         String htmlContent = "<html>"
-                + "<div style='padding:10px;background:#EC4A24;font-size:15px;color:#ffffff;font-weight:1000'>"
+                + "<div style='padding:10px;background:#ffffff;font-size:15px;color:#000000;font-weight:1000'>"
                 + "<p>Dear " + contact_person + ",</p>"
                 + "<p>" + email_body + "</p>"
-                + "<p>Regards<br/>SHARK MEDIA TEAM<br/><img src='http://sharkmediaug.com/wp-content/themes/Scyllalite/images/shark-logo.png'></img></p>"
+                + "<p>Best Regards<br/>SHARK MEDIA TEAM<br/><img src='../resources/images/logo_email.png'></img></p>"
+                + "</div>"
+                + "</html>";
+        htmlPart.setContent(htmlContent, "text/html");
+        multipart.addBodyPart(htmlPart);
+
+        message.setContent(multipart);
+
+        //send the message  
+        Transport.send(message);
+        System.out.println("message sent successfully...");
+    }
+    public void send_job_mail(String email_body, String email_to, String contact_person) throws MessagingException {
+        String host = "mail.wingersoft.co.ug";
+        final String user = "info@wingersoft.co.ug";//change accordingly  
+        final String password = "Rhythm123";//change accordingly  
+
+        String to = "newtonajuna@gmail.com";//change accordingly  
+
+        //Get the session object  
+        Properties props = new Properties();
+        props.put("mail.smtp.starttls.enable", "false");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.host", "mail.wingersoft.co.ug");
+        props.put("mail.smtp.port", "26");
+        Session session = Session.getDefaultInstance(props,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(user, password);
+            }
+        });
+        Multipart multipart = new MimeMultipart("alternative");
+        MimeMessage message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(user));
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(email_to));
+        message.setSubject("RE:Status of your print Job");
+
+        MimeBodyPart htmlPart = new MimeBodyPart();
+        String htmlContent = "<html>"
+                + "<div style='padding:10px;background:#ffffff;font-size:15px;color:#000000;font-weight:1000'>"
+                + "<p>Dear " + contact_person + ",</p>"
+                + "<p>" + email_body + "</p>"                
+                + "<p>Thank you for printing with us</p>"                
+                + "<p>Best Regards<br/>SHARK MEDIA TEAM<br/><img src='../resources/images/logo_email.png'></img></p>"
+                + "</div>"
+                + "</html>";
+        htmlPart.setContent(htmlContent, "text/html");
+        multipart.addBodyPart(htmlPart);
+
+        message.setContent(multipart);
+
+        //send the message  
+        Transport.send(message);
+        System.out.println("message sent successfully...");
+    }
+    public void send_ready_mail(String email_body, String email_to, String contact_person) throws MessagingException {
+        String host = "mail.wingersoft.co.ug";
+        final String user = "info@wingersoft.co.ug";//change accordingly  
+        final String password = "Rhythm123";//change accordingly  
+
+        String to = "newtonajuna@gmail.com";//change accordingly  
+
+        //Get the session object  
+        Properties props = new Properties();
+        props.put("mail.smtp.starttls.enable", "false");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.host", "mail.wingersoft.co.ug");
+        props.put("mail.smtp.port", "26");
+        Session session = Session.getDefaultInstance(props,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(user, password);
+            }
+        });
+        Multipart multipart = new MimeMultipart("alternative");
+        MimeMessage message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(user));
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(email_to));
+        message.setSubject("RE:Your Work is Ready");
+
+        MimeBodyPart htmlPart = new MimeBodyPart();
+        String htmlContent = "<html>"
+                + "<div style='padding:10px;background:#ffffff;font-size:15px;color:#000000;font-weight:1000'>"
+                + "<p>Dear " + contact_person + ",</p>"
+                + "<p>" + email_body + "</p>"
+                + "<p>Thank you for printing with us</p>"
+                + "<p>Regards<br/>SHARK MEDIA TEAM<br/><img src='../resources/images/logo_email.png'></img></p>"
+                + "</div>"
+                + "</html>";
+        htmlPart.setContent(htmlContent, "text/html");
+        multipart.addBodyPart(htmlPart);
+
+        message.setContent(multipart);
+
+        //send the message  
+        Transport.send(message);
+        System.out.println("message sent successfully...");
+    }
+    public void send_delivery_mail(String email_body, String email_to, String contact_person) throws MessagingException {
+        String host = "mail.wingersoft.co.ug";
+        final String user = "info@wingersoft.co.ug";//change accordingly  
+        final String password = "Rhythm123";//change accordingly  
+
+        String to = "newtonajuna@gmail.com";//change accordingly  
+
+        //Get the session object  
+        Properties props = new Properties();
+        props.put("mail.smtp.starttls.enable", "false");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.host", "mail.wingersoft.co.ug");
+        props.put("mail.smtp.port", "26");
+        Session session = Session.getDefaultInstance(props,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(user, password);
+            }
+        });
+        Multipart multipart = new MimeMultipart("alternative");
+        MimeMessage message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(user));
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(email_to));
+        message.setSubject("RE:Dispatched,Your work is on the way");
+
+        MimeBodyPart htmlPart = new MimeBodyPart();
+        String htmlContent = "<html>"
+                + "<div style='padding:10px;background:#ffffff;font-size:15px;color:#000000;font-weight:1000'>"
+                + "<p>Dear " + contact_person + ",</p>"
+                + "<p>" + email_body + "</p>"
+                + "<p>Thank you for printing with us</p>"
+                + "<p>Regards<br/>SHARK MEDIA TEAM<br/><img src='../resources/images/logo_email.png'></img></p>"
                 + "</div>"
                 + "</html>";
         htmlPart.setContent(htmlContent, "text/html");

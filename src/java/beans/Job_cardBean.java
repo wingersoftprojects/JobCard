@@ -5,6 +5,21 @@
  */
 package beans;
 
+import com.lowagie.text.Chunk;
+import com.lowagie.text.Document;
+import com.lowagie.text.Element;
+import com.lowagie.text.Font;
+import com.lowagie.text.Image;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.Rectangle;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+import java.awt.Color;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -12,12 +27,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.util.ByteArrayDataSource;
 import models.Contact_person_detail;
 import models.Customer_detail;
 import models.JobCardPersistentManager;
@@ -30,7 +47,7 @@ import models.User_detail;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 import org.primefaces.context.RequestContext;
-import utilities.GeneralUtilities;
+import utilities.GeneratePDF;
 import utilities.SendMail;
 import utilities.Sender;
 
@@ -48,6 +65,24 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
     private Job_card_status job_card_status;
     private String status = "";
     private String comment = "";
+    private Customer_detail selectedCustomer_detail;
+    private Contact_person_detail selectedContact_person_detail;
+
+    public Customer_detail getSelectedCustomer_detail() {
+        return selectedCustomer_detail;
+    }
+
+    public void setSelectedCustomer_detail(Customer_detail selectedCustomer_detail) {
+        this.selectedCustomer_detail = selectedCustomer_detail;
+    }
+
+    public Contact_person_detail getSelectedContact_person_detail() {
+        return selectedContact_person_detail;
+    }
+
+    public void setSelectedContact_person_detail(Contact_person_detail selectedContact_person_detail) {
+        this.selectedContact_person_detail = selectedContact_person_detail;
+    }
 
     public String getStatus() {
         return status;
@@ -127,6 +162,19 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
 
     public void setLoginBean(LoginBean loginBean) {
         this.loginBean = loginBean;
+    }
+
+    public List<Contact_person_detail> getContact_person_details_by_customer_detailID(String customer_detailID) {
+        try {
+            if (customer_detailID.length() > 0) {
+                return Contact_person_detail.queryContact_person_detail("is_active=1 and is_deleted=0 and customer_detail_id='" + customer_detailID + "'", null);
+            } else {
+                return null;
+            }
+        } catch (PersistentException | NullPointerException ex) {
+            Logger.getLogger(Contact_person_detailBean.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     public List<Customer_detail> completeCustomer_detail(String query) {
@@ -278,12 +326,13 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
             add();
             loginBean.saveMessage();
             try {
-                new SendMail().send_mail("Please note that you have a new job assigned to you. Login to view the job details. Thank You ", prev_job_card.getJob_manager().getEmail(), prev_job_card.getJob_manager().getFirst_name() + " " + prev_job_card.getJob_manager().getSecond_name());
-
+                //new SendMail().send_mail("Please note that you have a new job assigned to you. Attached are the job details. ", prev_job_card.getJob_manager().getEmail(), prev_job_card.getJob_manager().getFirst_name() + " " + prev_job_card.getJob_manager().getSecond_name());
+                GeneratePDF generatePDF = new GeneratePDF();
+                generatePDF.email(prev_job_card, "Please note that you have a new job assigned to you. Attached are the job details. ", prev_job_card.getJob_manager().getEmail(), prev_job_card.getJob_manager().getFirst_name() + " " + prev_job_card.getJob_manager().getSecond_name());
                 try {
-                    Sender s = new Sender("121.241.242.114", 8080, "wing-phillip", "phillip1", "Please note that your job at SHARK Media has commenced. Thank You", "1", "0", "256706267475" , "SHARK-MEDIA");
+                    Sender s = new Sender("121.241.242.114", 8080, "wing-phillip", "phillip1", "Please note that your job at SHARK Media has commenced. Thank You", "1", "0", "256706267475", "SHARK-MEDIA");
                     s.submitMessage();
-                    new SendMail().send_mail("Please note that your job at SHARK Media has commenced. Thank You ", prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
+                    new SendMail().send_job_mail("Please note that your print Job at Shark Media has started. \n" + "You will be notified once its ready for delivery. ", prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
                 } catch (Exception ex) {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", ex.getMessage());
                     RequestContext.getCurrentInstance().showMessageInDialog(message);
@@ -311,6 +360,15 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
     }
 
     public void view_job_card(int job_card_id) {
+        try {
+            this.setSelected(Job_card.getJob_cardByORMID(job_card_id));
+            job_card_items = new ArrayList<>(this.getSelected().getJob_card_item());
+        } catch (PersistentException ex) {
+            Logger.getLogger(Job_cardBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void view_delivery_note(int job_card_id) {
         try {
             this.setSelected(Job_card.getJob_cardByORMID(job_card_id));
             job_card_items = new ArrayList<>(this.getSelected().getJob_card_item());
@@ -352,16 +410,17 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
                 try {
                     //String contact = "+256" + prev_job_card.getCustomer_detail().getContact_person_telephone1().substring(1).replace("(", "").replace(")", "").replace(" ", "").replace("-", "");
                     if ("Ready".equals(status)) {
-                        Sender s = new Sender("121.241.242.114", 8080, "wing-phillip", "phillip1", "Please note that the printing job at SHARK Media is ready for delivery", "1", "0", "256706267475" , "SHARK-MEDIA");
+                        Sender s = new Sender("121.241.242.114", 8080, "wing-phillip", "phillip1", "Please note that the printing job at SHARK Media is ready for delivery", "1", "0", "256706267475", "SHARK-MEDIA");
                         s.submitMessage();
                         //new GeneralUtilities().send_sms(contact, "Please note that the printing job at SHARK Media is ready for delivery");
-                        new SendMail().send_mail("Please note that the printing job at SHARK Media is ready for delivery", prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
+                        new SendMail().send_ready_mail("We are happy to inform you that your work is ready for delivery.\n"
+                                + "We shall send you the delivery details shortly.", prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
                     }
                     if ("Delivered".equals(status)) {
                         //new GeneralUtilities().send_sms(contact, "Please note that the printing job at SHARK Media has been delivered");
                         Sender s = new Sender("121.241.242.114", 8080, "wing-phillip", "phillip1", "Please note that the printing job at SHARK Media has been delivered", "1", "0", "25670267475", "SHARK-MEDIA");
                         s.submitMessage();
-                        new SendMail().send_mail("Please note that the printing job at SHARK Media has been delivered<br/> By: " + prev_job_card.getDelivered_by() + " <br/> Telephone: " + prev_job_card.getDelivered_by_phone_number(), prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
+                        new SendMail().send_delivery_mail("Please note that your work has been dispatched from our Offices, and will be delivered<br/> By: " + prev_job_card.getDelivered_by() + " <br/> Telephone: " + prev_job_card.getDelivered_by_phone_number(), prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
                     }
                 } catch (Exception ex) {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", ex.getMessage());

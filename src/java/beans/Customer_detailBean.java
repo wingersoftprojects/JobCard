@@ -8,6 +8,7 @@ package beans;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -90,6 +91,26 @@ public class Customer_detailBean extends AbstractBean<Customer_detail> implement
         return cd;
     }
 
+        public List<Customer_detail> getCustomer_details_by_user() {
+        try {
+            if (loginBean.getUser_detail().getIs_user_gen_admin() == 1) {
+                return this.getTsActive();
+            } else {
+                String RFIDs = "";
+                
+                if (RFIDs.length() > 0) {
+                    return Customer_detail.queryCustomer_detail("is_active=1 and is_deleted=0 and customer_detail_id IN(" + RFIDs + ")", null);
+                } else {
+                    return null;
+                }
+            }
+        } catch (PersistentException ex) {
+            Logger.getLogger(Customer_detailBean.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    
     @Override
     public void save(User_detail aUserDetailId) {
         try {

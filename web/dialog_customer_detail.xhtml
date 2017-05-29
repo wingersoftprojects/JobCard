@@ -7,9 +7,11 @@
 
     <ui:composition>
         <p:dialog id="Dlg_customer_detail" widgetVar="Dialog_Customer_Detail" modal="true" resizable="false"  appendTo="@(body)" header="Customer Detail Dialog">
+            <p:scrollPanel mode="native" style="height: 600px">
             <h:form id="form_customer_detail">
                 <ui:include src="templates/create_customer_detail.xhtml"/>
             </h:form>
+            </p:scrollPanel>
         </p:dialog>
     </ui:composition>
 </html>

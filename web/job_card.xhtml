@@ -125,7 +125,20 @@
                                 </p:autoComplete>  
                             </td>
                             <td></td>
-                            <td></td>
+                                                    <tr>
+                            <td>
+                                <h:outputLabel value="Priority"/>
+                            </td>
+                            <td>
+                                <p:selectOneRadio id="job_priority" value="#{job_cardBean.job_card_item.priority}" required="true" requiredMessage="Priority field is required!">
+                                <f:selectItem itemLabel="Urgent" itemValue="Urgent" />
+                                <f:selectItem itemLabel="Critical" itemValue="Critical" />
+                                <f:selectItem itemLabel="Normal" itemValue="Normal" />
+                                <p:ajax process="@this"/>
+                            </p:selectOneRadio>
+                            </td>
+                        </tr>
+
                         </tr>
                     </table>
                     <br/>
@@ -262,6 +275,7 @@
                                 <p:selectOneRadio id="machine_used" value="#{job_cardBean.job_card_item.machine_used}" required="true" requiredMessage="Machine used field is required!">
                                     <f:selectItem itemLabel="Digital Machine" itemValue="Digital Machine" />
                                     <f:selectItem itemLabel="Offset Machine" itemValue="Offset Machine" />
+                                    <f:selectItem itemLabel="Large Format" itemValue="Large Format" />
                                     <p:ajax process="@this"/>
                                 </p:selectOneRadio>
                             </td>
