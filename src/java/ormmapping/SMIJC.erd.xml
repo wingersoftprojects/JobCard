@@ -171,6 +171,18 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
+    <Column name="contact_person_detail_id">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>contact_person_detail.contact_person_detail_id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>10</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>assigned</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
   </Entity>
   <Entity name="job_card_item" PKClustered="0">
     <Column name="job_card_item_id">
@@ -528,7 +540,7 @@
       <ForeignKey>false</ForeignKey>
       <Type>27</Type>
       <Length>100</Length>
-      <Nullable>false</Nullable>
+      <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -2970,6 +2982,16 @@
     </Columns>
     <RefColumns>
       <Column>customer_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKjob_card562906">
+    <ReferenceTable>job_card</ReferenceTable>
+    <ReferencedTable>contact_person_detail</ReferencedTable>
+    <Columns>
+      <Column>contact_person_detail_id</Column>
+    </Columns>
+    <RefColumns>
+      <Column>contact_person_detail_id</Column>
     </RefColumns>
   </ForeignKey>
 </Model>

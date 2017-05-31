@@ -76,11 +76,11 @@
                             <h:outputLabel value="Contact Person:" style="font-weight: bolder"/>
                         </td>
                         <td>
-                            <h:outputLabel value="#{job_cardBean.selected.customer_detail.contact_person_name}"/>
+                            <h:outputLabel value="#{job_cardBean.selected.contact_person_detail.contact_person_name}"/>
                         </td>
                         <td><h:outputLabel value="Telephone:" style="font-weight: bolder"/></td>
                         <td>
-                            <h:outputLabel value="#{job_cardBean.selected.customer_detail.telephone1}/#{job_cardBean.selected.customer_detail.telephone2}"/>
+                            <h:outputLabel value="#{job_cardBean.selected.contact_person_detail.contact_person_telephone1}/#{job_cardBean.selected.contact_person_detail.contact_person_telephone2}"/>
                         </td>
                     </tr>
                 </table>
@@ -150,10 +150,6 @@
                             <td>
                                 <p:outputLabel value="Prepared By: " style="font-weight: bolder"/>
                                 <h:outputText value="#{job_cardBean.selected.add_by.first_name} #{job_cardBean.selected.add_by.second_name}"/>
-                            </td>
-                            <td>
-                                <p:outputLabel value="Job Priority: " style="font-weight: bolder"/>
-                                <h:outputText value="#{job_cardBean.job_card_item.priority}"/>
                             </td>
                             <td></td>
 

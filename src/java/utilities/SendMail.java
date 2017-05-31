@@ -18,9 +18,9 @@ public class SendMail {
 
     public static void main(String[] args) {
 
-        String host = "mail.wingersoft.co.ug";
-        final String user = "info@wingersoft.co.ug";//change accordingly  
-        final String password = "Rhythm123";//change accordingly  
+        String host = "mail.sharkmediaug.com";
+        final String user = "info@sharkmediaug.com";//change accordingly  
+        final String password = "Havearide1";//change accordingly  
 
         String to = "newtonajuna@gmail.com";//change accordingly  
 
@@ -28,8 +28,8 @@ public class SendMail {
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "false");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.host", "mail.wingersoft.co.ug");
-        props.put("mail.smtp.port", "26");
+        props.put("mail.smtp.host", "mail.sharkmediaug.com");
+        props.put("mail.smtp.port", "25");
 //        props.put("mail.smtp.host", host);
 //        props.put("mail.smtp.auth", "true");
 
@@ -76,9 +76,9 @@ public class SendMail {
     }
 
     public void send_mail(String email_body, String email_to, String contact_person) throws MessagingException {
-        String host = "mail.wingersoft.co.ug";
-        final String user = "info@wingersoft.co.ug";//change accordingly  
-        final String password = "Rhythm123";//change accordingly  
+        String host = "mail.sharkmediaug.com";
+        final String user = "info@sharkmediaug.com";//change accordingly  
+        final String password = "Havearide1";//change accordingly  
 
         String to = "newtonajuna@gmail.com";//change accordingly  
 
@@ -86,8 +86,8 @@ public class SendMail {
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "false");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.host", "mail.wingersoft.co.ug");
-        props.put("mail.smtp.port", "26");
+        props.put("mail.smtp.host", "mail.sharkmediaug.com");
+        props.put("mail.smtp.port", "25");
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -118,9 +118,9 @@ public class SendMail {
         System.out.println("message sent successfully...");
     }
     public void send_job_mail(String email_body, String email_to, String contact_person) throws MessagingException {
-        String host = "mail.wingersoft.co.ug";
-        final String user = "info@wingersoft.co.ug";//change accordingly  
-        final String password = "Rhythm123";//change accordingly  
+        String host = "mail.sharkmediaug.com";
+        final String user = "info@sharkmediaug.com";//change accordingly  
+        final String password = "Havearide1";//change accordingly  
 
         String to = "newtonajuna@gmail.com";//change accordingly  
 
@@ -128,8 +128,8 @@ public class SendMail {
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "false");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.host", "mail.wingersoft.co.ug");
-        props.put("mail.smtp.port", "26");
+        props.put("mail.smtp.host", "mail.sharkmediaug.com");
+        props.put("mail.smtp.port", "25");
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -140,7 +140,7 @@ public class SendMail {
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(user));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(email_to));
-        message.setSubject("RE:Status of your print Job");
+        message.setSubject("Status of your print Job");
 
         MimeBodyPart htmlPart = new MimeBodyPart();
         String htmlContent = "<html>"
@@ -161,9 +161,9 @@ public class SendMail {
         System.out.println("message sent successfully...");
     }
     public void send_ready_mail(String email_body, String email_to, String contact_person) throws MessagingException {
-        String host = "mail.wingersoft.co.ug";
-        final String user = "info@wingersoft.co.ug";//change accordingly  
-        final String password = "Rhythm123";//change accordingly  
+        String host = "mail.sharkmediaug.com";
+        final String user = "info@sharkmediaug.com";//change accordingly  
+        final String password = "Havearide1";//change accordingly  
 
         String to = "newtonajuna@gmail.com";//change accordingly  
 
@@ -171,8 +171,8 @@ public class SendMail {
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "false");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.host", "mail.wingersoft.co.ug");
-        props.put("mail.smtp.port", "26");
+        props.put("mail.smtp.host", "mail.sharkmediaug.com");
+        props.put("mail.smtp.port", "25");
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -183,7 +183,7 @@ public class SendMail {
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(user));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(email_to));
-        message.setSubject("RE:Your Work is Ready");
+        message.setSubject("Your Work is Ready");
 
         MimeBodyPart htmlPart = new MimeBodyPart();
         String htmlContent = "<html>"
@@ -204,9 +204,9 @@ public class SendMail {
         System.out.println("message sent successfully...");
     }
     public void send_delivery_mail(String email_body, String email_to, String contact_person) throws MessagingException {
-        String host = "mail.wingersoft.co.ug";
-        final String user = "info@wingersoft.co.ug";//change accordingly  
-        final String password = "Rhythm123";//change accordingly  
+        String host = "mail.sharkmediaug.com";
+        final String user = "info@sharkmediaug.com";//change accordingly  
+        final String password = "Havearide1";//change accordingly  
 
         String to = "newtonajuna@gmail.com";//change accordingly  
 
@@ -214,8 +214,8 @@ public class SendMail {
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "false");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.host", "mail.wingersoft.co.ug");
-        props.put("mail.smtp.port", "26");
+        props.put("mail.smtp.host", "mail.sharkmediaug.com");
+        props.put("mail.smtp.port", "25");
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -226,7 +226,7 @@ public class SendMail {
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(user));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(email_to));
-        message.setSubject("RE:Dispatched,Your work is on the way");
+        message.setSubject("Dispatched,Your work is on the way");
 
         MimeBodyPart htmlPart = new MimeBodyPart();
         String htmlContent = "<html>"

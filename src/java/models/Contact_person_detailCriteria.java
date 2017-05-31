@@ -34,6 +34,7 @@ public class Contact_person_detailCriteria extends AbstractORMCriteria {
 	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_byId;
 	public final AssociationExpression last_edit_by;
+	public final CollectionExpression job_card;
 	
 	public Contact_person_detailCriteria(Criteria criteria) {
 		super(criteria);
@@ -52,6 +53,7 @@ public class Contact_person_detailCriteria extends AbstractORMCriteria {
 		last_edit_date = new TimestampExpression("last_edit_date", this);
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this);
 		last_edit_by = new AssociationExpression("last_edit_by", this);
+		job_card = new CollectionExpression("job_card", this);
 	}
 	
 	public Contact_person_detailCriteria(PersistentSession session) {
@@ -72,6 +74,10 @@ public class Contact_person_detailCriteria extends AbstractORMCriteria {
 	
 	public User_detailCriteria createLast_edit_byCriteria() {
 		return new User_detailCriteria(createCriteria("last_edit_by"));
+	}
+	
+	public Job_cardCriteria createJob_cardCriteria() {
+		return new Job_cardCriteria(createCriteria("job_card"));
 	}
 	
 	public Contact_person_detail uniqueContact_person_detail() {

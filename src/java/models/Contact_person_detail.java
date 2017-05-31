@@ -377,6 +377,10 @@ public class Contact_person_detail implements Serializable {
 				getLast_edit_by().getContact_person_detail1().remove(this);
 			}
 			
+			models.Job_card[] lJob_cards = (models.Job_card[])getJob_card().toArray(new models.Job_card[getJob_card().size()]);
+			for(int i = 0; i < lJob_cards.length; i++) {
+				lJob_cards[i].setContact_person_detail(null);
+			}
 			return delete();
 		}
 		catch(Exception e) {
@@ -399,6 +403,10 @@ public class Contact_person_detail implements Serializable {
 				getLast_edit_by().getContact_person_detail1().remove(this);
 			}
 			
+			models.Job_card[] lJob_cards = (models.Job_card[])getJob_card().toArray(new models.Job_card[getJob_card().size()]);
+			for(int i = 0; i < lJob_cards.length; i++) {
+				lJob_cards[i].setContact_person_detail(null);
+			}
 			try {
 				session.delete(this);
 				return true;
@@ -456,6 +464,11 @@ public class Contact_person_detail implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns({ @JoinColumn(name="last_edit_by", referencedColumnName="user_detail_id") })	
 	private models.User_detail last_edit_by;
+	
+	@OneToMany(mappedBy="contact_person_detail", targetEntity=models.Job_card.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set job_card = new java.util.HashSet();
 	
 	private void setContact_person_detail_id(int value) {
 		this.contact_person_detail_id = value;
@@ -556,6 +569,15 @@ public class Contact_person_detail implements Serializable {
 	public models.Customer_detail getCustomer_detail() {
 		return customer_detail;
 	}
+	
+	public void setJob_card(java.util.Set value) {
+		this.job_card = value;
+	}
+	
+	public java.util.Set getJob_card() {
+		return job_card;
+	}
+	
 	
 	public boolean equals(Object obj) {
 		if (obj == null) {

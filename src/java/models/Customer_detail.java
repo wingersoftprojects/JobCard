@@ -446,7 +446,7 @@ public class Customer_detail implements Serializable {
 	@Column(name="email", nullable=true, length=100)	
 	private String email;
 	
-	@Column(name="contact_person_name", nullable=false, length=100)	
+	@Column(name="contact_person_name", nullable=true, length=100)	
 	private String contact_person_name;
 	
 	@Column(name="contact_person_telephone1", nullable=true, length=100)	

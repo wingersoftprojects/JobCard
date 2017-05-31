@@ -9,12 +9,14 @@
     <ui:define name="metadata">
         <f:metadata>            
             <f:event listener="#{customer_detailBean.init()}" type="preRenderView" />
-            <f:event listener="#{customer_detailBean.initializelist()}" type="preRenderView" />            
+            <f:event listener="#{customer_detailBean.initializelist()}" type="preRenderView" />
+            <f:event listener="#{contact_person_detailBean.init()}" type="preRenderView" />
+            <f:event listener="#{contact_person_detailBean.initializelist()}" type="preRenderView" />                        
         </f:metadata>
     </ui:define>
     <ui:define name="content">
         <h:form id="main_form" rendered="#{loginBean.IsAllowed(0, 'View')}">
-            <ui:include src="templates/create_customer_detail.xhtml"/>
+            <ui:include src="templates/create_customer_detail_new.xhtml"/>
         </h:form>
     </ui:define>
 

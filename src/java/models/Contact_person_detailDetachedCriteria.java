@@ -34,6 +34,7 @@ public class Contact_person_detailDetachedCriteria extends AbstractORMDetachedCr
 	public final TimestampExpression last_edit_date;
 	public final IntegerExpression last_edit_byId;
 	public final AssociationExpression last_edit_by;
+	public final CollectionExpression job_card;
 	
 	public Contact_person_detailDetachedCriteria() {
 		super(models.Contact_person_detail.class, models.Contact_person_detailCriteria.class);
@@ -52,6 +53,7 @@ public class Contact_person_detailDetachedCriteria extends AbstractORMDetachedCr
 		last_edit_date = new TimestampExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this.getDetachedCriteria());
 		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
+		job_card = new CollectionExpression("job_card", this.getDetachedCriteria());
 	}
 	
 	public Contact_person_detailDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -71,6 +73,7 @@ public class Contact_person_detailDetachedCriteria extends AbstractORMDetachedCr
 		last_edit_date = new TimestampExpression("last_edit_date", this.getDetachedCriteria());
 		last_edit_byId = new IntegerExpression("last_edit_by.user_detail_id", this.getDetachedCriteria());
 		last_edit_by = new AssociationExpression("last_edit_by", this.getDetachedCriteria());
+		job_card = new CollectionExpression("job_card", this.getDetachedCriteria());
 	}
 	
 	public Customer_detailDetachedCriteria createCustomer_detailCriteria() {
@@ -83,6 +86,10 @@ public class Contact_person_detailDetachedCriteria extends AbstractORMDetachedCr
 	
 	public User_detailDetachedCriteria createLast_edit_byCriteria() {
 		return new User_detailDetachedCriteria(createCriteria("last_edit_by"));
+	}
+	
+	public Job_cardDetachedCriteria createJob_cardCriteria() {
+		return new Job_cardDetachedCriteria(createCriteria("job_card"));
 	}
 	
 	public Contact_person_detail uniqueContact_person_detail(PersistentSession session) {

@@ -7,6 +7,19 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition> 
+        <center>
+            <table>
+                <tr>
+                    <td>
+                        <p:commandButton styleClass="clsButtonBigLonger" value="Print (ALT+P)" icon="ui-icon-print" type="button" accesskey="p">
+                            <p:printer target="toprint" />
+                        </p:commandButton>            
+                    </td>
+                </tr>
+            </table>
+        </center>
+        <br/>
+
         <p:panel id="toprint">
             <h:panelGrid columns="4">
                 <h:panelGrid columns="1">
@@ -43,14 +56,14 @@
                             <h:outputLabel value="Contact Person:" style="font-weight: bolder;"/>
                         </td>
                         <td>
-                            <h:outputLabel value="#{job_cardBean.prev_job_card.customer_detail.contact_person_name}">                                
+                            <h:outputLabel value="#{job_cardBean.prev_job_card.contact_person_detail.contact_person_name}">                                
                             </h:outputLabel>
                         </td>
                         <td>
                             <h:outputLabel value="Telephone:" style="font-weight: bolder;"/>
                         </td>
                         <td>
-                            <h:outputLabel value="#{job_cardBean.prev_job_card.customer_detail.contact_person_telephone1}/#{job_cardBean.prev_job_card.customer_detail.contact_person_telephone2}">                                
+                            <h:outputLabel value="#{job_cardBean.prev_job_card.contact_person_detail.contact_person_telephone1} / #{job_cardBean.prev_job_card.contact_person_detail.contact_person_telephone2}">                                
                             </h:outputLabel>
                         </td>
                     </tr>
@@ -99,19 +112,6 @@
                 </table>
             </fieldset>            
         </p:panel>
-        <center>
-        <table>
-            <tr>
-                <td>
-                    <p:commandButton value="Save Delivery Note" process="@this" action="#{delivery_noteBean.save(loginBean.user_detail)}" update="@form" icon="ui-icon-disk" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()">                                                                                                          
-                        <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                            <p:graphicImage name="/images/ajax-loader.gif"/>
-                        </p:dialog>
-                    </p:commandButton>
-                </td>
-            </tr>
-        </table>
-        </center>
     </ui:composition>
 </html>
 

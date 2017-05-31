@@ -5,21 +5,6 @@
  */
 package beans;
 
-import com.lowagie.text.Chunk;
-import com.lowagie.text.Document;
-import com.lowagie.text.Element;
-import com.lowagie.text.Font;
-import com.lowagie.text.Image;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.Phrase;
-import com.lowagie.text.Rectangle;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfWriter;
-import java.awt.Color;
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -27,14 +12,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.util.ByteArrayDataSource;
 import models.Contact_person_detail;
 import models.Customer_detail;
 import models.JobCardPersistentManager;
@@ -153,6 +134,19 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
             loginBean.logout();
         }
     }
+    
+    @ManagedProperty("#{company_settingBean}")
+    private Company_settingBean company_settingBean;
+
+    public Company_settingBean getCompany_settingBean() {
+        return company_settingBean;
+    }
+
+    public void setCompany_settingBean(Company_settingBean company_settingBean) {
+        this.company_settingBean = company_settingBean;
+    }
+    
+    
     @ManagedProperty("#{loginBean}")
     private LoginBean loginBean;
 
@@ -328,11 +322,11 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
             try {
                 //new SendMail().send_mail("Please note that you have a new job assigned to you. Attached are the job details. ", prev_job_card.getJob_manager().getEmail(), prev_job_card.getJob_manager().getFirst_name() + " " + prev_job_card.getJob_manager().getSecond_name());
                 GeneratePDF generatePDF = new GeneratePDF();
-                generatePDF.email(prev_job_card, "Please note that you have a new job assigned to you. Attached are the job details. ", prev_job_card.getJob_manager().getEmail(), prev_job_card.getJob_manager().getFirst_name() + " " + prev_job_card.getJob_manager().getSecond_name());
+                generatePDF.email(prev_job_card, "Please note that you have a new job assigned to you. Attached are the job details. ", prev_job_card.getJob_manager().getEmail(), prev_job_card.getJob_manager().getFirst_name() + " " + prev_job_card.getJob_manager().getSecond_name(),company_settingBean.getCompany_setting());
                 try {
                     Sender s = new Sender("121.241.242.114", 8080, "wing-phillip", "phillip1", "Please note that your job at SHARK Media has commenced. Thank You", "1", "0", "256706267475", "SHARK-MEDIA");
                     s.submitMessage();
-                    new SendMail().send_job_mail("Please note that your print Job at Shark Media has started. \n" + "You will be notified once its ready for delivery. ", prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
+                    new SendMail().send_job_mail("Please note that your print Job at Shark Media has started. \n" + "You will be notified once its ready for delivery. ", prev_job_card.getContact_person_detail().getContact_person_email(), prev_job_card.getContact_person_detail().getContact_person_name());
                 } catch (Exception ex) {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Save", ex.getMessage());
                     RequestContext.getCurrentInstance().showMessageInDialog(message);

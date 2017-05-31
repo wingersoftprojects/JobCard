@@ -38,6 +38,8 @@ public class Job_cardCriteria extends AbstractORMCriteria {
 	public final AssociationExpression job_manager;
 	public final StringExpression delivered_by;
 	public final StringExpression delivered_by_phone_number;
+	public final IntegerExpression contact_person_detailId;
+	public final AssociationExpression contact_person_detail;
 	public final CollectionExpression job_card_item;
 	public final IntegerExpression delivery_noteId;
 	public final AssociationExpression delivery_note;
@@ -65,6 +67,8 @@ public class Job_cardCriteria extends AbstractORMCriteria {
 		job_manager = new AssociationExpression("job_manager", this);
 		delivered_by = new StringExpression("delivered_by", this);
 		delivered_by_phone_number = new StringExpression("delivered_by_phone_number", this);
+		contact_person_detailId = new IntegerExpression("contact_person_detail.contact_person_detail_id", this);
+		contact_person_detail = new AssociationExpression("contact_person_detail", this);
 		job_card_item = new CollectionExpression("job_card_item", this);
 		delivery_noteId = new IntegerExpression("delivery_note.job_card_id", this);
 		delivery_note = new AssociationExpression("delivery_note", this);
@@ -94,6 +98,10 @@ public class Job_cardCriteria extends AbstractORMCriteria {
 	
 	public User_detailCriteria createJob_managerCriteria() {
 		return new User_detailCriteria(createCriteria("job_manager"));
+	}
+	
+	public Contact_person_detailCriteria createContact_person_detailCriteria() {
+		return new Contact_person_detailCriteria(createCriteria("contact_person_detail"));
 	}
 	
 	public Job_card_itemCriteria createJob_card_itemCriteria() {

@@ -381,6 +381,10 @@ public class Job_card implements Serializable {
 				getJob_manager().getJob_card2().remove(this);
 			}
 			
+			if(getContact_person_detail() != null) {
+				getContact_person_detail().getJob_card().remove(this);
+			}
+			
 			models.Job_card_item[] lJob_card_items = (models.Job_card_item[])getJob_card_item().toArray(new models.Job_card_item[getJob_card_item().size()]);
 			for(int i = 0; i < lJob_card_items.length; i++) {
 				lJob_card_items[i].setJob_card(null);
@@ -421,6 +425,10 @@ public class Job_card implements Serializable {
 			
 			if(getJob_manager() != null) {
 				getJob_manager().getJob_card2().remove(this);
+			}
+			
+			if(getContact_person_detail() != null) {
+				getContact_person_detail().getJob_card().remove(this);
 			}
 			
 			models.Job_card_item[] lJob_card_items = (models.Job_card_item[])getJob_card_item().toArray(new models.Job_card_item[getJob_card_item().size()]);
@@ -509,6 +517,11 @@ public class Job_card implements Serializable {
 	
 	@Column(name="delivered_by_phone_number", nullable=true, length=100)	
 	private String delivered_by_phone_number;
+	
+	@ManyToOne(targetEntity=models.Contact_person_detail.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="contact_person_detail_id", referencedColumnName="contact_person_detail_id") })	
+	private models.Contact_person_detail contact_person_detail;
 	
 	@OneToMany(mappedBy="job_card", targetEntity=models.Job_card_item.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
@@ -655,6 +668,14 @@ public class Job_card implements Serializable {
 	
 	public models.User_detail getJob_manager() {
 		return job_manager;
+	}
+	
+	public void setContact_person_detail(models.Contact_person_detail value) {
+		this.contact_person_detail = value;
+	}
+	
+	public models.Contact_person_detail getContact_person_detail() {
+		return contact_person_detail;
 	}
 	
 	public void setJob_card_item(java.util.Set value) {

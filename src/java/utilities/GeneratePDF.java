@@ -39,6 +39,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
+import models.Company_setting;
 import models.Job_card;
 import models.Job_card_item;
 import org.orm.PersistentException;
@@ -49,23 +50,37 @@ import org.orm.PersistentException;
  */
 public class GeneratePDF {
 
+//    private Company_setting company_setting = new Company_setting();
+//
+//    public Company_setting getCompany_setting() {
+//        return company_setting;
+//    }
+//
+//    public void setCompany_setting(Company_setting company_setting) {
+//        this.company_setting = company_setting;
+//    }
+    
+    
     public static void main(String[] args) {
         GeneratePDF demo = new GeneratePDF();
         try {
-            demo.email(Job_card.getJob_cardByORMID(72), "Test", "newtonajuna@gmail.com", "Ajuna");
+            demo.email(Job_card.getJob_cardByORMID(104), "Test", "philpx32@gmail.com", "Phillip",new Company_setting());
         } catch (PersistentException ex) {
             Logger.getLogger(GeneratePDF.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void writePdf(OutputStream outputStream, Job_card previous_job_card) throws Exception {
+    public void writePdf(OutputStream outputStream, Job_card previous_job_card,Company_setting company_setting) throws Exception {            
         float[] columnWidths = {3, 10, 3, 4, 3};
         float[] job_card_columnWidths = {4, 7, 3};
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, outputStream);
         //PdfWriter.getInstance(document, new FileOutputStream("e:/Job Card.pdf"));
         //Image image = Image.getInstance("e://OneDrive/PROJECTS/NetBeansProjects/JobCard/web/resources/images/logo.png");
-        Image image = Image.getInstance("src/java/images/logo.png");
+        //ClassLoader classLoader=Thread.currentThread().getContextClassLoader();
+        //String path=classLoader.getResource("/../images/logo.png").getPath();
+        //Image image = Image.getInstance("src/java/images/logo.png");
+        Image image = Image.getInstance(images.Image.class.getResource("logo.png"));
         image.scalePercent(23f);
         Font font1 = new Font(Font.BOLD);
         Font font2 = new Font(Font.BOLD);
@@ -79,14 +94,14 @@ public class GeneratePDF {
         job_card.getDefaultCell().setBorder(1);
         PdfPCell cell1 = new PdfPCell();
         cell1.addElement(new Chunk(image, 0, 0));
-        cell1.addElement(new Paragraph("We add value to paper"));
+        cell1.addElement(new Paragraph(company_setting.getSloghan()));
         cell1.setBorder(Rectangle.NO_BORDER);
         job_card.addCell(cell1);
 
         PdfPCell cell2 = new PdfPCell();
-        cell2.addElement(new Paragraph("Plot:" + "5/5A,Nasser Rd" + "\n"));
-        cell2.addElement(new Paragraph("Tel: " + "+256707-635382/+256782-989787" + "\n"));
-        cell2.addElement(new Paragraph("Mob: " + "+25647272666"));
+        cell2.addElement(new Paragraph(company_setting.getStreet_address()  + "\n"));
+        cell2.addElement(new Paragraph("Tel: " + company_setting.getTelephone() + "\n"));
+        cell2.addElement(new Paragraph("Mob: " + company_setting.getMobile()));
         cell2.setBorder(Rectangle.NO_BORDER);
         job_card.addCell(cell2);
 
@@ -101,7 +116,7 @@ public class GeneratePDF {
         sectionHeader1.setSpacingBefore(2);
         Paragraph section4 = new Paragraph("Ms.(Company): " + previous_job_card.getCustomer_detail().getCustomer_name());
         Paragraph section5 = new Paragraph("Job Card Date: " + previous_job_card.getJob_date() + "                                    Due Date: " + previous_job_card.getDue_date());
-        Paragraph section6 = new Paragraph("Contact Person: " + previous_job_card.getCustomer_detail().getContact_person_name() + "                               Telephone: " + previous_job_card.getCustomer_detail().getContact_person_telephone1() + "/" + previous_job_card.getCustomer_detail().getContact_person_telephone2());
+        Paragraph section6 = new Paragraph("Contact Person: " + previous_job_card.getContact_person_detail().getContact_person_name()+ "                               Telephone: " + previous_job_card.getContact_person_detail().getContact_person_telephone1() + "/" + previous_job_card.getContact_person_detail().getContact_person_telephone2());
 
         Paragraph sectionHeader2 = new Paragraph("" + "\n" + "JOB DETAILS" + "\n" + "Final Product Details(For Delivery and Invoicing Purposes)" + "\n" + "\n");
 
@@ -146,8 +161,8 @@ public class GeneratePDF {
             pdfPTable.addCell(new Phrase(job_card_item.getJob_title() + "\n"
                     + "Size: " + job_card_item.getPaper_size() + "\n"
                     + "Pages: " + job_card_item.getPages() + "\n"
-                    + "Paper: " + job_card_item.getPaper_type() + "\n"
-                    + "Cover: " + job_card_item.getCover_type() + "\n"
+                    + "Paper: " + job_card_item.getPaper_type().getPaper_type_category()+""+job_card_item.getPaper_type().getPaper_type_sub_category() + "\n"
+                    + "Cover: " + job_card_item.getCover_type().getCover_type_name() + "\n"
                     + "Color: " + job_card_item.getColor() + "\n"
                     + "Machine: " + job_card_item.getMachine_used() + "\n"
                     + "Laminating: " + job_card_item.getLamination_type() + "\n"
@@ -212,14 +227,14 @@ public class GeneratePDF {
         document.close();
     }
 
-    public void email(Job_card job_card, String email_body, String email_to, String contact_person) {
-//        String smtpHost = "mail.wingersoft.co.ug"; //replace this with a valid host
-//        int smtpPort = 26; //replace this with a valid port
+    public void email(Job_card job_card, String email_body, String email_to, String contact_person,Company_setting company_setting) {
+//        String smtpHost = "mail.sharkmediaug.com"; //replace this with a valid host
+//        int smtpPort = 25; //replace this with a valid port
 
-        String recipient = email_to;//"philpx32@wingersoft.co.ug"; //replace this with a valid recipient email address
-        String recipient2 = "philliparinaitwe@wingersoft.co.ug"; //replace this with a valid recipient email address
-        final String user = "info@wingersoft.co.ug";//change accordingly  
-        final String password = "Rhythm123";//change accordingly  
+//        String recipient = email_to;//"philpx32@wingersoft.co.ug"; //replace this with a valid recipient email address
+//        String recipient2 = "bendabrian2@gmail.com"; //replace this with a valid recipient email address
+        final String user = "info@sharkmediaug.com";//change accordingly  
+        final String password = "Havearide1";//change accordingly  
 
         String to = "philpx32@gmail.com";//change accordingly  
 
@@ -227,8 +242,8 @@ public class GeneratePDF {
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "false");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.host", "mail.wingersoft.co.ug");
-        props.put("mail.smtp.port", "26");
+        props.put("mail.smtp.host", "mail.sharkmediaug.com");
+        props.put("mail.smtp.port", "25");
         //Session session = Session.getDefaultInstance(properties, null);
 
         Session session = Session.getDefaultInstance(props,
@@ -245,9 +260,9 @@ public class GeneratePDF {
             Multipart multipart = new MimeMultipart("alternative");
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient2));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(email_to));
+//            message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+//            message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient2));
             message.setSubject("Shark Media Job");
 
             MimeBodyPart textPart = new MimeBodyPart();
@@ -275,7 +290,7 @@ public class GeneratePDF {
 
             //now write the PDF content to the output stream
             outputStream = new ByteArrayOutputStream();
-            writePdf(outputStream, job_card);
+            writePdf(outputStream, job_card,company_setting);
             byte[] bytes = outputStream.toByteArray();
 
             //construct the pdf body part
