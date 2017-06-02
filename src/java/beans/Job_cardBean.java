@@ -324,7 +324,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
                 GeneratePDF generatePDF = new GeneratePDF();
                 generatePDF.email(prev_job_card, "Please note that you have a new job assigned to you. Attached are the job details. ", prev_job_card.getJob_manager().getEmail(), prev_job_card.getJob_manager().getFirst_name() + " " + prev_job_card.getJob_manager().getSecond_name(),company_settingBean.getCompany_setting());
                 try {
-                    Sender s = new Sender("121.241.242.114", 8080, "wing-phillip", "phillip1", "Please note that your job at SHARK Media has commenced. Thank You", "1", "0", "256706267475", "SHARK-MEDIA");
+                    Sender s = new Sender("121.241.242.114", 8080, "wing-sharkmed", "sharkmed", "Please note that your job at SHARK Media has commenced. Thank You", "1", "0", "256"+prev_job_card.getContact_person_detail().getContact_person_telephone1(), "SHARK-MEDIA");
                     s.submitMessage();
                     new SendMail().send_job_mail("Please note that your print Job at Shark Media has started. \n" + "You will be notified once its ready for delivery. ", prev_job_card.getContact_person_detail().getContact_person_email(), prev_job_card.getContact_person_detail().getContact_person_name());
                 } catch (Exception ex) {
@@ -404,7 +404,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
                 try {
                     //String contact = "+256" + prev_job_card.getCustomer_detail().getContact_person_telephone1().substring(1).replace("(", "").replace(")", "").replace(" ", "").replace("-", "");
                     if ("Ready".equals(status)) {
-                        Sender s = new Sender("121.241.242.114", 8080, "wing-phillip", "phillip1", "Please note that the printing job at SHARK Media is ready for delivery", "1", "0", "256706267475", "SHARK-MEDIA");
+                        Sender s = new Sender("121.241.242.114", 8080, "wing-sharkmed", "sharkmed", "Please note that the printing job at SHARK Media is ready for delivery", "1", "0", "256"+prev_job_card.getContact_person_detail().getContact_person_telephone1(), "SHARK-MEDIA");
                         s.submitMessage();
                         //new GeneralUtilities().send_sms(contact, "Please note that the printing job at SHARK Media is ready for delivery");
                         new SendMail().send_ready_mail("We are happy to inform you that your work is ready for delivery.\n"
@@ -412,7 +412,7 @@ public class Job_cardBean extends AbstractBean<Job_card> implements Serializable
                     }
                     if ("Delivered".equals(status)) {
                         //new GeneralUtilities().send_sms(contact, "Please note that the printing job at SHARK Media has been delivered");
-                        Sender s = new Sender("121.241.242.114", 8080, "wing-phillip", "phillip1", "Please note that the printing job at SHARK Media has been delivered", "1", "0", "25670267475", "SHARK-MEDIA");
+                        Sender s = new Sender("121.241.242.114", 8080, "wing-sharkmed", "sharkmed", "Please note that the printing job at SHARK Media has been delivered", "1", "0", "256"+prev_job_card.getContact_person_detail().getContact_person_telephone1(), "SHARK-MEDIA");
                         s.submitMessage();
                         new SendMail().send_delivery_mail("Please note that your work has been dispatched from our Offices, and will be delivered<br/> By: " + prev_job_card.getDelivered_by() + " <br/> Telephone: " + prev_job_card.getDelivered_by_phone_number(), prev_job_card.getCustomer_detail().getContact_person_email(), prev_job_card.getCustomer_detail().getContact_person_name());
                     }

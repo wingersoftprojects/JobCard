@@ -37,7 +37,7 @@
                 </h:panelGrid>
                 <h:panelGrid columns="1">
                     <p:outputLabel value="Delivery Note" style="font-weight: bolder; font-size: larger; font-style: italic;"/>
-                    <p:outputLabel value="Date: #{job_cardBean.selected.job_date}">
+                    <p:outputLabel value="Date: #{job_cardBean.selected.due_date}">
                         <f:convertDateTime pattern="#{company_settingBean.company_setting.dateformat}" timeZone="#{company_settingBean.company_setting.timezone}"/>
                     </p:outputLabel>
                 </h:panelGrid>
